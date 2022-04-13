@@ -1,0 +1,144 @@
+.selectSummary {
+	perspective: 1000px;
+}
+
+.selectSummary--checkbox {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.selectSummary--checkbox:focus ~ .selectSummary--label .selectSummary--indicatorOpen,
+.selectSummary--checkbox:focus ~ .selectSummary--label ::slotted([slot="indicator-open"]),
+.selectSummary--checkbox:focus ~ .selectSummary--label .selectSummary--indicatorClose,
+.selectSummary--checkbox:focus ~ .selectSummary--label ::slotted([slot="indicator-close"]) {
+	outline: 1px var(--focused--outlineStyle) var(--control--outlineColor);
+}
+
+.selectSummary--label {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+	margin: 0;
+	padding-right: calc(var(--density--sm) * 1rem);
+}
+
+.selectSummary--value {
+	margin-right: calc(var(--density--md) * 1rem);
+}
+
+.selectSummary ::slotted([slot="value"]) {
+	color: inherit;
+}
+
+.selectSummary--content {
+	position: absolute;
+	opacity: 0;
+	max-width: 100%;
+	left: 0;
+	top: 100%;
+	transition: 0s linear;
+	display: flow-root;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+}
+
+.selectSummary--option {
+	display: block;
+	margin: 0;
+	border: 0;
+	padding: calc(var(--density--sm) * 1rem) calc(var(--density--md) * 1rem);
+	color: inherit;
+	font: inherit;
+	background: none;
+	width: 100%;
+	text-align: left;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.selectSummary--option:focus {
+  outline: 0;
+  text-decoration: underline;
+}
+
+.selectSummary--option:hover {
+  background-color: var(--accent--defaultColor);
+  color: var(--onAccent--defaultColor);
+}
+
+/* States */
+.selectSummary--checkbox:checked ~ .selectSummary--label .selectSummary--indicatorOpen,
+.selectSummary--checkbox:checked ~ .selectSummary--label ::slotted([slot="indicator-open"]),
+.selectSummary--checkbox:not(:checked) ~ .selectSummary--label .selectSummary--indicatorClose,
+.selectSummary--checkbox:not(:checked) ~ .selectSummary--label ::slotted([slot="indicator-close"]) {
+	display: none;
+}
+
+.selectSummary--checkbox:checked ~ .selectSummary--content {
+	position: static;
+	opacity: 1;
+	transition: .218s ease;
+}
+
+.selectSummary--checkbox:not(:checked) ~ .selectSummary--content > * {
+	display: none;
+}
+
+/* Types */
+/* type="select" */
+.selectSummary[type="select"] .selectSummary--label {
+	border: 1px solid var(--accent--defaultColor);
+	padding: calc(var(--density--sm) * 1rem) calc(var(--density--md) * 1rem);
+}
+
+.selectSummary[type="select"] .selectSummary--content {
+	border-bottom: 1px solid var(--accent--defaultColor);
+	border-left: 1px solid var(--accent--defaultColor);
+	border-right: 1px solid var(--accent--defaultColor);
+}
+
+/* type="menu" */
+.selectSummary[type="menu"] .selectSummary--label {
+	text-transform: uppercase;
+	font-weight: var(--textAction--fontWeight);
+	font-size: calc(var(--textAction--fontSize) * .9);
+	padding: calc(var(--density--sm) * 1rem) calc(var(--density--md) * 1rem);
+}
+
+.selectSummary[type="menu"] .selectSummary--label:hover {
+	background-color: var(--accent--defaultColor);
+	color: var(--onAccent--defaultColor);
+}
+
+.selectSummary[type="menu"] .selectSummary--content {
+	margin-left: calc(var(--density--md) * 1rem);
+	border-left: 1px solid var(--accent--defaultColor);
+}
+
+/* type="summary" */
+.selectSummary[type="summary"] .selectSummary--label {
+	border-bottom: 1px solid var(--accent--defaultColor);
+	text-transform: uppercase;
+	font-weight: var(--textAction--fontWeight);
+	font-size: calc(var(--textAction--fontSize) * .9);
+	color: var(--accent--defaultColor);
+	filter: var(--a11y--filter);
+}
+
+.selectSummary[type="summary"] .selectSummary--value {
+	display: inline-block;
+	border-top: 1px solid var(--accent--defaultColor);
+	border-left: 1px solid var(--accent--defaultColor);
+	border-right: 1px solid var(--accent--defaultColor);
+	padding: calc(var(--density--sm) * 1rem) calc(var(--density--md) * 1rem);
+}
+
+.selectSummary[type="summary"] .selectSummary--content {
+	border-bottom: 1px solid var(--accent--defaultColor);
+	border-left: 1px solid var(--accent--defaultColor);
+	border-right: 1px solid var(--accent--defaultColor);
+	padding-left: calc(var(--density--md) * 1rem);
+	padding-right: calc(var(--density--md) * 1rem);
+}

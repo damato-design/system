@@ -1,0 +1,47 @@
+@media (max-width: 768px) {
+
+  html {
+    --navigationHeight: calc(var(--density--xl) * 1rem);
+    --scrollOffset: calc(var(--navigationHeight) + (var(--density--md) * 1rem) - 1px);
+  }
+
+  .app {
+    flex-direction: column;
+    padding-left: 0;
+  }
+
+  .app > aside {
+    max-width: initial;
+    width: 100%;
+    top: 0;
+  }
+
+  .navigation {
+    box-shadow: 0 12px 16px -8px var(--boxElevated--shadowColor);
+    background-color: var(--box--backgroundColor);
+    border-bottom: 1px solid var(--box--borderColor);
+    max-height: calc(100vh - var(--navigationHeight));
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    left: 0;
+    display: none;
+  }
+
+  .nav-button {
+    display: inline-flex;
+
+    & svg-icon {
+      margin-left: 1ch;
+    }
+  }
+
+  #navigation-toggle,
+  #navigation-toggle:checked + aside .navigation {
+    display: block;
+  }
+
+  .app > main {
+    max-width: initial;
+  }
+}

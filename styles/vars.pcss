@@ -1,0 +1,198 @@
+:root {
+  --color--pink: 205, 40, 175;
+  --color--blue: 5, 106, 255;
+  --color--green: 25, 130, 120;
+
+  --grayscale--factor: 5;
+  --midgray: 1;
+	--ultragray--1: calc(var(--midgray) * var(--grayscale--factor));
+	--ultragray--2: calc(var(--ultragray--1) * var(--grayscale--factor));
+	--ultragray--3: calc(var(--ultragray--2) * var(--grayscale--factor));
+	
+	--infragray--1: calc(var(--midgray) / var(--grayscale--factor));
+	--infragray--2: calc(var(--infragray--1) / var(--grayscale--factor));
+	--infragray--3: calc(var(--infragray--2) / var(--grayscale--factor));
+}
+
+/* Colors accessible on black or white */
+:root {
+  --accent--defaultColor: rgb(var(--color--green));
+  --accent--everyoneColor: rgb(var(--color--green));
+  --accent--designerColor: rgb(var(--color--pink));
+  --accent--engineerColor: rgb(var(--color--blue));
+  --onAccent--defaultColor: rgb(255, 255, 255);
+}
+
+html[hide-designer]:not([hide-engineer]) {
+  --accent--defaultColor: var(--accent--engineerColor);
+}
+
+html[hide-engineer]:not([hide-designer]) {
+  --accent--defaultColor: var(--accent--designerColor);
+} 
+
+[audience="designer"]:root {
+  --accent--defaultColor: var(--accent--designerColor);
+}
+
+[audience="engineer"]:root {
+  --accent--defaultColor: var(--accent--engineerColor);
+}
+
+/* color intents */
+/* LIGHT (DEFAULT) THEME */
+@mixin light-theme() {
+  --a11y--filter: brightness(1);
+
+  /* sections */
+  --box--backgroundColor: hsl(0, 0%, calc(100% / (1 + var(--infragray--3))));
+  --box--foregroundColor: hsl(0, 0%, calc(100% / (1 + var(--ultragray--1))));
+  --box--borderColor: hsl(0, 0%, calc(100% / (1 + var(--infragray--1))));
+
+  /* <body> */
+  --boxLowContrast--backgroundColor: hsl(0, 0%, calc(100% / (1 + var(--infragray--2))));
+  --boxLowContrast--foregroundColor: hsl(0, 0%, calc(100% / (1 + var(--ultragray--1))));
+  --boxLowContrast--borderColor: hsl(0, 0%, calc(100% / (1 + var(--infragray--1))));
+
+  --boxHighContrast--backgroundColor:  hsl(0, 0%, calc(100% / (1 + var(--ultragray--2))));
+  --boxHighContrast--foregroundColor: hsl(0, 0%, calc(100% / (1 + var(--infragray--3))));
+  --boxHighContrast--borderColor:  hsl(0, 0%, calc(100% / (1 + var(--ultragray--2))));
+
+  --boxElevated--shadowColor: hsla(0, 0%, calc(100% / (1 + var(--ultragray--1))), .5);
+
+  --control--backgroundColor: hsl(0, 0%, calc(100% / (1 + var(--infragray--2))));
+  --control--foregroundColor: hsl(0, 0%, calc(100% / (1 + var(--ultragray--3))));
+  --control--borderColor: var(--accent--defaultColor);
+  --control--outlineColor: hsl(0, 0%, calc(100% / (1 + var(--ultragray--3))));
+
+  --action--backgroundColor: var(--accent--defaultColor);
+  --action--foregroundColor: var(--onAccent--defaultColor);
+  --action--borderColor: var(--accent--defaultColor);
+  --action--outlineColor: hsl(0, 0%, calc(100% / (1 + var(--ultragray--3))));
+
+  --actionHovered--backgroundColor: hsl(0, 0%, calc(100% / (1 + var(--infragray--2))));
+  --actionHovered--foregroundColor: var(--accent--defaultColor);
+  --actionHovered--borderColor: hsl(0, 0%, calc(100% / (1 + var(--infragray--3))));
+}
+
+/* DARK THEME */
+@mixin dark-theme() {
+  --a11y--filter: brightness(1.2);
+
+  --box--backgroundColor: hsl(0, 0%, calc(100% / (1 + var(--ultragray--2))));
+  --box--foregroundColor: hsl(0, 0%, calc(100% / (1 + var(--infragray--2))));
+  --box--borderColor: hsl(0, 0%, calc(100% / (1 + var(--ultragray--1))));
+
+  --boxLowContrast--backgroundColor: hsl(0, 0%, calc(100% / (1 + var(--ultragray--3))));
+  --boxLowContrast--foregroundColor: hsl(0, 0%, calc(100% / (1 + var(--infragray--2))));
+  --boxLowContrast--borderColor: hsl(0, 0%, calc(100% / (1 + var(--ultragray--1))));
+
+  --boxHighContrast--backgroundColor: hsl(0, 0%, calc(100% / (1 + var(--infragray--2))));
+  --boxHighContrast--foregroundColor: hsl(0, 0%, calc(100% / (1 + var(--ultragray--3))));
+  --boxHighContrast--borderColor: hsl(0, 0%, calc(100% / (1 + var(--infragray--2))));
+
+  --boxElevated--shadowColor: hsla(0, 0%, calc(100% / (1 + var(--ultragray--3))), .5);
+
+  --control--backgroundColor: hsl(0, 0%, calc(100% / (1 + var(--ultragray--3))));
+  --control--foregroundColor: hsl(0, 0%, calc(100% / (1 + var(--infragray--3))));
+  --control--borderColor: var(--accent--defaultColor);
+  --control--outlineColor: hsl(0, 0%, calc(100% / (1 + var(--infragray--3))));
+
+  --action--backgroundColor: var(--accent--defaultColor);
+  --action--foregroundColor: var(--onAccent--defaultColor);
+  --action--borderColor: var(--accent--defaultColor);
+  --action--outlineColor: hsl(0, 0%, calc(100% / (1 + var(--infragray--3))));
+
+  --actionHovered--backgroundColor: hsl(0, 0%, calc(100% / (1 + var(--ultragray--3))));
+  --actionHovered--foregroundColor: var(--accent--defaultColor);
+  --actionHovered--borderColor: hsl(0, 0%, calc(100% / (1 + var(--ultragray--3))));
+}
+
+:root { @include light-theme() }
+@media screen {
+  html[theme="inverse"] { @include dark-theme() }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  :root { @include dark-theme() }
+  html[theme="inverse"] { @include light-theme() }
+}
+
+/* fonts & text */
+:root {
+	--typescale--factor: 1.4;
+	/* modular scale factors, Math.pow(scale, increment) */
+	--remscale--md: 1;
+	--remscale--lg: calc(var(--remscale--md) * var(--typescale--factor));
+	--remscale--xl: calc(var(--remscale--lg) * var(--typescale--factor));
+	--remscale--2xl: calc(var(--remscale--xl) * var(--typescale--factor));
+	--remscale--3xl: calc(var(--remscale--2xl) * var(--typescale--factor));
+	--remscale--sm: calc(var(--remscale--md) / var(--typescale--factor));
+	--remscale--xs: calc(var(--remscale--sm) / var(--typescale--factor));
+
+  --fontFamily--sans: 'Jost', sans-serif;
+  --fontWeight--normal: 400;
+  --fontWeight--medium: 500;
+  --fontWeight--bold: 700;
+  --lineHeight--paragraph: 1.5;
+  --lineHeight--headline: 1.25;
+
+  --textParagraph--fontFamily: var(--fontFamily--sans);
+  --textParagraph--fontSize: calc(var(--remscale--md) * 1rem);
+  --textParagraph--fontWeight: var(--fontWeight--normal);
+  --textParagraph--lineHeight: var(--lineHeight--paragraph);
+
+  --textLabel--fontFamily: var(--fontFamily--sans);
+  --textLabel--fontSize: calc(var(--remscale--md) * 1rem);
+  --textLabel--fontWeight: var(--fontWeight--medium);
+  --textLabel--lineHeight: var(--lineHeight--paragraph);
+
+  --textAction--fontFamily: var(--fontFamily--sans);
+  --textAction--fontSize: calc(var(--remscale--md) * 1rem);
+  --textAction--fontWeight: var(--fontWeight--medium);
+  --textAction--lineHeight: var(--lineHeight--paragraph);
+
+  --textHeading1--fontFamily: var(--fontFamily--sans);
+  --textHeading1--fontSize: calc(var(--remscale--2xl) * 1rem);
+  --textHeading1--fontWeight: var(--fontWeight--bold);
+  --textHeading1--lineHeight: var(--lineHeight--headline);
+
+  --textHeading2--fontFamily: var(--fontFamily--sans);
+  --textHeading2--fontSize: calc(var(--remscale--xl) * 1rem);
+  --textHeading2--fontWeight: var(--fontWeight--bold);
+  --textHeading2--lineHeight: var(--lineHeight--headline);
+
+  --textHeading3--fontFamily: var(--fontFamily--sans);
+  --textHeading3--fontSize: calc(var(--remscale--lg) * 1rem);
+  --textHeading3--fontWeight: var(--fontWeight--medium);
+  --textHeading3--lineHeight: var(--lineHeight--headline);
+
+  --textHeading4--fontFamily: var(--fontFamily--sans);
+  --textHeading4--fontSize: calc(var(--remscale--md) * 1rem);
+  --textHeading4--fontWeight: var(--fontWeight--medium);
+  --textHeading4--lineHeight: var(--lineHeight--headline);
+
+  --textQuote--fontFamily: var(--fontFamily--sans);
+  --textQuote--fontSize: calc(var(--remscale--lg) * 1rem);
+  --textQuote--fontWeight: var(--fontWeight--medium);
+  --textQuote--lineHeight: var(--lineHeight--paragraph);
+
+  --textCaption--fontFamily: var(--fontFamily--sans);
+  --textCaption--fontSize: calc(var(--remscale--sm) * 1rem);
+  --textCaption--fontWeight: var(--fontWeight--normal);
+  --textCaption--lineHeight: var(--lineHeight--paragraph);
+}
+
+:root {
+  --gridscale--factor: 1;
+
+  --density--xs: calc(var(--gridscale--factor) / 4); /* 4px */
+  --density--sm: calc(var(--gridscale--factor) / 2); /* 8px */
+  --density--md: calc(var(--gridscale--factor) * 1); /* 16px */
+  --density--lg: calc(var(--gridscale--factor) * 2); /* 32px */
+  --density--xl: calc(var(--gridscale--factor) * 4); /* 64px */
+}
+
+:root {
+  --focused--outlineStyle: dashed;
+}

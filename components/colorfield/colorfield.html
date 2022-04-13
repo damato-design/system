@@ -1,0 +1,31 @@
+<div class="colorfield">
+  <input class="colorfield--input" type="color" aria-labelledby="colorfield--mainLabel"/>
+  <div class="colorfield--display">
+    <div class="colorfield--label" id="colorfield--mainLabel">
+      <slot name="label-input">Input</slot>
+    </div>
+    <output class="colorfield--outputInput">rgb(0, 0, 0)</output>
+  </div>
+  <div class="colorfield--display">
+    <div class="colorfield--label">
+      <slot name="label-delta">Delta</slot>
+    </div>
+    <span class="colorfield--delta">
+      <output class="colorfield--outputDelta">0</output>
+    </span>
+  </div>
+  <div class="colorfield--display">
+    <div class="colorfield--label">
+      <slot name="label-value">Value</slot>
+    </div>
+    <output class="colorfield--outputValue">Output</output>
+  </div>
+
+
+  
+  
+  
+  
+  
+  
+</div>

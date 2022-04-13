@@ -1,0 +1,40 @@
+.textfield {
+  display: flex;
+  border-radius: 2px;
+  vertical-align: middle;
+}
+
+.textfield--label {
+  text-transform: uppercase;
+  font-size: calc(var(--textLabel--fontSize) * .9);
+  font-weight: var(--textLabel--fontWeight);
+  padding: calc(var(--density--sm) * 1rem) calc(var(--density--md) * 1rem);
+  border-right: inherit;
+  border: 0;
+  border-bottom: 1px solid var(--control--borderColor);
+  background: var(--control--backgroundColor);
+  border-top-left-radius: 2px;
+}
+
+.textfield--input {
+  flex: 1;
+  background: var(--control--backgroundColor);
+  font: inherit;
+  color: inherit;
+  padding: 0 calc(var(--density--sm) * 1rem);
+  align-self: stretch;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--control--borderColor);
+  border-top-right-radius: 2px;
+}
+
+.textfield--input:focus {
+  outline: 1px var(--focused--outlineStyle) var(--control--outlineColor);
+  outline-offset: -4px;
+}
+
+.textfield :not(.textfield--label):not(.textfield--input),
+.textfield ::slotted([slot="button"]) {
+  margin-left: calc(var(--density--md) * 1rem);
+}
