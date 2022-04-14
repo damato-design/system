@@ -38,9 +38,14 @@
         <div id="main-content">
           {{ sections | safe }}
         </div>
-        <p class="disclaimer" role="contentinfo">
+        <footer>
+          <a class="ds-house-link" href="https://system.damato.design">
+            {% include "ds-house.svg" %}
+          </a>
+          <p class="disclaimer" role="contentinfo">
           The <strong>DAMATO</strong> Design System is not intended for use outside of itself and does not provide downloadable content or installation guides. You may use concepts, designs, and/or source code from this site however you like. Please consider attributing  where appropriate.
         </p>
+       </footer>
       </main>
     </div>
     <button class="button style-reset" type="primary" onclick="document.documentElement.removeAttribute('style')">

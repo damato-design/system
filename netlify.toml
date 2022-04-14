@@ -1,7 +1,7 @@
 [build]
   publish = "_site"
   command = "npm run build"
-  functions = "functions" # https://damato.design/searchIndex.json
+  functions = "functions" # https://system.damato.design/searchIndex.json
 
 [[redirects]]
   from = "/"

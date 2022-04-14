@@ -102,7 +102,7 @@ async function compile() {
     fs.writeFileSync(pageJsonName, json, { encoding: 'utf8' });
   });
   
-  const rootUrl = 'https://damato.design/';
+  const rootUrl = 'https://system.damato.design/';
   const sitemapFileName = `${COMPILED_SITE_PATH}/sitemap.txt`;
   const urls = sitemap.map(({ filename }) => rootUrl + filename);
   urls.unshift(rootUrl);

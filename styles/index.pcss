@@ -200,13 +200,32 @@ a.offline::before {
   margin-right: calc(var(--density--md) * 1rem);
 }
 
-.disclaimer {
+footer {
+  display: flex;
+  gap: 1rem;
   font-family: var(--textCaption--fontFamily);
   font-size: var(--textCaption--fontSize);
   font-weight: var(--textCaption--fontWeight);
   line-height: var(--textCaption--lineHeight);
   color: var(--boxLowContrast--foregroundColor);
   opacity: .5;
+}
+
+.ds-house-link {
+  margin: 0;
+  padding: 0;
+  background: none;
+  color: currentColor;
+  display: flex;
+}
+
+.ds-house-link:hover {
+  background: none;
+  color: currentColor;
+}
+
+.ds-house-logo {
+  width: 4rem;
 }
 
 .bg-everyone {
