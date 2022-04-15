@@ -1,8 +1,10 @@
 root:
-  --box-font-size: 1rem
+  --text_standard_font-size: 1rem
 
 standard:
-  --box-surface: rgba(255, 255, 255, 1)
+  --box_standard_background-color: white
+  --box_standard_foreground-color: black
 
 inverse:
-  --box-surface: rgba(0,0,0,1)
+  --box_standard_background-color: black
+  --box_standard_foreground-color: white

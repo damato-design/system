@@ -1,9 +1,11 @@
+const fs = require('fs');
 const path = require('path');
 const glob = require('fast-glob');
 const { rollup } = require('rollup');
 const html = require('rollup-plugin-html');
 const css = require('rollup-plugin-postcss');
 const { terser } = require('rollup-plugin-terser');
+const combine = require('css-combine');
 
 const SOURCE = path.resolve(__dirname, '..', 'src');
 const SITE = path.resolve(__dirname, '..', '_site');
@@ -39,4 +41,7 @@ function prepare(filepath) {
     const bundle = await rollup(option);
     await bundle.write(option.output);
   }
+
+  const css = combine(path.join(SOURCE, 'decorations', 'index.css'));
+  css.pipe(fs.createWriteStream(path.join(SITE, `decorations.css`)));
 })();

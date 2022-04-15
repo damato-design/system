@@ -1,0 +1,4 @@
+body {
+  background-color: var(--box_standard_background-color);
+  color: var(--box_standard_foreground-color);
+}
