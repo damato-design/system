@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{ title }}</title>
+    {% include "head.njk" %}
+  </head>
+  <body>
+    <d-attribution></d-attribution>
+    <main>
+      {{ content | safe }}
+    </main>
+  </body>
+</html>
