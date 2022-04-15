@@ -3,7 +3,7 @@
 }
 
 #site-attribution {
-  display: flex;
+  display: inline-flex;
   color: currentColor;
   align-items: center;
   gap: 1ch;
