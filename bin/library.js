@@ -15,7 +15,6 @@ function prepare(filepath) {
     output:  {
       format: 'iife',
       file: path.join('_site', 'components', `${tagName}.iife.js`),
-      globals: tagName,
     },
   };
 }
@@ -23,7 +22,6 @@ function prepare(filepath) {
 (async function main() {
   const sourcefiles = await glob(path.join(SOURCE, 'components', '**/*.js'));
   const options = sourcefiles.map(prepare);
-  const tagNames = options.map(({ output }) => output.globals);
 
   const registrar = {
     input: path.join(SOURCE, 'infrastructure', 'registrar.js'),
@@ -31,7 +29,6 @@ function prepare(filepath) {
     output: {
       format: 'iife',
       file: path.join('_site', `registrar.iife.js`),
-      banner: `const components = [${tagNames.map((t) => `'${t}'`).join(',')}];`
     }
   }
 

@@ -1,45 +1,22 @@
-import observer from './observer.js';
-const REGISTRAR_IIFE_NAME = 'registrar.iife.js';
-
-const SOURCE = document.currentScript.src.replace(REGISTRAR_IIFE_NAME, '');
+import RootObserver from './root-observer.js';
+const SOURCE = new URL(document.currentScript.src).href.replace(/[^/]*$/, '');
 
 class Registrar {
   constructor() {
-
-    this.observer = observer;
-    this.observer(document.documentElement);
-
-    const detail = { registrar: this };
-    const event = new CustomEvent('registrarready', { detail });
-    window.dispatchEvent(event);
+    this.elements = new Set();
+    this.observer = new RootObserver();
+    this.observer.observe(document.documentElement);
   }
 
-  define(tagName, definition) {
-    if (window.customElements.get(tagName)) return;
-    window.customElements.define(tagName, definition);
-  }
-
-  fetchDefinition(tagName) {
-    if (window.customElements.get(tagName)) return;
-    const url = this._getComponentUrl(tagName);
-    this._injectScript(url);
-  }
-
-  getSystemUrl() {
-    return SOURCE;
-  }
-
-  _getComponentUrl(tagName) {
-    return new URL(`components/${tagName}.iife.js`, this.getSystemUrl());
-  }
-
-  _injectScript(url) {
+  lookup(tagName) {
+    if (this.elements.has(tagName)) return;
+    this.elements.add(tagName);
     const script = Object.assign(document.createElement('script'), {
       type: 'text/javascript',
       defer: true,
       onload: () => script.remove(),
       onerror: () => script.remove(),
-      src: url
+      src: new URL(`components/${tagName}.iife.js`, SOURCE)
     });
     document.head.appendChild(script);
   }
