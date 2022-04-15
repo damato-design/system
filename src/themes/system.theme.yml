@@ -1,0 +1,8 @@
+root:
+  --box-font-size: 1rem
+
+standard:
+  --box-surface: rgba(255, 255, 255, 1)
+
+inverse:
+  --box-surface: rgba(0,0,0,1)

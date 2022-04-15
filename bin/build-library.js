@@ -6,6 +6,7 @@ const css = require('rollup-plugin-postcss');
 const { terser } = require('rollup-plugin-terser');
 
 const SOURCE = path.resolve(__dirname, '..', 'src');
+const SITE = path.resolve(__dirname, '..', '_site');
 
 function prepare(filepath) {
   const tagName = path.basename(path.dirname(filepath))
@@ -14,7 +15,7 @@ function prepare(filepath) {
     plugins: [html(), css({inject: false}), terser()],
     output:  {
       format: 'iife',
-      file: path.join('_site', 'components', `${tagName}.iife.js`),
+      file: path.join(SITE, 'components', `${tagName}.iife.js`),
     },
   };
 }
@@ -28,7 +29,7 @@ function prepare(filepath) {
     plugins: [terser()],
     output: {
       format: 'iife',
-      file: path.join('_site', `registrar.iife.js`),
+      file: path.join(SITE, `registrar.iife.js`),
     }
   }
 

@@ -1,0 +1,111 @@
+text:
+  standard:
+    font-size: The <body> font-size
+    font-weight: The <body> font-weight
+    font-family: The <body> font-family
+    line-height: The <body> line-height
+  
+  headline:
+    font-size: The <h1-2> font-size
+    font-weight: The <h1-2> font-weight
+    font-family: The <h1-2> font-family
+    line-height: The <h1-2> line-height
+  
+  title:
+    font-size: The <h3-5> font-size
+    font-weight: The <h3-5> font-weight
+    font-family: The <h3-5> font-family
+    line-height: The <h3-5> line-height
+
+  overline:
+    font-size: The <h6> font-size
+    font-weight: The <h6> font-weight
+    font-family: The <h6> font-family
+    line-height: The <h6> line-height
+
+  action:
+    font-size: The <button> font-size
+    font-weight: The <button> font-weight
+    font-family: The <button> font-family
+    line-height: The <button> line-height
+
+  input:
+    font-size: The <input> font-size
+    font-weight: The <input> font-weight
+    font-family: The <input> font-family
+    line-height: The <input> line-height
+
+  label:
+    font-size: The <label> font-size
+    font-weight: The <label> font-weight
+    font-family: The <label> font-family
+    line-height: The <label> line-height
+
+  caption:
+    font-size: The <small> font-size
+    font-weight: The <small> font-weight
+    font-family: The <small> font-family
+    line-height: The <small> line-height
+
+box:
+  standard:
+    border-size: The <body> border-width.
+    border-curve: The <body> border-radius.
+
+    background-color: The <body> background color.
+    foreground-color: The <body> foreground color.
+    border-color: The <body> border color.
+  
+  low-contrast:
+    background-color: The <body> background color.
+    foreground-color: The <body> foreground color.
+    border-color: The <body> border color.
+
+  high-contrast:
+    background-color: The <body> background color.
+    foreground-color: The <body> foreground color.
+    border-color: The <body> border color.
+
+action:
+  standard:
+    border-size: The <button> border-width.
+    border-curve: The <button> border-radius.
+
+    background-color: The <button> background color.
+    foreground-color: The <button> foreground color.
+    border-color: The <button> border color.
+
+  hover:
+    background-color: The <button> background color.
+    foreground-color: The <button> foreground color.
+    border-color: The <button> border color.
+
+  chosen:
+    background-color: The <button> background color.
+    foreground-color: The <button> foreground color.
+    border-color: The <button> border color.
+
+control:
+  standard:
+    border-size: The <input> border-width.
+    border-curve: The <input> border-radius.
+
+    background-color: The <input> background color.
+    foreground-color: The <input> foreground color.
+    border-color: The <input> border color.
+
+  hover:
+    background-color: The <input> background color.
+    foreground-color: The <input> foreground color.
+    border-color: The <input> border color.
+
+  chosen:
+    background-color: The <input> background color.
+    foreground-color: The <input> foreground color.
+    border-color: The <input> border color.
+
+feedback:
+  critical:
+    surface-color: Using color as a container background.
+    onsurface-color: Using color for content on the surface background.
+    foreground-color: Using color in the <body> for readability.

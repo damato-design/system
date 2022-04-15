@@ -16,6 +16,7 @@ const ANIMATION_NAME = 'detect';
   }
 
   function observe(root) {
+    if (!root) return;
     root.addEventListener('animationstart', onAnimationStart);
     styles.set(root, Object.assign(document.createElement('style'), {
       type: 'text/css',
