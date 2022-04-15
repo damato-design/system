@@ -5,7 +5,6 @@ class SiteAttribution extends window.HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' }).innerHTML = `<style type="text/css">${css}</style>${html}`;
-    window.__library.observer.observe(this.shadowRoot);
   }
 }
 
