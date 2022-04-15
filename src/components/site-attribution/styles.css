@@ -1,3 +1,19 @@
 * {
   box-sizing: border-box;
 }
+
+#site-attribution {
+  display: flex;
+  color: currentColor;
+  align-items: center;
+  gap: 1ch;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: .8em;
+  line-height: 1.25;
+  font-weight: bolder;
+}
+
+#site-attribution svg {
+  font-size: 300%;
+}
