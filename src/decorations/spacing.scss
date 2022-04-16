@@ -1,0 +1,49 @@
+$attr-sel: "[data-spacing-shift]";
+$levels: 5;
+
+@function fib($n) {
+	@return if($n <= 1, $n, fib($n - 1) + fib($n - 2));
+}
+
+:root,
+#{$attr-sel},
+[style*="--box_density-factor"]{
+	--box_density-factor: #{fib($levels + 1)};
+	--spacing--far: calc(var(--box_density-factor) * var(--box_standard_density-size, 0.5rem));
+	--spacing--close: calc((var(--box_density-factor) - 1) * var(--box_standard_density-size, 0.5rem));
+}
+
+@for $i from 1 through $levels - 1 {
+	$nest-sel: if(
+		$i == 1,
+		$attr-sel,
+		selector-nest($nest-sel, $attr-sel)
+	);
+	
+	$level: $levels - $i;
+
+	#{$nest-sel} {
+		--box_density-factor: #{fib($level + 1)};
+	}
+}
+
+.spacing--inset {
+	padding: var(--spacing--far);
+}
+
+.spacing--inline {
+	padding-inline: var(--spacing--far);
+}
+
+.spacing--block {
+	padding-block: var(--spacing--far);
+}
+
+.spacing--gap {
+	gap: var(--spacing--close);
+}
+
+.spacing--all {
+	padding: var(--spacing--far);
+	gap: var(--spacing--close);
+}
