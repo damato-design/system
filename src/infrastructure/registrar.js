@@ -1,5 +1,5 @@
 const SOURCE_DIR = new URL(document.currentScript.src).href.replace(/[^/]*$/, '');
-const ANIMATION_NAME = 'detect';
+const ANIMATION_NAME = 'undefined-detection';
 
 (function registrar() {
   const styles = new Map();
@@ -26,7 +26,7 @@ const ANIMATION_NAME = 'detect';
     anchor.insertBefore(styles.get(root), target);
   }
 
-  function lookup(tagName) {
+  function register(tagName) {
     if (elements.has(tagName)) return;
     elements.add(tagName);
     const script = Object.assign(document.createElement('script'), {
@@ -40,8 +40,9 @@ const ANIMATION_NAME = 'detect';
   }
 
   function onAnimationStart({ animationName, target }) {
+    if (animationName !== ANIMATION_NAME) return;
     const name = target.tagName.toLowerCase();
-    if (animationName === ANIMATION_NAME) lookup(name);
+    register(name);
     window.customElements.whenDefined(name).then(() => observe(target.shadowRoot));
   }
 

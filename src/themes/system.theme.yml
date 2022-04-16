@@ -1,5 +1,6 @@
 root:
   --text_standard_font-size: 1rem
+  --box_standard_density-size: .5rem;
 
 standard:
   --box_standard_background-color: white

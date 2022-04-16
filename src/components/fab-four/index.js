@@ -10,7 +10,7 @@ class FabFour extends window.HTMLElement {
       root.style.setProperty('--children', this.assignedElements().length);
     });
 
-    root.style.setProperty('--gap', this.getAttribute('gap') || '0px');
+    root.style.setProperty('--gap', this.getAttribute('gap') || '0rem');
     root.style.setProperty('--threshold', this.getAttribute('threshold') || '60ch');
     root.style.setProperty('--column-max', this.getAttribute('column-max') || 2);
     root.style.setProperty('--column-min', this.getAttribute('column-min') || 1);

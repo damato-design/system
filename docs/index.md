@@ -7,14 +7,16 @@ Fanny pack cred gentrify, butcher authentic literally cliche blog coloring book.
 
 <site-attribution></site-attribution>
 
-<div>
+<div data-density-shift>
+  <div data-density-shift class="spacing--inset">
 
 ## headline
 
+  </div>
 </div>
 
 
-<fab-four column-min="1" column-max="2">
+<fab-four column-min="2" column-max="4">
   <span>hello 1</span>
   <span>hello 2</span>
   <span>hello 3</span>

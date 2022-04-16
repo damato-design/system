@@ -1,0 +1,47 @@
+:root, [data-density-shift] {
+  --box_density-factor: 8;
+  --spacing--base: calc(var(--box_density-factor) * var(--box_standard_density-size, .5rem));
+  --spacing--padding: calc(var(--spacing--base));
+  --spacing--gap: calc(var(--spacing--base) / 2);
+}
+
+[data-density-shift],
+[data-density-shift="4"] {
+  --box_density-factor: 5;
+}
+
+[data-density-shift] [data-density-shift],
+[data-density-shift="3"] {
+  --box_density-factor: 3;
+}
+
+[data-density-shift] [data-density-shift] [data-density-shift],
+[data-density-shift="2"] {
+  --box_density-factor: 2;
+}
+
+[data-density-shift] [data-density-shift] [data-density-shift] [data-density-shift],
+[data-density-shift="1"] {
+  --box_density-factor: 1;
+}
+
+.spacing--inset {
+  padding: var(--spacing--padding);
+}
+
+.spacing--inline {
+  padding-inline: var(--spacing--padding);
+}
+
+.spacing--block {
+  padding-block: var(--spacing--padding);
+}
+
+.spacing--gap {
+  gap: var(--spacing--gap);
+}
+
+.spacing--all {
+  padding:var(--spacing--padding);
+  gap: var(--spacing--gap);
+}
