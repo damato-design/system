@@ -7,7 +7,7 @@ $levels: 5;
 
 :root,
 #{$attr-sel},
-[style*="--box_density-factor"]{
+[style*="--box_density-factor"] {
 	--box_density-factor: #{fib($levels + 1)};
 	--spacing--far: calc(var(--box_density-factor) * var(--box_standard_density-size, 0.5rem));
 	--spacing--close: calc((var(--box_density-factor) - 1) * var(--box_standard_density-size, 0.5rem));
@@ -19,11 +19,9 @@ $levels: 5;
 		$attr-sel,
 		selector-nest($nest-sel, $attr-sel)
 	);
-	
-	$level: $levels - $i;
 
 	#{$nest-sel} {
-		--box_density-factor: #{fib($level + 1)};
+		--box_density-factor: #{fib($levels - $i + 1)};
 	}
 }
 
