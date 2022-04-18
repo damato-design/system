@@ -1,14 +1,84 @@
+* {
+  box-sizing: border-box;
+}
+
 :host {
   display: flex;
+  flex-wrap: wrap;
   min-height: 100vh;
+  position: relative;
+  background: inherit;
+}
+
+#skip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#skip:focus {
+  opacity: 1;
+  pointer-events: initial;
+}
+
+#navigation-toggle {
+  visibility: hidden;
+  position: absolute;
 }
 
 #navigation {
-  flex: 1 0 240px;
+  background: inherit;
+  min-width: 180px;
+  max-width: 100%;
+  width: calc((640px - 100%) * 100000);
   position: sticky;
+  align-self: flex-start;
   top: 0;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, .7);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space--away);
+  min-width: 100%;
+  max-width: calc(100% + 6rem);
+  width: calc((200px - 100%) * 100000);
+}
+
+label {
+  display: inline-flex;
+  cursor: pointer;
+}
+
+::slotted([slot="nav"]) {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav {
+  padding: var(--space--away);
+  background: inherit;
+  padding-top: 0;
+}
+
+@media (any-pointer: course) {
+  nav {
+    display: none;
+  }
+
+  input[type="checkbox"]:checked + #navigation nav {
+    display: block;
+  }
 }
 
 #main {
-  flex: 1 0 auto;
+  flex: 1;
+  padding: var(--space--away);
+  background: inherit;
 }

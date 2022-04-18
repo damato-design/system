@@ -6,6 +6,3 @@ standard:
   --box_standard_background-color: white
   --box_standard_foreground-color: black
 
-inverse:
-  --box_standard_background-color: black
-  --box_standard_foreground-color: white

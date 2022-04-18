@@ -4,6 +4,7 @@
   "description": "system.damato.design",
   "main": "index.js",
   "scripts": {
+    "dev": "ELEVENTY_ENV=dev npm run build",
     "build": "npm run build:library && npm run build:themes && npm run build:site",
     "build:themes": "node ./bin/build-themes.js",
     "build:library": "node ./bin/build-library.js",

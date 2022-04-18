@@ -1,5 +1,5 @@
 ---
-layout: layout.njk
+title: Getting Started
 ---
 
 # level 1 (good for spreads and heros)

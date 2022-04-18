@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>{{ title }}</title>
+    <title>{{ site.title }}</title>
     {% include "head.njk" %}
   </head>
   <body>
-    <navigation-chrome>
-      <ul slot="navigation">
-        <li>
-          <a href="#">Item</a>
-        </li>
-      </ul>
-      {{ content | safe }}
-    </navigation-chrome>
+    <div class="max-content spacing--inset">{{ content | safe }}</div>
   </body>
 </html>
