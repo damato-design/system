@@ -1,0 +1,11 @@
+h1, h2, h3, .text--heading {
+  font-weight: normal;
+  font-size: var(--text--heading);
+  line-height: 1.1;
+}
+
+h4, h5, h6, small, .text--detail {
+  font-weight: normal;
+  font-size: var(--text--detail);
+  line-height: 1.5;
+}

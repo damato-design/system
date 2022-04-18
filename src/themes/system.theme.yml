@@ -1,6 +1,6 @@
 root:
-  --text_standard_font-size: 1rem
-  --box_standard_density-size: .5rem;
+  --text_standard_font-size: min(1rem, 3vw);
+  --box_standard_density-size: min(.5rem, 2vw);
 
 standard:
   --box_standard_background-color: white

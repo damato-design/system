@@ -1,56 +1,15 @@
 text:
   standard:
-    font-size: The <body> font-size
+    font-size: The :root font-size
     font-weight: The <body> font-weight
     font-family: The <body> font-family
     line-height: The <body> line-height
-  
-  headline:
-    font-size: The <h1-2> font-size
-    font-weight: The <h1-2> font-weight
-    font-family: The <h1-2> font-family
-    line-height: The <h1-2> line-height
-  
-  title:
-    font-size: The <h3-5> font-size
-    font-weight: The <h3-5> font-weight
-    font-family: The <h3-5> font-family
-    line-height: The <h3-5> line-height
-
-  overline:
-    font-size: The <h6> font-size
-    font-weight: The <h6> font-weight
-    font-family: The <h6> font-family
-    line-height: The <h6> line-height
-
-  action:
-    font-size: The <button> font-size
-    font-weight: The <button> font-weight
-    font-family: The <button> font-family
-    line-height: The <button> line-height
-
-  input:
-    font-size: The <input> font-size
-    font-weight: The <input> font-weight
-    font-family: The <input> font-family
-    line-height: The <input> line-height
-
-  label:
-    font-size: The <label> font-size
-    font-weight: The <label> font-weight
-    font-family: The <label> font-family
-    line-height: The <label> line-height
-
-  caption:
-    font-size: The <small> font-size
-    font-weight: The <small> font-weight
-    font-family: The <small> font-family
-    line-height: The <small> line-height
 
 box:
   standard:
     border-size: The <body> border-width.
     border-curve: The <body> border-radius.
+    density-size: The density grid size.
 
     background-color: The <body> background color.
     foreground-color: The <body> foreground color.
