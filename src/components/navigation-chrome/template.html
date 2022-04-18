@@ -1,0 +1,18 @@
+<a href="#main">Skip to main content</a>
+<input type="checkbox" id="navigation-toggle" />
+<div id="navigation">
+  <header>
+    <a href="/">
+      <slot name="logo"></slot>
+    </a>
+    <label for="navigation-toggle">
+      <svg-icon>menu</svg-icon>
+    </label>
+  </header>
+  <nav>
+    <slot name="nav"></slot>
+  </nav>
+</div>
+<main id="main">
+  <slot></slot>
+</main>

@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  min-height: 100vh;
+}
+
+#navigation {
+  flex: 1 0 240px;
+  position: sticky;
+  top: 0;
+}
+
+#main {
+  flex: 1 0 auto;
+}

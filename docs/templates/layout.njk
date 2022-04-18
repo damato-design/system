@@ -5,8 +5,13 @@
     {% include "head.njk" %}
   </head>
   <body>
-    <main class="max-content">
+    <navigation-chrome>
+      <ul slot="navigation">
+        <li>
+          <a href="#">Item</a>
+        </li>
+      </ul>
       {{ content | safe }}
-    </main>
+    </navigation-chrome>
   </body>
 </html>
