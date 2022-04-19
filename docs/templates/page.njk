@@ -6,19 +6,9 @@
   </head>
   <body>
     <navigation-chrome data-density-shift class="max-content">
-      <span slot="logo">Logo</span>
-      <ul slot="nav">
-        <li>
-          <a href="#">Item 1</a>
-        </li>
-         <li>
-          <a href="#">Item 2</a>
-        </li>
-         <li>
-          <a href="#">Item 3</a>
-        </li>
-      </ul>
-      {{ content | safe }}
+      {% include "navigation.njk" %}
+      <div class="markdown">{{ content | safe }}</div>
+      <site-attribution></site-attribution>
     </navigation-chrome>
   </body>
 </html>

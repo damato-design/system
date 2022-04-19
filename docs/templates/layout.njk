@@ -5,6 +5,9 @@
     {% include "head.njk" %}
   </head>
   <body>
-    <div class="max-content spacing--inset">{{ content | safe }}</div>
+    <div class="max-content spacing--inset">
+      <div class="markdown">{{ content | safe }}</div>
+      <site-attribution data-density-shift></site-attribution>
+    </div>
   </body>
 </html>

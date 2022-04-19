@@ -44,6 +44,13 @@ action:
     foreground-color: The <button> foreground color.
     border-color: The <button> border color.
 
+link:
+  standard:
+    foreground-color: The <a> foreground color.
+
+  hover:
+    foreground-color: The <a> foreground color.
+
 control:
   standard:
     border-size: The <input> border-width.

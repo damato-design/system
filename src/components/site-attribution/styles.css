@@ -7,13 +7,17 @@
   color: currentColor;
   align-items: center;
   gap: 1ch;
-  text-transform: uppercase;
   text-decoration: none;
-  font-size: .8em;
+  font-size: .5em;
   line-height: 1.25;
-  font-weight: bolder;
+  opacity: .5;
+  transition: opacity .218s ease;
+}
+
+#site-attribution:hover {
+  opacity: 1;
 }
 
 #site-attribution svg {
-  font-size: 300%;
+  font-size: 250%;
 }

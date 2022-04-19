@@ -18,3 +18,7 @@
 	padding: var(--space--away);
 	gap: var(--space--near);
 }
+
+.markdown > :is(h2, h3, h4, h5, h6, p) {
+	margin-block: var(--space--near);
+}

@@ -1,8 +1,48 @@
 root:
-  --text_standard_font-size: min(1rem, 3vw);
-  --box_standard_density-size: min(.5rem, 2vw);
-
-standard:
+  --text_standard_font-size: min(1rem, 3vw)
+  --text_standard_font-family: Jost, sans-serif
+  --box_standard_density-size: min(.5rem, 2vw)
+  --box_standard_border-size: 1px
+  --box_standard_border-curve: .25em
+  "--text_standard_font-weight": initial
+  "--text_standard_line-height": initial
+  "--action_standard_border-size": initial
+  "--action_standard_border-curve": initial
+  "--control_standard_border-size": initial
+  "--control_standard_border-curve": initial
+standard: 
   --box_standard_background-color: white
   --box_standard_foreground-color: black
-
+  --box_standard_border-color: rgb(200, 200, 200)
+  --box_low-contrast_background-color: rgb(242, 242, 242)
+  --box_low-contrast_foreground-color: black
+  --box_low-contrast_border-color: rgb(200, 200, 200)
+  "--box_high-contrast_background-color": initial
+  "--box_high-contrast_foreground-color": initial
+  "--box_high-contrast_border-color": initial
+  "--action_standard_background-color": initial
+  "--action_standard_foreground-color": initial
+  "--action_standard_border-color": initial
+  "--action_hover_background-color": initial
+  "--action_hover_foreground-color": initial
+  "--action_hover_border-color": initial
+  "--action_chosen_background-color": initial
+  "--action_chosen_foreground-color": initial
+  "--action_chosen_border-color": initial
+  "--link_standard_foreground-color": initial
+  "--link_hover_foreground-color": initial
+  "--control_standard_background-color": initial
+  "--control_standard_foreground-color": initial
+  "--control_standard_border-color": initial
+  "--control_hover_background-color": initial
+  "--control_hover_foreground-color": initial
+  "--control_hover_border-color": initial
+  "--control_chosen_background-color": initial
+  "--control_chosen_foreground-color": initial
+  "--control_chosen_border-color": initial
+  --feedback_highlight_surface-color: hotpink
+  --feedback_highlight_onsurface-color: white
+  --feedback_highlight_foreground-color: pink
+  "--feedback_critical_surface-color": initial
+  "--feedback_critical_onsurface-color": initial
+  "--feedback_critical_foreground-color": initial

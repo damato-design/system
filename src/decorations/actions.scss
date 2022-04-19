@@ -1,0 +1,29 @@
+button, .button {
+  font: inherit;
+  padding: var(--space--near) var(--space--away);
+  background: var(--action_standard_background-color);
+  color: var(--action_standard_foreground-color);
+  border: var(--action_standard_border-size) solid var(--action_standard_border-color);
+  border-radius: var(--action_standard_border-curve);
+
+  &:hover {
+    background: var(--action_hover_background-color);
+    color: var(--action_hover_foreground-color);
+    border: var(--action_hover_border-size) solid var(--action_hover_border-color);
+  }
+
+  &:active,
+  &[aria-selected] {
+    background: var(--action_chosen_background-color);
+    color: var(--action_chosen_foreground-color);
+    border: var(--action_chosen_border-size) solid var(--action_chosen_border-color);
+  }
+}
+
+a, .link {
+  color: var(--link_standard_foreground-color);
+
+  &:hover {
+    color: var(--link_hover_foreground-color);
+  }
+}

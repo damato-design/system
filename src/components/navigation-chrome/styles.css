@@ -37,7 +37,6 @@
   align-self: flex-start;
   top: 0;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(255, 255, 255, .7);
 }
 
 header {
