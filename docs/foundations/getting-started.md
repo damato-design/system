@@ -12,6 +12,8 @@ title: Getting Started
 
 <delta-color-accent></delta-color-accent>
 
+<delta-color-text></delta-color-text>
+
 {% aside %}
 ## Check this out
 

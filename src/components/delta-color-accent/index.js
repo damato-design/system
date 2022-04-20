@@ -23,6 +23,10 @@ class DeltaColorAccent extends window.HTMLElement {
           output: closest,
         };
       }
+
+       // TODO: Get accent color here
+      const { color } = window.getComputedStyle(document.body);
+      control.color = color;
     });
   }
 }

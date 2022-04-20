@@ -13,18 +13,24 @@ class DeltaColor extends window.HTMLElement {
   }
 
   connectedCallback() {
-    this._$color.addEventListener('input', () => {
-      const { delta, ...display } = this.onColorChange(this.toObject(this._$color.value));
-      this._$delta.value = delta;
-      this._setDisplay(this._$input, { output: this.toObject(this._$color.value) });
-      this._setDisplay(this._$output, display);
-    })
+    this._$color.addEventListener('input', () => this.color = this._$color.value);
+  }
+
+  _onChange(color) { 
+    const { delta, ...display } = this.onColorChange(color);
+    this._$delta.value = delta;
+    this._setDisplay(this._$input, { output: color });
+    this._setDisplay(this._$output, display);
   }
 
   _setDisplay(target, { output, color = output }) {
     target.style.setProperty('--deltaColor--backgroundColor', color);
     target.style.setProperty('--deltaColor--foregroundColor', this.contrast(color));
     target.value = output;
+  }
+
+  set color(newVal) {
+    this._onChange(this.toObject(newVal));
   }
 
   onColorChange(rgb) {
