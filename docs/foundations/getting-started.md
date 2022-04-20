@@ -10,6 +10,17 @@ title: Getting Started
 
 <toggle-range type="checkbox">Dark mode</toggle-range>
 
+{% aside %}
+## Check this out
+
+Could you imagine this?
+
+```js
+console.log('Hello World');
+```
+
+{% endaside %}
+
 Lumbersexual activated charcoal sustainable mixtape air plant chillwave. VHS hella butcher cold-pressed, normcore chartreuse [single-origin](https://google.com) coffee edison bulb street art pour-over hot chicken hell of brunch. Pour-over locavore williamsburg adaptogen semiotics kickstarter bitters brunch hot chicken chartreuse. Man bun umami mlkshk vexillologist gastropub skateboard PBR&B occupy.
 
 | Name | Description | Value |
