@@ -27,20 +27,17 @@ class DeltaColorAccent extends window.HTMLElement {
   }
 }
 
-function getClosestColor(colors, original) {
-  const distances = colors.map((color) => compare(original, color));
+function getClosestColor(colors, input) {
+  const distances = colors.map((color) => compare(input, color));
   const distance = Math.min(...distances);
   return {
     closest: colors[distances.indexOf(distance)],
-    distance,
-    original
+    distance
   }
 }
 
-function compare(input, ref) {
-  const total = Object.keys(input).reduce((base, key) => {
-    return base + Math.pow(input[key] - ref[key], 2);
-  }, 0);
+function compare(input, color) {
+  const total = ['r', 'g', 'b'].reduce((base, key) => base + Math.pow(input[key] - color[key], 2), 0);
   return Math.sqrt(total);
 }
 

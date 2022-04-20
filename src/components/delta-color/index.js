@@ -59,7 +59,7 @@ class DeltaColor extends window.HTMLElement {
       } : null;
     }
   
-    const { groups } = color.match(/^#?(?<r>[a-f\d]{2})(?<g>[a-f\d]{2})(?<b>[a-f\d]{2})$/) || {};
+    const { groups } = color.match(/^#?(?<r>[a-f\d]{2})(?<g>[a-f\d]{2})(?<b>[a-f\d]{2})$/i) || {};
     return groups ? {
       r: parseInt(groups.r, 16),
       g: parseInt(groups.g, 16),
