@@ -31,18 +31,18 @@ standard:
   "--action_chosen_border-color": initial
   "--link_standard_foreground-color": initial
   "--link_hover_foreground-color": initial
-  "--control_standard_background-color": initial
-  "--control_standard_foreground-color": initial
-  "--control_standard_border-color": initial
+  --control_standard_background-color: white
+  --control_standard_foreground-color: black
+  --control_standard_border-color: rgb(200, 200, 200)
   "--control_hover_background-color": initial
   "--control_hover_foreground-color": initial
   "--control_hover_border-color": initial
-  "--control_chosen_background-color": initial
-  "--control_chosen_foreground-color": initial
-  "--control_chosen_border-color": initial
-  --feedback_highlight_surface-color: hotpink
-  --feedback_highlight_onsurface-color: white
-  --feedback_highlight_foreground-color: pink
+  --control_chosen_background-color: hotpink
+  --control_chosen_foreground-color: white
+  --control_chosen_border-color: pink
+  --feedback_standard_surface-color: hotpink
+  --feedback_standard_onsurface-color: white
+  --feedback_standard_foreground-color: pink
   "--feedback_critical_surface-color": initial
   "--feedback_critical_onsurface-color": initial
   "--feedback_critical_foreground-color": initial

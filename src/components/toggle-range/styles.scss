@@ -13,7 +13,7 @@
 label {
   cursor: pointer;
 	order: -1;
-	display: inline-flex;
+	display: flex;
 	align-items: center;
   text-align: right;
 }
@@ -32,7 +32,8 @@ input[type="range"] {
 	cursor: pointer;
   border-radius: 1rem;
 	box-sizing: content-box;
-  border: 1px solid;
+  border: 1px solid var(--control_standard_border-color);
+  background: var(--control_standard_background-color);
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
@@ -58,7 +59,8 @@ input[type="range"]::-ms-fill-lower {
 	height: 1rem;
 	width: 1rem;
 	transform: scale(1.5);
-  border: inherit;
+  border: 1px solid var(--control_chosen_border-color);
+  background: var(--control_chosen_background-color);
 }
 
 input[type="range"]::-webkit-slider-thumb {
@@ -82,23 +84,28 @@ input[type="checkbox"] {
   transform: scale(1.5) translateX(calc(-.75rem + 1px));
 	right: -2px;
   cursor: pointer;
-  border: 1px solid;
   transition: transform .218s ease;
+  border: 1px solid var(--control_chosen_border-color);
+  background: var(--control_chosen_background-color);
 }
 
 input[type="checkbox"]:checked {
 	transform: scale(1.5) translateX(0);
 }
 
-input[type="checkbox"] + label::before {
+input[type="checkbox"] + label {
+  flex: 1;
+}
+
+input[type="checkbox"] + label::after {
   content: "";
 	display: inline-block;
 	border-radius: 1rem;
-	position: absolute;
-	border: 1px solid;
-	right: 0;
+  margin-left: auto;
 	padding: .5rem;
   width: 1rem;
+  border: 1px solid var(--control_standard_border-color);
+  background: var(--control_standard_background-color);
 }
 
 input[type="checkbox"] ~ output {

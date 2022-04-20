@@ -7,15 +7,24 @@
 	margin-block: var(--space--away);
 }
 
-.markdown blockquote {
-  background: var(--feedback_highlight_surface-color);
-  color: var(--feedback_highlight_onsurface-color);
+.fig-quote {
+  background: var(--feedback_standard_surface-color);
+  color: var(--feedback_standard_onsurface-color);
   border-radius: var(--box_standard_border-curve);
   padding: var(--space--near);
   margin-block: var(--space--away);
 
-  & * {
+  blockquote * {
     margin: 0;
+  }
+
+  figcaption {
+    margin-top: var(--space--away);
+    text-align: right;
+  }
+
+  a {
+    color: inherit;
   }
 }
 

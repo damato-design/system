@@ -42,7 +42,9 @@ const formatted = new Intl.DateTimeFormat('en-US', {
 console.log(formatted); // "December 20, 2012" (varies by UTC timezone)
 ```
 
-> The quick brown fox jumps over the lazy dog
+{% quote "https://www.google.com" "Google" %}
+The quick brown fox jumps over the lazy dog
+{% endquote %}
 
 <small>Detail</small>
 

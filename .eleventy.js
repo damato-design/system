@@ -9,6 +9,17 @@ module.exports = function(eleventyConfig) {
   
   </aside>`);
 
+  eleventyConfig.addPairedShortcode('quote', (children, cite, display) => `<figure class="fig-quote">
+  <blockquote cite="${cite}">
+  
+  ${children}
+
+  </blockquote>
+  <figcaption data-density-shift>
+  — <a href="${cite}"><cite>${display || cite}</cite></a>
+  </figcaption>
+  </figure>`);
+
   eleventyConfig.addPassthroughCopy({"docs/public/*.(css|jpg|png|svg|webmanifest|ico)": '/'});
   return {
     dir: {
