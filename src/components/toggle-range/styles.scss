@@ -1,0 +1,110 @@
+* {
+  box-sizing: border-box;
+}
+
+#toggle-range {
+  display: flex;
+  align-items: center;
+	justify-content: flex-start;
+  position: relative;
+  gap: 1rem;
+}
+
+label {
+  cursor: pointer;
+	order: -1;
+	display: inline-flex;
+	align-items: center;
+  text-align: right;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  background: transparent;
+	border: 1px solid transparent;
+	border-radius: 1rem;
+  flex: 1;
+}
+
+@mixin track {
+  margin: 0;
+	width: 100%;
+	cursor: pointer;
+  border-radius: 1rem;
+	box-sizing: content-box;
+  border: 1px solid;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  @include track;
+}
+
+input[type="range"]::-moz-range-track {
+  @include track;
+}
+
+input[type="range"]::-ms-track {
+  @include track;
+}
+
+input[type="range"]::-ms-fill-lower {
+  background: transparent;
+}
+
+@mixin thumb {
+  -webkit-appearance: none;
+  border-radius: 1rem;
+  cursor: pointer;
+	height: 1rem;
+	width: 1rem;
+	transform: scale(1.5);
+  border: inherit;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  @include thumb;
+}
+
+input[type="range"]::-moz-range-thumb {
+  @include thumb;
+}
+
+input[type="range"]::-ms-thumb {
+  @include thumb;
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+	position: absolute;
+  border-radius: 1rem;
+  height: 1rem;
+	width: 1rem;
+  transform: scale(1.5) translateX(calc(-.75rem + 1px));
+	right: -2px;
+  cursor: pointer;
+  border: 1px solid;
+  transition: transform .218s ease;
+}
+
+input[type="checkbox"]:checked {
+	transform: scale(1.5) translateX(0);
+}
+
+input[type="checkbox"] + label::before {
+  content: "";
+	display: inline-block;
+	border-radius: 1rem;
+	position: absolute;
+	border: 1px solid;
+	right: 0;
+	padding: .5rem;
+  width: 1rem;
+}
+
+input[type="checkbox"] ~ output {
+  display: none;
+}
+
+output {
+  font-variant-numeric: tabular-nums;
+}

@@ -25,6 +25,7 @@
   "homepage": "https://github.com/damato-design/system#readmee",
   "devDependencies": {
     "@11ty/eleventy": "^1.0.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^4.0.0",
     "fast-glob": "^3.2.11",
     "jss": "^10.9.0",
     "jss-plugin-global": "^10.9.0",

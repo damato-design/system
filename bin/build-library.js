@@ -1,5 +1,4 @@
 const fs = require('fs/promises');
-const mkdirp = require('mkdirp');
 const path = require('path');
 const glob = require('fast-glob');
 const { rollup } = require('rollup');
