@@ -17,18 +17,28 @@ class ToggleRange extends window.HTMLElement {
   }
 
   _onChange() {
-    this._$output.value = this.type === 'checkbox'
-      ? Number(this._$input.checked)
-      : this._$input.value;
+    this._$output.value = this.value;
+    const detail = {
+      type: this.type,
+      value: this.value,
+    };
+    this.dispatchEvent(new CustomEvent('change', { detail }));
   }
 
   static get observedAttributes() {
-    return ['type'];
+    return ['type', 'value', 'min', 'max', 'step'];
   }
 
   attributeChangedCallback(attrName, oldVal, newVal) {
-    if (attrName === 'type') {
-      this.type = newVal;
+    switch(attrName) {
+      case 'type':
+        this.type = newVal;
+        break;
+      case 'value':
+        this.value = newVal;
+        break;
+      default:
+        this._$input.setAttribute(attrName, newVal);
     }
   }
 
@@ -38,6 +48,21 @@ class ToggleRange extends window.HTMLElement {
 
   set type(newVal) {
     this._$input.setAttribute('type', newVal);
+  }
+
+  get value() {
+    return this.type === 'checkbox'
+      ? Number(this._$input.checked)
+      : Number(this._$input.value);
+  }
+
+  set value(newVal) {
+    if (isNaN(newVal)) return;
+    if (this.type === 'checkbox') {
+      this._$input.checked = Boolean(newVal);
+    } else {
+      this._$input.value = Number(newVal);
+    }
   }
 }
 

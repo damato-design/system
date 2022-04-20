@@ -4,6 +4,7 @@ const glob = require('fast-glob');
 const { rollup } = require('rollup');
 const html = require('rollup-plugin-html');
 const css = require('rollup-plugin-postcss');
+const json = require('@rollup/plugin-json');
 const { terser } = require('rollup-plugin-terser');
 const sass = require('sass');
 
@@ -14,7 +15,7 @@ function prepare(filepath) {
   const tagName = path.basename(path.dirname(filepath))
   return {
     input: filepath,
-    plugins: [html(), css({inject: false}), terser()],
+    plugins: [html(), css({inject: false}), json(), terser()],
     output:  {
       format: 'iife',
       file: path.join(SITE, 'components', `${tagName}.iife.js`),

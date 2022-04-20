@@ -6,9 +6,11 @@ title: Getting Started
 
 <svg-icon>face</svg-icon>
 
-<toggle-range type="range">Density</toggle-range>
+<toggle-range type="range" max="50">Density</toggle-range>
 
 <toggle-range type="checkbox">Dark mode</toggle-range>
+
+<delta-color-accent></delta-color-accent>
 
 {% aside %}
 ## Check this out
