@@ -6,6 +6,12 @@ title: Getting Started
 
 <svg-icon>face</svg-icon>
 
+<button>Click this button</button>
+
+<div data-density-shift>
+  <a class="button" href="#">Click this link as a button</a>
+</div>
+
 <toggle-range type="range" max="50">Density</toggle-range>
 
 <toggle-range type="checkbox">Dark mode</toggle-range>

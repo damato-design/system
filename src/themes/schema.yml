@@ -4,6 +4,13 @@ text:
     font-weight: The <body> font-weight
     font-family: The <body> font-family
     line-height: The <body> line-height
+    letter-spacing: The <h1-h6> letter-spacing
+
+  heading:
+    font-weight: The <h1-h6> font-weight
+    font-family: The <h1-h6> font-family
+    line-height: The <h1-h6> line-height
+    letter-spacing: The <h1-h6> letter-spacing
 
 box:
   standard:

@@ -1,5 +1,7 @@
 button, .button {
   font: inherit;
+  text-decoration: none;
+  cursor: pointer;
   padding: var(--space--near) var(--space--away);
   background: var(--action_standard_background-color);
   color: var(--action_standard_foreground-color);
