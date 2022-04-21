@@ -11,7 +11,6 @@ class DeltaColorText extends window.HTMLElement {
   }
 
   connectedCallback() {
-    const reference = this.getAttribute('reference');
     window.customElements.whenDefined('delta-color').then(() => {
       const control = this.shadowRoot.querySelector('delta-color');
       const { luminance, toObject } = control;
@@ -27,8 +26,12 @@ class DeltaColorText extends window.HTMLElement {
         };
       }
 
-      control.color = window.getComputedStyle(document.body).getPropertyValue(reference);
+      control.color = window.getComputedStyle(document.body).getPropertyValue(this.reference);
     });
+  }
+
+  get reference() {
+    return this.getAttribute('reference');
   }
 }
 

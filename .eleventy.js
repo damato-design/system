@@ -20,6 +20,15 @@ module.exports = function(eleventyConfig) {
   </figcaption>
   </figure>`);
 
+  eleventyConfig.addPairedShortcode('audience', (children, audience) => `<details data-density-shift role="note" data-audience="${audience}">
+  <summary>${audience} Info</summary>
+  <div>
+
+  ${children}
+  
+  </div>
+  </details>`);
+
   eleventyConfig.addPassthroughCopy({"docs/public/*.(css|jpg|png|svg|webmanifest|ico)": '/'});
   return {
     dir: {

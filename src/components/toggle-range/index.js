@@ -7,22 +7,18 @@ class ToggleRange extends window.HTMLElement {
     this.attachShadow({ mode: 'open' }).innerHTML = `<style type="text/css">${css}</style>${html}`;
 
     this._$input = this.shadowRoot.querySelector('input');
-    this._$label = this.shadowRoot.querySelector('label');
     this._$output = this.shadowRoot.querySelector('output');
   }
 
   connectedCallback() {
-    this._$input.addEventListener('change', () => this._onChange());
-    this._onChange();
-  }
-
-  _onChange() {
-    this._$output.value = this.value;
-    const detail = {
-      type: this.type,
-      value: this.value,
-    };
-    this.dispatchEvent(new CustomEvent('change', { detail }));
+    this._$input.addEventListener('change', () => {
+      this.value = this.type === 'checkbox'
+        ? this._$input.checked
+        : this._$input.value;
+      const detail = { value: this.value, type: this.type };
+      this.dispatchEvent(new CustomEvent('change', { detail }));
+    });
+    this.value = this.value;
   }
 
   static get observedAttributes() {
@@ -30,15 +26,15 @@ class ToggleRange extends window.HTMLElement {
   }
 
   attributeChangedCallback(attrName, oldVal, newVal) {
-    switch(attrName) {
-      case 'type':
-        this.type = newVal;
-        break;
-      case 'value':
-        this.value = newVal;
-        break;
-      default:
-        this._$input.setAttribute(attrName, newVal);
+    if (attrName === 'value') {
+      if (this.type === 'checkbox') {
+        this._$input.checked = Boolean(this.value);
+      } else {
+        this._$input.value = this.value;
+      }
+      this._$output.value = this.value;
+    } else {
+      this._$input.setAttribute(attrName, newVal);
     }
   }
 
@@ -46,23 +42,12 @@ class ToggleRange extends window.HTMLElement {
     return this._$input.getAttribute('type');
   }
 
-  set type(newVal) {
-    this._$input.setAttribute('type', newVal);
-  }
-
   get value() {
-    return this.type === 'checkbox'
-      ? Number(this._$input.checked)
-      : Number(this._$input.value);
+    return Number(this.getAttribute('value'));
   }
 
   set value(newVal) {
-    if (isNaN(newVal)) return;
-    if (this.type === 'checkbox') {
-      this._$input.checked = Boolean(newVal);
-    } else {
-      this._$input.value = Number(newVal);
-    }
+    this.setAttribute('value', Number(newVal));
   }
 }
 

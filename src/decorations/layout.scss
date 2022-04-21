@@ -75,3 +75,27 @@ aside[role="note"] {
   padding: 0 var(--space--away);
   margin-block: var(--space--away);
 }
+
+details {
+  background-color: var(--box_standard_background-color);
+  color: var(--box_standard_foreground-color);
+  border: var(--box_standard_border-size) solid var(--feedback_standard_surface-color);
+  border-radius: var(--box_standard_border-curve);
+  margin-block: var(--space--away);
+
+  summary {
+    text-transform: capitalize;
+    background: var(--feedback_standard_surface-color);
+    color: var(--feedback_standard_onsurface-color);
+    padding: var(--space--near);
+    cursor: pointer;
+
+    &::marker {
+      content: '+ ';
+    }
+  }
+
+  & > div {
+    padding-inline: var(--space--away);
+  }
+}

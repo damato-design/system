@@ -10,7 +10,7 @@ root:
   --action_standard_border-curve: .25em
   "--control_standard_border-size": initial
   "--control_standard_border-curve": initial
-standard: 
+light: 
   --box_standard_background-color: white
   --box_standard_foreground-color: rgb(0, 0, 0)
   --box_standard_border-color: rgb(200, 200, 200)

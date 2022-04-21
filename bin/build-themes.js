@@ -12,18 +12,18 @@ jss.use(global());
 const SOURCE = path.resolve(__dirname, '..', 'src');
 const THEMES = path.resolve(__dirname, '..', '_site', 'themes');
 
-function styles({ root, standard, inverse }) {
+function styles({ root, light, dark }) {
   return {
     ':root': { 
       ...root,
-      ...standard
+      ...light
     },
-    '@media screen' : { 
-      '[data-inverse]': inverse
+    '@media screen' : {
+      '[data-dark]': dark
     },
     '@media screen and (prefers-color-scheme: dark)': { 
-      ':root': inverse,
-      '[data-inverse]': standard
+      ':root': dark,
+      '[data-dark]': light
     }
   };
 }
