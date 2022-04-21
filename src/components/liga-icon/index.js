@@ -12,4 +12,4 @@ class LigaIcon extends window.HTMLElement {
   }
 }
 
-window.customElements.define('liga-icon', SvgIcon);
+window.customElements.define('liga-icon', LigaIcon);
