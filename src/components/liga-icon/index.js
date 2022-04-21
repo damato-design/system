@@ -1,4 +1,4 @@
-class SvgIcon extends window.HTMLElement {
+class LigaIcon extends window.HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' }).innerHTML = `
@@ -12,4 +12,4 @@ class SvgIcon extends window.HTMLElement {
   }
 }
 
-window.customElements.define('svg-icon', SvgIcon);
+window.customElements.define('liga-icon', SvgIcon);

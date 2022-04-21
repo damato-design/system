@@ -4,7 +4,7 @@ layout: layout.njk
 
 # level 1 (good for spreads and heros)
 
-<svg-icon>face</svg-icon>
+<liga-icon>face</liga-icon>
 
 Lumbersexual activated charcoal sustainable mixtape air plant chillwave. VHS hella butcher cold-pressed, normcore chartreuse [single-origin](https://google.com) coffee edison bulb street art pour-over hot chicken hell of brunch. Pour-over locavore williamsburg adaptogen semiotics kickstarter bitters brunch hot chicken chartreuse. Man bun umami mlkshk vexillologist gastropub skateboard PBR&B occupy.
 

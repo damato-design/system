@@ -4,7 +4,7 @@ title: Getting Started
 
 # level 2 (good for general reading, paragraphs)
 
-<svg-icon>face</svg-icon>
+<liga-icon>face</liga-icon>
 
 <button>Click this button</button>
 
