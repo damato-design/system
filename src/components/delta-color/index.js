@@ -55,7 +55,7 @@ class DeltaColor extends window.HTMLElement {
   }
 
   toObject(color) {
-    if (color.startsWith('rgb')) {
+    if (color.trim().startsWith('rgb')) {
       const { groups } = color.match(/rgb\((?<r>\d{1,3}),\s*(?<g>\d{1,3}),\s*(?<b>\d{1,3})\)/) || {};
       return groups ? {
         r: parseInt(groups.r, 10),

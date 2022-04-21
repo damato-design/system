@@ -10,9 +10,9 @@ title: Getting Started
 
 <toggle-range type="checkbox">Dark mode</toggle-range>
 
-<delta-color-accent></delta-color-accent>
+<delta-color-accent reference="--feedback_standard_foreground-color"></delta-color-accent>
 
-<delta-color-text></delta-color-text>
+<delta-color-text reference="--box_standard_foreground-color"></delta-color-text>
 
 {% aside %}
 ## Check this out

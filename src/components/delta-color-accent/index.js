@@ -1,5 +1,4 @@
 import json from './colors.json';
-
 class DeltaColorAccent extends window.HTMLElement {
   constructor() {
     super();
@@ -13,6 +12,7 @@ class DeltaColorAccent extends window.HTMLElement {
   }
 
   connectedCallback() {
+    const reference = this.getAttribute('reference');
     window.customElements.whenDefined('delta-color').then(() => {
       const control = this.shadowRoot.querySelector('delta-color');
       const colors = json.map((color) => control.toObject(color));
@@ -24,9 +24,7 @@ class DeltaColorAccent extends window.HTMLElement {
         };
       }
 
-       // TODO: Get accent color here
-      const { color } = window.getComputedStyle(document.body);
-      control.color = color;
+      control.color = window.getComputedStyle(document.body).getPropertyValue(reference);
     });
   }
 }

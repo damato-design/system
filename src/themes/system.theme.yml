@@ -12,7 +12,7 @@ root:
   "--control_standard_border-curve": initial
 standard: 
   --box_standard_background-color: white
-  --box_standard_foreground-color: black
+  --box_standard_foreground-color: rgb(0, 0, 0)
   --box_standard_border-color: rgb(200, 200, 200)
   --box_low-contrast_background-color: rgb(242, 242, 242)
   --box_low-contrast_foreground-color: black
@@ -29,8 +29,8 @@ standard:
   "--action_chosen_background-color": initial
   "--action_chosen_foreground-color": initial
   "--action_chosen_border-color": initial
-  "--link_standard_foreground-color": initial
-  "--link_hover_foreground-color": initial
+  --link_standard_foreground-color: pink
+  --link_hover_foreground-color: hotpink
   --control_standard_background-color: white
   --control_standard_foreground-color: black
   --control_standard_border-color: rgb(200, 200, 200)
@@ -42,7 +42,7 @@ standard:
   --control_chosen_border-color: pink
   --feedback_standard_surface-color: hotpink
   --feedback_standard_onsurface-color: white
-  --feedback_standard_foreground-color: pink
+  --feedback_standard_foreground-color: rgb(175, 82, 175)
   "--feedback_critical_surface-color": initial
   "--feedback_critical_onsurface-color": initial
   "--feedback_critical_foreground-color": initial
