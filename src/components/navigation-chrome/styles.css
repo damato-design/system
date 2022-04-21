@@ -54,12 +54,6 @@ label {
   cursor: pointer;
 }
 
-::slotted([slot="nav"]) {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
 nav {
   padding: var(--space--away);
   background: inherit;

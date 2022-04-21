@@ -1,12 +1,21 @@
 {% include "logo.svg" %}
-<ul slot="nav">
+<ul slot="nav" class="navigation-column" data-density-shift>
+  {%- for heading, children in collections.all | navigation %}
   <li>
-    <a href="#">Item 1</a>
+    <h4>{{ heading }}</h4>
+    <ul>
+      {%- for child in children %}
+      <li>
+        <a href="{{ child.page.url }}">{{ child.title }}</a>
+      </li>
+      <li>
+        <a href="{{ child.page.url }}">{{ child.title }}</a>
+      </li>
+      <li>
+        <a href="{{ child.page.url }}">{{ child.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
   </li>
-    <li>
-    <a href="#">Item 2</a>
-  </li>
-    <li>
-    <a href="#">Item 3</a>
-  </li>
+  {% endfor %}
 </ul>

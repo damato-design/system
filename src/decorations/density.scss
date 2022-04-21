@@ -2,7 +2,7 @@
 $attr-sel: "[data-density-shift]";
 $levels: 3;
 $spacescale: 2;
-$typescale: 1.5;
+$typescale: 1.414;
 
 @function space-calc($n) {
   @return math.pow($spacescale, $n);

@@ -3,6 +3,17 @@ const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlight);
 
+  eleventyConfig.addFilter('navigation', function(all) {
+    // TODO: allow single level navigation
+    return all.reduce((nav, { data, filePathStem, fileSlug }) => {
+      if (!data.title) return nav;
+      const primary = filePathStem.split('/').filter((dir) => dir && dir !== fileSlug).join(', ');
+      if (!nav[primary]) nav[primary] = [];
+      nav[primary].push(data);
+      return nav;
+    }, {});
+  });
+
   eleventyConfig.addPairedShortcode('aside', (children, feedback = 'info') => `<aside data-density-shift role="note" data-feedback="${feedback}">
   
   ${children}
