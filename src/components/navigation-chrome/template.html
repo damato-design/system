@@ -1,18 +1,17 @@
-<a id="skip" href="#main">Skip to main content</a>
-<input type="checkbox" id="navigation-toggle" />
 <div id="navigation">
   <header>
     <a href="/" id="home">
       <slot name="logo"></slot>
     </a>
-    <label for="navigation-toggle">
+    <a href="#navigation">
       <liga-icon>menu</liga-icon>
-    </label>
+    </a>
   </header>
   <nav>
     <slot name="nav"></slot>
   </nav>
 </div>
-<main id="main">
+<main>
   <slot></slot>
 </main>
+

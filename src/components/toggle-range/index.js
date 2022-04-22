@@ -11,7 +11,7 @@ class ToggleRange extends window.HTMLElement {
   }
 
   connectedCallback() {
-    this._$input.addEventListener('change', () => {
+    this._$input.addEventListener('input', () => {
       this.value = this.type === 'checkbox'
         ? this._$input.checked
         : this._$input.value;

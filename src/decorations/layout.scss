@@ -7,13 +7,15 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  text-transform: capitalize;
 
   h4 {
-    margin-bottom: var(--space--away);
+    margin-top: var(--space--away);
+    margin-bottom: var(--space--near);
+    text-transform: capitalize;
   }
 
   ul {
+    text-transform: capitalize;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -21,6 +23,10 @@
     flex-direction: column;
     gap: var(--space--near);
   }
+
+   a {
+     display: block;
+   }
 }
 
 .markdown :where(h2, h3, h4, h5, h6, p) {

@@ -1,5 +1,6 @@
 ---
-title: Getting Started
+title: Principles
+order: 1
 ---
 
 # level 2 (good for general reading, paragraphs)

@@ -11,16 +11,7 @@
 }
 
 #skip {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  pointer-events: none;
-}
-
-#skip:focus {
-  opacity: 1;
-  pointer-events: initial;
+  font-size: 1rem;
 }
 
 #navigation-toggle {
@@ -33,10 +24,7 @@
   min-width: 180px;
   max-width: 100%;
   width: calc((640px - 100%) * 100000);
-  position: sticky;
   align-self: flex-start;
-  top: 0;
-  overflow: hidden;
 }
 
 header {
@@ -49,9 +37,13 @@ header {
   width: calc((200px - 100%) * 100000);
 }
 
-label {
-  display: inline-flex;
-  cursor: pointer;
+[href="#navigation"] {
+  position: sticky;
+  top: 0;
+  right: 0;
+  margin: var(--space--away);
+  color: inherit;
+  text-decoration: none;
 }
 
 nav {
@@ -60,17 +52,7 @@ nav {
   padding-top: 0;
 }
 
-@media (any-pointer: course) {
-  nav {
-    display: none;
-  }
-
-  input[type="checkbox"]:checked + #navigation nav {
-    display: block;
-  }
-}
-
-#main {
+main {
   flex: 1;
   padding: var(--space--away);
   background: inherit;
