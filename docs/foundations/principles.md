@@ -63,6 +63,10 @@ const formatted = new Intl.DateTimeFormat('en-US', {
 console.log(formatted); // "December 20, 2012" (varies by UTC timezone)
 ```
 
+1. The first item in the list
+1. The second item in the list
+1. The third item is going to be `something really` long so we can see the text wrap to the next line and ensure everything looks fine.
+
 {% quote "https://www.google.com" "Google" %}
 The quick brown fox jumps over the lazy dog
 {% endquote %}
