@@ -12,6 +12,7 @@
   line-height: 1.25;
   opacity: .5;
   transition: opacity .218s ease;
+  margin-block: 2rem;
 }
 
 #site-attribution:hover {
