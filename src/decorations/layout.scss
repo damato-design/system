@@ -1,32 +1,14 @@
+$env-breakpoint: 860px; 
+
 .max-content {
-  max-width: 860px;
+  max-width: calc($env-breakpoint - var(--space--away));
   margin-inline: auto;
 }
 
-.navigation-column {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
-  h4 {
-    margin-top: var(--space--away);
-    margin-bottom: var(--space--near);
-    text-transform: capitalize;
-  }
-
-  ul {
-    text-transform: capitalize;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space--near);
-  }
-
-   a {
-     display: block;
-   }
+#main {
+  padding-block: var(--space--away);
+  max-width: calc(100% - var(--space--away));
+  margin-inline: auto;
 }
 
 .markdown :where(h2, h3, h4, h5, h6, p) {

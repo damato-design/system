@@ -5,13 +5,12 @@
     {% include "head.njk" %}
   </head>
   <body>
-    <navigation-chrome data-density-shift class="max-content" id="top">
+    <div id="navigation-chrome" data-density-shift class="max-content">
       {% include "navigation.njk" %}
-      <div id="main" class="markdown">{{ content | safe }}</div>
-      <div data-density-shift class="max-content">
-        <a href="top">Back to top</a>
-      </div>
-      <site-attribution></site-attribution>
-    </navigation-chrome>
+      <main id="main" class="markdown">
+        {{ content | safe }}
+        <site-attribution></site-attribution>
+      </main>
+    </div>
   </body>
 </html>
