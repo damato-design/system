@@ -9,6 +9,11 @@ class LigaIcon extends window.HTMLElement {
       </style>
       <slot class="material-icons"></slot>
     `;
+    const slot =  this.shadowRoot.querySelector('slot');
+    slot.addEventListener('slotchange', () => {
+      const [node] = slot.assignedNodes();
+      this.title = node.nodeValue;
+    });
   }
 }
 
