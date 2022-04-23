@@ -15,7 +15,7 @@ order: 1
 
 <toggle-range type="range" max="50">Density</toggle-range>
 
-<toggle-range type="checkbox">Dark mode</toggle-range>
+<system-color-control>Dark mode</system-color-control>
 
 <audience-control audience="engineer"></audience-control>
 
