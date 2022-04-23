@@ -15,9 +15,10 @@ class DeltaColorText extends window.HTMLElement {
       const control = this.shadowRoot.querySelector('delta-color');
       const { luminance, toObject } = control;
       control.onColorChange = (input) => {
-        const { backgroundColor } = window.getComputedStyle(document.body);
-        const params = [toObject(backgroundColor), input].map(luminance);
+        const { backgroundColor } = window.getComputedStyle(document.body);    const params = [toObject(backgroundColor), input].map(luminance);
         const ratio = getRatio(...params);
+
+        document.body.style.setProperty(this.reference, input);
 
         return { 
           delta: `${(1/ratio).toFixed(1)}:1`,
@@ -26,13 +27,34 @@ class DeltaColorText extends window.HTMLElement {
         };
       }
 
-      control.color = window.getComputedStyle(document.body).getPropertyValue(this.reference);
+      const color = window.getComputedStyle(document.body).getPropertyValue(this.reference);
+      control.color = parse(color);
     });
   }
 
   get reference() {
     return this.getAttribute('reference');
   }
+}
+
+/**
+ * The hsl calculations for grayscale don't resolve well.
+ * This function parses the calculations and inserts static grayvalues into an rgb function
+ * 
+ * @param {String} color - A css color string
+ * @returns {String} - A maleable color string
+ */
+function parse(color) {
+  if (color.trim().startsWith('hsl')) {
+    // Convert to an rgb string
+    const factor = color.replace(/\s+/gm, '').match(/[*\/]\d+/g);
+    const calc = factor.reduce((math, str) => {
+      return str.startsWith('*') ? math * Number(str.substring(1)) : math / Number(str.substring(1));
+    }, 1);
+    const value = parseInt(255 / (1 + calc), 10);
+    return `rgb(${value}, ${value}, ${value})`;
+  }
+  return color;
 }
 
 function getRatio(bgLuma, fgLuma) {

@@ -43,6 +43,6 @@ function prepare(filepath) {
     await bundle.write(option.output);
   }
 
-  const { css } = sass.compile(path.join(SOURCE, 'decorations', 'index.scss'));
-  fs.writeFile(path.join(SITE, `decorations.css`), css, { encoding: 'utf8'});
+  const { css: decorations } = sass.compile(path.join(SOURCE, 'decorations', 'index.scss'));
+  fs.writeFile(path.join(SITE, `decorations.css`), decorations, { encoding: 'utf8'});
 })();

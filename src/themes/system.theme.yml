@@ -11,8 +11,8 @@ root:
   "--control_standard_border-size": initial
   "--control_standard_border-curve": initial
 light: 
-  --box_standard_background-color: white
-  --box_standard_foreground-color: rgb(0, 0, 0)
+  --box_standard_background-color: var(--infragray--3-hsl)
+  --box_standard_foreground-color: var(--ultragray--3-hsl)
   --box_standard_border-color: rgb(200, 200, 200)
   --box_low-contrast_background-color: rgb(242, 242, 242)
   --box_low-contrast_foreground-color: black

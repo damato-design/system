@@ -44,7 +44,9 @@ class DeltaColor extends window.HTMLElement {
     return this.luminance(color) > Math.sqrt(1.05 * 0.05) - 0.05 > 0.179 ? '#000' : '#fff';
   }
 
-  luminance({ r, g, b }) {
+  luminance(obj) {
+    if (!obj) return 0;
+    const { r, g, b } = obj;
     const multipliers = [ 0.2126, 0.7152, 0.0722 ];
     return [r, g, b].map((v) => {
       v /= 255;

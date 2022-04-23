@@ -17,6 +17,7 @@ class DeltaColorAccent extends window.HTMLElement {
       const colors = json.map((color) => control.toObject(color));
       control.onColorChange = (input) => {
         const { closest, distance } = getClosestColor(colors, input);
+        document.body.style.setProperty(this.reference, closest);
         return { 
           delta: distance && distance.toFixed(2),
           output: closest,
