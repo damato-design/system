@@ -7,8 +7,24 @@ $env-breakpoint: 860px;
 
 #main {
   padding-block: var(--space--away);
-  max-width: calc(100% - var(--space--away));
+  padding-inline: var(--space--near);
   margin-inline: auto;
+
+  header {
+    overflow: auto;
+    margin-block: calc(var(--space--near) * -1);
+    padding-block: var(--space--near);
+  }
+}
+
+#controls {
+  display: flex;
+  gap: var(--space--away);
+  justify-content: space-between;
+}
+
+#content {
+  padding-block: var(--space--away);
 }
 
 .markdown :where(h2, h3, h4, h5, h6, p, ol, ul) {

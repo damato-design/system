@@ -7,10 +7,20 @@
   <body>
     <div id="navigation-chrome" data-density-shift class="max-content">
       {% include "navigation.njk" %}
-      <main id="main" class="markdown">
-        {{ content | safe }}
+      <hr/>
+      <main id="main">
+        <header data-density-shift>
+          <div id="controls">
+            <system-color-control></system-color-control>
+            <audience-control audience="designer"></audience-control>
+            <audience-control audience="engineer"></audience-control>
+          </div>
+        </header>
+        <div id="content" class="markdown">
+          {{ content | safe }}
+        </div>
         <site-attribution></site-attribution>
-      </main>
+      </div>
     </div>
   </body>
 </html>

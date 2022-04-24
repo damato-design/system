@@ -3,11 +3,13 @@
 }
 
 #toggle-range {
+  --knob--position-offset: 4px;
   display: flex;
   align-items: center;
 	justify-content: flex-start;
   position: relative;
   gap: 1rem;
+  margin-right: var(--knob--position-offset);
 }
 
 label {
@@ -17,6 +19,8 @@ label {
 	display: flex;
 	align-items: center;
   text-align: right;
+  white-space: nowrap;
+  gap: var(--space--near);
 }
 
 input[type="range"] {
@@ -83,7 +87,7 @@ input[type="checkbox"] {
   height: 1rem;
 	width: 1rem;
   transform: scale(1.5) translateX(calc(-.75rem + 1px));
-	right: -2px;
+	right: calc(var(--knob--position-offset) / -2);
   cursor: pointer;
   transition: transform .218s ease;
   border: 1px solid var(--control_chosen_border-color);

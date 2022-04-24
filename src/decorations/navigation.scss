@@ -1,8 +1,12 @@
 #navigation-chrome {
   display: flex;
   flex-direction: row;
-  gap: var(--space--away);
 
+  & > hr {
+    border: none;
+    background: var(--box_standard_border-color);
+    flex: 1 0 var(--box_standard_border-size);
+  }
 
   nav {
     background-color: var(--box_standard_background-color);
@@ -61,7 +65,6 @@
     flex-direction: column;
 
     nav {
-      border-bottom: var(--box_standard_border-size) solid var(--box_standard_border-color);
 
       label {
         display: inline-flex;
