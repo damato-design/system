@@ -8,7 +8,6 @@ h1 {
   font-weight: bolder;
   font-size: calc(var(--text--heading) * 1.25);
   line-height: 1.1;
-  color: var(--accent-color, var(--feedback_standard_foreground-color));
 }
 
 h2, h3, .text--heading {
@@ -23,6 +22,3 @@ h4, h5, h6, small, .text--detail {
   line-height: 1.5;
 }
 
-strong {
-  color: var(--accent-color, var(--feedback_standard_foreground-color));
-}

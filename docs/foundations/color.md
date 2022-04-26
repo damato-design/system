@@ -50,7 +50,7 @@ The research explained in [Designers should avoid pure black typography — but 
 
 The colorfield component below provides the [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) between the chosen color and a color from the list.
 
-<delta-color-accent reference="--feedback_standard_foreground-color"></delta-color-accent>
+<delta-color-accent reference="--accent-color"></delta-color-accent>
 
 This tool was used to select the accent colors on the site that were close to desired hues. Admittedly, the accent colors selected for the site do not meet the 4.5:1 contrast ratio for both the light and dark themes and therefore you will find the majority of text is not given an accent color unless it is actionable.
 

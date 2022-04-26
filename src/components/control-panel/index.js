@@ -2,8 +2,8 @@ import html from './template.html';
 import css from './styles.css';
 
 const ACCENT_COLORS = {
-  designer: 'hotpink',
-  engineer: 'purple'
+  designer: 'rgb(205, 40, 175)',
+  engineer: 'rgb(5, 106, 255)'
 }
 
 class ControlPanel extends window.HTMLElement {

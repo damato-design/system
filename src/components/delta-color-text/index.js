@@ -16,7 +16,8 @@ class DeltaColorText extends window.HTMLElement {
       const control = this.shadowRoot.querySelector('delta-color');
       const { luminance, toObject } = control;
       control.onColorChange = (input) => {
-        const { backgroundColor } = window.getComputedStyle(document.body);    const params = [toObject(backgroundColor), input].map(luminance);
+        const { backgroundColor } = window.getComputedStyle(document.body);
+        const params = [toObject(backgroundColor), input].map(luminance);
         const ratio = getRatio(...params);
 
         if (userchange) {

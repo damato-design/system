@@ -1,4 +1,5 @@
 :root {
+  
   --grayscale--factor: 5;
   --ultragray--1: calc(1 * var(--grayscale--factor));
   --ultragray--2: calc(var(--ultragray--1) * var(--grayscale--factor));

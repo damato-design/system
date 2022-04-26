@@ -9,11 +9,12 @@ class GrayscaleControl extends window.HTMLElement {
   }
 
   connectedCallback() {
+    const { documentElement } = document;
     window.customElements.whenDefined('toggle-range').then(() => {
       this._$range = this.shadowRoot.querySelector('toggle-range');
-      this._$range.addEventListener('change', ({ detail }) =>  document.body.style.setProperty(this.reference, detail.value));
+      this._$range.addEventListener('change', ({ detail }) =>  documentElement.style.setProperty(this.reference, detail.value));
 
-      this._$range.value = window.getComputedStyle(document.body).getPropertyValue(this.reference);
+      this._$range.value = window.getComputedStyle(documentElement).getPropertyValue(this.reference);
     });
   }
 
