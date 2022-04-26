@@ -81,6 +81,7 @@ input[type="range"]::-ms-thumb {
   @include thumb;
 }
 
+/* toggle knob */
 input[type="checkbox"] {
   -webkit-appearance: none;
 	position: absolute;
@@ -91,18 +92,20 @@ input[type="checkbox"] {
 	right: calc(var(--knob--position-offset) / -2);
   cursor: pointer;
   transition: .218s ease;
-  border: 1px solid var(--accent-color, var(--control_chosen_border-color));
+  border: 1px solid var(--accent-color, var(--control_standard_border-color));
   background: var(--control_standard_background-color);
 }
 
 input[type="checkbox"]:checked {
 	transform: scale(1.5) translateX(0);
+  border-color: var(--accent-color, var(--control_chosen_background-color));
 }
 
 input[type="checkbox"] + label {
   flex: 1;
 }
 
+/* toggle track */
 input[type="checkbox"] + label::after {
   content: "";
 	display: inline-block;
@@ -117,6 +120,7 @@ input[type="checkbox"] + label::after {
 
 input[type="checkbox"]:checked + label::after {
   background: var(--accent-color, var(--control_chosen_background-color));
+  border-color: var(--accent-color, var(--control_chosen_background-color));
 }
 
 input[type="checkbox"] ~ output {
