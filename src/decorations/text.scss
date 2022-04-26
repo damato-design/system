@@ -6,7 +6,7 @@ body {
 
 h1 {
   font-weight: bolder;
-  font-size: calc(var(--text--heading) * 1.25);
+  font-size: calc(var(--text--heading) * $typescale);
   line-height: 1.1;
 }
 

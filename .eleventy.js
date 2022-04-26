@@ -1,4 +1,5 @@
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const anchorsPlugin = require('@orchidjs/eleventy-plugin-ids');
 
 function titleSort(a, b) {
   return a.title.localeCompare(b.title);
@@ -10,6 +11,7 @@ function orderSort(a, b) {
 
 module.exports = function(eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlight);
+  eleventyConfig.addPlugin(anchorsPlugin);
 
   eleventyConfig.addFilter('navigation', function(all) {
     // TODO: allow single level navigation

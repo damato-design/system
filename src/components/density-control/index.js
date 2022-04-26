@@ -5,7 +5,7 @@ class DensityControl extends window.HTMLElement {
     super();
     this.attachShadow({ mode: 'open' }).innerHTML = `
       <toggle-range type="range" step="0.1" min="0.1" max="0.9">
-        Density Factor
+        Base Grid
       </toggle-range>
     `;
   }

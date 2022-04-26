@@ -99,13 +99,3 @@ feedback:
     surface-color: Using color as a container background.
     onsurface-color: Using color for content on the surface background.
     foreground-color: Using color in the <body> for readability.
-  
-  warning:
-    surface-color: Using color as a container background.
-    onsurface-color: Using color for content on the surface background.
-    foreground-color: Using color in the <body> for readability.
-
-  critical:
-    surface-color: Using color as a container background.
-    onsurface-color: Using color for content on the surface background.
-    foreground-color: Using color in the <body> for readability.

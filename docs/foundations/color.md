@@ -5,17 +5,11 @@ order: 2
 
 # Color
 
-Beginning with layout colors; assuming everything is designed as grayscale. This is easy to visualize as wireframing with pencil and paper. This provides a perfect opportunity to identify the core user experience and lessen the concern about the personality of the interface. From there, accent colors were chosen to provide some charm and context.
+The color system does not include swatches of color and instead focuses on maintaining a contrast between colors and supporting accessible accents. A theme can choose to use the grayscale or accents in whatever combinations that produce suitable contrast for inclusive experiences.
 
 ## Grayscale
 
-A simple rule set here was to have three shades toward both ends of grayscale; 3 dark grays and 3 light grays. This means there isn't a traditional material scale of color. Colors toward the middle of the scale tends to be less accessible, especially when mixing with more saturated colors.
-
-{% quote "https://medium.com/@ethersystem" "Ether @Medium" %}
-It was all about contrast.
-{% endquote %}
-
-The color steps of gray follow a [logistic curve](https://mathworld.wolfram.com/LogisticEquation.html), meaning they increment exponentially from the middle gray. The formula to determine the level of gray is the following:
+The color steps of gray follow a [logistic curve](https://mathworld.wolfram.com/LogisticEquation.html), meaning they increment exponentially from the gray with the least amount of contrast (ie. the middle gray). The formula to determine the level of gray is the following:
 
 - **RGB**: 255 / 1 + grayscale<sup>step</sup>, result is the number for each color channel.
 - **HSL**: 100 / 1 + grayscale<sup>step</sup>, result is the percentage of lightness (0% saturation).
@@ -24,11 +18,7 @@ Step 0 results in middle gray, each step either goes toward black (ultragray) or
 
 <grayscale-control reference="--grayscale--factor"></grayscale-control>
 
-## Accent Colors
-
-Accent colors were chosen first by general hue then by accessibility measurements and finally applied to denote a user interaction or areas of interest. Many of the components that expect the use to take action are indicated using an accent color.
-
-In choosing colors, accessibility must be a priority. With the layout colors selected at opposite ends of the scale, this ensures that if a gray on one side appears as text on top of a gray on the other side. The text should pass accessibility standards (assuming the font size is appropriate). Accent colors are then chosen from a predetermined list and then reviewed for accessibility measurements and were considerate to not be based on cultural expectations.
+In choosing these shades, accessibility is a priority. With the layout colors selected at opposite ends of the scale, this ensures that if a gray on one side appears as text on top of a gray on the other side. The text should pass accessibility standards (assuming the font size is appropriate).
 
 While there are now [different standards between AA and AAA](https://www.w3.org/TR/WCAG21/#contrast-minimum) which also relate to font size, a general rule is to ensure a 4.5:1 contrast ratio between the background color and text. Throughout the site, this ratio is typically much higher. You can use the colorfield control below to test the ratio between a chosen text color and the current background color of the site. This should also update when changing the system color.
 
@@ -48,11 +38,13 @@ The research explained in [Designers should avoid pure black typography — but 
 
 {% endaudience %}
 
-The colorfield component below provides the [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) between the chosen color and a color from the list.
+## Accent Colors
+
+Accent colors were chosen first by general hue then by accessibility measurements and finally applied to denote a user interaction or areas of interest. Many of the components that expect the user to take action or provide feedback are indicated using an accent color.
+
+The colorfield component below provides the [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance) between the chosen color and an accessible color from the list.
 
 <delta-color-accent reference="--accent-color"></delta-color-accent>
-
-This tool was used to select the accent colors on the site that were close to desired hues. Admittedly, the accent colors selected for the site do not meet the 4.5:1 contrast ratio for both the light and dark themes and therefore you will find the majority of text is not given an accent color unless it is actionable.
 
 {% aside %}
 
