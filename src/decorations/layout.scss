@@ -41,6 +41,7 @@ $env-breakpoint: 860px;
   border-radius: var(--box_standard_border-curve);
   padding: var(--space--near);
   margin-block: var(--space--away);
+  font-size: var(--text--heading);
 
   blockquote * {
     margin: 0;
@@ -51,7 +52,7 @@ $env-breakpoint: 860px;
     text-align: right;
   }
 
-  a {
+  a, a:hover {
     color: inherit;
   }
 }
