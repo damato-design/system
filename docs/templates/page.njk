@@ -9,13 +9,7 @@
       {% include "navigation.njk" %}
       <hr/>
       <main id="main">
-        <header id="controls" data-density-shift>
-          <div>
-            <system-color-control></system-color-control>
-            <audience-control audience="designer"></audience-control>
-            <audience-control audience="engineer"></audience-control>
-          </div>
-        </header>
+        <control-panel></control-panel>
         <div id="content" class="markdown">
           {{ content | safe }}
         </div>

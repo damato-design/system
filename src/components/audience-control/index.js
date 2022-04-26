@@ -18,6 +18,7 @@ class AudienceControl extends window.HTMLElement {
       window.localStorage.setItem(`audience-control-${this.audience}`, this._$toggle.value)
       const details = document.querySelectorAll(`details[data-audience=${this.audience}]`);
       [...details].forEach((detail) => detail.open = this.open);
+      this.dispatchEvent(new CustomEvent('change', { detail: { audience: this.audience, open: this.open } }));
     }
   }
 
