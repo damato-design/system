@@ -12,12 +12,19 @@ class DeltaColorAccent extends window.HTMLElement {
   }
 
   connectedCallback() {
+    let userchange;
     window.customElements.whenDefined('delta-color').then(() => {
       const control = this.shadowRoot.querySelector('delta-color');
       const colors = json.map((color) => control.toObject(color));
       control.onColorChange = (input) => {
         const { closest, distance } = getClosestColor(colors, input);
-        document.body.style.setProperty(this.reference, closest);
+
+        if (userchange) {
+          document.body.style.setProperty(this.reference, closest)
+        } else {
+          userchange = true;
+        }
+
         return { 
           delta: distance && distance.toFixed(2),
           output: closest,

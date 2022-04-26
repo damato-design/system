@@ -23,9 +23,9 @@ button, .button {
 }
 
 a, .link {
-  color: var(--link_standard_foreground-color);
+  color: var(--accent-color, var(--link_standard_foreground-color));
 
   &:hover {
-    color: var(--link_hover_foreground-color);
+    color: var(--accent-color, var(--link_hover_foreground-color));
   }
 }

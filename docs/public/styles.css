@@ -1,0 +1,11 @@
+#controls {
+  overflow: auto;
+  margin-block: calc(var(--space--near) * -1);
+  padding-block: var(--space--near);
+}
+
+#controls > div {
+  display: flex;
+  gap: var(--space--away);
+  justify-content: space-between;
+}

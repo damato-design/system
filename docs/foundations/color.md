@@ -22,7 +22,7 @@ The color steps of gray follow a [logistic curve](https://mathworld.wolfram.com/
 
 Step 0 results in middle gray, each step either goes toward black (ultragray) or white (infragray). The grayscale value is where curation occurs as we can tune this to have more or less contrast between the grays. The higher the grayscale value, the more contrast between infragray and ultragray (which also results in less contrast between grays on the same side of the scale). You can see the effect of the value with the range control below.
 
-INSERT_GRAYSCALE_CONTROL
+<grayscale-control reference="--grayscale--factor"></grayscale-control>
 
 ## Accent Colors
 

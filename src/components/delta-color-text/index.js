@@ -11,6 +11,7 @@ class DeltaColorText extends window.HTMLElement {
   }
 
   connectedCallback() {
+    let userchange;
     window.customElements.whenDefined('delta-color').then(() => {
       const control = this.shadowRoot.querySelector('delta-color');
       const { luminance, toObject } = control;
@@ -18,7 +19,11 @@ class DeltaColorText extends window.HTMLElement {
         const { backgroundColor } = window.getComputedStyle(document.body);    const params = [toObject(backgroundColor), input].map(luminance);
         const ratio = getRatio(...params);
 
-        document.body.style.setProperty(this.reference, input);
+        if (userchange) {
+          document.body.style.setProperty(this.reference, input);
+        } else {
+          userchange = true;
+        }
 
         return { 
           delta: `${(1/ratio).toFixed(1)}:1`,

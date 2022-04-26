@@ -61,7 +61,7 @@ module.exports = function(eleventyConfig) {
   </div>
   </details>`);
 
-  eleventyConfig.addPassthroughCopy({"docs/public/*.(css|jpg|png|svg|webmanifest|ico)": '/'});
+  eleventyConfig.addPassthroughCopy({"docs/public/*.(css|jpg|png|svg|webmanifest|ico|json)": '/'});
   return {
     dir: {
       input: 'docs',

@@ -6,17 +6,17 @@ root:
   --box_standard_border-curve: .25em
   "--text_standard_font-weight": initial
   "--text_standard_line-height": initial
-  "--action_standard_border-size": initial
+  --action_standard_border-size: 1px
   --action_standard_border-curve: .25em
-  "--control_standard_border-size": initial
-  "--control_standard_border-curve": initial
+  --control_standard_border-size: 1px
+  --control_standard_border-curve: .25em
 light: 
   --box_standard_background-color: var(--infragray--3-hsl)
   --box_standard_foreground-color: var(--ultragray--3-hsl)
-  --box_standard_border-color: rgb(200, 200, 200)
-  --box_low-contrast_background-color: rgb(242, 242, 242)
-  --box_low-contrast_foreground-color: black
-  --box_low-contrast_border-color: rgb(200, 200, 200)
+  --box_standard_border-color: var(--infragray--1-hsl)
+  --box_low-contrast_background-color: var(--infragray--2-hsl)
+  --box_low-contrast_foreground-color: var(--ultragray--2-hsl)
+  --box_low-contrast_border-color: var(--infragray--1-hsl)
   "--box_high-contrast_background-color": initial
   "--box_high-contrast_foreground-color": initial
   "--box_high-contrast_border-color": initial
@@ -31,15 +31,15 @@ light:
   "--action_chosen_border-color": initial
   --link_standard_foreground-color: blue
   --link_hover_foreground-color: blue
-  --control_standard_background-color: white
-  --control_standard_foreground-color: black
-  --control_standard_border-color: rgb(200, 200, 200)
+  --control_standard_background-color: var(--infragray--2-hsl)
+  --control_standard_foreground-color: var(--ultragray--2-hsl)
+  --control_standard_border-color: var(--ultragray--3-hsl)
   "--control_hover_background-color": initial
   "--control_hover_foreground-color": initial
   "--control_hover_border-color": initial
-  --control_chosen_background-color: hotpink
-  --control_chosen_foreground-color: white
-  --control_chosen_border-color: pink
+  --control_chosen_background-color: var(--infragray--2-hsl)
+  --control_chosen_foreground-color: var(--ultragray--2-hsl)
+  --control_chosen_border-color: var(--ultragray--3-hsl)
   --feedback_standard_surface-color: hotpink
   --feedback_standard_onsurface-color: white
   --feedback_standard_foreground-color: rgb(175, 82, 175)

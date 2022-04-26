@@ -4,13 +4,13 @@
     <title>{{ title }} - {{ site.title }}</title>
     {% include "head.njk" %}
   </head>
-  <body>
+  <body style="--accent-color: rgb(25,130,120)">
     <div id="navigation-chrome" data-density-shift class="max-content">
       {% include "navigation.njk" %}
       <hr/>
       <main id="main">
-        <header data-density-shift>
-          <div id="controls">
+        <header id="controls" data-density-shift>
+          <div>
             <system-color-control></system-color-control>
             <audience-control audience="designer"></audience-control>
             <audience-control audience="engineer"></audience-control>
