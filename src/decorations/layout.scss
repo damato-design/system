@@ -10,6 +10,7 @@ $env-breakpoint: 860px;
   padding-inline: var(--space--near);
   margin-inline: auto;
   max-width: 100vw;
+  min-height: 100vh;
 }
 
 #content {
