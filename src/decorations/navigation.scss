@@ -15,6 +15,7 @@
     padding: var(--space--away) 0;
     width: calc(100% - var(--space--away));
     align-self: flex-start;
+    flex: 1 0 20%;
     position: sticky;
     top: 0;
     z-index: 1;

@@ -9,6 +9,7 @@ $env-breakpoint: 860px;
   padding-block: var(--space--away);
   padding-inline: var(--space--near);
   margin-inline: auto;
+  max-width: 100vw;
 }
 
 #content {
@@ -53,6 +54,7 @@ table {
   margin-block: var(--space--near);
 
   th {
+    color: var(--accent-color, currentColor);
     border-bottom: var(--box_standard_border-size) solid var(--box_standard_border-color);
   }
 
