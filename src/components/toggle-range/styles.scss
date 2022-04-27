@@ -96,7 +96,7 @@ input[type="checkbox"] {
   height: 1.5em;
 	width: 1.5em;
   margin: 0;
-  transform: translateX(1em);
+  transform: translateX(-1em);
 	right: calc(var(--knob--position-offset) / -2);
   cursor: pointer;
   transition: .218s ease;

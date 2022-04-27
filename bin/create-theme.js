@@ -12,8 +12,8 @@ function transform(json) {
     .forEach((v) => Object.assign(v.endsWith('color') ? colors : root, { [v]: 'initial' }));
   return format.yaml.stringify(JSON.stringify({
     root,
-    standard: colors,
-    inverse: colors,
+    light: colors,
+    dark: colors,
   }));
 };
 
