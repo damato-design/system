@@ -54,9 +54,9 @@ light:
   --control_standard_background-color: var(--ultragray--2-hsl)
   --control_standard_foreground-color: var(--infragray--2-hsl)
   --control_standard_border-color: var(--infragray--3-hsl)
-  "--control_hover_background-color": initial
-  "--control_hover_foreground-color": initial
-  "--control_hover_border-color": initial
+  --control_hover_background-color: initial
+  --control_hover_foreground-color: initial
+  --control_hover_border-color: var(--infragray--3-hsl)
   --control_chosen_background-color: var(--accent-color)
   --control_chosen_foreground-color: var(--infragray--2-hsl)
   --control_chosen_border-color: var(--infragray--3-hsl)
@@ -88,9 +88,9 @@ dark:
   --control_standard_background-color: var(--infragray--2-hsl)
   --control_standard_foreground-color: var(--ultragray--2-hsl)
   --control_standard_border-color: var(--ultragray--3-hsl)
-  "--control_hover_background-color": initial
-  "--control_hover_foreground-color": initial
-  "--control_hover_border-color": initial
+  --control_hover_background-color: initial
+  --control_hover_foreground-color: initial
+  --control_hover_border-color: var(--ultragray--3-hsl)
   --control_chosen_background-color: var(--accent-color)
   --control_chosen_foreground-color: var(--ultragray--2-hsl)
   --control_chosen_border-color: var(--ultragray--3-hsl)

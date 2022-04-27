@@ -135,6 +135,27 @@ input[type="checkbox"] ~ output {
   display: none;
 }
 
+#toggle-range:hover input[type="range"]::-webkit-slider-thumb,
+#toggle-range:hover input[type="range"]::-webkit-slider-runnable-track {
+  border-color: var(--control_hover_border-color);
+}
+
+#toggle-range:hover input[type="range"]::-moz-range-thumb,
+#toggle-range:hover input[type="range"]::-moz-range-track {
+  border-color: var(--control_hover_border-color);
+}
+
+#toggle-range:hover input[type="range"]::-ms-thumb,
+#toggle-range:hover input[type="range"]::-ms-track {
+  border-color: var(--control_hover_border-color);
+}
+
+#toggle-range:hover input[type="checkbox"],
+#toggle-range:hover input[type="checkbox"] + label::after,
+#toggle-range:hover input[type="checkbox"]:checked + label::after {
+  border-color: var(--control_hover_border-color);
+}
+
 output {
   font-variant-numeric: tabular-nums;
 }
