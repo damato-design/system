@@ -1,0 +1,26 @@
+root: 
+  "--text_standard_font-size": 1rem
+  "--text_standard_font-weight": 400
+  "--text_standard_font-family": Catamaran
+  "--text_standard_line-height": 1.25
+  "--text_standard_letter-spacing": normal
+  "--text_heading_font-weight": 700
+  "--text_heading_font-family": Catamaran
+  "--text_heading_line-height": 1
+  "--text_heading_letter-spacing": normal
+  "--text_details_font-weight": 400
+  "--text_details_font-family": Catamaran
+  "--text_details_line-height": 1.25
+  "--text_details_letter-spacing": normal
+
+  "--box_standard_border-size": 1px
+  "--box_standard_border-curve": 0
+  "--box_standard_density-size": .5rem
+light: 
+  "--box_standard_background-color": rgb(253, 217, 0)
+  "--box_standard_foreground-color": var(--infragray--3-hsl)
+  "--link_standard_foreground-color": var(--infragray--3-hsl)
+  "--link_hover_foreground-color": var(--infragray--3-hsl)
+  "--feedback_standard_surface-color": rgb(255, 105, 180)
+  "--feedback_standard_onsurface-color": var(--infragray--3-hsl)
+  "--feedback_standard_foreground-color": rgb(255, 105, 180)

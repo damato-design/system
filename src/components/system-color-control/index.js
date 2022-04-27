@@ -21,9 +21,9 @@ class SystemColorControl extends window.HTMLElement {
       this._$toggle.value = Number(this.inverse);
       window.localStorage.setItem(`system-color-control`, this._$toggle.value)
       if (this.inverse) {
-        document.body.setAttribute('data-dark', '');
+        document.body.setAttribute('data-inverse', '');
       } else {
-        document.body.removeAttribute('data-dark');
+        document.body.removeAttribute('data-inverse');
       }
     }
   }

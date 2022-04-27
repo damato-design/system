@@ -19,11 +19,11 @@ function styles({ root, light, dark }) {
       ...light
     },
     '@media screen' : {
-      '[data-dark]': dark
+      '[data-inverse]': dark
     },
     '@media screen and (prefers-color-scheme: dark)': { 
       ':root': dark,
-      '[data-dark]': light
+      '[data-inverse]': light
     }
   };
 }
