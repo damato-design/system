@@ -1,0 +1,23 @@
+<div id="delta-color">
+  <input type="color" id="color"/>
+  <div class="display">
+    <label class="label" for="color">
+      <slot name="label-input">Input</slot>
+    </label>
+    <output id="input">rgb(0, 0, 0)</output>
+  </div>
+  <div class="display">
+    <div class="label">
+      <slot name="label-delta">Delta</slot>
+    </div>
+    <span class="delta">
+      <output id="delta">0</output>
+    </span>
+  </div>
+  <div class="display">
+    <div class="label">
+      <slot name="label-output">Value</slot>
+    </div>
+    <output id="output">Output</output>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" style="--accent-color: rgb(25,130,120);">
+  <head>
+    <title>{{ site.title }}</title>
+    {% include "head.njk" %}
+  </head>
+  <body>
+    <main id="main" class="max-content">
+      <header style="margin-bottom: var(--space--away)">
+        <control-panel></control-panel>
+      </header>
+      <h1>{% include "logo.svg" %} <div>Design System</div></h1>
+      <div id="content">{{ content | safe }}</div>
+      <site-attribution></site-attribution>
+    </main>
+  </body>
+</html>

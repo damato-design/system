@@ -1,0 +1,38 @@
+#clipboard-copy {
+  position: relative;
+  display: inline-block;
+}
+
+#clipboard-copy:before {
+  content: attr(data-message);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  pointer-events: none;
+  white-space: pre;
+  opacity: 0;
+  transform: translate(-50%, 50%) scale(.8);
+  background-color: var(--box_low-contrast_background-color);
+  color: var(--box_low-contrast_foreground-color);
+  border: var(--box_standard_border-size) solid var(--box_low-contrast_border-color);
+  border-radius: var(--box_standard_border-curve);
+  font-size: var(--text--detail);
+  padding: var(--space--near);
+}
+
+input {
+  visibility: hidden;
+  position: absolute;
+}
+
+#clipboard-copy[data-message]:before {
+  opacity: 1;
+  transform: translate(-50%, 0%) scale(1);
+  transition: .01s ease;
+}
+
+@media ( prefers-reduced-motion: no-preference ) {
+  #clipboard-copy[data-message]:before {
+    transition: 2s ease;
+  }
+}

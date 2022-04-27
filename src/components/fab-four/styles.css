@@ -1,0 +1,13 @@
+#fab-four {
+  display: flex;
+  flex-flow: row wrap;
+  gap: var(--gap, 0px);
+}
+
+#fab-four > ::slotted(*) {
+  --remaining-max: calc(100% - (var(--gap) * (var(--column-max) - 1)));
+  --remaining-min: calc(100% - (var(--gap) * (var(--column-min) - 1)));
+  min-width: calc(var(--remaining-max) / var(--column-max));
+  max-width: calc(var(--remaining-min) / var(--column-min));
+  width: calc((var(--threshold) - 100%) * 100000);
+}

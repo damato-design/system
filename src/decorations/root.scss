@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--box_standard_background-color);
+  color: var(--box_standard_foreground-color);
+}

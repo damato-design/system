@@ -1,0 +1,30 @@
+@use 'sass:math';
+$attr-sel: "[data-density-shift]";
+$levels: 3;
+$spacescale: 2;
+$typescale: 1.25;
+
+@function space-calc($n) {
+  @return math.pow($spacescale, $n);
+}
+
+@function type-calc($n) {
+  @return math.pow($typescale, $n);
+}
+
+@mixin vars($n) {
+  font-size: calc(#{type-calc($n)} * var(--text_standard_font-size, 1rem));
+
+  --text--heading: calc(#{type-calc($n + 1)} * var(--text_standard_font-size, 1rem));
+  --text--detail: calc(#{type-calc($n - 1)} * var(--text_standard_font-size, 1rem));
+  --space--near: calc(#{space-calc($n)} * var(--box_standard_density-size, 0.5rem)); 
+  --space--away: calc(#{space-calc($n + 1)} * var(--box_standard_density-size, 0.5rem));
+}
+
+@for $i from 1 through $levels {
+	$nest-sel: if($i == 1, "body", selector-nest($nest-sel, $attr-sel));
+
+	#{$nest-sel} {
+    @include vars($levels - $i);
+	}
+}

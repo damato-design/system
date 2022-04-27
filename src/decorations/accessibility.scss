@@ -1,0 +1,20 @@
+#skip {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@mixin visible-skip {
+  opacity: 1;
+  pointer-events: initial;
+}
+
+#skip:focus {
+  @include visible-skip;
+}
+
+@media (any-pointer: course) {
+  #skip {
+    @include visible-skip;
+  }
+}
+
