@@ -2,6 +2,9 @@ button, .button {
   font: inherit;
   text-decoration: none;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space--near);
   padding: var(--space--near) var(--space--away);
   background: var(--action_standard_background-color);
   color: var(--action_standard_foreground-color);
@@ -11,14 +14,14 @@ button, .button {
   &:hover {
     background: var(--action_hover_background-color);
     color: var(--action_hover_foreground-color);
-    border: var(--action_hover_border-size) solid var(--action_hover_border-color);
+    border-color: var(--action_hover_border-color);
   }
 
   &:active,
   &[aria-selected] {
     background: var(--action_chosen_background-color);
     color: var(--action_chosen_foreground-color);
-    border: var(--action_chosen_border-size) solid var(--action_chosen_border-color);
+    border-color: var(--action_chosen_border-color);
   }
 }
 

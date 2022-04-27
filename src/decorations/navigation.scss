@@ -2,6 +2,14 @@
   display: flex;
   flex-direction: row;
 
+  #main {
+    max-width: 100vw;
+  }
+
+  #content {
+    padding-block: var(--space--away);
+  }
+
   & > hr {
     border: none;
     background: var(--box_standard_border-color);

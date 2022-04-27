@@ -17,12 +17,9 @@ light:
   --box_low-contrast_background-color: var(--infragray--2-hsl)
   --box_low-contrast_foreground-color: var(--ultragray--2-hsl)
   --box_low-contrast_border-color: var(--infragray--1-hsl)
-  "--box_high-contrast_background-color": initial
-  "--box_high-contrast_foreground-color": initial
-  "--box_high-contrast_border-color": initial
-  --action_standard_background-color: blue
-  --action_standard_foreground-color: white
-  "--action_standard_border-color": initial
+  --action_standard_background-color: var(--accent-color)
+  --action_standard_foreground-color: var(--infragray--3-hsl)
+  --action_standard_border-color: var(--accent-color)
   "--action_hover_background-color": initial
   "--action_hover_foreground-color": initial
   "--action_hover_border-color": initial
