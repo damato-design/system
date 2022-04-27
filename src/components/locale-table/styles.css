@@ -1,0 +1,38 @@
+:host {
+  max-height: 70vh;
+  overflow: auto;
+  display: block;
+  border: var(--box_standard_border-size) solid var(--box_standard_border-color);
+  border-radius: var(--box_standard_border-curve);
+}
+
+table {
+  border-collapse: collapse;
+  overflow-x: auto;
+  width: 100%;
+  text-align: left;
+  font-size: 1rem;
+  border-spacing: 0;
+  background-color: var(--box_standard_background-color);
+  color: var(--box_standard_foreground-color);
+}
+
+th {
+  color: var(--accent-color, currentColor);
+  border-bottom: var(--box_standard_border-size) solid var(--box_standard_border-color);
+}
+
+th, td {
+  padding: var(--space--near);
+  text-align: inherit;
+}
+
+code {
+  background-color: var(--box_low-contrast_background-color);
+  color: var(--box_low-contrast_foreground-color);
+  border: var(--box_standard_border-size) solid var(--box_low-contrast_border-color);
+  border-radius: var(--box_standard_border-curve);
+  font-size: var(--text--detail);
+  padding: 0.1em 0.5ch;
+  vertical-align: 0.1em;
+}

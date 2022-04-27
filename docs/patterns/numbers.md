@@ -5,6 +5,11 @@ order: 2
 
 # Numbers
 
+Curating patterns to your user's cultural expectations will always provide a better experience. However, knowing all the distinctions between groups of people and their behaviors are very challenging.
+
+The table below has a list of most of the possible combinations of locales.
+
+<locale-table></locale-table>
 ## Counting
 
 Use numerals when counting, do not spell numbers unless they are larger than 6 digits. In this exception, you may used named numbers. Some names are [localized depending on the scale](https://en.wikipedia.org/wiki/Names_of_large_numbers).
