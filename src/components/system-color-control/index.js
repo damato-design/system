@@ -14,6 +14,10 @@ class SystemColorControl extends window.HTMLElement {
 
   attributeChangedCallback(attrName) {
     if (attrName === 'inverse' && this._$toggle) {
+      document.body.style.setProperty('opacity', 0);
+      document.body.addEventListener('transitionend', () => {
+        document.body.style.setProperty('opacity', 1);
+      });
       this._$toggle.value = Number(this.inverse);
       window.localStorage.setItem(`system-color-control`, this._$toggle.value)
       if (this.inverse) {

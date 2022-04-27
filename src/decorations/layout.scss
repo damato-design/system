@@ -78,6 +78,14 @@ pre {
   & > code {
     white-space: pre-wrap;
   }
+
+  & .token.punctuation {
+    color: var(--accent-color);
+  }
+
+  & .token.comment {
+    opacity: .4;
+  }
 }
 
 :not(pre) > code {
