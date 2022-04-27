@@ -5,9 +5,9 @@ order: 4
 
 # Density
 
-The exercise of applying space between elements is to identify where elements are related. Elements with a closer relation have tigher space while elements with less relation are farther apart. This is the concept commonly known as [The Gestalt Law of Proximity](https://www.nngroup.com/articles/gestalt-proximity/).
+The exercise of applying space between elements is to identify where elements are related. Elements with a closer relation have tigher space while elements with less relation are farther apart. This is the concept popularly known as [The Gestalt Law of Proximity](https://www.nngroup.com/articles/gestalt-proximity/).
 
-A way to visualize this is by social degrees of separation. People living in the same house are 1 degree of separation while neighbors could be 2 degrees of separation. In other words, parent-child and child-child relationships are closer than any other.
+A way to visualize this is by social degrees of separation. People living in the same house are 1 degree of separation while neighbors could be 2 degrees of separation. In other words, parent-child and child-child relationships are commonly closer than any other.
 
 ## Padding and gap
 
@@ -38,3 +38,9 @@ To calculate the values at a given context the following formula is used where e
 Use the control below to affect the base grid value. This page will update with the new value.
 
 <density-control reference="--box_standard_density-size"></density-control>
+
+{% audience "engineer" %}
+
+Adding a new density context can be done by adding the `data-density-shift` attribute to an element. The name implies we are shifting the density context to the next step within this element. It is not possible to explicitly set the preferred density context; it is implied by relation to the other contexts defined in each page.
+
+{% endaudience %}
