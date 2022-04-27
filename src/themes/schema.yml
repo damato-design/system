@@ -63,11 +63,6 @@ action:
     foreground-color: The <button> foreground color.
     border-color: The <button> border color.
 
-  chosen:
-    background-color: The <button> background color.
-    foreground-color: The <button> foreground color.
-    border-color: The <button> border color.
-
 link:
   standard:
     foreground-color: The <a> foreground color.

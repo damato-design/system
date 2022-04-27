@@ -37,21 +37,18 @@ light:
   --box_low-contrast_background-color: var(--ultragray--2-hsl)
   --box_low-contrast_foreground-color: var(--infragray--2-hsl)
   --box_low-contrast_border-color: var(--ultragray--1-hsl)
-  --action_standard_background-color: var(--accent-color)
-  --action_standard_foreground-color: var(--infragray--3-hsl)
-  --action_standard_border-color: var(--accent-color)
-  "--action_primary_background-color": initial
-  "--action_primary_foreground-color": initial
-  "--action_primary_border-color": initial
-  "--action_secondary_background-color": initial
-  "--action_secondary_foreground-color": initial
-  "--action_secondary_border-color": initial
-  "--action_hover_background-color": initial
-  "--action_hover_foreground-color": initial
-  "--action_hover_border-color": initial
-  "--action_chosen_background-color": initial
-  "--action_chosen_foreground-color": initial
-  "--action_chosen_border-color": initial
+  --action_standard_background-color: transparent
+  --action_standard_foreground-color: var(--accent-color)
+  --action_standard_border-color: transparent
+  --action_primary_background-color: var(--accent-color)
+  --action_primary_foreground-color: var(--infragray--3-hsl)
+  --action_primary_border-color: var(--accent-color)
+  --action_secondary_background-color: transparent
+  --action_secondary_foreground-color: var(--infragray--3-hsl)
+  --action_secondary_border-color: var(--infragray--3-hsl)
+  --action_hover_background-color: var(--infragray--3-hsl)
+  --action_hover_foreground-color: var(--ultragray--3-hsl)
+  --action_hover_border-color: var(--infragray--3-hsl)
   --link_standard_foreground-color: var(--accent-color)
   --link_hover_foreground-color: var(--infragray--3-hsl)
   --control_standard_background-color: var(--ultragray--2-hsl)
@@ -74,21 +71,18 @@ dark:
   --box_low-contrast_background-color: var(--infragray--2-hsl)
   --box_low-contrast_foreground-color: var(--ultragray--2-hsl)
   --box_low-contrast_border-color: var(--infragray--1-hsl)
-  --action_standard_background-color: var(--accent-color)
-  --action_standard_foreground-color: var(--infragray--3-hsl)
-  --action_standard_border-color: var(--accent-color)
-  "--action_primary_background-color": initial
-  "--action_primary_foreground-color": initial
-  "--action_primary_border-color": initial
-  "--action_secondary_background-color": initial
-  "--action_secondary_foreground-color": initial
-  "--action_secondary_border-color": initial
-  "--action_hover_background-color": initial
-  "--action_hover_foreground-color": initial
-  "--action_hover_border-color": initial
-  "--action_chosen_background-color": initial
-  "--action_chosen_foreground-color": initial
-  "--action_chosen_border-color": initial
+  --action_standard_background-color: transparent
+  --action_standard_foreground-color: var(--accent-color)
+  --action_standard_border-color: transparent
+  --action_primary_background-color: var(--accent-color)
+  --action_primary_foreground-color: var(--infragray--3-hsl)
+  --action_primary_border-color: var(--accent-color)
+  --action_secondary_background-color: transparent
+  --action_secondary_foreground-color: var(--ultragray--3-hsl)
+  --action_secondary_border-color: var(--ultragray--3-hsl)
+  --action_hover_background-color: var(--ultragray--3-hsl)
+  --action_hover_foreground-color: var(--infragray--3-hsl)
+  --action_hover_border-color: var(--ultragray--3-hsl)
   --link_standard_foreground-color: var(--accent-color)
   --link_hover_foreground-color: var(--accent-color)
   --control_standard_background-color: var(--infragray--2-hsl)
