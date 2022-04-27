@@ -18,9 +18,9 @@ root:
   "--box_standard_density-size": .5rem
 light: 
   "--box_standard_background-color": rgb(253, 217, 0)
-  "--box_standard_foreground-color": var(--infragray--3-hsl)
-  "--link_standard_foreground-color": var(--infragray--3-hsl)
-  "--link_hover_foreground-color": var(--infragray--3-hsl)
+  "--box_standard_foreground-color": var(--ultragray--3-hsl)
+  "--link_standard_foreground-color": var(--ultragray--3-hsl)
+  "--link_hover_foreground-color": var(--ultragray--3-hsl)
   "--feedback_standard_surface-color": rgb(255, 105, 180)
-  "--feedback_standard_onsurface-color": var(--infragray--3-hsl)
+  "--feedback_standard_onsurface-color": var(--ultragray--3-hsl)
   "--feedback_standard_foreground-color": rgb(255, 105, 180)
