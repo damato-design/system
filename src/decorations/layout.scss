@@ -12,8 +12,8 @@ $env-breakpoint: 860px;
   min-height: 100vh;
 }
 
-#content {
-  & :where(h2, h3, h4, h5, h6, p, ol, ul) {
+.content {
+  & > * {
     margin-block: var(--space--away);
   }
 
@@ -108,7 +108,7 @@ aside[role="note"] {
   color: var(--box_standard_foreground-color);
   border: var(--box_standard_border-size) solid var(--box_standard_border-color);
   border-radius: var(--box_standard_border-curve);
-  padding: 0 var(--space--away);
+  padding: var(--space--away);
   margin-block: var(--space--away);
 }
 
@@ -132,6 +132,6 @@ details {
   }
 
   & > div {
-    padding-inline: var(--space--away);
+    padding: var(--space--away);
   }
 }
