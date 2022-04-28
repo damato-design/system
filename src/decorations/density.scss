@@ -15,7 +15,7 @@ $typescale: 1.25;
 @mixin vars($n) {
   font-size: calc(#{type-calc($n)} * var(--text_standard_font-size, 1rem));
 
-  --text--display: calc(#{type-calc($n + 5)} * var(--text_standard_font-size, 1rem));
+  --text--display: calc(#{type-calc($n + 2)} * var(--text_standard_font-size, 1rem) + 3vw);
   --text--heading: calc(#{type-calc($n + 1)} * var(--text_standard_font-size, 1rem));
   --text--details: calc(#{type-calc($n - 1)} * var(--text_standard_font-size, 1rem));
   --space--near: calc(#{space-calc($n)} * var(--box_standard_density-size, 0.5rem)); 
