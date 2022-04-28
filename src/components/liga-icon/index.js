@@ -2,8 +2,9 @@ class LigaIcon extends window.HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' }).innerHTML = `
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
       <style type="text/css">
-        @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
         :host { display: inline-flex; pointer-events: none; }
         .material-icons { font-size: 1.5em; }
       </style>
