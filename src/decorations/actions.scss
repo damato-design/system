@@ -5,7 +5,7 @@ button, .button {
   display: inline-flex;
   align-items: center;
   gap: var(--space--near);
-  padding: var(--space--near) var(--space--away);
+  padding: var(--space--near);
   border-style: solid;
   transition: .218s ease;
 
@@ -14,6 +14,10 @@ button, .button {
   background: var(--action_standard_background-color);
   color: var(--action_standard_foreground-color);
   border-color: var(--action_standard_border-color);
+
+  &:not([data-square]) {
+    padding-block: var(--space--away);
+  }
   
   &[data-priority="primary"] {
     border-width: var(--action_primary_border-size);
