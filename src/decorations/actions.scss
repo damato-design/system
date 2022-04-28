@@ -16,7 +16,7 @@ button, .button {
   border-color: var(--action_standard_border-color);
 
   &:not([data-square]) {
-    padding-block: var(--space--away);
+    padding-inline: var(--space--away);
   }
   
   &[data-priority="primary"] {

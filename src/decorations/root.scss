@@ -15,7 +15,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  background-color: var(--box_standard_background-color);
+  background: var(--box_standard_background-color);
   color: var(--box_standard_foreground-color);
   transition: .218s ease;
   opacity: 0;
