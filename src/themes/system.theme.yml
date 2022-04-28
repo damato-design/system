@@ -16,10 +16,10 @@ root:
   --text_heading_line-height: 1.1
   --text_heading_letter-spacing: initial
 
-  --text_details_font-weight: 400
-  --text_details_font-family: Jost
-  --text_details_line-height: 1.5
-  --text_details_letter-spacing: initial
+  --text_detail_font-weight: 400
+  --text_detail_font-family: Jost
+  --text_detail_line-height: 1.5
+  --text_detail_letter-spacing: initial
 
   --box_standard_border-size: 1px
   --box_standard_border-curve: .25em

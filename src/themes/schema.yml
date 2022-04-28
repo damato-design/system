@@ -18,7 +18,7 @@ text:
     line-height: The <h2-h3> line-height
     letter-spacing: The <h2-h3> letter-spacing
 
-  details:
+  detail:
     font-weight: The <h4-h6> font-weight
     font-family: The <h4-h6> font-family
     line-height: The <h4-h6> line-height
