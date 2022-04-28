@@ -1,12 +1,13 @@
 const SOURCE_DIR = new URL(document.currentScript.src).href.replace(/[^/]*$/, '');
 const ANIMATION_NAME = 'undefined-detection';
+const FONT_IMPORT_URL = `@import url('https://fonts.googleapis.com/icon?family=Material+Icons');`;
 
 (function registrar() {
   const styles = new Map();
   const elements = new Set();
 
   function detection() {
-    return `${[':not(:defined)', ...elements].join(',')} { animation: ${ANIMATION_NAME} .1ms; } @keyframes ${ANIMATION_NAME} { to { visibility: visible; } }`;
+    return `${FONT_IMPORT_URL} ${[':not(:defined)', ...elements].join(',')} { animation: ${ANIMATION_NAME} .1ms; } @keyframes ${ANIMATION_NAME} { to { visibility: visible; } }`;
   }
 
   function location(root) {
