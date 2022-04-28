@@ -1,0 +1,10 @@
+:host {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  grid-template-rows: min-content auto;
+  grid-column-gap: var(--space--away);
+}
+
+::slotted([slot="title"]) {
+  align-self: center;
+}
