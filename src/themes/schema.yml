@@ -6,11 +6,17 @@ text:
     line-height: The <body> line-height
     letter-spacing: The <h1-h6> letter-spacing
 
+  display:
+    font-weight: The <h1> font-weight
+    font-family: The <h1> font-family
+    line-height: The <h1> line-height
+    letter-spacing: The <h1> letter-spacing
+
   heading:
-    font-weight: The <h1-h3> font-weight
-    font-family: The <h1-h3> font-family
-    line-height: The <h1-h3> line-height
-    letter-spacing: The <h1-h3> letter-spacing
+    font-weight: The <h2-h3> font-weight
+    font-family: The <h2-h3> font-family
+    line-height: The <h2-h3> line-height
+    letter-spacing: The <h2-h3> letter-spacing
 
   details:
     font-weight: The <h4-h6> font-weight

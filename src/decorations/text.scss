@@ -5,10 +5,10 @@ body {
 }
 
 h1, .text--display {
-  font-family: var(--text_heading_font-family);
-  font-weight: var(--text_heading_font-weight);
-  font-size: calc(var(--text--heading) * $typescale * 2);
-  line-height: var(--text_heading_line-height);
+  font-family: var(--text_display_font-family);
+  font-weight: var(--text_display_font-weight);
+  font-size: var(--text--display);
+  line-height: var(--text_display_line-height);
 }
 
 h2, h3, .text--heading {

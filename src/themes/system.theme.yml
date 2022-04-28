@@ -6,6 +6,11 @@ root:
   --text_standard_line-height: 1.3
   --text_standard_letter-spacing: initial
 
+  --text_display_font-weight: 700
+  --text_display_font-family: Jost
+  --text_display_line-height: 1.1
+  --text_display_letter-spacing: initial
+
   --text_heading_font-weight: 700
   --text_heading_font-family: Jost
   --text_heading_line-height: 1.1

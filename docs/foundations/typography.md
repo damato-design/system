@@ -7,9 +7,10 @@ order: 3
 
 ## Categories
 
-There are three categories of typography:
+There are four categories of typography:
 
-  - **Heading**: Used for top-level headlines and titles.
+  - **Display**: Used for top-level heading.
+  - **Heading**: Used for titles.
   - **Standard**: Used for most content.
   - **Detail**: Used for auxiliary content.
 
@@ -18,9 +19,9 @@ Each category can have the following properties defined within a theme:
 - `font-family` (example, `--text_standard_font-family`)
 - `font-weight` (example, `--text_heading_font-weight`)
 - `line-height` (example, `--text_detail_line-height`)
-- `letter-spacing` (example, `--text_standard_letter-spacing`)
+- `letter-spacing` (example, `--text_display_letter-spacing`)
 
-These values do not change between density contexts. Each value is applied to the entire category. This helps reduce the number of decisions needed to customize a theme. For example, this keeps the number of fonts loaded at a maximum of 3; one for each category.
+These values do not change between density contexts. Each value is applied to the entire category. This helps reduce the number of decisions needed to customize a theme. For example, this keeps the number of fonts loaded at a maximum of 4; one for each category.
 
 ## Font size
 
@@ -29,8 +30,6 @@ The font sizes steps are calculated using the [Major Third scale (1.25)](https:/
 ## Relation to density
 
 The typography scale is related directly to density where the `--text_standard_font-size` is used to calculate the font size for each category varying by the density context. In other words, as the density gets tighter, the font sizes for each category are reduced by one step of the scale.
-
-An exception occurs for `<h1>` tags where the font size is an additional 1.25 times the size of the heading font size in the given density context. This exception is justified by providing a content hierarchy for the single most important heading without defining too many additional heading sizes.
 
 ## Avoiding vertical rhythm curation
 
