@@ -16,6 +16,11 @@ $env-breakpoint: 860px;
   & :where(h2, h3, h4, h5, h6, p, ol, ul) {
     margin-block: var(--space--away);
   }
+
+  h2 {
+    border-top: var(--box_standard_border-size) solid var(--box_standard_border-color);
+    padding-top: var(--space--away);
+  }
 }
 
 #content li {

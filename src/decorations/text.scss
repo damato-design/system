@@ -16,11 +16,6 @@ h2, h3, .text--heading {
   line-height: var(--text_heading_line-height);
 }
 
-h2 {
-  border-top: var(--box_standard_border-size) solid var(--box_standard_border-color);
-  padding-top: var(--space--away);
-}
-
 h4, h5, h6, small, .text--detail {
   font-weight: var(--text_detail_font-weight);
   font-size: var(--text--detail);
