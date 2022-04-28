@@ -35,7 +35,7 @@ root:
   --control_standard_border-size: 1px
   --control_standard_border-curve: .25em
 
-light: 
+light:
   --box_standard_background-color: var(--ultragray--3-hsl)
   --box_standard_foreground-color: var(--infragray--3-hsl)
   --box_standard_border-color: var(--ultragray--1-hsl)
@@ -69,7 +69,7 @@ light:
   --feedback_standard_onsurface-color: var(--infragray--3-hsl)
   --feedback_standard_foreground-color: var(--accent-color)
 
-dark: 
+dark:
   --box_standard_background-color: var(--infragray--3-hsl)
   --box_standard_foreground-color: var(--ultragray--3-hsl)
   --box_standard_border-color: var(--infragray--1-hsl)
