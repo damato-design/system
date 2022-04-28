@@ -1,6 +1,7 @@
 :host {
   display: block;
   overflow: auto;
+  padding-bottom: var(--space--away);
 }
 
 #controls {

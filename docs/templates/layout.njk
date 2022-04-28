@@ -6,10 +6,8 @@
   </head>
   <body>
     <main id="main" class="max-content">
-      <header style="margin-bottom: var(--space--away)">
-        <control-panel></control-panel>
-      </header>
-      <h1>{% include "logo.svg" %} <div>Design System</div></h1>
+      <control-panel></control-panel>
+      <h1 style="margin-bottom: var(--space--away)">{% include "logo.svg" %} <div>Design System</div></h1>
       <div class="content">{{ content | safe }}</div>
       <site-attribution></site-attribution>
     </main>

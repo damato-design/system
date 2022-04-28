@@ -13,8 +13,13 @@ $env-breakpoint: 860px;
 }
 
 .content {
-  & > * {
-    margin-block: var(--space--away);
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--space--away);
+
+  h2, p, div, hr {
+    align-self: stretch;
   }
 
   h2 {
