@@ -9,6 +9,7 @@ root:
   --text_display_font-family: Catamaran
   --text_display_line-height: 1
   --text_display_letter-spacing: normal
+  --text_display_min-size: 20vw
 
   --text_heading_font-weight: 700
   --text_heading_font-family: Catamaran
