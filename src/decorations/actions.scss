@@ -45,6 +45,8 @@ button, .button {
 a, .link {
   color: var(--link_standard_foreground-color);
   transition: .218s ease;
+  text-decoration: underline;
+  cursor: pointer;
 
   &:hover {
     color: var(--link_hover_foreground-color);
