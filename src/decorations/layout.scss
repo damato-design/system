@@ -12,13 +12,15 @@ $env-breakpoint: 860px;
   min-height: 100vh;
 }
 
-.content {
+.content,
+.content details > div,
+.content aside[role="note"] {
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: var(--space--away);
 
-  h2, p, div, hr {
+  h2, p, div, hr, pre, ul, ol, details, table, .fig-quote {
     align-self: stretch;
   }
 
@@ -26,10 +28,10 @@ $env-breakpoint: 860px;
     border-top: var(--box_standard_border-size) solid var(--box_standard_border-color);
     padding-top: var(--space--away);
   }
-}
 
-#content li {
-  margin-block: var(--space--near);
+  li {
+    margin-block: var(--space--away);
+  }
 }
 
 .fig-quote {
@@ -67,7 +69,6 @@ table {
   border: var(--box_standard_border-size) solid var(--box_standard_border-color);
   border-radius: var(--box_standard_border-curve);
   width: 100%;
-  margin-block: var(--space--near);
 
   th {
     color: var(--accent-color, currentColor);
@@ -91,7 +92,6 @@ pre {
   border: var(--box_standard_border-size) solid var(--box_low-contrast_border-color);
   border-radius: var(--box_standard_border-curve);
   padding: var(--space--near);
-  margin-block: var(--space--away);
 
   & > code {
     white-space: pre-wrap;
@@ -122,7 +122,6 @@ aside[role="note"] {
   border: var(--box_standard_border-size) solid var(--box_standard_border-color);
   border-radius: var(--box_standard_border-curve);
   padding: var(--space--away);
-  margin-block: var(--space--away);
 }
 
 details {
@@ -130,7 +129,6 @@ details {
   color: var(--box_standard_foreground-color);
   border: var(--box_standard_border-size) solid var(--feedback_standard_surface-color);
   border-radius: var(--box_standard_border-curve);
-  margin-block: var(--space--away);
 
   summary {
     text-transform: capitalize;

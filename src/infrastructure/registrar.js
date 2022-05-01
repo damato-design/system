@@ -1,6 +1,6 @@
 const SOURCE_DIR = new URL(document.currentScript.src).href.replace(/[^/]*$/, '');
 const ANIMATION_NAME = 'undefined-detection';
-const FONT_IMPORT_URL = `@import url('https://fonts.googleapis.com/icon?family=Material+Icons');`;
+const FONT_IMPORT_URL = `@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Outlined');`;
 
 (function registrar() {
   const styles = new Map();

@@ -7,7 +7,7 @@ class LigaIcon extends window.HTMLElement {
         :host { display: inline-flex; pointer-events: none; }
         .material-icons { font-size: 1.5em; }
       </style>
-      <slot class="material-icons"></slot>
+      <slot class="material-icons-outlined"></slot>
     `;
     const slot =  this.shadowRoot.querySelector('slot');
     slot.addEventListener('slotchange', () => {

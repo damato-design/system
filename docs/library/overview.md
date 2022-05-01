@@ -5,4 +5,4 @@ order: 1
 
 # Component overview
 
-This section and related pages are a work-in-progress. Please check back over the next few weeks for information about the library of components.
+Some components are merely decorations on existing HTML elements, while others are identified as requiring more complexity or logic than a single component would normally provide.
