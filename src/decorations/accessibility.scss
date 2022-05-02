@@ -1,6 +1,7 @@
 #skip {
   opacity: 0;
   pointer-events: none;
+  margin-block: var(--space--near);
 }
 
 @mixin visible-skip {
