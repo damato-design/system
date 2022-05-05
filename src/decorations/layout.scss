@@ -97,12 +97,12 @@ pre {
     white-space: pre-wrap;
   }
 
-  & .token.punctuation {
-    color: var(--accent-color);
-  }
-
   & .token.comment {
     opacity: .4;
+  }
+
+  & .token:not(.comment) {
+    color: var(--accent-color, var(--feedback_standard_foreground-color));
   }
 }
 
