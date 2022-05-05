@@ -25,7 +25,7 @@ Decorations is a collection of CSS meant to help layout and style common element
 
 ## Registrar
 
-The registrar is a IIFE that executes on the page to help register custom elements. Each custom element definition is found at `https://system.damato.design/components/[COMPONENT_NAME].iife.js and will be registered as they are discovered on each page. A definition wil be fetched only once.
+The registrar is a IIFE that executes on the page to help register custom elements. Each custom element definition is found at `https://system.damato.design/components/[COMPONENT_NAME].iife.js and will be registered as they are discovered on each page. A definition will be fetched only once.
 
 ```html
 <script src="https://system.damato.design/registrar.iife.js" defer></script>
