@@ -101,7 +101,7 @@ pre {
     opacity: .4;
   }
 
-  & .token:not(.comment) {
+  & .token:not(.comment, .keyword, .string, .number, .boolean) {
     color: var(--accent-color, var(--feedback_standard_foreground-color));
   }
 }
