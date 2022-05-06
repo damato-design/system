@@ -51,4 +51,8 @@ a, .link {
   &:hover {
     color: var(--link_hover_foreground-color);
   }
+
+  & > code {
+    color: inherit;
+  }
 }
