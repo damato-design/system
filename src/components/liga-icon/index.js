@@ -4,7 +4,7 @@ class LigaIcon extends window.HTMLElement {
 
     this.attachShadow({ mode: 'open' }).innerHTML = `
       <style type="text/css">
-        :host { display: inline-flex; pointer-events: none; }
+        :host { display: inline-flex; pointer-events: none; vertical-align: middle; }
         .material-icons { font-size: 1.5em; }
       </style>
       <slot class="material-icons-outlined"></slot>
