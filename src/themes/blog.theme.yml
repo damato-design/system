@@ -2,7 +2,7 @@ root:
   --text_standard_font-size: 1rem
   --text_standard_font-weight: 400
   --text_standard_font-family: Poppins
-  --text_standard_line-height: 1.3
+  --text_standard_line-height: 1.5
   --text_standard_letter-spacing: initial
 
   --text_display_font-weight: 700
@@ -17,7 +17,7 @@ root:
 
   --text_detail_font-weight: 700
   --text_detail_font-family: Poppins
-  --text_detail_line-height: 1.5
+  --text_detail_line-height: 1.6
   --text_detail_letter-spacing: initial
 
   --box_standard_border-size: 1px
