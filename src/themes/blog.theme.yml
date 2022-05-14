@@ -6,12 +6,12 @@ root:
   --text_standard_letter-spacing: initial
 
   --text_display_font-weight: 700
-  --text_display_font-family: Inter
+  --text_display_font-family: Poppins
   --text_display_line-height: 1.2
   --text_display_letter-spacing: initial
 
   --text_heading_font-weight: 700
-  --text_heading_font-family: Inter
+  --text_heading_font-family: Poppins
   --text_heading_line-height: 1.2
   --text_heading_letter-spacing: initial
 
