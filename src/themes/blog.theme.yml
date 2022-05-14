@@ -1,22 +1,22 @@
 root: 
   --text_standard_font-size: 1rem
   --text_standard_font-weight: 400
-  --text_standard_font-family: Poppins
-  --text_standard_line-height: 1.5
+  --text_standard_font-family: Inter
+  --text_standard_line-height: 1.6
   --text_standard_letter-spacing: initial
 
   --text_display_font-weight: 700
-  --text_display_font-family: Poppins
-  --text_display_line-height: 1.1
+  --text_display_font-family: Inter
+  --text_display_line-height: 1.2
   --text_display_letter-spacing: initial
 
   --text_heading_font-weight: 700
-  --text_heading_font-family: Poppins
-  --text_heading_line-height: 1.1
+  --text_heading_font-family: Inter
+  --text_heading_line-height: 1.2
   --text_heading_letter-spacing: initial
 
   --text_detail_font-weight: 700
-  --text_detail_font-family: Poppins
+  --text_detail_font-family: Inter
   --text_detail_line-height: 1.6
   --text_detail_letter-spacing: initial
 
