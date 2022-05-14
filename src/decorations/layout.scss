@@ -21,7 +21,7 @@ $env-breakpoint: 860px;
   gap: var(--space--away);
   width: 100%;
 
-  h2, p, div, hr, pre, ul, ol, details, table, .fig-quote {
+  :where(h2, p, div, hr, pre, ul, ol, details, table, .fig-quote) {
     align-self: stretch;
   }
 
