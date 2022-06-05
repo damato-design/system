@@ -63,6 +63,6 @@ light:
   --control_chosen_background-color: var(--accent-color)
   --control_chosen_foreground-color: var(--ultragray--2-hsl)
   --control_chosen_border-color: var(--ultragray--3-hsl)
-  --feedback_standard_surface-color: rgb(40, 120, 200)
+  --feedback_standard_surface-color: rgb(200, 225, 250)
   --feedback_standard_onsurface-color: var(--ultragray--3-hsl)
   --feedback_standard_foreground-color: rgb(40, 120, 200)
