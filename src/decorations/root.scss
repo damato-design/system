@@ -17,7 +17,6 @@ body {
   text-rendering: optimizeLegibility;
   background: var(--box_standard_background-color);
   color: var(--box_standard_foreground-color);
-  transition: .218s ease;
   opacity: 0;
   animation: appear 2s ease forwards;
 }
