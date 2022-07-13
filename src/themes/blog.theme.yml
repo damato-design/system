@@ -43,7 +43,7 @@ light:
   --action_standard_background-color: transparent
   --action_standard_foreground-color: rgb(200, 40, 40)
   --action_standard_border-color: transparent
-  --action_primary_background-color: rgb(200, 40, 40)
+  --action_primary_background-color: rgb(255, 0, 0)
   --action_primary_foreground-color: var(--infragray--3-hsl)
   --action_primary_border-color: rgb(200, 40, 40)
   --action_secondary_background-color: transparent
@@ -52,7 +52,7 @@ light:
   --action_hover_background-color: var(--ultragray--3-hsl)
   --action_hover_foreground-color: var(--infragray--3-hsl)
   --action_hover_border-color: var(--ultragray--3-hsl)
-  --link_standard_foreground-color: rgb(200, 40, 40)
+  --link_standard_foreground-color: rgb(255, 0, 0)
   --link_hover_foreground-color: rgb(200, 40, 40)
   --control_standard_background-color: var(--infragray--2-hsl)
   --control_standard_foreground-color: var(--ultragray--2-hsl)
@@ -63,6 +63,6 @@ light:
   --control_chosen_background-color: rgb(240, 190, 90)
   --control_chosen_foreground-color: var(--ultragray--2-hsl)
   --control_chosen_border-color: var(--ultragray--3-hsl)
-  --feedback_standard_surface-color: rgb(240, 190, 90)
+  --feedback_standard_surface-color: rgb(255, 235, 170)
   --feedback_standard_onsurface-color: var(--ultragray--3-hsl)
-  --feedback_standard_foreground-color: rgb(200, 40, 40)
+  --feedback_standard_foreground-color: rgb(255, 0, 0)
