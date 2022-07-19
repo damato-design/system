@@ -26,13 +26,13 @@ root:
   --box_standard_density-size: .5rem
 
   --action_standard_border-size: 1px
-  --action_standard_border-curve: 0.25rem
+  --action_standard_border-curve: 0
   --action_primary_border-size: 1px
-  --action_primary_border-curve: 0.25rem
+  --action_primary_border-curve: 2rem
   --action_secondary_border-size: 1px
-  --action_secondary_border-curve: 0.25rem
+  --action_secondary_border-curve: 2rem
   --control_standard_border-size: 1px
-  --control_standard_border-curve: 0.25rem
+  --control_standard_border-curve: 2rem
 light: 
   --box_standard_background-color: linear-gradient(to top, rgb(120, 2, 6), rgb(6, 17, 97))
   --box_standard_foreground-color: var(--infragray--1-hsl)
