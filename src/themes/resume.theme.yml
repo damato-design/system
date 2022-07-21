@@ -9,7 +9,7 @@ root:
   --text_display_font-family: Lustria
   --text_display_line-height: 1
   --text_display_letter-spacing: initial
-  --text_display_min-size: 2.5rem
+  --text_display_min-size: 10vw
 
   --text_heading_font-weight: 700
   --text_heading_font-family: Lustria
