@@ -32,18 +32,18 @@ root:
   --control_standard_border-size: 2px
   --control_standard_border-curve: 0
 light: 
-  --box_standard_background-color: linear-gradient(to bottom, rgb(0, 18, 186), rgb(0, 72, 155))
+  --box_standard_background-color: rgb(47, 129, 252);
   --box_standard_foreground-color: var(--infragray--3-hsl)
-  --box_standard_border-color: rgb(0, 149, 184)
-  --box_low-contrast_background-color: rgb(0, 72, 155)
+  --box_standard_border-color: rgb(103, 165, 255)
+  --box_low-contrast_background-color: rgb(47, 129, 252);
   --box_low-contrast_foreground-color: var(--infragray--3-hsl)
-  --box_low-contrast_border-color: rgb(0, 149, 184)
+  --box_low-contrast_border-color: rgb(103, 165, 255)
   --action_standard_background-color: transparent
   --action_standard_foreground-color: rgb(255, 255, 0)
   --action_standard_border-color: transparent
-  --action_primary_background-color: rgb(0, 149, 184)
+  --action_primary_background-color: rgb(47, 129, 252)
   --action_primary_foreground-color: var(--infragray--3-hsl)
-  --action_primary_border-color: rgb(0, 149, 184)
+  --action_primary_border-color: var(--infragray--3-hsl)
   --action_secondary_background-color: transparent
   --action_secondary_foreground-color: var(--infragray--3-hsl)
   --action_secondary_border-color: rgb(255, 255, 0)
