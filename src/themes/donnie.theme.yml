@@ -41,15 +41,15 @@ light:
   --action_standard_background-color: transparent
   --action_standard_foreground-color: rgb(255, 255, 0)
   --action_standard_border-color: transparent
-  --action_primary_background-color: rgb(47, 129, 252)
-  --action_primary_foreground-color: var(--infragray--3-hsl)
+  --action_primary_background-color: var(--infragray--3-hsl)
+  --action_primary_foreground-color: rgb(47, 129, 252)
   --action_primary_border-color: var(--infragray--3-hsl)
   --action_secondary_background-color: transparent
   --action_secondary_foreground-color: var(--infragray--3-hsl)
   --action_secondary_border-color: rgb(255, 255, 0)
-  --action_hover_background-color: rgb(0, 149, 184)
-  --action_hover_foreground-color: var(--infragray--3-hsl)
-  --action_hover_border-color: rgb(0, 149, 184)
+  --action_hover_background-color: rgb(41, 116, 228)
+  --action_hover_foreground-color: rgb(255, 255, 0)
+  --action_hover_border-color: rgb(41, 116, 228)
   --link_standard_foreground-color: rgb(255, 255, 0)
   --link_hover_foreground-color: rgb(255, 255, 0)
   --control_standard_background-color: initial
