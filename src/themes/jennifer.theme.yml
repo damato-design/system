@@ -34,11 +34,11 @@ root:
   --control_standard_border-curve: 0
 light: 
   --box_standard_background-color: rgb(85, 25, 54)
-  --box_standard_foreground-color: var(--ultragray--1-hsl)
-  --box_standard_border-color: var(--ultragray--1-hsl)
-  --box_low-contrast_background-color: initial
-  --box_low-contrast_foreground-color: initial
-  --box_low-contrast_border-color: initial
+  --box_standard_foreground-color: var(--infragray--1-hsl)
+  --box_standard_border-color: var(--infragray--1-hsl)
+  --box_low-contrast_background-color: var(--infragray--1-hsl)
+  --box_low-contrast_foreground-color: var(--ultragray--1-hsl)
+  --box_low-contrast_border-color: var(--ultragray--1-hsl)
   --action_standard_background-color: initial
   --action_standard_foreground-color: initial
   --action_standard_border-color: initial
@@ -51,8 +51,8 @@ light:
   --action_hover_background-color: initial
   --action_hover_foreground-color: initial
   --action_hover_border-color: initial
-  --link_standard_foreground-color: var(--accent-color, currentColor)
-  --link_hover_foreground-color: var(--accent-color, currentColor)
+  --link_standard_foreground-color: var(--infragray--1-hsl)
+  --link_hover_foreground-color: var(--infragray--1-hsl)
   --control_standard_background-color: initial
   --control_standard_foreground-color: initial
   --control_standard_border-color: initial
