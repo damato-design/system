@@ -5,13 +5,13 @@ root:
   --text_standard_line-height: initial
   --text_standard_letter-spacing: initial
 
-  --text_display_font-weight: 700
+  --text_display_font-weight: 400
   --text_display_font-family: temeraire
   --text_display_line-height: initial
   --text_display_letter-spacing: initial
 
   --text_heading_font-weight: 400
-  --text_heading_font-family: temeraire
+  --text_heading_font-family: soleil
   --text_heading_line-height: initial
   --text_heading_letter-spacing: initial
 
