@@ -14,10 +14,12 @@
     "lint": "eslint . --ext ts,tsx",
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "storybook:build": "storybook build",
     "dev": "npm run storybook",
     "start": "npm run storybook",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "test": "vitest",
+    "storybook:test": "npx vitest --project=storybook"
   },
   "dependencies": {
     "react": "^18.3.1",
