@@ -10,6 +10,8 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+storybook-static
+_site
 *.local
 
 # Editor directories and files

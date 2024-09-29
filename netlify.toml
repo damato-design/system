@@ -1,5 +1,5 @@
 [build]
-  publish = "_site"
+  publish = "storybook-static"
   command = "npm run build"
 
 [[plugins]]
