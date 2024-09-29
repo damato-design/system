@@ -5,8 +5,6 @@ interface ComponentProps extends React.ComponentProps<'div'> {
   children: string;
 };
 
-function Box(props: ComponentProps) {
+export function Box(props: ComponentProps) {
   return <div {...props} className={styles.box} />;
 }
-
-export default Box;

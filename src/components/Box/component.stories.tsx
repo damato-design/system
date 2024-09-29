@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
 
-import Box from './';
+import { Box } from './';
 
 const meta = {
     title: 'Components/Box',
