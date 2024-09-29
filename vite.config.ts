@@ -8,6 +8,7 @@ import dts from 'vite-plugin-dts'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), libInjectCss(), dts({ exclude: ['**/*.stories.tsx'] })],
+  server: {watch: {usePolling: true}},
   build: {
     lib: {
       entry: resolve(__dirname, 'src/main.ts'),

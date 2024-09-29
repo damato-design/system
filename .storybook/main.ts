@@ -12,6 +12,10 @@ const config: StorybookConfig = {
     "@storybook/experimental-addon-test"
   ],
 
+  core: {
+    builder: "@storybook/builder-vite",
+  },
+
   framework: {
     name: "@storybook/react-vite",
     options: {},
