@@ -17,11 +17,13 @@ export interface BoxComponent extends React.FC<BoxComponentProps> {
   displayName: string;
 }
 
-type DynamicProxy = {
-  [key: string]: BoxComponent;
+type DynamicProxy<T> = {
+  [K in HTMLTagsOnly]: T;
 };
 
-const createBox = (TagName: HTMLTagsOnly) => {
+type Create<T> = (component: string, tagName: HTMLTagsOnly) => T;
+
+const createBox: Create<BoxComponent> = (component, TagName) => {
   /**
    * 
    * @param {BoxComponentProps} props - Configuration Object  
@@ -37,18 +39,18 @@ const createBox = (TagName: HTMLTagsOnly) => {
     // Render element
     return <TagName { ...rest } className={ clsx(styles.box) } data-standby={ standby } />
   } 
-  Box.displayName = `box.${TagName}`;
+  Box.displayName = `${component}.${TagName}`;
   return Box as BoxComponent;
 }
 
-const tagProxy = () => {
-  const cache = new Map<string, BoxComponent>();
+const tagProxy = <T extends any>(component: string, create: Create<T>) => {
+  const cache = new Map<string, T>();
   return new Proxy({}, {
     get(_, tagName: HTMLTagsOnly) {
-      if (!cache.has(tagName)) cache.set(tagName, createBox(tagName));
+      if (!cache.has(tagName)) cache.set(tagName, create(component, tagName));
       return cache.get(tagName);
     }
-  }) as DynamicProxy
+  }) as DynamicProxy<T>
 }
 
-export const box: DynamicProxy = tagProxy();
+export const box: DynamicProxy<BoxComponent> = tagProxy('box', createBox);
