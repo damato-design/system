@@ -1,0 +1,18 @@
+.sb-flex-section {
+    display: flex;
+    flex-flow: row-reverse wrap;
+    gap: 1rem;
+
+    & > * {
+        flex: 1 1 30%;
+    }
+
+    .sbdocs-preview {
+        position: sticky;
+        top: 1rem;
+    }
+}
+
+.sbdocs-content {
+    max-width: 720px;
+}
