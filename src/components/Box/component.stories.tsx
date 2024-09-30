@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
 
-import { box, boxProps } from './';
+import { box, BoxComponentProps } from './';
 
 /**
  * Description here
  */
 const meta = {
     title: 'Components/Box',
-    component: box.div,
-} satisfies Meta<boxProps>
+    component: box.div
+} satisfies Meta<typeof box.div>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -19,6 +19,6 @@ type Story = StoryObj<typeof meta>
  */
 export const Default: Story = {
     args: {
-        children: 'Hello World!'
-    }
+        children: 'Hello World!',
+    } as BoxComponentProps
 }

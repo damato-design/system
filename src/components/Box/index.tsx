@@ -2,14 +2,18 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
 
-interface BoxComponentProps {
+type HTMLTagsOnly = {
+  [K in keyof JSX.IntrinsicElements]: JSX.IntrinsicElements[K] extends React.SVGProps<SVGElement> ? never : K
+}[keyof JSX.IntrinsicElements];
+
+export interface BoxComponentProps extends React.HTMLAttributes<HTMLElement> {
   /**
-   * Determines if the component should show a loading state
+   * Loading state (interface)
    */
   standby?: boolean;
 }
 
-interface BoxComponent extends React.FC<BoxComponentProps> {
+export interface BoxComponent extends React.FC<BoxComponentProps> {
   displayName: string;
 }
 
@@ -17,7 +21,13 @@ type DynamicProxy = {
   [key: string]: BoxComponent;
 };
 
-const createBox = (tagName: string) => {
+const createBox = (TagName: HTMLTagsOnly) => {
+  /**
+   * 
+   * @param {BoxComponentProps} props - Configuration Object  
+   * @param {Boolean} [props.standby] - Loading state (JSDoc)
+   * @returns {BoxComponent}
+   */
   const Box: BoxComponent = ({
     standby,
     className,
@@ -25,21 +35,20 @@ const createBox = (tagName: string) => {
     ...rest
   }: BoxComponentProps): JSX.Element => {
     // Render element
-    const Tag = tagName as keyof JSX.IntrinsicElements;
-    return <Tag { ...rest } className={ clsx(styles.box) } data-standby={ standby } />
+    return <TagName { ...rest } className={ clsx(styles.box) } data-standby={ standby } />
   } 
-  Box.displayName = `box.${tagName}`;
+  Box.displayName = `box.${TagName}`;
   return Box as BoxComponent;
 }
 
 const tagProxy = () => {
-  const cache = new Map();
+  const cache = new Map<string, BoxComponent>();
   return new Proxy({}, {
-    get(_, tagName: string) {
+    get(_, tagName: HTMLTagsOnly) {
       if (!cache.has(tagName)) cache.set(tagName, createBox(tagName));
       return cache.get(tagName);
     }
-  })
+  }) as DynamicProxy
 }
 
 export const box: DynamicProxy = tagProxy();
