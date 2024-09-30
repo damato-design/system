@@ -3,6 +3,7 @@ import theme from './theme';
 
 const preview: Preview = {
   parameters: {
+    viewMode: 'docs',
     toolbar: { disable: true },
     controls: {
       matchers: {
@@ -15,6 +16,9 @@ const preview: Preview = {
       theme,
       canvas: {
         sourceState: 'shown'
+      },
+      source: {
+        excludeDecorators: true,
       }
     }
   },
