@@ -2,24 +2,34 @@ import React from 'react';
 import clsx from 'clsx';
 import styles from './styles.module.css';
 
-export type BoxProps = React.ComponentProps<any> & {};
+export type boxProps = React.ComponentProps<any> & {
+  /**
+   * Determines if the component should show a loading state
+   */
+  standby?: boolean;
+};
 
-function tagProxy(fn: Function) {
+type boxComponent = (tagName: string) => React.FC<boxProps>;
+
+const tagProxy = (fn: boxComponent) => {
   const cache = new Map();
   return new Proxy(fn, {
-    get(_, key: string) {
-      if (!cache.has(key)) cache.set(key, fn(key));
-      return cache.get(key);
+    get(_, tagName: string) {
+      if (!cache.has(tagName)) cache.set(tagName, fn(tagName));
+      return cache.get(tagName);
     }
   })
 }
 
-function createBox(TagName: string) {
-  const Box: React.FC<BoxProps> = (props: BoxProps) => {
-    // Pull out props that normally could affect style
-    const { className, style, ...rest } = props;
+const createBox: boxComponent = (TagName) => {
+  const Box = ({
+    standby,
+    className,
+    style,
+    ...rest
+  }: boxProps): JSX.Element => {
     // Render element
-    return <TagName { ...rest } className={ clsx(styles.box) } />
+    return <TagName { ...rest } className={ clsx(styles.box) } data-standby={ standby } />
   } 
   Box.displayName = `box.${TagName}`;
   return Box;
