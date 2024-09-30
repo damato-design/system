@@ -3,6 +3,9 @@ import { fn } from '@storybook/test'
 
 import { Box } from './';
 
+/**
+ * Description here
+ */
 const meta = {
     title: 'Components/Box',
     component: Box,
@@ -12,6 +15,9 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+/**
+ * Default story
+ */
 export const Default: Story = {
     args: {
         children: 'Hello World!'
