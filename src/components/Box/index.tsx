@@ -15,12 +15,14 @@ function tagProxy(fn: Function) {
 }
 
 function createBox(TagName: string) {
-  return function Box(props: BoxProps) {
+  const Box: React.FC<BoxProps> = (props: BoxProps) => {
     // Pull out props that normally could affect style
     const { className, style, ...rest } = props;
     // Render element
     return <TagName { ...rest } className={ clsx(styles.box) } />
   } 
+  Box.displayName = `box.${TagName}`;
+  return Box;
 }
 
 export const box = tagProxy(createBox);
