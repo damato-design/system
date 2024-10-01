@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { box } from '.';
+import { media } from '.';
 
 /**
  * Description here
  */
 const meta = {
-    title: 'Components/Box',
-    component: box.div,
-} satisfies Meta<typeof box.div>
+    title: 'Components/Media',
+    component: media.img,
+} satisfies Meta<typeof media.img>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -18,7 +18,6 @@ type Story = StoryObj<typeof meta>
  */
 export const Default: Story = {
     args: {
-        children: 'Hello World!',
-        standby: true
+        src: '#',
     }
 }

@@ -4,7 +4,7 @@ import css from './styles.module.css';
 import { proxy } from '../Element/proxy';
 import { element, ElementComponentProps } from '../Element';
 
-export const box = proxy('box', (TagName) => {
+export const input = proxy('input', (TagName) => {
   return (props: ElementComponentProps) => {
     return React.createElement(element[TagName], props);
   }
