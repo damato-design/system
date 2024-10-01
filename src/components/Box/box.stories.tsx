@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from '@storybook/test'
 
-import { box, BoxComponentProps } from './';
+import { box, BoxComponentProps } from '.';
 
 /**
  * Description here
