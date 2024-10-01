@@ -1,4 +1,30 @@
 .box {
     background: red;
     height: 10rem;
+
+    &:where([aria-describedby]):not(:focus):not(:active) {
+        clip: rect(0 0 0 0); 
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap; 
+        width: 1px;
+    }
+
+    &:where([data-priority="primary"]) {
+        background: blue;
+    }
+
+    &:where([data-priority="secondary"]) {
+        background: green;
+    }
+}
+
+.gap {
+    gap: 1rem;
+}
+
+.padding {
+    padding: 1rem;
 }

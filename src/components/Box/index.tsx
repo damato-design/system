@@ -1,28 +1,97 @@
-import React from 'react';
 import clsx from 'clsx';
-import styles from './styles.module.css';
-import { proxy, DynamicProxy } from '../proxy';
+import css from './styles.module.css';
+import { proxy, Props } from '../proxy';
 
-export interface BoxComponentProps extends React.HTMLAttributes<HTMLElement> {
-  /**
-   * Loading state (interface)
-   */
-  standby?: boolean;
+type Position = 'start' | 'center' | 'end';
+type MixedPosition = { inline?: Position, block?: Position } | Position | undefined;
+
+function updateLogical(position: string | undefined) {
+	switch(position) {
+		case 'left':
+		case 'top':
+			return 'start';
+		case 'right':
+		case 'bottom':
+			return 'end';
+		default:
+			return position;
+	}
 }
 
-export const box: DynamicProxy<BoxComponentProps> = proxy('box', (TagName) => {
+function createLayout(position: MixedPosition, logical: boolean) {
+  const layout: [string?, string?] = [
+    typeof position === 'object' ? position?.inline : position,
+    typeof position === 'object' ? position?.block : position,
+  ];
+
+  return logical ? layout.map(updateLogical) : layout;
+}
+
+export interface BoxComponentProps extends Props {
+  distribute?: 'between' | 'around' | 'evenly';
+  gap?: boolean;
+  inset?: MixedPosition;
+  logical?: boolean;
+  outset?: MixedPosition;
+  padding?: boolean;
+  priority?: 'primary' | 'secondary';
+  screenreaderOnly?: string;
+  stack?: boolean;
+  standby?: boolean;
+  stretch?: boolean;
+  wrap?: boolean;
+}
+
+export const box = proxy('box', (TagName) => {
   return ({
+    distribute,
+    gap,
+    inset,
+    logical = true,
+    outset,
+    padding,
+    priority,
+    screenreaderOnly,
+    stack,
     standby,
+    stretch,
+    wrap,
     className,
     style,
     ...rest
   }: BoxComponentProps) => {
-    // Render element
+    
+    const innerLayout = createLayout(inset, logical);
+		const outerLayout = createLayout(outset, logical);
+
+    if (stack) {
+			innerLayout.reverse();
+		}
+
+    const styles: React.CSSProperties = {
+      justifyContent: distribute ? `space-${distribute}` : innerLayout.at(0),
+			alignItems: innerLayout.at(1),
+			display: stretch ? 'flex' : 'inline-flex',
+			flex: stretch ? 1 : 'initial',
+			flexDirection: stack ? 'column' : 'row',
+			flexWrap: wrap ? 'wrap' : 'nowrap',
+			justifySelf: outerLayout.at(0),
+			alignSelf: outerLayout.at(1)
+    };
+
+    const classNames = clsx(css.box, {
+      [css.gap]: gap,
+      [css.padding]: padding
+    });
+
     return (
       <TagName 
         { ...rest }
-        className={ clsx(styles.box) }
-        data-standby={ standby } />
+        aria-describedby={ screenreaderOnly }
+        className={ classNames }
+        data-priority={ priority }
+        data-standby={ standby }
+        style={ styles } />
     )
   }
 });

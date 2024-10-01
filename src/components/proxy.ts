@@ -2,9 +2,11 @@ type HTMLTagsOnly = {
     [K in keyof JSX.IntrinsicElements]: JSX.IntrinsicElements[K] extends React.SVGProps<SVGElement> ? never : K
   }[keyof JSX.IntrinsicElements];
 
-export type DynamicProxy<Props> = {
+type ProxyObject<Props> = {
     [K in HTMLTagsOnly]: React.FC<Props>;
 };
+
+export type Props = React.HTMLAttributes<HTMLElement>
 
 export const proxy = <Props extends object>(
     component: string, 
@@ -20,5 +22,5 @@ export const proxy = <Props extends object>(
             }
             return cache.get(tagName);
         }
-    }) as DynamicProxy<Props>;
+    }) as ProxyObject<Props>;
 }
