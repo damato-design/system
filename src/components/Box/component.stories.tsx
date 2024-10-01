@@ -8,8 +8,8 @@ import { box, BoxComponentProps } from './';
  */
 const meta = {
     title: 'Components/Box',
-    component: box.div
-} satisfies Meta<typeof box.div>
+    component: box.div,
+} satisfies Meta<BoxComponentProps>
 
 export default meta
 type Story = StoryObj<typeof meta>

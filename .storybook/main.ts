@@ -26,7 +26,11 @@ const config: StorybookConfig = {
   },
 
   typescript: {
-    reactDocgen: "react-docgen-typescript"
+    reactDocgen: "react-docgen-typescript",
+    reactDocgenTypescriptOptions: {
+      shouldExtractLiteralValuesFromEnum: true,
+      propFilter: (prop) => prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
+    }
   },
 
   staticDirs: ['./public']
