@@ -4,8 +4,9 @@ import css from './styles.module.css';
 import { proxy } from '../Element/proxy';
 import { element, ElementComponentProps } from '../Element';
 
-export const input = proxy('input', (TagName) => {
+export const input = proxy('input', (inputType) => {
   return (props: ElementComponentProps) => {
-    return React.createElement(element[TagName], props);
+    const Element = inputType === 'textarea' ? element.textarea : element.input;
+    return React.createElement(Element, { type: inputType, ...props});
   }
 });

@@ -6,15 +6,15 @@ type ProxyObject<Props> = {
     [K in HTMLTagsOnly]: React.FC<Props>;
 };
 
-export type Props = React.HTMLAttributes<HTMLElement>
+export type Props<Element = HTMLElement> = React.HTMLAttributes<Element>
 
-export const proxy = <Props extends object>(
+export const proxy = <Props extends object, DynamicKey extends string>(
     component: string, 
-    create: (TagName: HTMLTagsOnly) => React.FC<Props>
+    create: (TagName: DynamicKey) => React.FC<Props>
 ) => {
     const cache = new Map<string, ReturnType<typeof create>>();
     return new Proxy({}, {
-        get(_, tagName: HTMLTagsOnly) {
+        get(_, tagName: DynamicKey) {
             if (!cache.has(tagName)) {
                 const Component = create(tagName);
                 Component.displayName = `${component}.${tagName}`;

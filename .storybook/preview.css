@@ -13,6 +13,31 @@
     }
 }
 
-.sbdocs-content {
+.sbdocs .sbdocs-content {
     max-width: 720px;
+    h1 {
+        font-size: 3rem;
+        line-height: 1.1;
+    }
+
+    h2 {
+        font-size: 2.2rem;
+        letter-spacing: normal;
+        text-transform: none;
+        line-height: 1.1;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+        line-height: 1.1;
+    }
+
+    p, li {
+        font-size: 1.5rem;
+        line-height: 1.5;
+    }
+
+    a {
+        text-decoration: underline;
+    }
 }

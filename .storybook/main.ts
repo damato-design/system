@@ -1,4 +1,5 @@
 import type { StorybookConfig } from "@storybook/react-vite";
+import svgr from 'vite-plugin-svgr';
 
 const config: StorybookConfig = {
   stories: ["../docs/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
@@ -33,6 +34,14 @@ const config: StorybookConfig = {
     }
   },
 
-  staticDirs: ['./public']
+  staticDirs: ['./public'],
+
+  viteFinal: (config) => {
+    // Add the svgr plugin to the Vite configuration
+    config.plugins.push(svgr());
+    
+    // Return the modified config
+    return config;
+  }
 };
 export default config;
