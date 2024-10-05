@@ -18,6 +18,13 @@
             display: none;
         }
     }
+
+    #storybook-explorer-searchfield {
+        visibility: hidden;
+        animation: appear 0s linear forwards;
+    }
+
+    @keyframes appear { to { visibility: visible; } }
 </style>
 
 <script>
@@ -32,4 +39,22 @@
     { subtree: true, characterData: true, childList: true }
 );
 
+    function updatePlaceholder(node) {
+        if (node.getAttribute('placeholder').includes('components')) {
+            node.setAttribute('placeholder', 'Search docs');
+        }
+    }
+
+    window.addEventListener('animationend', (ev) => {
+        if (ev.animationName === 'appear') {
+            updatePlaceholder(ev.target);
+            new MutationObserver(([entry]) => {
+            updatePlaceholder(entry.target);
+    }).observe(
+        ev.target,
+        { attributes: true, attributeFilter: ['placeholder'], subtree: true,
+        childList: true, }
+    );
+        }
+    });
 </script>

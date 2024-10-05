@@ -25,6 +25,7 @@
         letter-spacing: normal;
         text-transform: none;
         line-height: 1.1;
+        display: none;
     }
 
     h3 {

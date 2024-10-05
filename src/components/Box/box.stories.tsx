@@ -6,7 +6,7 @@ import { box } from '.';
  * Description here
  */
 const meta = {
-    title: 'Components/Box',
+    title: 'Primitives/Box',
     component: box.div,
 } satisfies Meta<typeof box.div>
 

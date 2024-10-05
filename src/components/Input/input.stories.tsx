@@ -6,7 +6,7 @@ import { input } from '.';
  * Description here
  */
 const meta = {
-    title: 'Components/Input',
+    title: 'Primitives/Input',
     component: input.input,
 } satisfies Meta<typeof input.input>
 

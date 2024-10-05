@@ -6,7 +6,7 @@ import { media } from '.';
  * Description here
  */
 const meta = {
-    title: 'Components/Media',
+    title: 'Primitives/Media',
     component: media.img,
 } satisfies Meta<typeof media.img>
 
