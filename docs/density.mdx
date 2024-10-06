@@ -4,30 +4,27 @@ import { Meta } from '@storybook/blocks';
 
 # Density
 
-The exercise of applying space between elements is to identify where elements are related. Elements with a closer relation have tigher space while elements with less relation are farther apart. This is the concept popularly known as [The Gestalt Law of Proximity](https://www.nngroup.com/articles/gestalt-proximity/).
+### Spacing in scopes
 
-A way to visualize this is by social degrees of separation. People living in the same house are 1 degree of separation while neighbors could be 2 degrees of separation. In other words, parent-child and child-child relationships are commonly closer than any other.
+Instead of thinking about applying space at focused locations, we consider the relationships between the elements within that region. This is directly linked to [Gestalt's Law of Proximity](https://lawsofux.com/law-of-proximity/) which explains elements that are closer together are more related. Therefore, we expect to apply space between elements to signify a relation.
 
-### Padding and gap
-Using the above concept we have idenitifed that only two spacing properties are needed.
+Consider the content lockup for a hero banner. We would expect this to have large spacing values, along with relatively large typography in comparison to tighter content lockups for individual cards on the same page. If we consider that both of these use the same content lockup and uniformly change the density between the larger and smaller sizes, we do not need to curate spacing values specifically.
 
-- Padding: The space around content.
-- Gap: The space between content.
-We can think of the padding as the space between neighbors and the gap as the space between parent-child or child-child relationships.
+### Scale factor
 
-### Density contexts
-In order to maintain the minimalistic spacing properties but allow for several values to be resolved, the concept of a density context is introduced. The page starts with a density context where the padding and gap values are at their largest, as we expect the items at this level to be the least related. As the layout is composed, items become more related and therefore require the spacing to decrease as the content becomes more specific. This is where a new density context would be added. The system delivers 3 density contexts. By the third context, additional contexts are inert.
+To determine the values of space used, we use four values:
 
-With each new context, padding and gap values will reduce. This allows for only those two values to be recalled in any given area to describe the necessary space resolving to a total of 6 spacing values. It could be argued that this is limiting however, designing within constaints forges new solutions. This is not the first time the idea of a limited exponental set has been considered. Reducing the values limits the decisions required. The only question to ask is if the items are related or not.
+- **Padding base** - The smallest non-zero amount of space that we expect to be applied around elements, preferrably in non-relative units.
+- **Gap base** - The smallest non-zero amount of space that we expect to be applied between elements, preferrably in non-relative units. 
+- **Padding scale** - The amount to multiply to determine the next size of space for padding.
+- **Gap scale** - The amount to multiple to determine the next size of space for gap.
 
-### Calculating density values
-Two variables are used to control the overall density system.
+If no values are provided, the gap base is set at `8px`. Padding is twice the size of gap and the scale for both padding and gap is `2`.
 
-- **Base grid**: A unit value which describes the grid where elements should align. Adjusting this value will change space uniformly.
-- **Spacing scale**: Similar to a type scale, a multiplier to adjust the amount of space in a logistic curve. Adjusting this value will change space exponentially.
-To calculate the values at a given context the following formula is used where each step is a new context:
+> #### Why are non-relative units preferred?
+>
+> If we were to link the space to a relative unit such as `(r)em`, if the font size of the interface increases, this would affect the space between the elements. A user increasing the font size does so to make the content more legible. If the space also increased, it could shift content or require the user scroll due to the amount of additional space. Using a non-relative unit such as pixels ensures that the relationships between elements are consistently maintained regardless of the user's font preferences.
 
-- base grid × spacing scale<sup>step</sup>
-Use the control below to affect the base grid value. This page will update with the new value.
-
-Adding a new density context can be done by adding the data-density-shift attribute to an element. The name implies we are shifting the density context to the next step within this element. It is not possible to explicitly set the preferred density context; it is implied by relation to the other contexts defined in each page.
+> #### Why is the "base" density value meant to be the smallest?
+>
+> If we were to calculate the size of density starting at the largest value working downward, the amount of space at deeper nested regions may result in near-zero values which would be undesired. We set the "base" as smallest to ensure that space will always expect no matter the number of nested regions of density shifts.

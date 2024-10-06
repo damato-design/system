@@ -1,21 +1,21 @@
 import clsx from 'clsx';
 import css from './styles.module.css';
-import { proxy, Props } from './proxy';
+import { proxy, Props, HTMLTagsOnly } from './proxy';
 
 type Position = 'start' | 'center' | 'end';
 type MixedPosition = { inline?: Position, block?: Position } | Position | undefined;
 
 function updateLogical(position: string | undefined) {
-	switch(position) {
-		case 'left':
-		case 'top':
-			return 'start';
-		case 'right':
-		case 'bottom':
-			return 'end';
-		default:
-			return position;
-	}
+  switch (position) {
+    case 'left':
+    case 'top':
+      return 'start';
+    case 'right':
+    case 'bottom':
+      return 'end';
+    default:
+      return position;
+  }
 }
 
 function createLayout(position: MixedPosition, logical: boolean) {
@@ -43,7 +43,7 @@ export interface ElementComponentProps extends Props {
   wrap?: boolean;
 }
 
-export const element = proxy('element', (TagName) => {
+export const element = proxy<HTMLTagsOnly, Props>('element', (TagName) => {
   return ({
     distribute,
     gap,
@@ -62,24 +62,26 @@ export const element = proxy('element', (TagName) => {
     style,
     ...rest
   }: ElementComponentProps) => {
-    
+
     const innerLayout = createLayout(inset, logical);
-	const outerLayout = createLayout(outset, logical);
+    const outerLayout = createLayout(outset, logical);
 
     if (stack) {
-        innerLayout.reverse();
+      innerLayout.reverse();
     }
 
     const styles: React.CSSProperties = {
-        justifyContent: distribute ? `space-${distribute}` : innerLayout.at(0),
-        alignItems: innerLayout.at(1),
-        display: stretch ? 'flex' : 'inline-flex',
-        flex: stretch ? 1 : 'initial',
-        flexDirection: stack ? 'column' : 'row',
-        flexWrap: wrap ? 'wrap' : 'nowrap',
-        justifySelf: outerLayout.at(0),
-        alignSelf: outerLayout.at(1)
+      justifyContent: distribute ? `space-${distribute}` : innerLayout.at(0),
+      alignItems: innerLayout.at(1),
+      display: stretch ? 'flex' : 'inline-flex',
+      flex: stretch ? 1 : 'initial',
+      flexDirection: stack ? 'column' : 'row',
+      flexWrap: wrap ? 'wrap' : 'nowrap',
+      justifySelf: outerLayout.at(0),
+      alignSelf: outerLayout.at(1)
     };
+
+    console.log({ className });
 
     const classNames = clsx(className, css.element, {
       [css.gap]: gap,
@@ -87,14 +89,14 @@ export const element = proxy('element', (TagName) => {
     });
 
     return (
-      <TagName 
-        { ...rest }
-        aria-describedby={ screenreaderOnly }
-        className={ classNames }
-        data-mode={ mode }
-        data-priority={ priority }
-        data-standby={ standby }
-        style={ Object.assign(styles, style) } />
+      <TagName
+        {...rest}
+        aria-describedby={screenreaderOnly}
+        className={classNames}
+        data-mode={mode}
+        data-priority={priority}
+        data-standby={standby}
+        style={Object.assign(styles, style)} />
     )
   }
 });

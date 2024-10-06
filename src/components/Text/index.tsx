@@ -1,11 +1,12 @@
-import React from 'react';
-import clsx from 'clsx';
 import css from './styles.module.css';
-import { proxy } from '../Element/proxy';
+import { proxy, Props, HTMLTagsOnly } from '../Element/proxy';
 import { element, ElementComponentProps } from '../Element';
 
-export const text = proxy('text', (TagName) => {
-  return (props: ElementComponentProps) => {
-    return React.createElement(element[TagName], props);
+type ElementProps = Props<HTMLElement> & ElementComponentProps;
+
+export const text = proxy<HTMLTagsOnly, ElementProps>('text', (TagName) => {
+  return (props: ElementProps) => {
+    const Text = element[TagName];
+    return <Text { ...props } className={ css.text } />;
   }
 });

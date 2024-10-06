@@ -13,11 +13,18 @@
     }
 }
 
+.docs-story {
+    color: #C9CDCF;
+}
+
 .sbdocs .sbdocs-content {
     max-width: 720px;
+    font-size: 1.2em;
+
     h1 {
         font-size: 3rem;
         line-height: 1.1;
+        margin-block-end: 1em;
     }
 
     h2 {
@@ -31,14 +38,27 @@
     h3 {
         font-size: 1.8rem;
         line-height: 1.1;
+        margin-block: 1em .5em;
     }
 
-    p, li {
-        font-size: 1.5rem;
+    p, ul, li {
         line-height: 1.5;
+        font-size: inherit;
     }
 
     a {
         text-decoration: underline;
+        color: color-mix(in srgb, currentcolor, #198278 50%);
+    }
+
+    blockquote {
+        padding: 1em calc(2em - 4px);
+        background: color-mix(in srgb, #222425, #198278 10%);
+        font-size: .8em;
+        border-color: #198278;
+    }
+
+    blockquote h3 {
+        margin-block-start: 0;
     }
 }

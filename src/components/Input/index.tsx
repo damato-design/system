@@ -1,12 +1,17 @@
-import React from 'react';
-import clsx from 'clsx';
+import { HTMLInputTypeAttribute } from 'react';
 import css from './styles.module.css';
-import { proxy } from '../Element/proxy';
+import { proxy, Props } from '../Element/proxy';
 import { element, ElementComponentProps } from '../Element';
 
-export const input = proxy('input', (inputType) => {
-  return (props: ElementComponentProps) => {
+type ElementProps = Props<HTMLInputElement> & ElementComponentProps;
+
+export const input = proxy<HTMLInputTypeAttribute, ElementProps>('input', (inputType) => {
+  return (props: ElementProps) => {
     const Element = inputType === 'textarea' ? element.textarea : element.input;
-    return React.createElement(Element, { type: inputType, ...props});
+    const type = inputType !== 'textarea' ? inputType : null;
+    return <Element
+      { ...props}
+      className={ css.input }
+      type={ type }/>;
   }
 });

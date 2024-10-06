@@ -7,8 +7,8 @@ import { input } from '.';
  */
 const meta = {
     title: 'Primitives/Input',
-    component: input.input,
-} satisfies Meta<typeof input.input>
+    component: input.text,
+} satisfies Meta<typeof input.text>
 
 export default meta
 type Story = StoryObj<typeof meta>
@@ -21,4 +21,16 @@ export const Default: Story = {
         value: 'Hello World!',
         onChange: Function.prototype,
     }
+}
+
+/**
+ * Using a textarea 
+ */
+export const Textarea: Story = {
+    args: {
+        id: 'textarea-example',
+        value: 'Hello World!',
+        onChange: Function.prototype
+    },
+    render: (args: any) => <input.textarea { ...args }/>
 }

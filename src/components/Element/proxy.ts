@@ -1,26 +1,27 @@
-type HTMLTagsOnly = {
+export type HTMLTagsOnly = {
     [K in keyof JSX.IntrinsicElements]: JSX.IntrinsicElements[K] extends React.SVGProps<SVGElement> ? never : K
   }[keyof JSX.IntrinsicElements];
 
-type ProxyObject<Props> = {
-    [K in HTMLTagsOnly]: React.FC<Props>;
+export type ProxyObject<DynamicKey extends string, Props> = {
+    [K in DynamicKey]: React.FC<Props>;
 };
 
 export type Props<Element = HTMLElement> = React.HTMLAttributes<Element>
 
-export const proxy = <Props extends object, DynamicKey extends string>(
+export const proxy = <DynamicKey extends string, Props>(
     component: string, 
-    create: (TagName: DynamicKey) => React.FC<Props>
+    create: (key: DynamicKey) => React.FC<Props>
 ) => {
     const cache = new Map<string, ReturnType<typeof create>>();
     return new Proxy({}, {
-        get(_, tagName: DynamicKey) {
-            if (!cache.has(tagName)) {
-                const Component = create(tagName);
-                Component.displayName = `${component}.${tagName}`;
-                cache.set(tagName, Component);
+        get(_, key: DynamicKey) {
+            const displayName = `${component}.${key}`;
+            if (!cache.has(displayName)) {
+                const Component = create(key);
+                Component.displayName = displayName;
+                cache.set(displayName, Component);
             }
-            return cache.get(tagName);
+            return cache.get(displayName);
         }
-    }) as ProxyObject<Props>;
+    }) as ProxyObject<DynamicKey, Props>;
 }

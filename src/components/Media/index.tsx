@@ -1,11 +1,12 @@
-import React from 'react';
-import clsx from 'clsx';
 import css from './styles.module.css';
-import { proxy } from '../Element/proxy';
+import { proxy, Props } from '../Element/proxy';
 import { element, ElementComponentProps } from '../Element';
 
-export const media = proxy('media', (TagName) => {
-  return (props: ElementComponentProps) => {
-    return React.createElement(element[TagName], props);
+type ElementProps = Props<HTMLImageElement & HTMLAudioElement & HTMLVideoElement> & ElementComponentProps;
+
+export const media = proxy<'img' | 'audio' | 'video', ElementProps>('media', (TagName) => {
+  return (props: ElementProps) => {
+    const Media = element[TagName];
+    return <Media { ...props } className={ css.media }/>;
   }
 });

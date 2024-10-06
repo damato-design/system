@@ -7,17 +7,26 @@ import { Meta } from '@storybook/blocks';
 ### Categories
 There are three categories of typography:
 
-- Heading: Used for titles.
-- Body: Used for most content.
-- Detail: Used for auxiliary content.
+- **Primary**: Used for headings and titles.
+- **Secondary**: Used for most content.
+- **Default**: Used for auxiliary content, such as disclaimer or help text.
 
-These values do not change between density contexts. Each value is applied to the entire category. This helps reduce the number of decisions needed to customize a theme. For example, this keeps the number of fonts loaded at a maximum of 4; one for each category.
+> #### Why is "Default" not meant for the body copy?
+>
+> When curating the font size, we want to ensure that the base font size set is the smallest expected size. Then all additional calculations for higher levels can be based off of that smallest size in an increasing magnitude.
+>
+> This means that when applying the font size to the page, we most likely expect to use the "Secondary" size more often. Remember, the names of these types of typography indicate priority to the user, not how often we expect to use the option.
 
-### Font size
-The font sizes steps are calculated using the [Major Third scale (1.25)](https://type-scale.com/) against the theme's standard font size. This scale allows for a noticable progression without exaggerated results. In other words, each step relates well to the next for content hierarchy.
+Each category has the ability to adjust font configuration to affect that category. This is helpful when segregating a different typeface between headings and other copy. Due to the ability of changing the typeface, all metrics are also configurable.
 
-### Relation to density
-The typography scale is related directly to density is used to calculate the font size for each category varying by the density context. In other words, as the density gets tighter, the font sizes for each category are reduced by one step of the scale.
+### Density effects
 
-### Avoiding vertical rhythm curation
-Due to the [line-height box model](https://iamvdo.me/en/blog/css-font-metrics-line-height-and-vertical-align), there is little consideration for vertical rhythm. With more effort, [the given approach](https://iamvdo.me/en/blog/css-font-metrics-line-height-and-vertical-align#css-awesome) could be executed, however more metrics would need to be captured and set within the theme for each font used. As another option, if the [leading-trim specification](https://medium.com/microsoft-design/leading-trim-the-future-of-digital-typesetting-d082d84b202) is adopted across modern browsers this can be revisited.
+Typography should be directly linked to density. As the density becomes more compact, the content lockups become tighter with less room for larger typography. Importantly, the hierarchy must be maintained such that "Primary" text is presented as more significant than "Secondary" text. This is normally achieved using font size; the larger the font, the more important the content.
+
+### Scale factor
+
+- **Font size** - The smallest font size expected within the interface.
+- **Font scale** - The amount to multiply to determine the next size for the font.
+
+If no values are set, the base font size is set at `1rem` and the base font scale is set as Major Third (1.25). This means as the density is shifted, we also shift the font size by that font scale.
+
