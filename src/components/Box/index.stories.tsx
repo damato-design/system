@@ -10,7 +10,7 @@ import { box } from '.';
  * Example: `<box.main/>` will create a `<main/>` element with additional enhancements.
  */
 const meta = {
-    title: 'Primitives/Box',
+    title: 'Primitives/box',
     component: box.div,
 } satisfies Meta<typeof box.div>
 

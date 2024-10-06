@@ -19,6 +19,11 @@ body {
     }
 }
 
+pre.docs-install.docs-install {
+    background: #0f0f10;
+    padding: 1rem;
+}
+
 .sbdocs .sbdocs-content {
     max-width: 720px;
     font-size: 1.2em;
@@ -27,6 +32,10 @@ body {
         font-size: 3rem;
         line-height: 1.1;
         margin-block-end: 1em;
+    }
+
+    h1.sbdocs-title {
+        text-transform: capitalize;
     }
 
     h2 {

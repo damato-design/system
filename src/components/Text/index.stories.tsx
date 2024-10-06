@@ -6,7 +6,7 @@ import { text } from '.';
  * Description here
  */
 const meta = {
-    title: 'Primitives/Text',
+    title: 'Primitives/text',
     component: text.span,
 } satisfies Meta<typeof text.span>
 

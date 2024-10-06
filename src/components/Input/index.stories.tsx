@@ -8,7 +8,7 @@ import { input } from '.';
  * in conjunction with `<box.div appearance='control'/>` to create the frame around the input.
  */
 const meta = {
-    title: 'Primitives/Input',
+    title: 'Primitives/input',
     component: input.text,
 } satisfies Meta<typeof input.text>
 

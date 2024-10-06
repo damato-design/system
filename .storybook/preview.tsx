@@ -5,25 +5,39 @@ import theme from './theme';
 
 import './preview.css';
 
-const page = (context) => {
-  // TODO: Generate installation examples
-  const of = useOf(context);
-  console.log(of);
+function Install(props) {
+  const { of } = props;
+  const resolveOf = useOf(of || 'meta');
+  const { kind } = resolveOf?.preparedMeta;
+  if (!kind) return null;
+
+  const [_, component] = kind.split('/');
+
   return (
-    (
-      <>
-        <Title/>
-        <Description/>
-        <Primary/>
-        <Controls/>
-        <Stories/>
-      </>
-    )
+    <pre className='docs-install'>
+      <code>{ `import { ${component} } from '@components/${component}';`}</code>
+    </pre>
   )
-};
+}
+
+const page = () => (
+  <>
+    <Title/>
+    <Install/>
+    <Description/>
+    <Primary/>
+    <Controls/>
+    <Stories/>
+  </>
+);
 
 const preview: Preview = {
   parameters: {
+    options: {
+      storySort: {
+        order: ['Welcome']
+      }
+    },
     viewMode: 'docs',
     toolbar: { disable: true },
     controls: {
