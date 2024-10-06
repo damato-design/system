@@ -38,6 +38,9 @@ export interface ElementComponentProps extends Props {
   priority?: 'primary' | 'secondary';
   screenreaderOnly?: string;
   stack?: boolean;
+  /**
+   * Presents the component as loading.
+   */
   standby?: boolean;
   stretch?: boolean;
   wrap?: boolean;
@@ -80,8 +83,6 @@ export const element = proxy<HTMLTagsOnly, Props>('element', (TagName) => {
       justifySelf: outerLayout.at(0),
       alignSelf: outerLayout.at(1)
     };
-
-    console.log({ className });
 
     const classNames = clsx(className, css.element, {
       [css.gap]: gap,

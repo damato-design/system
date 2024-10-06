@@ -1,21 +1,26 @@
 import React from 'react';
 import type { Preview } from "@storybook/react";
-import { Title, Description, Primary, Controls, Stories } from '@storybook/addon-docs';
+import { Title, Description, Primary, Controls, Stories, useOf } from '@storybook/addon-docs';
 import theme from './theme';
 
 import './preview.css';
 
-const page = () => (
-  <>
-    <Title/>
-    <Description/>
-    <section className='sb-flex-section'>
-      <Primary/>
-      <Controls/>
-    </section>
-    <Stories/>
-  </>
-);
+const page = (context) => {
+  // TODO: Generate installation examples
+  const of = useOf(context);
+  console.log(of);
+  return (
+    (
+      <>
+        <Title/>
+        <Description/>
+        <Primary/>
+        <Controls/>
+        <Stories/>
+      </>
+    )
+  )
+};
 
 const preview: Preview = {
   parameters: {

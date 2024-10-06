@@ -1,5 +1,6 @@
 .element {
     margin: 0;
+    border: 0;
     color: inherit;
     font: inherit;
     background: transparent;
@@ -13,14 +14,6 @@
         position: absolute;
         white-space: nowrap; 
         width: 1px;
-    }
-
-    &:where([data-priority="primary"]) {
-        background: blue;
-    }
-
-    &:where([data-priority="secondary"]) {
-        background: green;
     }
 
     &:where([data-standby="true"]) {
@@ -44,6 +37,28 @@
         @media (prefers-reduced-motion: no-preference) {
             background-position-x: 180%;
 		    animation: 2s loading ease-in-out infinite;
+        }
+    }
+
+    /* <Button/> */
+    &:where(button, a) {
+        cursor: pointer;
+
+        &:where([data-priority="primary"]) {
+            background: blue;
+        }
+    
+        &:where([data-priority="secondary"]) {
+            background: green;
+        }
+
+        &[disabled] {
+            cursor: not-allowed;
+            opacity: .4;
+        }
+
+        &:not([disabled]):hover {
+            filter: brightness(1.3);
         }
     }
 }

@@ -1,7 +1,13 @@
+body {
+    margin: 0;
+    color: #C9CDCF;
+    font-family: Plus Jakarta Sans, sans-serif;
+}
+
 .sb-flex-section {
     display: flex;
     flex-flow: row-reverse wrap;
-    gap: 1rem;
+    gap: 2rem;
 
     & > * {
         flex: 1 1 30%;
@@ -11,10 +17,6 @@
         position: sticky;
         top: 1rem;
     }
-}
-
-.docs-story {
-    color: #C9CDCF;
 }
 
 .sbdocs .sbdocs-content {
@@ -41,7 +43,7 @@
         margin-block: 1em .5em;
     }
 
-    p, ul, li {
+    p, ul, li, div {
         line-height: 1.5;
         font-size: inherit;
     }
