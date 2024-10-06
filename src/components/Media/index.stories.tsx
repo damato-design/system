@@ -1,23 +1,33 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { media } from '.';
+import { Media } from '.';
 
 /**
- * Description here
+ * This primitive helps in managing media sources.
+ *  
+ * Note that this is the only primitive that has no variation for the HTML element.
+ * This is because the type of element is inferred by the given `src` and its MIME type.
  */
 const meta = {
     title: 'Primitives/Media',
-    component: media.img,
-} satisfies Meta<typeof media.img>
+    component: Media,
+} satisfies Meta<typeof Media>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 /**
- * Default story
+ * The most common use is the `<Media/>` element which creates an `<img/>` element.
+ * The `src` attribute is required.
  */
 export const Default: Story = {
     args: {
         src: '#',
+    }
+}
+
+export const Video: Story = {
+    args: {
+        src: 'hello.mp4'
     }
 }
