@@ -40,6 +40,7 @@ export interface ElementComponentProps extends Props {
   stack?: boolean;
   /**
    * Presents the component as loading.
+   * @default false
    */
   standby?: boolean;
   stretch?: boolean;

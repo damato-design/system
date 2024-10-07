@@ -59,6 +59,21 @@ export const Link: Story = {
     }
 }
 
+/**
+ * You can provide an icon to the component by passing the reference string
+ * to generate the `icon` component.
+ */
+export const Icon: Story = {
+    args: {
+        children: 'Search',
+        icon: 'search',
+        priority: 'primary'
+    }
+}
+
+/**
+ * Setting the `disabled` attribute will prevent the user from interacting with the button.
+ */
 export const Disabled: Story = {
     args: {
         children: 'Click here!',

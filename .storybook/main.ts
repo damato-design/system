@@ -13,7 +13,10 @@ const config: StorybookConfig = {
   ],
 
   core: {
-    builder: "@storybook/builder-vite",
+    builder: {
+      name: "@storybook/builder-vite",
+      options: { fsCache: false }
+    },
   },
 
   framework: {
