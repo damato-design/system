@@ -4,13 +4,27 @@ import { element, ElementComponentProps } from '../Element';
 
 type ElementProps = Props<HTMLImageElement & HTMLAudioElement & HTMLVideoElement> & ElementComponentProps;
 
-function getElement(src: string) {
-  // TODO: Mimetype check for element
-  const mimeType = src;
-  switch(mimeType) {
-    case 'video':
+function getElement(src: string) {  
+  const ext = src.substring(src.lastIndexOf('.'));
+
+  switch(ext) {
+    case 'avi':
+    case 'mp4':
+    case 'mpeg':
+    case 'ogv':
+    case 'ts':
+    case 'webm':
+    case '3gp':
+    case '3g2':
       return element.video;
-    case 'audio':
+    case 'aac':
+    case 'mid':
+    case 'midi':
+    case 'mp3':
+    case 'oga':
+    case 'opus':
+    case 'wav':
+    case 'weba':
       return element.audio;
     default:
       return element.img;
