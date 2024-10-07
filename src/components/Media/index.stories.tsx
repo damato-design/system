@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>
  */
 export const Default: Story = {
     args: {
-        src: 'https://picsum.photos/300/200',
+        src: 'https://loremflickr.com/1280/720',
     }
 }
 
