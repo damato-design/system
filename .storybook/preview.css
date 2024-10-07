@@ -59,14 +59,13 @@ pre.docs-install.docs-install {
 
     a {
         text-decoration: underline;
-        color: color-mix(in srgb, currentcolor, #198278 50%);
     }
 
     blockquote {
         padding: 1em calc(2em - 4px);
-        background: color-mix(in srgb, #222425, #198278 10%);
+        background: color-mix(in srgb, #222425, #4fb9af 10%);
         font-size: .8em;
-        border-color: #198278;
+        border-color: #4fb9af;
     }
 
     blockquote h3 {

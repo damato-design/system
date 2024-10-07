@@ -9,10 +9,10 @@ export default create({
     brandTarget: '_self',
     fontBase: '"Plus Jakarta Sans", sans-serif',
     fontCode: 'monospace',
-    colorPrimary: '#198278',
-    colorSecondary: '#198278',
-    appBorderColor: '#198278',
-    barSelectedColor: '#198278',
-    inputBorder: '#198278',
+    colorPrimary: '#4fb9af',
+    colorSecondary: '#4fb9af',
+    appBorderColor: '#4fb9af',
+    barSelectedColor: '#4fb9af',
+    inputBorder: '#4fb9af',
 });
 

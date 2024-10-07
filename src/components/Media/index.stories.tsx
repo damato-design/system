@@ -22,12 +22,12 @@ type Story = StoryObj<typeof meta>
  */
 export const Default: Story = {
     args: {
-        src: '#',
+        src: 'https://picsum.photos/300/200',
     }
 }
 
 export const Video: Story = {
     args: {
-        src: 'hello.mp4'
+        src: 'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
     }
 }
