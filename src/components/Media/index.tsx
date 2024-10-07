@@ -31,6 +31,8 @@ function getElement(src: string) {
   }
 }
 
+// TODO: support blob entry?
+
 export const Media = ({
   src,
   ...props
