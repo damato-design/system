@@ -26,7 +26,7 @@ export const Button = forwardRef<HTMLElement, ComponentProps>(({
     return (
         <Element { ...props } ref={ ref } href={ href } { ...spacing } inset='center'>
             { iconRef ? createElement(icon[iconRef]) : null }
-            <text.span>{ children }</text.span>
+            <text.span priority='secondary'>{ children }</text.span>
         </Element>
     )
 })
