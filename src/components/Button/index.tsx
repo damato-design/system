@@ -5,18 +5,24 @@ import { box } from '../Box';
 import { text } from '../Text';
 import { icon } from '../Icon';
 
-type ElementProps = Props<HTMLButtonElement & HTMLAnchorElement> & ElementComponentProps;
+type ButtonProps = Props<HTMLButtonElement> | Props<HTMLAnchorElement>
 
-export const Button = forwardRef(({
+type ComponentProps =  ButtonProps & ElementComponentProps & {
+    icon?: string,
+    inline?: boolean
+};
+
+export const Button = forwardRef<HTMLElement, ComponentProps>(({
     children,
     href,
     icon: iconRef,
     inline,
     ...props
-}: ElementProps, ref) => {
+}: ComponentProps, ref) => {
     const Element = href ? box.a : box.button;
     const spacing = { gap: true };
     if (!inline) spacing.padding = true;
+
     return (
         <Element { ...props } ref={ ref } href={ href } { ...spacing } inset='center'>
             { iconRef ? createElement(icon[iconRef]) : null }

@@ -41,7 +41,7 @@ function getElement(src: string | undefined) {
   }
 }
 
-export const Media = forwardRef(({
+export const Media = forwardRef<HTMLElement, ElementProps>(({
   standby,
   ...props
 }: ElementProps, ref) => {

@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import clsx from 'clsx';
 import css from './styles.module.css';
 import { proxy, Props, HTMLTagsOnly } from '../Element/proxy';
@@ -28,7 +29,7 @@ function createLayout(position: MixedPosition, logical: boolean) {
   return logical ? layout.map(updateLogical) : layout;
 }
 
-type ElementProps = Props<HTMLElement> & ElementComponentProps & {
+type ComponentProps = Props<HTMLElement> & ElementComponentProps & {
   distribute?: 'between' | 'around' | 'evenly';
   gap?: boolean;
   logical?: boolean;
@@ -41,8 +42,8 @@ type ElementProps = Props<HTMLElement> & ElementComponentProps & {
   wrap?: boolean;
 };
 
-export const box = proxy<HTMLTagsOnly, ElementProps>('box', (TagName) => {
-  return ({
+export const box = proxy<HTMLTagsOnly, ComponentProps>('box', (TagName) => {
+  return forwardRef<HTMLElement, ComponentProps>(({
     distribute,
     gap,
     inset,
@@ -54,7 +55,7 @@ export const box = proxy<HTMLTagsOnly, ElementProps>('box', (TagName) => {
     stretch,
     wrap,
     ...props
-  } : ElementProps) => {
+  }: ComponentProps, ref) => {
     const Box = element[TagName];
 
     const innerLayout = createLayout(inset, logical);
@@ -82,8 +83,9 @@ export const box = proxy<HTMLTagsOnly, ElementProps>('box', (TagName) => {
 
     return <Box
       { ...props }
+      ref={ ref }
       className={ classNames }
       data-priority={ priority }
       style={ styles }/>;
-  }
+  })
 });

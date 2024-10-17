@@ -1,14 +1,4 @@
 .text {
-    &:where([aria-describedby]):not(:focus):not(:active) {
-        clip: rect(0 0 0 0); 
-        clip-path: inset(50%);
-        height: 1px;
-        overflow: hidden;
-        position: absolute;
-        white-space: nowrap; 
-        width: 1px;
-    }
-
     &:where([data-standby="true"]) {
         /* These will need to be intents triggered by mode */
         --skeleton-bg: #ededed;
@@ -31,6 +21,18 @@
             background-position-x: 180%;
 		    animation: 2s loading ease-in-out infinite;
         }
+    }
+}
+
+.sronly {
+    &:not(:focus):not(:active) {
+        clip: rect(0 0 0 0); 
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap; 
+        width: 1px;
     }
 }
 

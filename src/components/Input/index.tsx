@@ -7,10 +7,10 @@ type InputElementProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 type TextareaElementProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 
-type ElementProps = InputElementProps | TextareaElementProps & ElementComponentProps;
+type ComponentProps = InputElementProps | TextareaElementProps & ElementComponentProps;
 
-export const input = proxy<HTMLInputTypeAttribute | 'textarea', ElementProps>('input', (inputType) => {
-  return forwardRef((props: ElementProps, ref) => {
+export const input = proxy<HTMLInputTypeAttribute | 'textarea', ComponentProps>('input', (inputType) => {
+  return forwardRef<HTMLElement, ComponentProps>((props: ComponentProps, ref) => {
     const config = Object.assign({
       type: inputType !== 'textarea' ? inputType : null
     }, props);
