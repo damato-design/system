@@ -4,7 +4,7 @@ import css from './styles.module.css';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { element, ElementProps } from '../Element';
 
-type Position = 'start' | 'center' | 'end';
+type Position = 'start' | 'center' | 'end' | string | undefined;
 type MixedPosition = { inline?: Position, block?: Position } | Position | undefined;
 
 function updateLogical(position: string | undefined) {
@@ -30,16 +30,52 @@ function createLayout(position: MixedPosition, logical: boolean) {
 }
 
 export type BoxProps = ElementProps & {
+  /**
+   * How to distribute the space across children.
+   */
   distribute?: 'between' | 'around' | 'evenly';
+  /**
+   * Add a standardized gap between the children.
+   */
   gap?: boolean;
+  /**
+   * Determines if the layout options should use logical properties.
+   * @default true
+   */
   logical?: boolean;
+  /**
+   * Set the alignment for the children within the element.
+   */
   inset?: MixedPosition;
+  /**
+   * Set the alignment for this component.
+   */
   outset?: MixedPosition;
+  /**
+   * Add a standardized padding around the children.
+   */
   padding?: boolean;
+  /**
+   * Set the priority intended for this component.
+   * This will affect the final presentation.
+   */
   priority?: 'primary' | 'secondary';
-  purpose?: 'action' | 'control';
+  /**
+   * Set the purpose for this component.
+   * This will affect the final presentation.
+   */
+  purpose?: 'surface' |'action' | 'control';
+  /**
+   * If set, makes children align vertically.
+   */
   stack?: boolean;
+  /**
+   * If set, makes the component stretch the width of the container.
+   */
   stretch?: boolean;
+  /**
+   * If set, allows children to wrap to a new line.
+   */
   wrap?: boolean;
 };
 

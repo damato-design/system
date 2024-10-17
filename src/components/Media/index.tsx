@@ -7,6 +7,9 @@ export type MediaProps = (React.ImgHTMLAttributes<HTMLImageElement>
   | React.VideoHTMLAttributes<HTMLVideoElement>) 
   & ElementProps
   & {
+    /**
+     * If set, component is shown in a loading state.
+     */
     standby?: boolean;
   };
 

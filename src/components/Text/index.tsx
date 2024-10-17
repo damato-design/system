@@ -5,8 +5,19 @@ import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { element, ElementProps } from '../Element';
 
 type TextProps = ElementProps & {
+  /**
+   * Set the priority intended for this component.
+   * This will affect the final presentation.
+   */
   priority?: 'primary' | 'secondary';
+  /**
+   * A `ref` to another component that requires more clarity
+   * that this component is meant to provide for assistive technologies.
+   */
   screenreaderOnly?: React.Ref<HTMLElement>;
+  /**
+   * If set, component is shown in a loading state.
+   */
   standby?: boolean;
 };
 

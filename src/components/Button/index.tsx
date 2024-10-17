@@ -7,7 +7,13 @@ type ComponentProps = (React.ButtonHTMLAttributes<HTMLButtonElement>
     | React.AnchorHTMLAttributes<HTMLAnchorElement>)
     & BoxProps
     & {
+        /**
+         * A string reference to an `<icon/>` element.
+         */
         icon?: string,
+        /**
+         * If set, component is expected to appear inline with content.
+         */
         inline?: boolean
     };
 

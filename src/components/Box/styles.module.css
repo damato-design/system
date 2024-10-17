@@ -5,8 +5,9 @@
 
 .action:is(.action) {
     cursor: pointer;
-    line-height: 1;
+    line-height: 1.2rlh;
     border-radius: .25em;
+    font-size: 1.2rem;
 
     --bgColor: transparent;
     background-color: var(--bgColor);
@@ -39,4 +40,5 @@
 .control:is(.control) {
     border: 1px solid;
     border-radius: .25em;
+    font-size: 1.2rem;
 }
