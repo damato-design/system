@@ -1,7 +1,6 @@
 import { forwardRef } from 'react';
-import clsx from 'clsx';
 import css from './styles.module.css';
-import { proxy, Props, HTMLTagsOnly } from '../Element/proxy';
+import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { element, ElementComponentProps } from '../Element';
 
 type Position = 'start' | 'center' | 'end';
@@ -73,18 +72,15 @@ export const box = proxy<HTMLTagsOnly, ComponentProps>('box', (TagName) => {
       flexDirection: stack ? 'column' : 'row',
       flexWrap: wrap ? 'wrap' : 'nowrap',
       justifySelf: outerLayout.at(0),
-      alignSelf: outerLayout.at(1)
+      alignSelf: outerLayout.at(1),
+      padding: padding ? 'var(--padding, 1rem)' : undefined,
+      gap: gap ? 'var(--gap, .5rem)' : undefined
     };
-
-    const classNames = clsx(css.box, {
-      [css.gap]: gap,
-      [css.padding]: padding
-    });
 
     return <Box
       { ...props }
       ref={ ref }
-      className={ classNames }
+      className={ css.box }
       data-priority={ priority }
       style={ styles }/>;
   })

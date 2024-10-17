@@ -56,7 +56,8 @@ export const Link: Story = {
         children: 'Click here!',
         inline: true,
         href: '#'
-    }
+    },
+    render: (args) => <p>The quick brown fox <Button { ...args }>jumped over</Button> the lazy dog.</p>
 }
 
 /**
