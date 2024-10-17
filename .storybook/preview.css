@@ -71,4 +71,13 @@ pre.docs-install.docs-install {
     blockquote h3 {
         margin-block-start: 0;
     }
+
+    pre,
+    pre[class*="language"],
+    pre .token,
+    code,
+    .docblock-argstable-body :not(label) > span[class] {
+        font-family: 'Monaspace Radon', monospace;
+        font-size: 1em;
+    }
 }

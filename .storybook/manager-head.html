@@ -9,6 +9,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
 
 <style>
+    @font-face {
+        font-family: 'Monaspace Radon', monospace;
+        src: url(https://cdn.jsdelivr.net/gh/githubnext/monaspace@v1.000/fonts/webfonts/MonaspaceRadon-Regular.woff);
+    }
+
     .sidebar-item {
         &[data-selected="true"][data-highlightable="true"] {
             color: #222425;
@@ -22,6 +27,10 @@
         svg {
             display: none;
         }
+    }
+
+    pre, code {
+        font-family: 'Monaspace Radon', monospace;
     }
 
     #storybook-explorer-searchfield {

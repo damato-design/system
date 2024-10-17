@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { useRef } from 'react';
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Field } from '.';
@@ -27,11 +27,16 @@ export const Default: Story = {
     args: {
         label: 'Search',
         inputRef: React.createRef(),
-        children: [
-            <input.text placeholder='Search for something' ref={ React.createRef() } key='input'/>,
-            <Button icon='search' key='button'/>
-        ] as ReactNode
     },
+    render: ({ inputRef: _, ...args }) => {
+        const inputRef = useRef(null);
+        return (
+            <Field { ...args } inputRef={inputRef}>
+                <input.text placeholder='Search for something' ref={ inputRef }/>
+                <Button icon='search'/>
+            </Field>
+        )
+    }
 }
 
 /**
@@ -57,11 +62,16 @@ export const Messaging: Story = {
         label: 'Search',
         inputRef: React.createRef(),
         helpMessage: 'You can search for anything you want!',
-        errorMessage: 'This is where you will find the error message.',
-        children: [
-            <input.text placeholder='Search for something' ref={ React.createRef() } key='input'/>,
-            <Button icon='search' key='button'/>
-        ]
+        errorMessage: 'This is where you will find the error message.'
+    },
+    render: ({ inputRef: _, ...args }) => {
+        const inputRef = useRef(null);
+        return (
+            <Field { ...args } inputRef={inputRef}>
+                <input.text placeholder='Search for something' ref={ inputRef }/>
+                <Button icon='search'/>
+            </Field>
+        )
     }
 }
 
