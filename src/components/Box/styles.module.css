@@ -1,35 +1,42 @@
 .box {
-    /* <Button/> */
-    &:is(button, a) {
-        cursor: pointer;
-        line-height: 1;
-        border-radius: .25em;
+    min-width: 0;
+    font-size: 1.2em;
+}
 
-        --bgColor: transparent;
-        background-color: var(--bgColor);
-        transition: background .218s ease;
+.action:is(.action) {
+    cursor: pointer;
+    line-height: 1;
+    border-radius: .25em;
 
-        &:where([data-priority="primary"]) {
-            --bgColor: blue;
-        }
-    
-        &:where([data-priority="secondary"]) {
-            --bgColor: green;
-        }
+    --bgColor: transparent;
+    background-color: var(--bgColor);
+    transition: background .218s ease;
 
-        &[disabled] {
-            cursor: not-allowed;
-            opacity: .4;
-        }
-
-        /* padded buttons */
-        &:not([disabled]):where([style*="padding"]):hover {
-            background-color: color-mix(in srgb, var(--bgColor), currentColor 15%);
-        }
-
-        /* non-padded buttons (inline links) */
-        &:not([disabled]):not([style*="padding"]):hover {
-            text-decoration-color: color-mix(in srgb, var(--bgColor), currentColor 25%);
-        }
+    &:is([data-priority="primary"]) {
+        --bgColor: blue;
     }
+
+    &:is([data-priority="secondary"]) {
+        --bgColor: green;
+    }
+
+    &[disabled] {
+        cursor: not-allowed;
+        opacity: .4;
+    }
+
+    /* padded buttons */
+    &:not([disabled]):where([style*="padding"]):hover {
+        background-color: color-mix(in srgb, var(--bgColor), currentColor 15%);
+    }
+
+    /* non-padded buttons (inline links) */
+    &:not([disabled]):not([style*="padding"]):hover {
+        text-decoration-color: color-mix(in srgb, var(--bgColor), currentColor 25%);
+    }
+}
+
+.control:is(.control) {
+    border: 1px solid;
+    border-radius: .25em;
 }

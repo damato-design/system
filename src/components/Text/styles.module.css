@@ -1,4 +1,20 @@
 .text {
+    &:is(label) {
+        font-weight: bolder;
+    }
+
+    &:empty {
+        display: none;
+    }
+
+    &:is([data-priority="primary"]) {
+        font-size: 1.8em;
+    }
+
+    &:is([data-priority="secondary"]) {
+        font-size: 1.2em;
+    }
+    
     &:where([data-standby="true"]) {
         /* These will need to be intents triggered by mode */
         --skeleton-bg: #ededed;

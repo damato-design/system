@@ -1,9 +1,14 @@
 .input {
     margin: 0;
     border: 0;
-    padding: 0;
+    padding: var(--padding, 1rem);
+    box-sizing: content-box;
+    background: transparent;
+    min-width: 1ch;
+    font-size: 1.2em;
+    flex: 1;
 
-    :not(textarea) {
+    &:not(textarea) {
         line-height: 1;
     }
 }

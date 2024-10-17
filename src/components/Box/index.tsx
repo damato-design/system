@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+import clsx from 'clsx';
 import css from './styles.module.css';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { element, ElementComponentProps } from '../Element';
@@ -36,6 +37,7 @@ type ComponentProps = ElementComponentProps & {
   outset?: MixedPosition;
   padding?: boolean;
   priority?: 'primary' | 'secondary';
+  purpose?: 'action' | 'control';
   stack?: boolean;
   stretch?: boolean;
   wrap?: boolean;
@@ -50,6 +52,7 @@ export const box = proxy<HTMLTagsOnly, ComponentProps>('box', (TagName) => {
     outset,
     padding,
     priority,
+    purpose,
     stack,
     stretch,
     wrap,
@@ -77,10 +80,17 @@ export const box = proxy<HTMLTagsOnly, ComponentProps>('box', (TagName) => {
       gap: gap ? 'var(--gap, .5rem)' : undefined
     };
 
+    const appearance: { [key: string]: boolean } = {};
+    if (typeof purpose === 'string') {
+      appearance[css[purpose]] = true;
+    }
+
+    const classNames = clsx(css.box, appearance);
+
     return <Box
       { ...props }
       ref={ ref }
-      className={ css.box }
+      className={ classNames }
       data-priority={ priority }
       style={ styles }/>;
   })

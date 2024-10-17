@@ -5,6 +5,10 @@ import theme from './theme';
 
 import './preview.css';
 
+function capitalize(str: string, locale = navigator.language) {
+  return str.replace(/^\p{CWU}/u, (char: string) => char.toLocaleUpperCase(locale));
+}
+
 function Install(props) {
   const { of } = props;
   const resolveOf = useOf(of || 'meta');
@@ -15,7 +19,7 @@ function Install(props) {
 
   return (
     <pre className='docs-install'>
-      <code>{ `import { ${component} } from '@components/${component}';`}</code>
+      <code>{ `import { ${component} } from '@components/${capitalize(component)}';`}</code>
     </pre>
   )
 }

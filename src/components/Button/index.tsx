@@ -19,6 +19,8 @@ export const Button = forwardRef<HTMLElement, ComponentProps>(({
     children,
     icon: iconRef,
     inline,
+    className,
+    style,
     ...props
 }: ComponentProps, ref) => {
     const Element = 'href' in props ? box.a : box.button;
@@ -26,9 +28,9 @@ export const Button = forwardRef<HTMLElement, ComponentProps>(({
     if (!inline) spacing.padding = true;
 
     return (
-        <Element { ...props } ref={ ref } { ...spacing } inset='center'>
+        <Element { ...props } ref={ ref } { ...spacing } inset='center' purpose='action'>
             { iconRef ? createElement(icon[iconRef]) : null }
-            <text.span priority='secondary'>{ children }</text.span>
+            { children ? <text.span priority='secondary'>{ children }</text.span> : null }
         </Element>
     )
 })
