@@ -30,7 +30,12 @@ const page = () => (
     <Install/>
     <Description/>
     <Primary/>
-    <Controls/>
+    <details>
+      <summary className='controls-summary'>
+        <h3>Controls</h3>
+      </summary>
+      <Controls/>
+    </details>
     <Stories/>
   </>
 );

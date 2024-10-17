@@ -2,6 +2,7 @@
     margin: 0;
     border: 0;
     padding: var(--padding, 1rem);
+    scroll-padding-block: var(--padding, 1rem);
     box-sizing: content-box;
     background: transparent;
     min-width: 1ch;

@@ -52,6 +52,21 @@ pre.docs-install.docs-install {
         margin-block: 1em .5em;
     }
 
+    .controls-summary {
+        cursor: pointer;
+    }
+
+    .controls-summary::marker {
+        font-size: 1.8rem;
+        margin-inline-end: 2em;
+    }
+
+    .controls-summary h3 {
+        display: inline-flex;
+        cursor: pointer;
+        padding-inline: .5em;
+    }
+
     p, ul, li, div {
         line-height: 1.5;
         font-size: inherit;
