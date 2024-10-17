@@ -49,7 +49,7 @@ export const Button = forwardRef<HTMLElement, ComponentProps>(({
     const spacing: { gap: true, padding?: boolean } = { gap: true };
     if (!inline) spacing.padding = true;
 
-    if (!children) {
+    if (!children && !props['aria-label']) {
         console.warn(`
             No children were provided,
             if this is an icon only button please add an 'aria-label' to the component

@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { Field } from '.';
 
+import { box } from '../Box';
 import { input } from '../Input';
 import { Button } from '../Button';
 
@@ -33,7 +34,7 @@ export const Default: Story = {
         return (
             <Field { ...args } inputRef={inputRef}>
                 <input.text placeholder='Search for something' ref={ inputRef }/>
-                <Button icon='search'/>
+                <Button icon='search' aria-label='Search'/>
             </Field>
         )
     }
@@ -69,7 +70,7 @@ export const Messaging: Story = {
         return (
             <Field { ...args } inputRef={inputRef}>
                 <input.text placeholder='Search for something' ref={ inputRef }/>
-                <Button icon='search'/>
+                <Button icon='search' aria-label='Search'/>
             </Field>
         )
     }
@@ -101,11 +102,43 @@ export const Mixed: Story = {
 
         return (
             <Field { ...args } stretch={ false }>
-                <Button icon='remove' value={ -1 } onClick={ onClick }/>
+                <Button icon='remove' aria-label='Decrement' value={ -1 } onClick={ onClick }/>
                 <input.number value={ value } ref={ args.inputRef } onChange={ onChange } fieldSizing='content'/>
-                <Button icon='add' value={ 1 } onClick={ onClick }/>
+                <Button icon='add' aria-label='Increment' value={ 1 } onClick={ onClick }/>
             </Field>
         )
     }
 }
 
+/**
+ * This demonstrates the alignment of a `<Button/>` outside of the `<Field/>`.
+ * 
+ * **TODO:** Check the alignment of buttons to ensure both this
+ * and the [Mixed](#mixed) examples are expected.
+ */
+export const Alignment: Story = {
+    args: {
+        label: 'Newsletter',
+        inputRef: React.createRef(),
+    },
+    render: (args) => {
+        const [value, setValue] = React.useState('');
+
+        const onClick = React.useCallback(() => {
+            console.log(`Your email is entered: `, value);
+        }, [value]);
+
+        const onChange = React.useCallback((ev: any) => {
+            setValue(ev.target.value);
+        }, []);
+
+        return (
+            <box.form action='' gap inset={{ block: 'end' }}>
+                <Field { ...args }>
+                    <input.email value={ value } ref={ args.inputRef } onChange={ onChange }/>
+                </Field>
+                <Button priority='primary' onClick={ onClick }>Subscribe</Button>
+            </box.form>
+        )
+    }
+}
