@@ -1,5 +1,5 @@
-.text {
-    &:is(label) {
+.text:is(.text) {
+    &:is(label, strong) {
         font-weight: bolder;
     }
 
@@ -8,11 +8,11 @@
     }
 
     &:is([data-priority="primary"]) {
-        font-size: 1.8em;
+        font-size: 1.8rem;
     }
 
     &:is([data-priority="secondary"]) {
-        font-size: 1.2em;
+        font-size: 1.2rem;
     }
     
     &:where([data-standby="true"]) {

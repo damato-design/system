@@ -1,9 +1,8 @@
 import { useEffect, useId, forwardRef } from 'react';
-import { ElementComponentProps } from '../Element';
-import { box } from '../Box';
+import { box, BoxProps } from '../Box';
 import { text } from '../Text';
 
-type ComponentProps = ElementComponentProps & {
+type FieldProps = BoxProps & {
     label?: string,
     helpMessage?: string,
     errorMessage?: string,
@@ -11,7 +10,7 @@ type ComponentProps = ElementComponentProps & {
     stretch?: boolean
 };
 
-export const Field = forwardRef<HTMLElement, ComponentProps>(({
+export const Field = forwardRef<HTMLElement, FieldProps>(({
     children,
     className,
     style,
@@ -21,7 +20,7 @@ export const Field = forwardRef<HTMLElement, ComponentProps>(({
     inputRef,
     stretch = true,
     ...props
-}: ComponentProps, ref) => {
+}: FieldProps, ref) => {
 
     const errorId = useId();
     const helpId = useId();

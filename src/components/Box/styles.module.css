@@ -1,6 +1,6 @@
 .box {
     min-width: 0;
-    font-size: 1.2em;
+    font-size: 1.2rem;
 }
 
 .action:is(.action) {

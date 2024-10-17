@@ -2,22 +2,22 @@ import { forwardRef, useEffect, useId } from 'react';
 import css from './styles.module.css';
 import clsx from 'clsx';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';
-import { element, ElementComponentProps } from '../Element';
+import { element, ElementProps } from '../Element';
 
-type ComponentProps = ElementComponentProps & {
+type TextProps = ElementProps & {
   priority?: 'primary' | 'secondary';
   screenreaderOnly?: React.Ref<HTMLElement>;
   standby?: boolean;
 };
 
-export const text = proxy<HTMLTagsOnly, ComponentProps>('text', (TagName) => {
-  return forwardRef<HTMLElement, ComponentProps>(({
+export const text = proxy<HTMLTagsOnly, TextProps>('text', (TagName) => {
+  return forwardRef<HTMLElement, TextProps>(({
     id: givenId,
     priority,
     screenreaderOnly,
     standby,
     ...props
-  }: ComponentProps, ref) => {
+  }: TextProps, ref) => {
     const Text = element[TagName];
     const id = givenId || useId();
 

@@ -1,15 +1,14 @@
 import { forwardRef } from 'react';
 import css from './styles.module.css';
-import { element } from '../Element';
+import { element, ElementProps } from '../Element';
 
-type MediaElementProps =
-  | React.ImgHTMLAttributes<HTMLImageElement>
+export type MediaProps = (React.ImgHTMLAttributes<HTMLImageElement>
   | React.AudioHTMLAttributes<HTMLAudioElement>
-  | React.VideoHTMLAttributes<HTMLVideoElement>;
-
-type ElementProps = {
-  standby?: boolean;
-} & MediaElementProps;
+  | React.VideoHTMLAttributes<HTMLVideoElement>) 
+  & ElementProps
+  & {
+    standby?: boolean;
+  };
 
 function getElement(src: string | undefined) {
   if (!src) return element.img;
@@ -41,10 +40,10 @@ function getElement(src: string | undefined) {
   }
 }
 
-export const Media = forwardRef<HTMLElement, ElementProps>(({
+export const Media = forwardRef<HTMLElement, MediaProps>(({
   standby,
   ...props
-}: ElementProps, ref) => {
+}: MediaProps, ref) => {
 
   const Media = getElement(props.src);
   return <Media { ...props } ref={ ref } className={ css.media }/>;

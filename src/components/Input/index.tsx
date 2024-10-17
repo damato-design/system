@@ -1,41 +1,42 @@
 import { HTMLInputTypeAttribute, forwardRef } from 'react';
+import { Globals } from 'csstype';
 import css from './styles.module.css';
 import { proxy } from '../Element/proxy';
-import { element, ElementComponentProps } from '../Element';
+import { element, ElementProps } from '../Element';
 
-type InputElementProps = React.InputHTMLAttributes<HTMLInputElement>;
+export type InputProps = (React.InputHTMLAttributes<HTMLInputElement>
+  | React.TextareaHTMLAttributes<HTMLTextAreaElement>)
+  & ElementProps
+  & {
+    fieldSizing?: 'content' | 'flex'
+  };
 
-type TextareaElementProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
+interface ModernCSSProperties extends React.CSSProperties {
+  fieldSizing?: 'content' | 'fixed' | Globals;
+}
 
-type ComponentProps = InputElementProps | TextareaElementProps & ElementComponentProps & {
-  fieldSizing?: 'content' | 'flex'
-};
-
-export const input = proxy<HTMLInputTypeAttribute | 'textarea', ComponentProps>('input', (inputType) => {
-  return forwardRef<HTMLElement, ComponentProps>(({
+export const input = proxy<HTMLInputTypeAttribute | 'textarea', InputProps>('input', (inputType) => {
+  return forwardRef<HTMLElement, InputProps>(({
     className,
     fieldSizing,
     style,
     ...props
-  }: ComponentProps, ref) => {
-
-    const config = Object.assign({
-      type: inputType !== 'textarea' ? inputType : null
-    }, props);
+  }: InputProps, ref) => {
+    const type = inputType !== 'textarea' ? inputType : null;
 
     const Element = inputType === 'textarea'
       ? element.textarea
       : element.input;
 
-    const styles: React.CSSProperties = {};
+    const styles: ModernCSSProperties = {};
     if (fieldSizing === 'content') {
       styles.fieldSizing = 'content';
     }
 
     return <Element
-      { ...config }
-      ref={ ref }
-      className={ css.input }
-      style={ styles }/>;
+      {...Object.assign({ type }, props)}
+      ref={ref}
+      className={css.input}
+      style={styles} />;
   })
 });

@@ -2,6 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { Button } from '.';
 
+import { box } from '../Box';
+import { text } from '../Text';
+
 /**
  * The `<Button/>` component allows a user to take an action.
  * This is commonly used to execute some behavior on the current page
@@ -57,7 +60,7 @@ export const Link: Story = {
         inline: true,
         href: '#'
     },
-    render: (args) => <p>The quick brown fox <Button { ...args }>jumped over</Button> the lazy dog.</p>
+    render: (args) => <text.p>The quick brown fox <Button { ...args }>jumped over</Button> the lazy dog.</text.p>
 }
 
 /**
@@ -79,5 +82,20 @@ export const Disabled: Story = {
     args: {
         children: 'Click here!',
         disabled: true
+    }
+}
+
+export const Alignment: Story = {
+    args: {
+        priority: 'primary'
+    },
+    render: (args) => {
+        return (
+            <box.div gap inset={{ block: 'start' }}>
+                <Button { ...args }>Text</Button>
+                <Button { ...args } icon='search'>Icon</Button>
+                <Button { ...args } icon='search'/>
+            </box.div>
+        );
     }
 }

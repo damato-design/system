@@ -1,11 +1,11 @@
-.input {
+.input:is(.input) {
     margin: 0;
     border: 0;
     padding: var(--padding, 1rem);
     box-sizing: content-box;
     background: transparent;
     min-width: 1ch;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     flex: 1;
 
     &:not(textarea) {
