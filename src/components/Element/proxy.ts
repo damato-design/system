@@ -1,6 +1,4 @@
-export type HTMLTagsOnly = {
-    [K in keyof JSX.IntrinsicElements]: JSX.IntrinsicElements[K] extends React.SVGProps<SVGElement> ? never : K
-  }[keyof JSX.IntrinsicElements];
+export type HTMLTagsOnly =  Exclude<keyof JSX.IntrinsicElements, keyof SVGElementTagNameMap>;
 
 export type ProxyObject<DynamicKey extends string, Props> = {
     [K in DynamicKey]: React.FC<Props>;

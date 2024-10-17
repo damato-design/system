@@ -1,17 +1,23 @@
-import { HTMLInputTypeAttribute } from 'react';
+import { HTMLInputTypeAttribute, forwardRef } from 'react';
 import css from './styles.module.css';
-import { proxy, Props } from '../Element/proxy';
+import { proxy } from '../Element/proxy';
 import { element, ElementComponentProps } from '../Element';
 
-type ElementProps = Props<HTMLInputElement> & ElementComponentProps;
+type InputElementProps = React.InputHTMLAttributes<HTMLInputElement>;
 
-export const input = proxy<HTMLInputTypeAttribute, ElementProps>('input', (inputType) => {
-  return (props: ElementProps) => {
+type TextareaElementProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
+
+type ElementProps = InputElementProps | TextareaElementProps & ElementComponentProps;
+
+export const input = proxy<HTMLInputTypeAttribute | 'textarea', ElementProps>('input', (inputType) => {
+  return forwardRef((props: ElementProps, ref) => {
+    const config = Object.assign({
+      type: inputType !== 'textarea' ? inputType : null
+    }, props);
     const Element = inputType === 'textarea' ? element.textarea : element.input;
-    const type = inputType !== 'textarea' ? inputType : null;
     return <Element
-      { ...props}
-      className={ css.input }
-      type={ type }/>;
-  }
+      { ...config }
+      ref={ ref }
+      className={ css.input }/>;
+  })
 });

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { text } from '.';
+import { useRef } from 'react';
 
 /**
  * Description here
@@ -49,11 +50,11 @@ export const ScreenreaderOnly: Story = {
         children: 'Hello World!',
     },
     render: (args) => {
-        const id = 'sr-only';
+        const ref = useRef(null);
         return (
             <>
-                <text.label id={ id }>Tel:</text.label>
-                <text.span { ...args } screenreaderOnly={ id }>Telephone Number</text.span>
+                <text.label ref={ ref }>Tel:</text.label>
+                <text.span { ...args } screenreaderOnly={ ref }>Telephone Number</text.span>
             </>
         )
     }

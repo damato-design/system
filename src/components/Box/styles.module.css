@@ -1,3 +1,31 @@
 .box {
-    margin: 0;
+    .gap {
+        gap: .5rem;
+    }
+    
+    .padding {
+        padding: 1rem;
+    }
+
+    /* <Button/> */
+    &:where(button, a) {
+        cursor: pointer;
+
+        &:where([data-priority="primary"]) {
+            background: blue;
+        }
+    
+        &:where([data-priority="secondary"]) {
+            background: green;
+        }
+
+        &[disabled] {
+            cursor: not-allowed;
+            opacity: .4;
+        }
+
+        &:not([disabled]):hover {
+            filter: brightness(1.3);
+        }
+    }
 }

@@ -1,10 +1,19 @@
+import { forwardRef } from 'react';
 import css from './styles.module.css';
-import { Props } from '../Element/proxy';
-import { element, ElementComponentProps } from '../Element';
+import { element } from '../Element';
 
-type ElementProps = Props<HTMLImageElement & HTMLAudioElement & HTMLVideoElement> & ElementComponentProps;
+type MediaElementProps =
+  | React.ImgHTMLAttributes<HTMLImageElement>
+  | React.AudioHTMLAttributes<HTMLAudioElement>
+  | React.VideoHTMLAttributes<HTMLVideoElement>;
 
-function getElement(src: string) {
+type ElementProps = {
+  standby?: boolean;
+} & MediaElementProps;
+
+function getElement(src: string | undefined) {
+  if (!src) return element.img;
+
   const { pathname } = new URL(src);
   const ext = pathname.substring(pathname.lastIndexOf('.'));
 
@@ -32,12 +41,11 @@ function getElement(src: string) {
   }
 }
 
-// TODO: support blob entry?
-
-export const Media = ({
-  src,
+export const Media = forwardRef(({
+  standby,
   ...props
-}: ElementProps) => {
-  const Media = getElement(src);
-  return <Media { ...props } className={ css.media } src={ src }/>;
-}
+}: ElementProps, ref) => {
+
+  const Media = getElement(props.src);
+  return <Media { ...props } ref={ ref } className={ css.media }/>;
+})
