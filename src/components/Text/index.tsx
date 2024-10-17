@@ -1,10 +1,10 @@
 import { forwardRef, useEffect, useId } from 'react';
 import css from './styles.module.css';
 import clsx from 'clsx';
-import { proxy, Props, HTMLTagsOnly } from '../Element/proxy';
+import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { element, ElementComponentProps } from '../Element';
 
-type ComponentProps = Props<HTMLElement> & ElementComponentProps & {
+type ComponentProps = ElementComponentProps & {
   priority?: 'primary' | 'secondary';
   screenreaderOnly?: React.Ref<HTMLElement>;
   standby?: boolean;

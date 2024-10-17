@@ -29,7 +29,7 @@ function createLayout(position: MixedPosition, logical: boolean) {
   return logical ? layout.map(updateLogical) : layout;
 }
 
-type ComponentProps = Props<HTMLElement> & ElementComponentProps & {
+type ComponentProps = ElementComponentProps & {
   distribute?: 'between' | 'around' | 'evenly';
   gap?: boolean;
   logical?: boolean;
