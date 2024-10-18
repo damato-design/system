@@ -36,6 +36,8 @@ export const lockup = proxy<HTMLTagsOnly, LockupProps>('lockup', (TagName) => {
       }, iconElement);
     }
 
+    // TODO: optional onClose button, use bouyant approach
+
     return <Element
       { ...props }
       ref={ ref }

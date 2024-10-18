@@ -32,3 +32,18 @@ export const Emphasis: Story = {
     },
 }
 
+export const Modal: Story = {
+    parameters: {
+        docs: {
+            story: {
+                inline: false,
+                iframeHeight: 700,
+            },
+        },
+    },
+    args: {
+        modal: true,
+        title: <text.h2 priority='primary'>Don't do this</text.h2>,
+        children: `Modals are bad`
+    },
+}

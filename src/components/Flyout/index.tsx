@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useId } from 'react';
+import { forwardRef, useLayoutEffect, useId } from 'react';
 import css from './styles.module.css';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { element, ElementProps } from '../Element';
@@ -35,7 +35,7 @@ export const flyout = proxy<HTMLTagsOnly, FlyoutProps>('flyout', (TagName) => {
     const targetId = useId();
     const name = `--${anchorId.replaceAll(':', '')}`;
 
-    useEffect(() => {
+    useLayoutEffect(() => {
       if (typeof anchorRef === 'function' || !anchorRef?.current) return;
       if (anchorRef.current.tagName !== 'BUTTON') console.warn(`Flyouts can only be anchored to <button/>`);
       anchorRef.current.style.setProperty('anchor-name', name);

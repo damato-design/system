@@ -1,6 +1,12 @@
+html,
+#storybook-root {
+    height: 100%;
+}
+
 body {
     margin: 0;
     color: #C9CDCF;
+    height: 100%;
     font-family: Plus Jakarta Sans, sans-serif;
 }
 

@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useCallback } from 'react';
 import { box } from '../Box';
 import { lockup, LockupProps } from '../Lockup';
 
@@ -18,21 +18,27 @@ function getIconRef(emphasis: string | undefined) {
 
 type DialogProps = LockupProps
     & {
-        emphasis?: 'critical' | 'warning' | 'success'
+        emphasis?: 'critical' | 'warning' | 'success',
+        modal?: boolean,
     };
 
 export const Dialog = forwardRef<HTMLElement, DialogProps>(({
     emphasis,
+    modal,
     ...props
 }: DialogProps, ref) => {
     
-    const Element = box.div;
-    const icon = getIconRef(emphasis);
+    const Element = modal ? box.dialog : box.div;
+    const showModal = useCallback(($elem: HTMLDialogElement) => {
+        if (!modal) return;
+        // $elem.style.setProperty('inset', 'auto');
+        $elem?.showModal();
+    }, [modal])
 
     return (
-        <Element ref={ ref } purpose='surface'>
+        <Element purpose='surface' ref={ showModal }>
             <div style={{ background: 'currentColor', width: '8px', flexShrink: 0 }}/>
-            <lockup.div {...props} icon={ icon } padding />
+            <lockup.div {...props} ref={ ref } icon={ getIconRef(emphasis) } padding />
         </Element>
     )
 })
