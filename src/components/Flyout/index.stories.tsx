@@ -44,6 +44,7 @@ export const Stretch: Story = {
                 <Button ref={ anchorRef } priority='primary'>anchor element</Button>
                 <flyout.div { ...args } anchorRef={ anchorRef }>
                     <box.div
+                        stretch={ args.stretch }
                         padding
                         purpose='surface'
                         priority='secondary'>Hi! 👋</box.div>
