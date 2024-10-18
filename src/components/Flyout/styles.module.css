@@ -1,7 +1,7 @@
 .flyout:is(.flyout) {
     min-width: 0;
-    position-try-options: flip-block;
-    position-try-fallbacks: flip-block;
+    /* position-try-options: flip-block; */
+    /* position-try-fallbacks: flip-block; */
 
     &:popover-open {
         background: transparent;
