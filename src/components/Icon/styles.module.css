@@ -4,8 +4,6 @@
     display: inline-flex;
     flex-shrink: 0;
     min-width: 0;
-    height: 1.2rlh;
-    margin-inline: calc((1em - 1.2rlh) / -2);
     box-sizing: content-box;
     align-items: center;
     pointer-events: none;
@@ -13,6 +11,7 @@
     font-weight: normal;
     font-style: normal;
     font-size: 1.5em;
+    line-height: 1lh;
     letter-spacing: normal;
     text-transform: none;
     white-space: nowrap;

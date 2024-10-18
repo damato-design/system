@@ -38,11 +38,7 @@ pre.docs-install.docs-install {
         text-transform: capitalize;
     }
 
-    h2 {
-        font-size: 2.2rem;
-        letter-spacing: normal;
-        text-transform: none;
-        line-height: 1.1;
+    h2[id="stories"] {
         display: none;
     }
 

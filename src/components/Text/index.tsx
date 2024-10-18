@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { element, ElementProps } from '../Element';
 
-type TextProps = ElementProps & {
+export type TextProps = ElementProps & {
   /**
    * Set the priority intended for this component.
    * This will affect the final presentation.
