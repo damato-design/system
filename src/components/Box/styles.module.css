@@ -19,10 +19,10 @@
 
 .action:is(.action) {
     cursor: pointer;
-    line-height: 1.2rlh;
+    font-size: 1.2rem;
+    line-height: .8lh;
     border-radius: .25em;
     border: 1px solid transparent;
-    font-size: 1.2rem;
 
     --bgColor: transparent;
     background-color: var(--bgColor);
@@ -56,4 +56,10 @@
     border: 1px solid;
     border-radius: .25em;
     font-size: 1.2rem;
+    line-height: .8lh;
+
+    button {
+        border-radius: 0;
+        border: 0;
+    }
 }

@@ -1,5 +1,7 @@
 .input:is(.input) {
-    margin: 0;
+    /* match control border width */
+    margin-block: 0;
+    margin-inline: 0;
     border: 0;
     padding: var(--padding, 1rem);
     scroll-padding-block: var(--padding, 1rem);
@@ -14,6 +16,6 @@
     }
 
     &:not(textarea) {
-        line-height: 1;
+        line-height: .8lh;
     }
 }

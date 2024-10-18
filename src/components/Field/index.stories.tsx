@@ -112,9 +112,6 @@ export const Mixed: Story = {
 
 /**
  * This demonstrates the alignment of a `<Button/>` outside of the `<Field/>`.
- * 
- * **TODO:** Check the alignment of buttons to ensure both this
- * and the [Mixed](#mixed) examples are expected.
  */
 export const Alignment: Story = {
     args: {
