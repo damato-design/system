@@ -30,9 +30,11 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(({
     
     const Element = modal ? box.dialog : box.div;
     const showModal = useCallback(($elem: HTMLDialogElement) => {
-        if (!modal) return;
-        // $elem.style.setProperty('inset', 'auto');
-        $elem?.showModal();
+        if (!modal || !$elem) return;
+        // $elem.style?.setProperty('margin', 'auto');
+        $elem.showModal();
+        // const watcher = new CloseWatcher();
+        // watcher.onclose = $elem.close();
     }, [modal])
 
     return (
