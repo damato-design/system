@@ -64,7 +64,7 @@ export type BoxProps = ElementProps & {
    * Set the purpose for this component.
    * This will affect the final presentation.
    */
-  purpose?: 'surface' |'action' | 'control';
+  purpose?: 'surface' | 'action' | 'control';
   /**
    * If set, makes children align vertically.
    */

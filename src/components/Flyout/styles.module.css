@@ -1,0 +1,13 @@
+.flyout {
+    min-width: 0;
+    position-try-options: flip-block;
+    position-try-fallbacks: flip-block;
+
+    &:popover-open {
+        background: transparent;
+        color: currentColor;
+        padding: 0;
+        overflow: visible;
+    }
+}
+

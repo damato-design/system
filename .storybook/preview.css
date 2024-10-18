@@ -94,5 +94,7 @@ pre.docs-install.docs-install {
     .docblock-argstable-body :not(label) > span[class] {
         font-family: 'Monaspace Radon', monospace;
         font-size: 1em;
+        white-space: pre-wrap;
+        line-height: 1.2;
     }
 }
