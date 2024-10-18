@@ -28,13 +28,13 @@ type FieldProps = BoxProps & {
 
 export const Field = forwardRef<HTMLElement, FieldProps>(({
     children,
-    className,
-    style,
     label,
     helpMessage,
     errorMessage,
     inputRef,
     stretch = true,
+    className,
+    style,
     ...props
 }: FieldProps, ref) => {
 
@@ -49,6 +49,7 @@ export const Field = forwardRef<HTMLElement, FieldProps>(({
 
     const outset = !stretch ? { block: 'start' } : undefined;
 
+    // TODO: use fieldset and legend?
     return (
         <box.div stack gap stretch={ stretch }>
             { label ? <text.label priority='secondary'>{ label }</text.label> : null }

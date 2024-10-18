@@ -47,7 +47,9 @@ export const Stretch: Story = {
                         stretch={ args.stretch }
                         padding
                         purpose='surface'
-                        priority='secondary'>Hi! 👋</box.div>
+                        priority='secondary'>
+                        Hi! 👋
+                    </box.div>
                 </flyout.div>
             </>
         )

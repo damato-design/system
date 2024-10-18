@@ -17,8 +17,8 @@ interface ModernCSSProperties extends React.CSSProperties {
 
 export const input = proxy<HTMLInputTypeAttribute | 'textarea', InputProps>('input', (inputType) => {
   return forwardRef<HTMLElement, InputProps>(({
-    className,
     fieldSizing,
+    className,
     style,
     ...props
   }: InputProps, ref) => {

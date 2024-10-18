@@ -45,6 +45,8 @@ function getElement(src: string | undefined) {
 
 export const Media = forwardRef<HTMLElement, MediaProps>(({
   standby,
+  className,
+  style,
   ...props
 }: MediaProps, ref) => {
 

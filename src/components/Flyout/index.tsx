@@ -28,6 +28,8 @@ export const flyout = proxy<HTMLTagsOnly, FlyoutProps>('flyout', (TagName) => {
     behavior,
     stretch,
     disclosure = 'auto',
+    className,
+    style,
     ...props
   }: FlyoutProps, ref) => {
 

@@ -27,6 +27,8 @@ export const text = proxy<HTMLTagsOnly, TextProps>('text', (TagName) => {
     priority,
     screenreaderOnly,
     standby,
+    className,
+    style,
     ...props
   }: TextProps, ref) => {
     const Text = element[TagName];
