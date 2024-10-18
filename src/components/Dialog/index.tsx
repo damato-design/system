@@ -30,8 +30,9 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(({
     const icon = getIconRef(emphasis);
 
     return (
-        <Element ref={ ref }>
-            <lockup.div {...props} icon={ icon } />
+        <Element ref={ ref } purpose='surface'>
+            <div style={{ background: 'currentColor', width: '8px', flexShrink: 0 }}/>
+            <lockup.div {...props} icon={ icon } padding />
         </Element>
     )
 })

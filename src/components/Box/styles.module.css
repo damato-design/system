@@ -1,6 +1,7 @@
-.box:is(.box) {
+.box {
     min-width: 0;
     font-size: 1.2rem;
+    overflow: clip;
 }
 
 .surface:is(.surface) {

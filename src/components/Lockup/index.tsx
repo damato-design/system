@@ -42,7 +42,7 @@ export const lockup = proxy<HTMLTagsOnly, LockupProps>('lockup', (TagName) => {
       inset={{ block: 'start' }}
       gap>
         {iconElement}
-        <box.div stack gap>
+        <box.div stack gap inset={{ block: 'start' }}>
           { title }
           { children }
         </box.div>
