@@ -32,6 +32,7 @@ export const Field = forwardRef<HTMLElement, FieldProps>(({
     helpMessage,
     errorMessage,
     inputRef,
+    mode,
     stretch = true,
     className,
     style,
@@ -40,31 +41,30 @@ export const Field = forwardRef<HTMLElement, FieldProps>(({
 
     const errorId = useId();
     const helpId = useId();
+    const labelId = useId();
 
     useEffect(() => {
         if (typeof inputRef === 'function') return;
         if (!inputRef?.current) console.warn(`inputRef not provided to field, ref:`, inputRef);
         inputRef?.current?.setAttribute('aria-describedby', [errorId, helpId].join(' '));
+        inputRef?.current?.setAttribute('aria-labelledby', labelId);
     }, [inputRef]);
 
     const outset = !stretch ? { block: 'start' } : undefined;
 
-    // TODO: use fieldset and legend?
     return (
-        <box.div stack gap stretch={ stretch }>
-            { label ? <text.label priority='secondary'>{ label }</text.label> : null }
-            <box.div mode={ props.mode } stack gap>
+        <box.fieldset { ...props } ref={ ref } stack stretch={ stretch }>
+            { label ? <text.legend priority='secondary' id={ labelId }>{ label }</text.legend> : null }
+            <box.div mode={ mode } stack gap>
                 <text.p aria-live='polite' id={ errorId }>{ errorMessage }</text.p>
                 <box.div
-                    { ...props }
-                    ref={ ref }
                     purpose='control'
                     inset={{ block: 'center' }}
                     outset={ outset }>
                     { children }
                 </box.div>
             </box.div>
-            <text.p id={ helpId }>{ helpMessage }</text.p>
-        </box.div>
+            { helpMessage ? <text.p id={ helpId }>{ helpMessage }</text.p> : null }
+        </box.fieldset>
     )
 })

@@ -8,14 +8,14 @@
     box-sizing: content-box;
     background: transparent;
     min-width: 1ch;
-    font-size: 1.2rem;
     flex: 1;
+    font-size: 1.2rem;
 
     &::-webkit-inner-spin-button {
         display: none;
     }
 
     &:not(textarea) {
-        line-height: .8lh;
+        line-height: 1lh;
     }
 }

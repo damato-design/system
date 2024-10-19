@@ -30,6 +30,11 @@ pre.docs-install.docs-install {
     padding: 1rem;
 }
 
+.sb-anchor :is(p, ul, li, div) {
+    line-height: 1.5;
+    font-size: inherit;
+}
+
 .sbdocs .sbdocs-content {
     max-width: 720px;
     font-size: 1.2em;
@@ -67,11 +72,6 @@ pre.docs-install.docs-install {
         display: inline-flex;
         cursor: pointer;
         padding-inline: .5em;
-    }
-
-    p, ul, li, div {
-        line-height: 1.5;
-        font-size: inherit;
     }
 
     a {

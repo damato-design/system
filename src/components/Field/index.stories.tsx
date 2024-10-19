@@ -23,10 +23,19 @@ type Story = StoryObj<typeof meta>
 /**
  * The `inputRef` prop is **required**, as it is used to connect the input
  * within the field with accessibility attributes.
+ * 
+ * > #### Why is the label so close to the input?
+ * >
+ * > This happens to be a [bug in Chrome](https://issues.chromium.org/issues/40366646),
+ * > where `<fieldset/>` elements don't accept flex or grid
+ * > display properties and therefore the use of `gap` is inert.
+ * >
+ * > If anything it provides a more closer visual relationship between the
+ * > two elements that if the gap was present.
  */
 export const Default: Story = {
     args: {
-        label: 'Search',
+        label: 'Tell me what you want?',
         inputRef: React.createRef(),
     },
     render: ({ inputRef: _, ...args }) => {
@@ -34,7 +43,6 @@ export const Default: Story = {
         return (
             <Field { ...args } inputRef={inputRef}>
                 <input.text placeholder='Search for something' ref={ inputRef }/>
-                <Button icon='search' aria-label='Search'/>
             </Field>
         )
     }
@@ -60,16 +68,16 @@ export const Default: Story = {
  */
 export const Messaging: Story = {
     args: {
-        label: 'Search',
+        label: 'Telephone number',
         inputRef: React.createRef(),
-        helpMessage: 'You can search for anything you want!',
+        helpMessage: 'Enter the number however you want!',
         errorMessage: 'This is where you will find the error message.'
     },
     render: ({ inputRef: _, ...args }) => {
         const inputRef = useRef(null);
         return (
             <Field { ...args } inputRef={inputRef}>
-                <input.text placeholder='Search for something' ref={ inputRef }/>
+                <input.tel placeholder='(212) 867-5309' ref={ inputRef }/>
                 <Button icon='search' aria-label='Search'/>
             </Field>
         )
@@ -119,7 +127,7 @@ export const Alignment: Story = {
         inputRef: React.createRef(),
     },
     render: (args) => {
-        const [value, setValue] = React.useState('');
+        const [value, setValue] = React.useState('hello@example.com');
 
         const onClick = React.useCallback(() => {
             console.log(`Your email is entered: `, value);
@@ -134,7 +142,7 @@ export const Alignment: Story = {
                 <Field { ...args }>
                     <input.email value={ value } ref={ args.inputRef } onChange={ onChange }/>
                 </Field>
-                <Button priority='primary' onClick={ onClick }>Subscribe</Button>
+                <Button priority='primary' icon='email' onClick={ onClick }>Subscribe</Button>
             </box.form>
         )
     }

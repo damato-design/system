@@ -50,7 +50,7 @@ export const flyout = proxy<HTMLTagsOnly, FlyoutProps>('flyout', (TagName) => {
 
     const styles = {
       positionAnchor: name,
-      width: stretch ? 'anchor-size(width)' : 'fit-content',
+      minWidth: stretch ? 'anchor-size(width)' : 'fit-content',
       top: `anchor(${name} bottom)`,
       left: `anchor(${name} left)`,
     }

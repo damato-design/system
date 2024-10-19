@@ -1,6 +1,7 @@
 .element {
     margin: 0;
     border: 0;
+    padding: 0;
     color: inherit;
     font: inherit;
     box-sizing: border-box;

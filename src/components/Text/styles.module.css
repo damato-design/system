@@ -1,5 +1,8 @@
 .text:is(.text) {
-    &:is(label, strong) {
+    font-size: 1rem;
+    line-height: 1lh;
+
+    &:is(label, strong, legend) {
         font-weight: bolder;
     }
 
@@ -7,16 +10,14 @@
         display: none;
     }
 
-    &:not(:empty) {
-        min-width: 1lh;
-    }
-
     &:is([data-priority="primary"]) {
         font-size: 1.8rem;
+        line-height: 1.2lh;
     }
 
     &:is([data-priority="secondary"]) {
         font-size: 1.2rem;
+        line-height: 1lh;
     }
     
     &:where([data-standby="true"]) {
