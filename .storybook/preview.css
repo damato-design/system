@@ -37,7 +37,7 @@ body {
 
 button.docblock-code-toggle:focus,
 .docblock-source.docblock-source button:focus,
-.sbdocs-preview button:focus {
+.sbdocs-preview button:not([style]):focus {
     box-shadow: #4fb9af 0 -3px 0 0 inset;
 }
 
