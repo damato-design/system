@@ -6,6 +6,7 @@ export const icon = proxy<string, Props>('icon', (reference) => {
     return <span
       { ...props }
       role='presentation'
+      data-icon={ reference }
       className={ css.icon }>
         { reference }
       </span>;

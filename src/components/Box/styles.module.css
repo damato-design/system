@@ -66,4 +66,12 @@
         border-radius: 0;
         border: 0;
     }
+
+    > hr {
+        height: 1lh;
+    }
+
+    > [data-icon] {
+        padding-inline: var(--padding, 1rem);
+    }
 }

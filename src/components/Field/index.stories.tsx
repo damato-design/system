@@ -5,6 +5,7 @@ import { Field } from '.';
 
 import { box } from '../Box';
 import { input } from '../Input';
+import { icon } from '../Icon';
 import { Button } from '../Button';
 
 /**
@@ -23,15 +24,6 @@ type Story = StoryObj<typeof meta>
 /**
  * The `inputRef` prop is **required**, as it is used to connect the input
  * within the field with accessibility attributes.
- * 
- * > #### Why is the label so close to the input?
- * >
- * > This happens to be a [bug in Chrome](https://issues.chromium.org/issues/40366646),
- * > where `<fieldset/>` elements don't accept flex or grid
- * > display properties and therefore the use of `gap` is inert.
- * >
- * > If anything it provides a more closer visual relationship between the
- * > two elements that if the gap was present.
  */
 export const Default: Story = {
     args: {
@@ -52,16 +44,16 @@ export const Default: Story = {
  * You can provide a `helpMessage` to provide more context to the user
  * and a `errorMessage` to help the user correct invalid inputs.
  * 
- * > #### Why is the error message above the input?
+ * > #### Why are the messages above the input?
  * >
- * > Having the error message before the input helps raise the error more prominently
+ * > Having the message before the input helps raise the content more prominently
  * > than if it was below. This also avoids some of the browser built-in flyouts that
  * > may obscure this detail.
  * 
  * > #### Why is the error message shown with same presentation as the help message?
  * >
  * > The `mode` should convey the concept of having this composition in a "critical" state.
- * > As a result, the critical mode should adjust these elements accordingly.
+ * > As a result, the critical mode should present these elements accordingly.
  * >
  * > **TODO:** Allow for `invalid` to update the interal mode to present the concept of `critical`
  * > instead of expecting the author to determine the correct mode.
@@ -77,8 +69,9 @@ export const Messaging: Story = {
         const inputRef = useRef(null);
         return (
             <Field { ...args } inputRef={inputRef}>
+                <icon.phone/>
+                <hr/>
                 <input.tel placeholder='(212) 867-5309' ref={ inputRef }/>
-                <Button icon='search' aria-label='Search'/>
             </Field>
         )
     }
@@ -95,6 +88,7 @@ export const Messaging: Story = {
 export const Mixed: Story = {
     args: {
         label: 'Quantity Selector',
+        helpMessage: 'It even navigates negative numbers!',
         inputRef: React.createRef(),
     },
     render: (args) => {

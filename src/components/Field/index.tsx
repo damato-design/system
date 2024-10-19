@@ -47,15 +47,15 @@ export const Field = forwardRef<HTMLElement, FieldProps>(({
         if (typeof inputRef === 'function') return;
         if (!inputRef?.current) console.warn(`inputRef not provided to field, ref:`, inputRef);
         inputRef?.current?.setAttribute('aria-describedby', [errorId, helpId].join(' '));
-        inputRef?.current?.setAttribute('aria-labelledby', labelId);
     }, [inputRef]);
 
     const outset = !stretch ? { block: 'start' } : undefined;
 
     return (
-        <box.fieldset { ...props } ref={ ref } stack stretch={ stretch }>
-            { label ? <text.legend priority='secondary' id={ labelId }>{ label }</text.legend> : null }
+        <box.fieldset { ...props } ref={ ref } stack gap stretch={ stretch } aria-labelledby={ labelId }>
+            { label ? <text.label priority='secondary' id={ labelId }>{ label }</text.label> : null }
             <box.div mode={ mode } stack gap>
+                { helpMessage ? <text.p id={ helpId }>{ helpMessage }</text.p> : null }
                 <text.p aria-live='polite' id={ errorId }>{ errorMessage }</text.p>
                 <box.div
                     purpose='control'
@@ -64,7 +64,6 @@ export const Field = forwardRef<HTMLElement, FieldProps>(({
                     { children }
                 </box.div>
             </box.div>
-            { helpMessage ? <text.p id={ helpId }>{ helpMessage }</text.p> : null }
         </box.fieldset>
     )
 })

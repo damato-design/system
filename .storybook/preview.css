@@ -92,17 +92,17 @@ table.docblock-argstable.docblock-argstable tbody > tr > * {
 
     :is(h1, h3, h4) {
         display: flex;
-        align-items: center;
+        align-items: baseline;
         a {
             padding: 0;
-            margin-left: -1.25em;
+            padding-right: .5ch;
+            margin-left: calc(-1em - .5ch);
             display: flex;
     
             svg {
                 top: 0;
-                height: 1.25em;
-                width: 1.25em;
-                padding: .25em;
+                height: 1em;
+                width: 1em;
                 box-sizing: border-box;
             }
         }
