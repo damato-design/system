@@ -1,0 +1,14 @@
+.listbox {
+    display: inline-flex;
+
+    button[class]:is(button) {
+        border: 0;
+        border-radius: 0;
+    }
+}
+
+.visualfocus {
+    [tabIndex="0"] {
+        background: red;
+    }
+}
