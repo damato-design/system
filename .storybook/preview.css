@@ -6,23 +6,27 @@ html,
 body {
     margin: 0;
     color: #C9CDCF;
+    background: #1B1C1D;
     height: 100%;
     font-family: Plus Jakarta Sans, sans-serif;
 }
 
-.sb-flex-section {
-    display: flex;
-    flex-flow: row-reverse wrap;
-    gap: 2rem;
+.sbdocs:is(.sbdocs-wrapper),
+.sb-unstyled :is(.sbdocs-preview, .sb-bar) {
+    background: transparent;
+}
 
-    & > * {
-        flex: 1 1 30%;
-    }
+.sb-unstyled :is(.sbdocs-preview, .sb-bar) {
+    border-color: currentColor;
+}
 
-    .sbdocs-preview {
-        position: sticky;
-        top: 1rem;
-    }
+.docs-story > div, button.docblock-code-toggle {
+    background: transparent;
+    color: currentColor;
+}
+
+button.docblock-code-toggle:focus {
+    box-shadow: #4fb9af 0 -3px 0 0 inset;
 }
 
 pre.docs-install.docs-install {
@@ -30,9 +34,9 @@ pre.docs-install.docs-install {
     padding: 1rem;
 }
 
-.sb-anchor :is(p, ul, li, div) {
-    line-height: 1.5;
-    font-size: inherit;
+.toc-list.toc-list .toc-list-item > a,
+.toc-list.toc-list .toc-list-item.is-active-li > a {
+    color: inherit;
 }
 
 .sbdocs .sbdocs-content {
@@ -47,6 +51,7 @@ pre.docs-install.docs-install {
 
     h1.sbdocs-title {
         text-transform: capitalize;
+        color: inherit;
     }
 
     h2[id="stories"] {
@@ -76,17 +81,24 @@ pre.docs-install.docs-install {
 
     a {
         text-decoration: underline;
+        color: currentColor;
     }
 
     blockquote {
-        padding: 1em calc(2em - 4px);
+        padding: 1em 2.5em;
         background: color-mix(in srgb, #222425, #4fb9af 10%);
         font-size: .8em;
-        border-color: #4fb9af;
+        border-left: 4px solid #4fb9af;
+        margin-inline: 0;
     }
 
-    blockquote h3 {
-        margin-block-start: 0;
+    blockquote h4 {
+        margin-block-start: .5em;
+        font-size: 1.1em;
+    }
+
+    .prismjs {
+        font-size: 1.2rem;
     }
 
     pre,
@@ -98,5 +110,12 @@ pre.docs-install.docs-install {
         font-size: 1em;
         white-space: pre-wrap;
         line-height: 1.2;
+    }
+
+    code {
+        padding: 0;
+        border: 0;
+        color: inherit;
+        background: transparent;
     }
 }

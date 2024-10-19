@@ -25,22 +25,51 @@ type DialogProps = LockupProps
 export const Dialog = forwardRef<HTMLElement, DialogProps>(({
     emphasis,
     modal,
+    onClose,
     ...props
 }: DialogProps, ref) => {
     
     const Element = modal ? box.dialog : box.div;
+    const styles = { 
+        background: 'currentColor',
+        width: '8px',
+        flexShrink: 0
+    };
+
     const showModal = useCallback(($elem: HTMLDialogElement) => {
         if (!modal || !$elem) return;
-        // $elem.style?.setProperty('margin', 'auto');
+        $elem.style?.setProperty('margin', 'auto');
         $elem.showModal();
-        // const watcher = new CloseWatcher();
-        // watcher.onclose = $elem.close();
-    }, [modal])
+    }, [modal, onClose])
+
+    const onKeyDown = useCallback((ev: any) => {
+        if (!modal) return;
+        if (ev.key === 'Escape') {
+            ev.preventDefault();
+            typeof onClose === 'function' && onClose(ev);
+        }
+    }, [modal, onClose]);
+
+    const onPointerDown = useCallback((ev: any) => {
+        if (!modal) return;
+        if (ev.target === ev.currentTarget) {
+            typeof onClose === 'function' && onClose(ev);
+        }
+    }, [modal, onClose]);
 
     return (
-        <Element purpose='surface' ref={ showModal }>
-            <div style={{ background: 'currentColor', width: '8px', flexShrink: 0 }}/>
-            <lockup.div {...props} ref={ ref } icon={ getIconRef(emphasis) } padding />
+        <Element
+            purpose='surface'
+            ref={ showModal }
+            onKeyDown={ onKeyDown }
+            onPointerDown={ onPointerDown }>
+            <div style={ styles }/>
+            <lockup.div
+                {...props}
+                onClose={ onClose }
+                ref={ ref }
+                icon={ getIconRef(emphasis) }
+                padding />
         </Element>
     )
 })

@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Preview } from "@storybook/react";
-import { Title, Description, Primary, Controls, Stories, useOf } from '@storybook/addon-docs';
+import { Title, Description, Primary, Controls, Stories, useOf, DocsContainer } from '@storybook/addon-docs';
+import { Unstyled } from "@storybook/blocks";
 import theme from './theme';
 
 import './preview.css';
@@ -64,10 +65,16 @@ const preview: Preview = {
       },
       source: {
         excludeDecorators: true,
-      }
+      },
+      container: ({ children, context }) => (
+        <DocsContainer context={context}>
+          <Unstyled>
+              {children}
+          </Unstyled>
+        </DocsContainer>
+      ),
     }
   },
-
   tags: ["autodocs"]
 };
 

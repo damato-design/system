@@ -10,6 +10,7 @@ export type LockupProps = BoxProps & {
    */
   icon?: string,
   title?: FC<TextProps>,
+  onClose?: (ev: any) => void,
 };
 
 export const lockup = proxy<HTMLTagsOnly, LockupProps>('lockup', (TagName) => {
@@ -17,6 +18,7 @@ export const lockup = proxy<HTMLTagsOnly, LockupProps>('lockup', (TagName) => {
     icon: iconRef,
     children,
     title,
+    onClose,
     className,
     style,
     ...props
