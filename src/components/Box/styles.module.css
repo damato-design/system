@@ -41,6 +41,11 @@
         opacity: .4;
     }
 
+    /* inline links */
+    &:not([style*="padding"]) span {
+        font: inherit;
+    }
+
     /* padded buttons */
     &:not([disabled]):where([style*="padding"]):hover {
         background-color: color-mix(in srgb, var(--bgColor), currentColor 15%);

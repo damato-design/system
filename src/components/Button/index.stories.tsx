@@ -73,6 +73,7 @@ export const Secondary: Story = {
  * 
  * The component will still include the expected padding around the content.
  * If you expect the element to appear inline, set `inline=true`.
+ * This will also cause the font styles to be inherited instead of set from the component.
  */
 export const Link: Story = {
     args: {
@@ -80,7 +81,11 @@ export const Link: Story = {
         inline: true,
         href: '#'
     },
-    render: (args) => <text.p>The quick brown fox <Button { ...args }>jumped over</Button> the lazy dog.</text.p>
+    render: (args) => (
+        <text.p priority='secondary'>
+            The quick brown fox <Button { ...args }>jumped over</Button> the lazy dog.
+        </text.p>
+    )
 }
 
 /**
@@ -112,7 +117,9 @@ export const Behavior: Story = {
 }
 
 /**
- * Setting the `disabled` attribute will prevent the user from interacting with the button.
+ * Setting the `disabled` attribute will prevent the user
+ * from interacting with the button. Avoid using this in
+ * favor of simply not showing a button the user cannot use.
  */
 export const Disabled: Story = {
     args: {

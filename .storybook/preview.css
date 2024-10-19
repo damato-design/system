@@ -5,6 +5,7 @@ html,
 
 body {
     margin: 0;
+    line-height:1.5;
     color: #C9CDCF;
     background: #1B1C1D;
     height: 100%;
@@ -12,26 +13,32 @@ body {
 }
 
 .sbdocs:is(.sbdocs-wrapper),
-.sb-unstyled :is(.sbdocs-preview, .sb-bar) {
+.sb-unstyled :is(.sbdocs-preview, .sb-bar),
+.docblock-source.docblock-source,
+.docblock-source.docblock-source .prismjs [class*="language"] .token,
+.docblock-source.docblock-source > div {
     background: transparent;
+    color: currentColor;
+}
+
+.docblock-source.docblock-source {
+    border-color: currentColor;
 }
 
 .sb-unstyled :is(.sbdocs-preview, .sb-bar) {
     border-color: currentColor;
 }
 
-.docs-story > div, button.docblock-code-toggle {
+.docs-story > div, button.docblock-code-toggle,
+.docblock-source.docblock-source button {
     background: transparent;
     color: currentColor;
 }
 
-button.docblock-code-toggle:focus {
+button.docblock-code-toggle:focus,
+.docblock-source.docblock-source button:focus,
+.sbdocs-preview button:focus {
     box-shadow: #4fb9af 0 -3px 0 0 inset;
-}
-
-pre.docs-install.docs-install {
-    background: #0f0f10;
-    padding: 1rem;
 }
 
 .toc-list.toc-list .toc-list-item > a,
@@ -101,6 +108,7 @@ table.docblock-argstable.docblock-argstable tbody > tr > * {
     a {
         text-decoration: underline;
         color: currentColor;
+        font: inherit;
     }
 
     blockquote {
@@ -113,7 +121,7 @@ table.docblock-argstable.docblock-argstable tbody > tr > * {
 
     blockquote h4 {
         margin-block-start: .5em;
-        font-size: 1.1em;
+        font-size: 1.3em;
     }
 
     .prismjs {
