@@ -39,6 +39,25 @@ pre.docs-install.docs-install {
     color: inherit;
 }
 
+table.docblock-argstable.docblock-argstable,
+table.docblock-argstable.docblock-argstable th {
+    color: currentColor;
+}
+
+table.docblock-argstable.docblock-argstable tbody tr * {
+    background: transparent;
+    color: currentColor;
+    font: inherit;
+}
+
+table.docblock-argstable.docblock-argstable tbody > tr > * {
+    border: 0 !important;
+}
+
+.rejt-name[style] {
+    color: currentColor !important
+}
+
 .sbdocs .sbdocs-content {
     max-width: 720px;
     font-size: 1.2em;
@@ -110,6 +129,9 @@ pre.docs-install.docs-install {
         font-size: 1em;
         white-space: pre-wrap;
         line-height: 1.2;
+        background: transparent;
+        border: 0;
+        padding: 0;
     }
 
     code {
