@@ -18,9 +18,8 @@ export const Default: Story = {
         
     },
     render: (args) => {
-        const ref = useRef(null);
         return (
-            <listbox.div { ...args } anchorRef={ ref }>
+            <listbox.div { ...args }>
                 <Button>Option 1</Button>
                 <Button>Option 2</Button>
                 <Button>Option 3</Button>

@@ -92,8 +92,6 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
     stack,
     stretch,
     wrap,
-    className,
-    style,
     ...props
   }: BoxProps, ref) => {
     const Box = element[TagName];

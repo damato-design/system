@@ -6,4 +6,9 @@
     font: inherit;
     box-sizing: border-box;
     font-variant-numeric: tabular-nums;
+
+    &[data-actions] button {
+        border: 0;
+        border-radius: 0;
+    }
 }

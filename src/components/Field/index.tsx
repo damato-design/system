@@ -58,6 +58,7 @@ export const Field = forwardRef<HTMLElement, FieldProps>(({
                 { helpMessage ? <text.p id={ helpId }>{ helpMessage }</text.p> : null }
                 <text.p aria-live='polite' id={ errorId }>{ errorMessage }</text.p>
                 <box.div
+                    data-actions
                     purpose='control'
                     inset={{ block: 'center' }}
                     outset={ outset }>

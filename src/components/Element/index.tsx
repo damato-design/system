@@ -3,6 +3,16 @@ import clsx from 'clsx';
 import css from './styles.module.css';
 import { proxy, Props, HTMLTagsOnly } from './proxy';
 
+export function restrictProps({
+  id,
+  tabIndex,
+  className,
+  style,
+  ...props
+}: Props) {
+  return props;
+}
+
 export type ElementProps = Props & {
   /**
    * The `mode` is a way to expressively enhance the scope in which it is applied.
