@@ -54,7 +54,23 @@ export const Menu: Story = {
     render: ({ onActiveDescendantChange: _, ...args}) => {
         const [buttonProps, setButtonProps] = useState({});
         const [activeDescendant, onActiveDescendantChange] = useState(args.activeDescendant);
-        const anchorRef = useRef(null)
+        const anchorRef = useRef(null);
+
+        const menu = (
+            <flyout.div anchorRef={ anchorRef } stretch>
+                <box.div
+                    stretch
+                    purpose='surface'
+                    priority='secondary'>
+                    <listbox.div
+                        { ...args }
+                        getAnchorProps={ setButtonProps }
+                        activeDescendant={ activeDescendant }
+                        onActiveDescendantChange={ onActiveDescendantChange } />
+                </box.div>
+            </flyout.div>
+        )
+
         return (
             <>
                 <Button
@@ -64,18 +80,7 @@ export const Menu: Story = {
                     priority='primary'>
                     Menu
                 </Button>
-                <flyout.div anchorRef={ anchorRef } stretch>
-                    <box.div
-                        stretch={ true }
-                        purpose='surface'
-                        priority='secondary'>
-                        <listbox.div
-                            { ...args }
-                            getAnchorProps={ setButtonProps }
-                            activeDescendant={ activeDescendant }
-                            onActiveDescendantChange={ onActiveDescendantChange } />
-                    </box.div>
-                </flyout.div>
+                { menu }
             </>
         )
     }
