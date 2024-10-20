@@ -69,6 +69,10 @@ export type BoxProps = ElementProps & {
    */
   priority?: 'primary' | 'secondary';
   /**
+   * If content is text, adds additional space between children.
+   */
+  prose?: boolean;
+  /**
    * Set the purpose for this component.
    * This will affect the final presentation.
    */
@@ -101,6 +105,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
     outset,
     padding,
     priority,
+    prose,
     purpose,
     round,
     stack,
@@ -136,7 +141,10 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       appearance[css[purpose]] = true;
     }
 
-    const classNames = clsx(css.box, appearance, { [css.round]: round });
+    const classNames = clsx(css.box, appearance, { 
+      [css.round]: round,
+      [css.prose]: prose
+    });
 
     return <Box
       { ...props }

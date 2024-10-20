@@ -54,7 +54,7 @@ export const lockup = proxy<HTMLTagsOnly, LockupProps>('lockup', (TagName) => {
         })
     }, [getInputProps]);
 
-    // TODO: optional onClose button, use bouyant approach
+    // TODO: optional onClose button, use bouyant approach, remember no hard code label
 
     return (
       <Element { ...props } ref={ ref } gap>
@@ -62,7 +62,7 @@ export const lockup = proxy<HTMLTagsOnly, LockupProps>('lockup', (TagName) => {
           <box.div stack gap>
             { subject ? <text.span id={ subjectId }>{ subject }</text.span> : null }
             { passiveMessage ? <text.p id={ passiveId }>{ passiveMessage }</text.p> : null }
-            <box.div mode={ mode } stack gap>
+            <box.div mode={ mode } stack gap prose>
                 <text.p aria-live='polite' id={ errorId }>{ errorMessage }</text.p>
                 { children }
             </box.div>

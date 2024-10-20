@@ -4,6 +4,10 @@
     &.round:is(.round) {
         border-radius: 100vw;
     }
+
+    &.prose:is(.prose) > * + * {
+        margin-block-start: var(--gap, .5rem);
+    }
 }
 
 .surface:is(.surface) {
