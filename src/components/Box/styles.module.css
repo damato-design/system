@@ -33,6 +33,7 @@
 
     & > * {
         pointer-events: none;
+        padding-inline: var(--padding, 1rem);
     }
 
     &:is([data-priority="primary"]) {
@@ -51,6 +52,7 @@
     /* inline links */
     &:not([style*="padding"]) span {
         font: inherit;
+        padding: 0;
     }
 
     /* padded buttons */

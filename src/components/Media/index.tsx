@@ -55,6 +55,7 @@ export const Media = forwardRef<HTMLElement, MediaProps>(({
   const sources = [''].concat(src).filter(Boolean);
 
   const [tagName, ...rest] = new Set(sources.map(getElement));
+  if (!tagName) return null;
   if (rest) console.warn('Mixed sources found, all sources must be the same type: ', rest);
   const Media = element[tagName];
   const config = Object.assign({}, props, {
