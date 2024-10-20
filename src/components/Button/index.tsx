@@ -6,17 +6,17 @@ import { icon } from '../Icon';
 type Accessory = 'menu' | 'external' | undefined;
 
 function getAccessory(behavior: Accessory) {
-    switch(behavior) {
-        case 'menu': 
-            return <icon.expand_more/>;
+    switch (behavior) {
+        case 'menu':
+            return <icon.expand_more />;
         case 'external':
-            return <icon.launch/>;
+            return <icon.launch />;
         default:
             return null;
     }
 }
 
-type ComponentProps = (React.ButtonHTMLAttributes<HTMLButtonElement>
+export type ButtonProps = (React.ButtonHTMLAttributes<HTMLButtonElement>
     | React.AnchorHTMLAttributes<HTMLAnchorElement>)
     & BoxProps
     & {
@@ -34,19 +34,25 @@ type ComponentProps = (React.ButtonHTMLAttributes<HTMLButtonElement>
         inline?: boolean
     };
 
-export const Button = forwardRef<HTMLElement, ComponentProps>(({
+export const Button = forwardRef<HTMLElement, ButtonProps>(({
     behavior,
     children,
     icon: iconRef,
     inline,
-    className,
-    style,
+    role,
     type = 'button',
     ...props
-}: ComponentProps, ref) => {
+}: ButtonProps, ref) => {
     const Element = 'href' in props ? box.a : box.button;
     const Text = inline ? text.span : text.strong;
     const spacing: { gap: true, padding?: boolean } = { gap: true };
+    const inset = {
+        block: 'center',
+        inline: 'center'
+    }
+    if (['option', 'menuitem'].includes(role as string)) {
+        inset.inline = 'start'
+    }
     if (!inline) spacing.padding = true;
 
     if (!children && !props['aria-label']) {
@@ -61,11 +67,12 @@ export const Button = forwardRef<HTMLElement, ComponentProps>(({
             {...Object.assign({ type }, props)}
             {...spacing}
             ref={ref}
-            inset='center'
+            role={role}
+            inset={inset}
             purpose='action'>
             {iconRef ? createElement(icon[iconRef]) : null}
             {children ? <Text priority='secondary'>{children}</Text> : null}
-            {getAccessory(behavior)} 
+            {getAccessory(behavior)}
         </Element>
     )
 })

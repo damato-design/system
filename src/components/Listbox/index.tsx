@@ -1,58 +1,71 @@
 import { 
-    Children,
-    cloneElement,
     forwardRef,
-    isValidElement,
     useCallback,
     useId,
     useMemo,
-    useEffect,
     useState
 } from 'react';
 import clsx from 'clsx';
 import css from './styles.module.css';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { element, ElementProps, restrictProps } from '../Element';
+import { Button, ButtonProps } from '../Button';
 
 const JUMP_KEYS = ['End', 'Home'];
 const HORIZONTAL_KEYS = ['ArrowLeft', 'ArrowRight']
 const VERTICAL_KEYS = ['ArrowUp', 'ArrowDown'];
 const ALL_KEYS = JUMP_KEYS.concat(HORIZONTAL_KEYS, VERTICAL_KEYS);
 
-function nextIndex(
+function getIcon(behavior: 'listbox' | 'menu', selected: boolean) {
+    if (behavior !== 'listbox') return;
+    return selected ? 'check_box' : 'check_box_outline_blank';
+}
+
+function nextId(
     key: string,
     id: string,
     itemIds: string[],
     arrows: string[],
-    loop?: boolean): string | undefined {
-    if (JUMP_KEYS.includes(key)) return itemIds.at(JUMP_KEYS.indexOf(key) - 1);
-    if (!arrows.includes(key)) return;
-    const index = itemIds.indexOf(id) + (arrows.indexOf(key) % 2) * 2 - 1;
-    if (loop) return itemIds.at(index) ? itemIds.at(index) : itemIds.at(0);
-    return itemIds[index];
+    loop?: boolean): string {
+
+    if (JUMP_KEYS.includes(key)) return itemIds.at(JUMP_KEYS.indexOf(key) - 1) || id;
+    const direction = (arrows.indexOf(key) % 2) * 2 - 1;
+    const index = itemIds.indexOf(id);
+    const update = index + direction;
+    if (direction === -3 || !~index) return id;
+    if (!itemIds.at(index) && loop) return itemIds[0];
+    return itemIds[update] || id;
+}
+
+type ItemProps = ButtonProps & {
+    id: string,
 }
 
 type ListboxProps = ElementProps
     & {
-        anchorRef?: React.Ref<HTMLElement>,
+        getAnchorProps?: (props: ElementProps) => void,
+        activeDescendant?: string,
+        onActiveDescendantChange: (id: string) => void,
         behavior?: 'listbox' | 'menu',
         start?: number,
         rtl?: boolean,
         loop?: boolean,
         stack?: boolean,
+        items: [ItemProps, ...ItemProps[]],
     };
 
 export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) => {
     return forwardRef<HTMLElement, ListboxProps>(({
-        anchorRef,
+        getAnchorProps,
+        activeDescendant,
+        onActiveDescendantChange,
         behavior = 'listbox',
         stack = true,
+        items,
         rtl,
         loop,
         start = 0,
-        children,
-        className,
-        style,
+        children: _,
         ...props
     }: ListboxProps, ref) => {
 
@@ -62,10 +75,9 @@ export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) =>
         }
 
         const listboxId = useId();
-        const itemIds = Children.map(children, (_) => useId()) || [];
+        const itemIds = useMemo(() => items.map(({ id }) => id), [items]);
 
         const [visualFocus, setVisualFocus] = useState(false);
-        const [activeDescendant, setActiveDescendant] = useState(itemIds[start]);
 
         const arrows = useMemo(() => {
             if (stack) return VERTICAL_KEYS;
@@ -76,75 +88,60 @@ export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) =>
 
         const onKeyDown = useCallback((ev: any) => {
             if (ALL_KEYS.includes(ev.key)) ev.preventDefault();
-            setActiveDescendant(nextIndex(ev.key, activeDescendant, itemIds, arrows, loop) || activeDescendant);
-        }, [arrows, activeDescendant, children, loop]);
-
-        const clones = useMemo(() =>
-            Children.map(children, (child, idx) =>
-                isValidElement(child)
-                && cloneElement(child, {
-                    id: itemIds[idx],
-                    tabIndex: -1,
-                    role: behavior === 'menu' ? 'menuitem' : 'option',
-                    "aria-selected": itemIds[idx] === activeDescendant,
-                    onPointerDown: (ev) => {
-                        typeof child?.props?.onPointerDown === 'function'
-                            && child.props.onPointerDown(ev);
-                        ev.preventDefault();
-                        setActiveDescendant(itemIds[idx]);
-                    }
-                } as ElementProps)
-            ), [children, activeDescendant]);
+            const id = activeDescendant || itemIds[0];
+            const update = nextId(ev.key, id, itemIds, arrows, loop)
+            typeof onActiveDescendantChange === 'function'
+                && onActiveDescendantChange(update);
+        }, [onActiveDescendantChange, itemIds, arrows, activeDescendant, loop]);
 
         const onFocus = useCallback(() => setVisualFocus(true), []);
         const onBlur = useCallback(() => setVisualFocus(false), []);
 
-        useEffect(() => {
-            if (typeof anchorRef === 'function') return;
-            const $anchor = anchorRef?.current;
-            if (!$anchor) return;
+        const onPointerDown = useCallback((ev: any) => {
+            ev.preventDefault();
+            typeof onActiveDescendantChange === 'function'
+                && onActiveDescendantChange(ev.currentTarget.id);
+        }, [onActiveDescendantChange]);
 
-            $anchor.addEventListener('keydown', onKeyDown);
-            $anchor.addEventListener('focus', onFocus);
-            $anchor.addEventListener('blur', onBlur);
-
-            // Only if anchor is not itself
-            $anchor.setAttribute('tabindex', '0');
-            $anchor.setAttribute('aria-haspopup', behavior);
-            $anchor.setAttribute('aria-controls', listboxId);
-            $anchor.setAttribute('aria-owns', listboxId);
-            () => {
-                $anchor.removeEventListener('keydown', onKeyDown);
-                $anchor.removeEventListener('focus', onFocus);
-                $anchor.removeEventListener('blur', onBlur);
-            };
-        }, [anchorRef, behavior])
-
-        useEffect(() => {
-            if (typeof anchorRef === 'function') return;
-            // Only if anchor is not itself
-            anchorRef?.current?.setAttribute('aria-activedescendant', activeDescendant);
-        }, [activeDescendant])
-
-        const isSelf = {
+        const anchorProps = {
+            onPointerDown: (ev: any) => ev.currentTarget.focus(),
             tabIndex: 0,
             onKeyDown,
             onFocus,
             onBlur,
-            'aria-activedescendant': activeDescendant,
-            onPointerDown: (ev: any) => ev.currentTarget.focus(),
         }
+
+        typeof getAnchorProps === 'function'
+            && getAnchorProps(Object.assign(anchorProps, {
+                "aria-haspopup": behavior,
+                "aria-controls": listboxId,
+                "aria-owns": listboxId,
+            }))
 
         return <Element
             {...restrictProps(props)}
-            {...!anchorRef ? isSelf : {}}
+            {...typeof getAnchorProps !== 'function' ? anchorProps : {}}
             id={listboxId}
             role={behavior}
             ref={ref}
             className={clsx(css.listbox, { [css.visualfocus]: visualFocus })}
             style={styles}
             data-actions>
-            {clones}
+            { items.map((item) => {
+                return (
+                    <Button 
+                        { ...item}
+                        stretch
+                        key={ item.id }
+                        icon={ getIcon(behavior, item.id === activeDescendant) }
+                        aria-selected={ item.id === activeDescendant }
+                        role={ behavior === 'menu' ? 'menuitem' : 'option' }
+                        onPointerDown={ onPointerDown }
+                        tabIndex={ -1 }>
+                        { item.children || item.id }
+                    </Button>
+                )
+            }) }
         </Element>;
     })
 });

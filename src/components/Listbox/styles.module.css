@@ -1,5 +1,7 @@
 .listbox {
-    display: inline-flex;
+    display: flex;
+    flex: 1;
+    overflow: clip;
     &.visualfocus, &:focus-within {
         [aria-selected="true"] {
             background-color: color-mix(in srgb, var(--bgColor), currentColor 15%);
