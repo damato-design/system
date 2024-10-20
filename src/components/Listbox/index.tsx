@@ -1,6 +1,7 @@
 import { 
     forwardRef,
     useCallback,
+    useEffect,
     useId,
     useMemo,
     useState
@@ -103,21 +104,23 @@ export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) =>
                 && onActiveDescendantChange(ev.currentTarget.id);
         }, [onActiveDescendantChange]);
 
-        const anchorProps = {
+        const anchorProps = useMemo(() => ({
             onPointerDown: (ev: any) => ev.currentTarget.focus(),
             tabIndex: 0,
             onKeyDown,
             onFocus,
             onBlur,
-        }
+        }), [onKeyDown]);
 
-        typeof getAnchorProps === 'function'
-            && getAnchorProps(Object.assign(anchorProps, {
-                "aria-haspopup": behavior,
-                "aria-controls": listboxId,
-                "aria-owns": listboxId,
-            }))
-
+        useEffect(() => {
+            typeof getAnchorProps === 'function'
+                && getAnchorProps(Object.assign(anchorProps, {
+                    "aria-haspopup": behavior,
+                    "aria-controls": listboxId,
+                    "aria-owns": listboxId,
+                }))
+        }, [anchorProps, getAnchorProps, behavior]);
+        
         return <Element
             {...restrictProps(props)}
             {...typeof getAnchorProps !== 'function' ? anchorProps : {}}

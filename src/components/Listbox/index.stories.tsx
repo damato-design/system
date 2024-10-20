@@ -71,6 +71,7 @@ export const Menu: Story = {
                         priority='secondary'>
                         <listbox.div
                             { ...args }
+                            getAnchorProps={ setButtonProps }
                             activeDescendant={ activeDescendant }
                             onActiveDescendantChange={ onActiveDescendantChange } />
                     </box.div>
