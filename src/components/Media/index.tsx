@@ -7,6 +7,7 @@ export type MediaProps = (React.ImgHTMLAttributes<HTMLImageElement>
   | React.VideoHTMLAttributes<HTMLVideoElement>) 
   & ElementProps
   & {
+    src: string[] | string,
     /**
      * If set, component is shown in a loading state.
      */
@@ -14,7 +15,7 @@ export type MediaProps = (React.ImgHTMLAttributes<HTMLImageElement>
   };
 
 function getElement(src: string | undefined) {
-  if (!src) return element.img;
+  if (!src) return 'picture';
 
   const { pathname } = new URL(src);
   const ext = pathname.substring(pathname.lastIndexOf('.'));
@@ -28,7 +29,7 @@ function getElement(src: string | undefined) {
     case '.webm':
     case '.3gp':
     case '.3g2':
-      return element.video;
+      return 'video';
     case '.aac':
     case '.mid':
     case '.midi':
@@ -37,19 +38,33 @@ function getElement(src: string | undefined) {
     case '.opus':
     case '.wav':
     case '.weba':
-      return element.audio;
+      return 'audio';
     default:
-      return element.img;
+      return 'picture';
   }
 }
 
 export const Media = forwardRef<HTMLElement, MediaProps>(({
+  src,
   standby,
   className,
   style,
   ...props
 }: MediaProps, ref) => {
 
-  const Media = getElement(props.src);
-  return <Media { ...props } ref={ ref } className={ css.media }/>;
+  const sources = [''].concat(src).filter(Boolean);
+
+  const [tagName, ...rest] = new Set(sources.map(getElement));
+  if (rest) console.warn('Mixed sources found, all sources must be the same type: ', rest);
+  const Media = element[tagName];
+  const config = Object.assign({}, props, {
+    controls: tagName !== 'picture' ? true : null
+  });
+
+  return (
+    <Media { ...config } ref={ ref } className={ css.media }>
+      { sources.map((src) => <source {...{ [tagName === 'picture' ? 'srcSet' : 'src']: src }} key={ src }/>) }
+      { tagName === 'picture' ? <img src={ sources[0] }/> : null }
+    </Media>
+  );
 })
