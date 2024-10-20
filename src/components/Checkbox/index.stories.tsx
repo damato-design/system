@@ -28,7 +28,8 @@ export const Default: Story = {
 export const Radio: Story = {
     args: { 
         name: 'radio',
-        exclusive: true
+        exclusive: true,
+        label: 'Only this one'
     }
 }
 

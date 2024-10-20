@@ -85,7 +85,7 @@ export const Minimal: Story = {
  */
 export const Form: Story = {
     args: {
-        subject: <text.label priority='secondary'>Email</text.label>,
+        subject: <text.label priority='primary'>Email</text.label>,
         passiveMessage: 'Enter your email validate',
         errorMessage: 'Sorry, not good enough',
         icon: 'email'

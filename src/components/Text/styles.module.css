@@ -1,8 +1,12 @@
 .text:is(.text) {
     font-size: 1rem;
 
-    &:is(label, strong, legend) {
+    &:is(strong) {
         font-weight: bolder;
+    }
+
+    &:is(label[for]) {
+        cursor: pointer;
     }
 
     &:empty {
@@ -10,9 +14,12 @@
     }
 
     &:is([data-priority="primary"]) {
-        font-size: 1.8rem;
-        line-height: 1.1;
         font-weight: bolder;
+        font-size: 1.2rem;
+        &:not(label) {
+            font-size: 1.8rem;
+            line-height: 1.1;
+        }
     }
 
     &:is([data-priority="secondary"]) {
