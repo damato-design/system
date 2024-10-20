@@ -11,10 +11,10 @@ export type TextProps = ElementProps & {
    */
   priority?: 'primary' | 'secondary';
   /**
-   * A `ref` to another component that requires more clarity
+   * A function that provides accessible attributes for more clarity
    * that this component is meant to provide for assistive technologies.
    */
-  screenreaderOnly?: React.Ref<HTMLElement>;
+  getScreenreaderProps?: (props: TextProps) => void;
   /**
    * If set, component is shown in a loading state.
    */
@@ -23,26 +23,26 @@ export type TextProps = ElementProps & {
 
 export const text = proxy<HTMLTagsOnly, TextProps>('text', (TagName) => {
   return forwardRef<HTMLElement, TextProps>(({
-    id: givenId,
     priority,
-    screenreaderOnly,
+    getScreenreaderProps,
     standby,
     className,
     style,
     ...props
   }: TextProps, ref) => {
     const Text = element[TagName];
-    const id = givenId || useId();
+    const id = useId();
 
     useEffect(() => {
-      // Connect the given `screenreaderOnly` to this element
-      // using `id` and `aria-describedby`
-      if (typeof screenreaderOnly === 'function') return;
-      screenreaderOnly?.current?.setAttribute('aria-describedby', id);
-      return () => screenreaderOnly?.current?.removeAttribute('aria-describedby');
-    }, [screenreaderOnly, id]);
+      typeof getScreenreaderProps === 'function'
+        && getScreenreaderProps({
+          'aria-describedby': id
+        });
+    }, [getScreenreaderProps]);
 
-    const classNames = clsx(css.text, { [css.sronly]: Boolean(screenreaderOnly) })
+    const classNames = clsx(css.text, { 
+      [css.sronly]: typeof getScreenreaderProps === 'function'
+    });
 
     return <Text
       { ...props }

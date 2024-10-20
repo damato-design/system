@@ -1,7 +1,7 @@
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { text } from '.';
-import { useRef } from 'react';
 
 /**
  * Description here
@@ -42,19 +42,21 @@ export const Primary: Story = {
 }
 
 /**
- * The `screenreaderOnly` option expects the `id` of the element it is meant to provide detail about.
- * This could be helpful when space is limited and assistive technologies would benefit from more information.
+ * The `getScreenreaderProps` callback returns accessibility props
+ * that should be attached to another element which requires more
+ * descriptive text. When this function is used, the element is invisible
+ * but within the document.
  */
 export const ScreenreaderOnly: Story = {
     args: {
         children: 'Hello World!',
     },
     render: (args) => {
-        const ref = useRef(null);
+        const [srProps, setSrProps] = useState({});
         return (
             <>
-                <text.label ref={ ref }>Tel:</text.label>
-                <text.span { ...args } screenreaderOnly={ ref }>Telephone Number</text.span>
+                <text.label { ...srProps }>Tel:</text.label>
+                <text.span { ...args } getScreenreaderProps={ setSrProps }>Telephone Number</text.span>
             </>
         )
     }
