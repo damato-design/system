@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Dialog } from '.';
 
 import { text } from '../Text';
+import { box } from '../Box';
 import { Button } from '../Button';
 
 const meta = {
@@ -56,14 +57,21 @@ export const Modal: Story = {
     },
     args: {
         modal: true,
+        emphasis: 'critical',
         subject: <text.h2 priority='primary'>Don't do this</text.h2>,
-        children: <text.p priority='secondary'>
-            Modals are the crutch of the inarticulate designer and developer.
-            Remember to always ask, "Why does this have to be a modal?"
-            <Button href="https://modalzmodalzmodalz.com/" inline>
-                modalzmodalzmodalz.com
-            </Button>
-        </text.p>,
+        children: [
+            <text.p key='descriptio' priority='secondary'>
+                Modals are the crutch of the inarticulate designer and developer.
+                Remember to always ask, "Why does this have to be a modal?"
+                <Button href="https://modalzmodalzmodalz.com/" inline>
+                    modalzmodalzmodalz.com
+                </Button>
+            </text.p>,
+            <box.div gap key='actions'>
+                <Button priority='primary' autofocus>Submit</Button>
+                <Button>Cancel</Button>
+            </box.div>
+        ],
         onClose: ($elem) => console.log('Trying to close this!', $elem)
     },
 }

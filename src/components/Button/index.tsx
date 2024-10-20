@@ -45,7 +45,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
 }: ButtonProps, ref) => {
     const Element = 'href' in props ? box.a : box.button;
     const Text = inline ? text.span : text.strong;
-    const spacing: { gap: true, padding?: boolean } = { gap: true };
+    const spacing: { padding?: boolean } = {};
     const inset = {
         block: 'center',
         inline: 'center'
