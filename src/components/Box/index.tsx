@@ -29,7 +29,15 @@ function createLayout(position: MixedPosition, logical: boolean) {
   return logical ? layout.map(updateLogical) : layout;
 }
 
+interface ModernCSSProperties extends React.CSSProperties {
+  anchorName?: string;
+}
+
 export type BoxProps = ElementProps & {
+  /**
+   * Use to help with anchor positioning.
+   */
+  anchorName?: string,
   /**
    * How to distribute the space across children.
    */
@@ -81,6 +89,7 @@ export type BoxProps = ElementProps & {
 
 export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
   return forwardRef<HTMLElement, BoxProps>(({
+    anchorName,
     distribute,
     gap,
     inset,
@@ -103,7 +112,8 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       innerLayout.reverse();
     }
 
-    const styles: React.CSSProperties = {
+    const styles: ModernCSSProperties = {
+      anchorName: anchorName,
       justifyContent: distribute ? `space-${distribute}` : innerLayout.at(0),
       alignItems: innerLayout.at(1),
       display: stretch ? 'flex' : 'inline-flex',

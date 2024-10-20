@@ -1,4 +1,4 @@
-import { forwardRef, useLayoutEffect, useId } from 'react';
+import { forwardRef, useId, useEffect } from 'react';
 import css from './styles.module.css';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { element, ElementProps } from '../Element';
@@ -7,7 +7,7 @@ export type FlyoutProps = ElementProps & {
   /**
     * The `ref` linked to the "anchor" element associated with the `<Flyout/>`.
     */
-  anchorRef: React.Ref<HTMLElement>,
+  getAnchorProps: ({}) => void,
   /**
    * Matches the accessibility role for the content.
    */
@@ -24,7 +24,7 @@ export type FlyoutProps = ElementProps & {
 
 export const flyout = proxy<HTMLTagsOnly, FlyoutProps>('flyout', (TagName) => {
   return forwardRef<HTMLElement, FlyoutProps>(({
-    anchorRef,
+    getAnchorProps,
     behavior,
     stretch,
     disclosure = 'auto',
@@ -37,16 +37,15 @@ export const flyout = proxy<HTMLTagsOnly, FlyoutProps>('flyout', (TagName) => {
     const targetId = useId();
     const name = `--${anchorId.replaceAll(':', '')}`;
 
-    useLayoutEffect(() => {
-      if (typeof anchorRef === 'function' || !anchorRef?.current) return;
-      if (anchorRef.current.tagName !== 'BUTTON') console.warn(`Flyouts can only be anchored to <button/>`);
-      anchorRef.current.style.setProperty('anchor-name', name);
-      anchorRef.current.setAttribute('popovertarget', targetId);
-      if (disclosure === 'manual') anchorRef.current.setAttribute('popovertargetaction', 'toggle');
-      anchorRef.current.id = anchorId;
-    }, [anchorRef]);
-
     const Element = element[TagName];
+    useEffect(() => {
+      typeof getAnchorProps === 'function'
+        && getAnchorProps({
+          popovertarget: targetId,
+          anchorName: name,
+          popovertargetaction: disclosure ? 'toggle' : null
+        });
+    }, [getAnchorProps]);
 
     const styles = {
       positionAnchor: name,
@@ -59,7 +58,6 @@ export const flyout = proxy<HTMLTagsOnly, FlyoutProps>('flyout', (TagName) => {
       { ...props }
       id={ targetId }
       role={ behavior }
-      anchor={ anchorId }
       popover={ disclosure }
       ref={ ref }
       className={ css.flyout }

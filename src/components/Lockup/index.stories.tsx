@@ -21,6 +21,12 @@ type Story = StoryObj<typeof meta>
 /**
  * The `subject` field expects a `text` primitive.
  * Make sure to set the priority of the text.
+ * 
+ * > #### Why is this prop called "subject"?
+ * >
+ * > Because this is meant to support general lockups of content,
+ * > along with form fields with labels, the word "subject" was chosen
+ * > to encompass both concepts into a single prop name.
  */
 export const Default: Story = {
     args: {

@@ -1,4 +1,4 @@
-import { createRef, useRef } from 'react';
+import { createRef, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { flyout } from '.';
@@ -16,14 +16,13 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
     args: {
         children: 'Hello World!',
-        anchorRef: createRef(),
     },
-    render: ({ anchorRef: _, ...args }) => {
-        const anchorRef = useRef(null);
+    render: (args) => {
+        const [anchorProps, setAnchorProps] = useState({});
         return (
             <>
-                <Button ref={ anchorRef } priority='primary'>anchor element</Button>
-                <flyout.div { ...args } anchorRef={ anchorRef }>
+                <Button { ...anchorProps } priority='primary'>anchor element</Button>
+                <flyout.div { ...args } getAnchorProps={ setAnchorProps }>
                     flyout is open!
                 </flyout.div>
             </>
@@ -34,15 +33,14 @@ export const Default: Story = {
 export const Stretch: Story = {
     args: {
         children: 'Hello World!',
-        anchorRef: createRef(),
         stretch: true
     },
-    render: ({ anchorRef: _, ...args }) => {
-        const anchorRef = useRef(null);
+    render: (args) => {
+        const [anchorProps, setAnchorProps] = useState({});
         return (
             <>
-                <Button ref={ anchorRef } priority='primary'>anchor element</Button>
-                <flyout.div { ...args } anchorRef={ anchorRef }>
+                <Button { ...anchorProps } priority='primary'>anchor element</Button>
+                <flyout.div { ...args } getAnchorProps={ setAnchorProps }>
                     <box.div
                         stretch={ args.stretch }
                         padding

@@ -1,4 +1,4 @@
-import { createElement, cloneElement, forwardRef, FC, useId, useEffect, ReactElement } from 'react';
+import { createElement, cloneElement, forwardRef, useId, useEffect, ReactElement } from 'react';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { box, BoxProps } from '../Box';
 import { text, TextProps } from '../Text';

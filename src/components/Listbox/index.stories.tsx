@@ -126,12 +126,13 @@ export const Menu: Story = {
     },
     render: ({ onActiveDescendantChange: _, ...args}) => {
         const [buttonProps, setButtonProps] = useState({});
+        const [anchorProps, setAnchorProps] = useState({});
         const [active, setActive] = useState(args.activeDescendant);
         const [focus, setFocus] = useState(args.visualFocus);
         const anchorRef = useRef(null);
 
         const menu = (
-            <flyout.div anchorRef={ anchorRef } stretch>
+            <flyout.div getAnchorProps={ setAnchorProps } stretch>
                 <box.div
                     stretch
                     purpose='surface'
@@ -150,6 +151,7 @@ export const Menu: Story = {
             <>
                 <Button
                     { ...buttonProps }
+                    { ...anchorProps }
                     ref={ anchorRef }
                     onFocus={ () => setFocus(true) }
                     onBlur={ () => setFocus(false) }
