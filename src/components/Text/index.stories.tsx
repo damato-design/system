@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { text } from '.';
 
 /**
- * Description here
+ * The `text` primitive helps present text content.
  */
 const meta = {
     title: 'Primitives/text',
@@ -33,7 +33,7 @@ export const Default: Story = {
  * The `priority` only affects the presentation of the text, to help inform the document outline
  * be sure to use the most appropriate semantic HTML element.
  */
-export const Primary: Story = {
+export const Priority: Story = {
     args: {
         children: 'Hello World!',
         priority: 'primary'
