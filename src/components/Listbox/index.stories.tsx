@@ -25,16 +25,16 @@ export const Default: Story = {
         ]
     },
     render: ({ onActiveDescendantChange: _, ...args}) => {
-        const [activeDescendant, onActiveDescendantChange] = useState(args.activeDescendant);
+        const [active, setActive] = useState(args.activeDescendant);
         return (
             <>
                 <box.div stretch>
-                    { `Active option: ${activeDescendant}` }
+                    { `Active option: ${active}` }
                 </box.div>
                 <listbox.div
                     { ...args }
-                    activeDescendant={ activeDescendant }
-                    onActiveDescendantChange={ onActiveDescendantChange } />
+                    activeDescendant={ active }
+                    onActiveDescendantChange={ setActive } />
             </>
         )
     }
@@ -52,8 +52,10 @@ export const Menu: Story = {
         ]
     },
     render: ({ onActiveDescendantChange: _, ...args}) => {
+        // TODO: Pull out onFocus and onBlur to connect to menu?
+        // TODO: onPointerDown on items to close?
         const [buttonProps, setButtonProps] = useState({});
-        const [activeDescendant, onActiveDescendantChange] = useState(args.activeDescendant);
+        const [active, setActive] = useState(args.activeDescendant);
         const anchorRef = useRef(null);
 
         const menu = (
@@ -65,8 +67,8 @@ export const Menu: Story = {
                     <listbox.div
                         { ...args }
                         getAnchorProps={ setButtonProps }
-                        activeDescendant={ activeDescendant }
-                        onActiveDescendantChange={ onActiveDescendantChange } />
+                        activeDescendant={ active }
+                        onActiveDescendantChange={ setActive } />
                 </box.div>
             </flyout.div>
         )

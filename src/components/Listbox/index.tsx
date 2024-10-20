@@ -48,7 +48,6 @@ type ListboxProps = ElementProps
         activeDescendant?: string,
         onActiveDescendantChange: (id: string) => void,
         behavior?: 'listbox' | 'menu',
-        start?: number,
         rtl?: boolean,
         loop?: boolean,
         stack?: boolean,
@@ -65,7 +64,6 @@ export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) =>
         items,
         rtl,
         loop,
-        start = 0,
         children: _,
         ...props
     }: ListboxProps, ref) => {
@@ -87,10 +85,12 @@ export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) =>
                 : HORIZONTAL_KEYS;
         }, [rtl, stack]);
 
+        // TODO: Is there a way to improve render performance by dropping deps;
+        // especially activeDescendant?
         const onKeyDown = useCallback((ev: any) => {
             if (ALL_KEYS.includes(ev.key)) ev.preventDefault();
             const id = activeDescendant || itemIds[0];
-            const update = nextId(ev.key, id, itemIds, arrows, loop)
+            const update = nextId(ev.key, id, itemIds, arrows, loop);
             typeof onActiveDescendantChange === 'function'
                 && onActiveDescendantChange(update);
         }, [onActiveDescendantChange, itemIds, arrows, activeDescendant, loop]);
