@@ -56,7 +56,7 @@ export const Media = forwardRef<HTMLElement, MediaProps>(({
 
   const [tagName, ...rest] = new Set(sources.map(getElement));
   if (!tagName) return null;
-  if (rest) console.warn('Mixed sources found, all sources must be the same type: ', rest);
+  if (rest.length) console.warn('Mixed sources found, all sources must be the same type: ', rest);
   const Media = element[tagName];
   const config = Object.assign({}, props, {
     controls: tagName !== 'picture' ? true : null
