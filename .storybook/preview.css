@@ -13,25 +13,18 @@ body {
 }
 
 #storybook-docs:has([data-welcome="true"]) {
-    --s: 18px; /* control the size*/
+    --s: 70px; /* control the size*/
     --c1: #1B1C1D;
     --c2: color-mix(in srgb, #222425, #4fb9af 10%);
-    --c3: color-mix(in srgb, #222425, #4fb9af 10%);
     
-    --b: calc(var(--s)/3.67); /* control the thickness of the curved lines */
-    
-    --_r: calc(1.28*var(--s) + var(--b)/2) at top 50%;
-    --_f: calc(99.5% - var(--b)),var(--c1) calc(101% - var(--b)) 99.5%,#0000 101%;
-    --_g0: calc(-.8*var(--s)), var(--c2) var(--_f);
-    --_g1: calc(-.8*var(--s)), var(--c3) var(--_f);
-    --_s: calc(1.8*var(--s) + var(--b));
+    --_g: #0000 8%,var(--c1) 0 17%,#0000 0 58%;
     background: 
-        radial-gradient(var(--_r) right var(--_g0)) calc(-1*var(--_s)) var(--s),
-        radial-gradient(var(--_r) left  var(--_g1))         var(--_s)  calc(-1*var(--s)),
-        radial-gradient(var(--_r) right var(--_g1)) calc(var(--_s)/-2) calc(-1*var(--s)),
-        radial-gradient(var(--_r) left  var(--_g0)) calc(var(--_s)/ 2) var(--s),
-        linear-gradient(90deg,var(--c2) 50%,var(--c3) 0);
-    background-size: var(--_s) calc(4*var(--s));
+        linear-gradient(135deg,#0000 20.5%,var(--c1) 0 29.5%,#0000 0) 0 calc(var(--s)/4),
+        linear-gradient( 45deg,var(--_g)) calc(var(--s)/2) 0,
+        linear-gradient(135deg,var(--_g),var(--c1) 0 67%,#0000 0),        
+        linear-gradient( 45deg,var(--_g),var(--c1) 0 67%,#0000 0 83%,var(--c1) 0 92%,#0000 0),
+        var(--c2); 
+    background-size: var(--s) var(--s);
 
     .sbdocs:is(.sbdocs-wrapper) {
         justify-content: start;
