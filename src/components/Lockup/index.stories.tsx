@@ -27,6 +27,12 @@ type Story = StoryObj<typeof meta>
  * > Because this is meant to support general lockups of content,
  * > along with form fields with labels, the word "subject" was chosen
  * > to encompass both concepts into a single prop name.
+ * > 
+ * > Internally, we set a `aria-labelledby` attribute to `subject` containing
+ * > element. Assistive technologies should still be able to read nested HTML content
+ * > as shown in [this example](https://www.digitala11y.com/aria-labelledby-properties/#arialabelledby-example).
+ * > This is only connected when using the `getInputProps()` function seen in
+ * > a later example on this page.
  */
 export const Default: Story = {
     args: {

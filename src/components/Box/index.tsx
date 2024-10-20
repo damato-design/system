@@ -74,6 +74,10 @@ export type BoxProps = ElementProps & {
    */
   purpose?: 'surface' | 'action' | 'control';
   /**
+   * Circular box.
+   */
+  round?: boolean,
+  /**
    * If set, makes children align vertically.
    */
   stack?: boolean;
@@ -98,6 +102,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
     padding,
     priority,
     purpose,
+    round,
     stack,
     stretch,
     wrap,
@@ -131,7 +136,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       appearance[css[purpose]] = true;
     }
 
-    const classNames = clsx(css.box, appearance);
+    const classNames = clsx(css.box, appearance, { [css.round]: round });
 
     return <Box
       { ...props }

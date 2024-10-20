@@ -1,6 +1,9 @@
 .box {
     min-width: 0;
     font-size: 1.2rem;
+    &.round:is(.round) {
+        border-radius: 100vw;
+    }
 }
 
 .surface:is(.surface) {
