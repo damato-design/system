@@ -143,7 +143,7 @@ table.docblock-argstable.docblock-argstable tbody > tr > * {
     }
 
     blockquote h4 {
-        margin-block-start: .5em;
+        margin-block: .5em;
         font-size: 1.3em;
     }
 

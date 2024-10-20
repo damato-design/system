@@ -19,6 +19,11 @@ type Story = StoryObj<typeof meta>
  * The children should only be of type `String` or type `Number`.
  * If you expect a more complex composition of elements,
  * consider using the `<box/>` primitive.
+ * 
+ * > #### Why is the text so small?
+ * >
+ * > The default size is the smallest size meant to be accessible.
+ * > This is so all other sizes are larger and therefore also accessible.
  */
 export const Default: Story = {
     args: {
@@ -55,7 +60,7 @@ export const ScreenreaderOnly: Story = {
         const [srProps, setSrProps] = useState({});
         return (
             <>
-                <text.label { ...srProps }>Tel:</text.label>
+                <text.label { ...srProps } priority='secondary'>Tel:</text.label>
                 <text.span { ...args } getScreenreaderProps={ setSrProps }>Telephone Number</text.span>
             </>
         )
