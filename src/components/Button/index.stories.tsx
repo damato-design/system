@@ -83,7 +83,7 @@ export const Link: Story = {
     },
     render: (args) => (
         <text.p priority='secondary'>
-            The quick brown fox <Button { ...args }>jumped over</Button> the lazy dog.
+            The quick brown fox <Button { ...args }>jumps over</Button> the lazy dog.
         </text.p>
     )
 }
@@ -126,7 +126,7 @@ export const Behavior: Story = {
  */
 export const Disabled: Story = {
     args: {
-        children: 'Click here!',
+        children: 'Please do not do this',
         disabled: true
     }
 }

@@ -3,8 +3,7 @@ import {
     useCallback,
     useEffect,
     useId,
-    useMemo,
-    useState
+    useMemo
 } from 'react';
 import clsx from 'clsx';
 import css from './styles.module.css';

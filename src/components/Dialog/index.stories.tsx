@@ -27,7 +27,7 @@ export const Default: Story = {
 export const Emphasis: Story = {
     args: {
         emphasis: 'warning',
-        title: <text.h2 priority='primary'>Watch out!</text.h2>,
+        subject: <text.h2 priority='primary'>Watch out!</text.h2>,
         children: `
             If you tell someone to watch out,
             you are warning them to be careful,
@@ -56,7 +56,7 @@ export const Modal: Story = {
     },
     args: {
         modal: true,
-        title: <text.h2 priority='primary'>Don't do this</text.h2>,
+        subject: <text.h2 priority='primary'>Don't do this</text.h2>,
         children: <text.p priority='secondary'>
             Modals are the crutch of the inarticulate designer and developer.
             Remember to always ask, "Why does this have to be a modal?"

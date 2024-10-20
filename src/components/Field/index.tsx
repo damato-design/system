@@ -1,70 +1,27 @@
-import { useEffect, useId, forwardRef } from 'react';
+import { forwardRef } from 'react';
+import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { box, BoxProps } from '../Box';
-import { text } from '../Text';
 
-type FieldProps = BoxProps & {
-    /**
-     * The text that summarizes the purpose of the input.
-     */
-    label?: string,
-    /**
-     * Text that helps the user fill the input by providing more context.
-     */
-    helpMessage?: string,
-    /**
-     * A message that appears if the user input is invalid.
-     */
-    errorMessage?: string,
-    /**
-     * The `ref` linked to the `<input/>` element within the `<Field/>`.
-     */
-    inputRef: React.Ref<HTMLElement>,
-    /**
-     * Prop passed down to the internal `box` element for width behavior.
-     * @default true
-     */
-    stretch?: boolean
-};
+type FieldProps = BoxProps & {};
 
-export const Field = forwardRef<HTMLElement, FieldProps>(({
-    children,
-    label,
-    helpMessage,
-    errorMessage,
-    inputRef,
-    mode,
-    stretch = true,
-    className,
-    style,
-    ...props
-}: FieldProps, ref) => {
+export const field = proxy<HTMLTagsOnly, FieldProps>('field', (TagName) => {
+    return forwardRef<HTMLElement, FieldProps>(({
+        stretch = true,
+        ...props
+    }: FieldProps, ref) => {
 
-    const errorId = useId();
-    const helpId = useId();
-    const labelId = useId();
+        const Element = box[TagName];
+        const outset = !stretch ? { block: 'start' } : undefined;
 
-    useEffect(() => {
-        if (typeof inputRef === 'function') return;
-        if (!inputRef?.current) console.warn(`inputRef not provided to field, ref:`, inputRef);
-        inputRef?.current?.setAttribute('aria-describedby', [errorId, helpId].join(' '));
-    }, [inputRef]);
-
-    const outset = !stretch ? { block: 'start' } : undefined;
-
-    return (
-        <box.fieldset { ...props } ref={ ref } stack gap stretch={ stretch } aria-labelledby={ labelId }>
-            { label ? <text.label priority='secondary' id={ labelId }>{ label }</text.label> : null }
-            <box.div mode={ mode } stack gap>
-                { helpMessage ? <text.p id={ helpId }>{ helpMessage }</text.p> : null }
-                <text.p aria-live='polite' id={ errorId }>{ errorMessage }</text.p>
-                <box.div
-                    data-actions
-                    purpose='control'
-                    inset={{ block: 'center' }}
-                    outset={ outset }>
-                    { children }
-                </box.div>
-            </box.div>
-        </box.fieldset>
-    )
-})
+        return (
+            <Element
+                { ...props }
+                ref={ ref }
+                stretch={ stretch }
+                data-actions
+                purpose='control'
+                inset={{ block: 'center' }}
+                outset={ outset }/>
+        )
+    });
+});
