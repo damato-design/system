@@ -1,0 +1,32 @@
+.input:is(.input) {
+    /* match control border width */
+    margin-block: 0;
+    margin-inline: 0;
+    border: 0;
+    padding: var(--padding, 1rem);
+    scroll-padding-block: var(--padding, 1rem);
+    box-sizing: content-box;
+    background: transparent;
+    min-width: 1ch;
+    flex: 1;
+    font-size: 1.2rem;
+
+    &::-webkit-inner-spin-button {
+        display: none;
+    }
+
+    &:not(textarea) {
+        line-height: 1lh;
+    }
+
+    &:where([type="checkbox"], [type="radio"]) {
+        cursor: pointer;
+        aspect-ratio: 1;
+        height: calc(2 * var(--padding, 1rem) + 1lh);
+        accent-color: green;
+
+        &:not(:checked) {
+            opacity: 0;
+        }
+    }
+}

@@ -1,0 +1,30 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Foundations/Density" />
+
+# Density
+
+### Spacing in scopes
+
+Instead of thinking about applying space at focused locations, we consider the relationships between the elements within that region. This is directly linked to [Gestalt's Law of Proximity](https://lawsofux.com/law-of-proximity/) which explains elements that are closer together are more related. Therefore, we expect to apply space between elements to signify a relation.
+
+Consider the content lockup for a hero banner. We would expect this to have large spacing values, along with relatively large typography in comparison to tighter content lockups for individual cards on the same page. If we consider that both of these use the same content lockup and uniformly change the density between the larger and smaller sizes, we do not need to curate spacing values specifically.
+
+### Scale factor
+
+To determine the values of space used, we use four values:
+
+- **Padding base** - The smallest non-zero amount of space that we expect to be applied around elements, preferrably in non-relative units.
+- **Gap base** - The smallest non-zero amount of space that we expect to be applied between elements, preferrably in non-relative units. 
+- **Padding scale** - The amount to multiply to determine the next size of space for padding.
+- **Gap scale** - The amount to multiple to determine the next size of space for gap.
+
+If no values are provided, the gap base is set at `8px`. Padding is twice the size of gap and the scale for both padding and gap is `2`.
+
+> #### Why are non-relative units preferred?
+>
+> If we were to link the space to a relative unit such as `(r)em`, if the font size of the interface increases, this would affect the space between the elements. A user increasing the font size does so to make the content more legible. If the space also increased, it could shift content or require the user scroll due to the amount of additional space. Using a non-relative unit such as pixels ensures that the relationships between elements are consistently maintained regardless of the user's font preferences.
+
+> #### Why is the "base" density value meant to be the smallest?
+>
+> If we were to calculate the size of density starting at the largest value working downward, the amount of space at deeper nested regions may result in near-zero values which would be undesired. We set the "base" as smallest to ensure that space will always expect no matter the number of nested regions of density shifts.

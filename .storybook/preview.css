@@ -1,0 +1,174 @@
+html,
+#storybook-root {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    line-height:1.5;
+    color: #C9CDCF;
+    background: #1B1C1D;
+    height: 100%;
+    font-family: Plus Jakarta Sans, sans-serif;
+}
+
+.sbdocs:is(.sbdocs-wrapper),
+.sb-unstyled :is(.sbdocs-preview, .sb-bar),
+.docblock-source.docblock-source,
+.docblock-source.docblock-source .prismjs [class*="language"] .token,
+.docblock-source.docblock-source > div {
+    background: transparent;
+    color: currentColor;
+}
+
+.docblock-source.docblock-source {
+    border-color: currentColor;
+}
+
+.sb-unstyled :is(.sbdocs-preview, .sb-bar) {
+    border-color: currentColor;
+}
+
+.docs-story > div, button.docblock-code-toggle,
+.docblock-source.docblock-source button {
+    background: transparent;
+    color: currentColor;
+}
+
+button.docblock-code-toggle:focus,
+.docblock-source.docblock-source button:focus,
+.sbdocs-preview button:not([style]):focus {
+    box-shadow: #4fb9af 0 -3px 0 0 inset;
+}
+
+.toc-list.toc-list .toc-list-item > a,
+.toc-list.toc-list .toc-list-item.is-active-li > a {
+    color: inherit;
+}
+
+table.docblock-argstable.docblock-argstable,
+table.docblock-argstable.docblock-argstable th {
+    color: currentColor;
+}
+
+table.docblock-argstable.docblock-argstable tbody tr * {
+    background: transparent;
+    color: currentColor;
+    font: inherit;
+}
+
+table.docblock-argstable.docblock-argstable tbody > tr > * {
+    border: 0 !important;
+}
+
+.rejt-name[style] {
+    color: currentColor !important
+}
+
+.docblock-source.docblock-source {
+    margin: 0;
+}
+
+.sbdocs .sbdocs-content {
+    max-width: 720px;
+    font-size: 1.2em;
+
+    h1 {
+        font-size: 3em;
+        line-height: 1.1;
+        margin-block-end: 1em;
+    }
+
+    h1.sbdocs-title {
+        text-transform: capitalize;
+        color: inherit;
+    }
+
+    h2[id="stories"] {
+        display: none;
+    }
+
+    h3 {
+        font-size: 1.8em;
+        line-height: 1.1;
+        margin-block: 1em .5em;
+    }
+
+    :is(h1, h3, h4) {
+        display: flex;
+        align-items: baseline;
+        a {
+            padding: 0;
+            padding-right: .5ch;
+            margin-left: calc(-1em - .5ch);
+            display: flex;
+    
+            svg {
+                top: 0;
+                height: 1em;
+                width: 1em;
+                box-sizing: border-box;
+            }
+        }
+    }
+    
+
+    .controls-summary {
+        cursor: pointer;
+    }
+
+    .controls-summary::marker {
+        font-size: 1.8rem;
+        margin-inline-end: 2em;
+    }
+
+    .controls-summary h3 {
+        display: inline-flex;
+        cursor: pointer;
+        padding-inline: .5em;
+    }
+
+    a {
+        text-decoration: underline;
+        color: currentColor;
+        font: inherit;
+    }
+
+    blockquote {
+        padding: 1em 2.5em;
+        background: color-mix(in srgb, #222425, #4fb9af 10%);
+        font-size: .8em;
+        border-left: 4px solid #4fb9af;
+        margin-inline: 0;
+    }
+
+    blockquote h4 {
+        margin-block-start: .5em;
+        font-size: 1.3em;
+    }
+
+    .prismjs {
+        font-size: 1.2rem
+    }
+
+    pre,
+    [class*="language"],
+    pre .token,
+    code,
+    .docblock-argstable-body :not(label) > span[class] {
+        font-family: 'Monaspace Radon', monospace;
+        font-size: 1em;
+        white-space: pre-wrap;
+        line-height: 1.2;
+        background: transparent;
+        border: 0;
+        padding: 0;
+    }
+
+    code {
+        padding: 0;
+        border: 0;
+        color: inherit;
+        background: transparent;
+    }
+}

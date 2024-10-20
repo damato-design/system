@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Primitives/Overview" />
+
+# Primitives
+
+Primitives are low-level components that are the foundational building blocks to more complex compositions. In many cases, you can think of them as super-charged HTML elements.
+
+Generally speaking, primitives aren't expected to be used on their own but instead as a part of a larger composition. For example the `input` primitive is practically invisible itself. The more appropriate choice for displaying a user input is to use the `<Field/>` component and add the `input` primitive as a child.
+
+```jsx
+<Field>
+    <input.text/>
+</Field>
+```
+See visual examples in the [Field component docs](/docs/components-field--docs).
+
+### Priniciples
+
+- Elements should be composable such that no additional styles need to be declared.

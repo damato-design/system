@@ -1,0 +1,79 @@
+.box {
+    min-width: 0;
+    font-size: 1.2rem;
+    &.round:is(.round) {
+        border-radius: 100vw;
+    }
+}
+
+.surface:is(.surface) {
+    background: black;
+    border-radius: .25em;
+    overflow: clip;
+
+    &:is([data-priority="primary"]) {
+        box-shadow: 0 2px 4px black;
+    }
+
+    &:is([data-priority="secondary"]) {
+        background: black;
+        box-shadow: 0 2px 4px black;
+    }
+}
+
+.action:is(.action) {
+    cursor: pointer;
+    font-size: 1.2rem;
+    border-radius: .25em;
+    border: 1px solid transparent;
+
+    --bgColor: transparent;
+    background-color: var(--bgColor);
+    transition: background .218s ease;
+
+    & > * {
+        pointer-events: none;
+    }
+
+    &:is([data-priority="primary"]) {
+        --bgColor: blue;
+    }
+
+    &:is([data-priority="secondary"]) {
+        --bgColor: green;
+    }
+
+    &[disabled] {
+        cursor: not-allowed;
+        opacity: .4;
+    }
+
+    /* inline links */
+    &:not([style*="padding"]) span {
+        font: inherit;
+    }
+
+    /* padded buttons */
+    &:not([disabled]):where([style*="padding"]):hover {
+        background-color: color-mix(in srgb, var(--bgColor), currentColor 15%);
+    }
+
+    /* non-padded buttons (inline links) */
+    &:not([disabled]):not([style*="padding"]):hover {
+        text-decoration-color: color-mix(in srgb, var(--bgColor), currentColor 25%);
+    }
+}
+
+.control:is(.control) {
+    border: 1px solid;
+    border-radius: .25em;
+    font-size: 1.2rem;
+
+    > hr {
+        height: 1lh;
+    }
+
+    > [data-icon] {
+        padding-inline: var(--padding, 1rem);
+    }
+}

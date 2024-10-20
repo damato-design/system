@@ -1,0 +1,74 @@
+
+<title>D'Amato Design System</title>
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="shortcut icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+<link rel="shortcut icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+
+<style>
+    @font-face {
+        font-family: 'Monaspace Radon', monospace;
+        src: url(https://cdn.jsdelivr.net/gh/githubnext/monaspace@v1.000/fonts/webfonts/MonaspaceRadon-Regular.woff);
+    }
+
+    .sidebar-item {
+        &[data-selected="true"][data-highlightable="true"] {
+            color: #222425;
+        }
+
+        a {
+            padding-block: .5em;
+            text-transform: capitalize;
+        }
+
+        svg {
+            display: none;
+        }
+    }
+
+    pre, code {
+        font-family: 'Monaspace Radon', monospace;
+    }
+
+    #storybook-explorer-searchfield {
+        visibility: hidden;
+        animation: appear 0s linear forwards;
+    }
+
+    @keyframes appear { to { visibility: visible; } }
+</style>
+
+<script>
+    const title = document.querySelector('title');
+
+    new MutationObserver(([entry]) => {
+        if (title.textContent.includes('Storybook')) {
+            title.textContent = title.textContent.replace('Docs ⋅ Storybook', `DAMATO Design System`)
+        }
+}).observe(
+    title,
+    { subtree: true, characterData: true, childList: true }
+);
+
+    function updatePlaceholder(node) {
+        if (node.getAttribute('placeholder').includes('components')) {
+            node.setAttribute('placeholder', 'Search docs');
+        }
+    }
+
+    window.addEventListener('animationend', (ev) => {
+        if (ev.animationName === 'appear') {
+            updatePlaceholder(ev.target);
+            new MutationObserver(([entry]) => {
+            updatePlaceholder(entry.target);
+    }).observe(
+        ev.target,
+        { attributes: true, attributeFilter: ['placeholder'], subtree: true,
+        childList: true, }
+    );
+        }
+    });
+</script>

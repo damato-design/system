@@ -1,0 +1,9 @@
+.listbox {
+    display: flex;
+    flex: 1;
+    &.visualfocus, &:focus-within {
+        [aria-selected="true"] {
+            background-color: color-mix(in srgb, var(--bgColor), currentColor 15%);
+        }
+    }
+}

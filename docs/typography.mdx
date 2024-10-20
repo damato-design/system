@@ -1,0 +1,32 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Foundations/Typography" />
+
+# Typography
+
+### Categories
+There are three categories of typography:
+
+- **Primary**: Used for headings and titles.
+- **Secondary**: Used for most content.
+- **Default**: Used for auxiliary content, such as disclaimer or help text.
+
+> #### Why is "Default" not meant for the body copy?
+>
+> When curating the font size, we want to ensure that the base font size set is the smallest expected size. Then all additional calculations for higher levels can be based off of that smallest size in an increasing magnitude.
+>
+> This means that when applying the font size to the page, we most likely expect to use the "Secondary" size more often. Remember, the names of these types of typography indicate priority to the user, not how often we expect to use the option.
+
+Each category has the ability to adjust font configuration to affect that category. This is helpful when segregating a different typeface between headings and other copy. Due to the ability of changing the typeface, all metrics are also configurable.
+
+### Density effects
+
+Typography should be directly linked to density. As the density becomes more compact, the content lockups become tighter with less room for larger typography. Importantly, the hierarchy must be maintained such that "Primary" text is presented as more significant than "Secondary" text. This is normally achieved using font size; the larger the font, the more important the content.
+
+### Scale factor
+
+- **Font size** - The smallest font size expected within the interface.
+- **Font scale** - The amount to multiply to determine the next size for the font.
+
+If no values are set, the base font size is set at `1rem` and the base font scale is set as Major Third (1.25). This means as the density is shifted, we also shift the font size by that font scale.
+
