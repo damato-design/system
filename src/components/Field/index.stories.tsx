@@ -38,7 +38,7 @@ export const Default: Story = {
     render: (args) => {
         return (
             <field.div { ...args }>
-                <input.text placeholder='Search for something'/>
+                <input.text name='search' placeholder='Search for something'/>
             </field.div>
         )
     }
@@ -54,7 +54,7 @@ export const Icon: Story = {
             <field.div { ...args }>
                 <icon.phone/>
                 <hr/>
-                <input.tel placeholder='(212) 867-5309'/>
+                <input.tel name='telephone' placeholder='(212) 867-5309'/>
             </field.div>
         )
     }
@@ -83,7 +83,7 @@ export const InnerButton: Story = {
         return (
             <field.div { ...args }>
                 <Button icon='remove' aria-label='Decrement' value={ -1 } onClick={ onClick }/>
-                <input.number value={ value } onChange={ onChange } fieldSizing='content'/>
+                <input.number name='number' value={ value } onChange={ onChange } fieldSizing='content'/>
                 <Button icon='add' aria-label='Increment' value={ 1 } onClick={ onClick }/>
             </field.div>
         )
@@ -118,7 +118,7 @@ export const OuterButton: Story = {
         return (
             <box.form action='' gap inset={{ block: 'end' }}>
                 <field.div { ...args }>
-                    <input.email value={ value } onChange={ onChange }/>
+                    <input.email name='email' value={ value } onChange={ onChange }/>
                 </field.div>
                 <Button priority='primary' icon='email' onClick={ onClick }>
                     Subscribe

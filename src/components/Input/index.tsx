@@ -8,6 +8,7 @@ export type InputProps = (React.InputHTMLAttributes<HTMLInputElement>
   | React.TextareaHTMLAttributes<HTMLTextAreaElement>)
   & ElementProps
   & {
+    name: string,
     fieldSizing?: 'content' | 'flex'
   };
 

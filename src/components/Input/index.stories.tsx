@@ -27,11 +27,14 @@ type Story = StoryObj<typeof meta>
  * > as if they were different elements entirely. In this system, we treat them closer
  * > to different elements as we tie their semantics to the host component in a similar
  * > manner to other fragments.
+ * 
+ * The `name` prop is **required** for this component.
  */
 export const Default: Story = {
     args: {
         id: 'default',
-        value: 'Hello World!'
+        value: 'Hello World!',
+        name: 'default'
     },
     render: ({ value: givenValue, ...args }) => {
         const [value, setValue] = useState(givenValue);
@@ -48,6 +51,7 @@ export const Color: Story = {
     args: {
         id: 'color',
         value: '#ff0000',
+        name: 'color'
     },
     render: ({ value: givenValue, ...args }) => {
         const [value, setValue] = useState(givenValue);
@@ -63,6 +67,7 @@ export const Textarea: Story = {
     args: {
         id: 'textarea-example',
         value: 'Hello World!',
+        name: 'textarea'
     },
     render: ({ value: givenValue, ...args }) => {
         const [value, setValue] = useState(givenValue);

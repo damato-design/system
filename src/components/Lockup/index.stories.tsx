@@ -82,6 +82,9 @@ export const Minimal: Story = {
  * >
  * > **TODO:** Allow for `invalid` to update the interal mode to present the concept of `critical`
  * > instead of expecting the author to determine the correct mode.
+ * 
+ * There is no need to connect the `subject` element to the input within when using the
+ * `getInputProps` callback. This will connect the input to the `subject` automatically.
  */
 export const Form: Story = {
     args: {
@@ -101,7 +104,7 @@ export const Form: Story = {
         return (
             <lockup.fieldset { ...args } getInputProps={ setInputProps }>
                 <field.div>
-                    <input.email { ...inputProps } value={ value } onChange={ onChange }/>
+                    <input.email { ...inputProps } name='email' value={ value } onChange={ onChange }/>
                 </field.div>
             </lockup.fieldset>
         )

@@ -5,7 +5,6 @@ import { box } from '../Box';
 import { text } from '../Text';
 
 type CheckboxProps = InputProps & {
-    name: string,
     exclusive?: boolean,
     label?: string,
 };
@@ -19,7 +18,7 @@ export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(({
     const id = useId();
 
     return (
-        <box.div stack={ false } gap inset='center'>
+        <box.div stack={ false } gap padding inset='center'>
             <field.div stretch={ false } round={ exclusive }>
                 { exclusive
                     ? <input.radio { ...props } ref={ ref } id={ id }/>

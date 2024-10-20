@@ -22,7 +22,7 @@
     &:where([type="checkbox"], [type="radio"]) {
         cursor: pointer;
         aspect-ratio: 1;
-        height: calc(2 * var(--padding, 1rem) + 1lh);
+        height: 1lh;
         accent-color: green;
 
         &:not(:checked) {

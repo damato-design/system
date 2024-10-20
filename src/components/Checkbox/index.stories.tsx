@@ -43,7 +43,7 @@ export const Alignment: Story = {
             <box.div gap inset={{ block: 'end' }}>
                 <Checkbox { ...args }/>
                 <field.div>
-                    <input.text placeholder='Ready'/>
+                    <input.text name='alignment' placeholder='Ready'/>
                 </field.div>
                 <Button icon='star' aria-label="favorite" priority='secondary'/>
             </box.div>
