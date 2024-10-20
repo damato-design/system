@@ -6,7 +6,7 @@ import { Button } from '../Button';
 import { box } from '../Box';
 
 const meta = {
-    title: 'Primitives/Flyout',
+    title: 'Primitives/flyout',
     component: flyout.div,
 } satisfies Meta<typeof flyout.div>
 

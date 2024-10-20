@@ -7,6 +7,7 @@ import { useCallback, useState } from 'react';
  * The `input` primitive creates elements meant for user input.
  * They are all expected to be presented as nearly invisible. These elements are meant to be used
  * in conjunction with `<box.div appearance='control'/>` to create the frame around the input.
+ * For an example of this, check out the [Field docs](/docs/components-field--docs).
  */
 const meta = {
     title: 'Primitives/input',
@@ -18,6 +19,14 @@ type Story = StoryObj<typeof meta>
 
 /**
  * Use the `<input.text/>` to create a standard `<input type="text"/>` element.
+ * 
+ * > #### Why use the dot-notation for the input type?
+ * >
+ * > Like other fragments, the kind of element you want to use is closely paired
+ * > with the component as a tag name. For inputs, they often render wildly different
+ * > as if they were different elements entirely. In this system, we treat them closer
+ * > to different elements as we tie their semantics to the host component in a similar
+ * > manner to other fragments.
  */
 export const Default: Story = {
     args: {

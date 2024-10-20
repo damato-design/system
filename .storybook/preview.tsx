@@ -30,13 +30,13 @@ const page = () => (
     <Title/>
     <Install/>
     <Description/>
-    <Primary/>
-    <details>
+    {/* <Primary/> */}
+    {/* <details>
       <summary className='controls-summary'>
         <h3>Controls</h3>
       </summary>
       <Controls/>
-    </details>
+    </details> */}
     <Stories/>
   </>
 );

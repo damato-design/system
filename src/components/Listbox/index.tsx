@@ -52,6 +52,7 @@ type ListboxProps = ElementProps
         loop?: boolean,
         stack?: boolean,
         items: [ItemProps, ...ItemProps[]],
+        visualFocus: boolean,
     };
 
 export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) => {
@@ -64,6 +65,7 @@ export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) =>
         items,
         rtl,
         loop,
+        visualFocus,
         children: _,
         ...props
     }: ListboxProps, ref) => {
@@ -75,8 +77,6 @@ export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) =>
 
         const listboxId = useId();
         const itemIds = useMemo(() => items.map(({ id }) => id), [items]);
-
-        const [visualFocus, setVisualFocus] = useState(false);
 
         const arrows = useMemo(() => {
             if (stack) return VERTICAL_KEYS;
@@ -95,9 +95,6 @@ export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) =>
                 && onActiveDescendantChange(update);
         }, [onActiveDescendantChange, itemIds, arrows, activeDescendant, loop]);
 
-        const onFocus = useCallback(() => setVisualFocus(true), []);
-        const onBlur = useCallback(() => setVisualFocus(false), []);
-
         const onPointerDown = useCallback((ev: any) => {
             ev.preventDefault();
             typeof onActiveDescendantChange === 'function'
@@ -108,8 +105,6 @@ export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) =>
             onPointerDown: (ev: any) => ev.currentTarget.focus(),
             tabIndex: 0,
             onKeyDown,
-            onFocus,
-            onBlur,
         }), [onKeyDown]);
 
         useEffect(() => {
@@ -139,7 +134,11 @@ export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) =>
                         icon={ getIcon(behavior, item.id === activeDescendant) }
                         aria-selected={ item.id === activeDescendant }
                         role={ behavior === 'menu' ? 'menuitem' : 'option' }
-                        onPointerDown={ onPointerDown }
+                        onPointerDown={ (ev: any) => {
+                            typeof item.onPointerDown === 'function'
+                                && item.onPointerDown(ev);
+                            onPointerDown(ev);
+                        } }
                         tabIndex={ -1 }>
                         { item.children || item.id }
                     </Button>

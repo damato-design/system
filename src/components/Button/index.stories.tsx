@@ -107,6 +107,9 @@ export const Icon: Story = {
 /**
  * In some cases, it may be expected to show an accessory on the button
  * to indicate a different behavior.
+ * 
+ * This example is non-interactive. For an interactive example,
+ * see the [Listbox docs](/docs/primitives-listbox--docs#menu).
  */
 export const Behavior: Story = {
     args: {

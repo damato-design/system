@@ -1,12 +1,12 @@
 .box {
     min-width: 0;
     font-size: 1.2rem;
-    overflow: clip;
 }
 
 .surface:is(.surface) {
     background: black;
     border-radius: .25em;
+    overflow: clip;
 
     &:is([data-priority="primary"]) {
         box-shadow: 0 2px 4px black;

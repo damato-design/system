@@ -5,7 +5,7 @@ import { text } from '../Text';
 // import { Button } from '../Button';
 
 const meta = {
-    title: 'Primitives/Lockup',
+    title: 'Primitives/lockup',
     component: lockup.div,
 } satisfies Meta<typeof lockup.div>
 

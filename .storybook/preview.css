@@ -65,6 +65,10 @@ table.docblock-argstable.docblock-argstable tbody > tr > * {
     color: currentColor !important
 }
 
+.docblock-source.docblock-source {
+    margin: 0;
+}
+
 .sbdocs .sbdocs-content {
     max-width: 720px;
     font-size: 1.2em;
@@ -144,11 +148,11 @@ table.docblock-argstable.docblock-argstable tbody > tr > * {
     }
 
     .prismjs {
-        font-size: 1.2rem;
+        font-size: 1.2rem
     }
 
     pre,
-    pre[class*="language"],
+    [class*="language"],
     pre .token,
     code,
     .docblock-argstable-body :not(label) > span[class] {
