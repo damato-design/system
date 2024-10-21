@@ -29,14 +29,16 @@ export const Default: Story = {
 
 export const Primary: Story = {
     args: {
-        children: 'Click here!',
+        children: 'Most important thing to do!',
         priority: 'primary'
     }
 }
 
 export const Secondary: Story = {
     args: {
-        children: 'Click here!',
+        children: 'Go to dashboard!',
+        href: '#',
+        behavior: 'external',
         priority: 'secondary'
     }
 }

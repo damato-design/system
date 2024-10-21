@@ -111,6 +111,10 @@ table.docblock-argstable.docblock-argstable tbody > tr > * {
     margin: 0;
 }
 
+.sbdocs .sbdocs-a {
+    text-decoration: underline;
+}
+
 .sbdocs .sbdocs-content {
     max-width: 720px;
     font-size: 1.2em;
@@ -172,7 +176,6 @@ table.docblock-argstable.docblock-argstable tbody > tr > * {
     }
 
     a {
-        text-decoration: underline;
         color: currentColor;
         font: inherit;
     }
