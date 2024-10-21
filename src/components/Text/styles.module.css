@@ -31,6 +31,10 @@
     &:is([data-priority="secondary"]) {
         font-size: 1.2rem;
     }
+
+    & .text:not([data-priority]) {
+        font: inherit;
+    }
     
     &:where([data-standby="true"]) {
         /* These will need to be intents triggered by mode */
