@@ -1,5 +1,4 @@
 import { forwardRef } from 'react';
-import css from './styles.module.css';
 import { proxy } from '../Element/proxy';
 
 export const IDREF = {
@@ -17,7 +16,8 @@ export const localize = proxy<keyof typeof IDREF, LocalizeProps>('localize', (id
 
     return <span
       ref={ ref }
-      className={ css.localize }
+      style={{ display: 'none' }}
+      hidden
       id={ IDREF[idRef] }>
         { children }
       </span>;

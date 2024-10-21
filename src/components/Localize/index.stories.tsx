@@ -35,6 +35,9 @@ type Story = StoryObj<typeof meta>
  * 
  * It is not uncommon for the use of the `localize` fragment to not appear
  * in the same file that the `IDREF` key is attached.
+ * 
+ * You may also set the `aria-label` as a fallback. The `aria-labelledby`
+ * will override the `aria-label` if an `IDREF` reference was rendered.
  */
 export const Default: Story = {
     args: {
@@ -43,7 +46,10 @@ export const Default: Story = {
     render: (args) => {
         return (
             <div lang='es'>
-                <Button aria-labelledby={ IDREF.close } icon='close' />
+                <Button
+                    aria-labelledby={ IDREF.close }
+                    aria-label='close'
+                    icon='close' />
                 <localize.close { ...args }/>
             </div>
         )
