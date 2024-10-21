@@ -27,6 +27,7 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(({
     emphasis,
     modal,
     onClose,
+    priority,
     ...props
 }: DialogProps, ref) => {
     
@@ -61,6 +62,7 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(({
     return (
         <Element
             purpose='surface'
+            priority={ priority }
             ref={ showModal }
             onKeyDown={ onKeyDown }
             onPointerDown={ onPointerDown }>

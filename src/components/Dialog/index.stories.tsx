@@ -51,6 +51,7 @@ export const Modal: Story = {
     args: {
         modal: true,
         emphasis: 'critical',
+        priority: 'primary',
         subject: (
             <text.h2 priority='primary'>
                 <Close onClick={() => console.log('close!')}/>
