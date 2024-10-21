@@ -38,6 +38,11 @@ type Story = StoryObj<typeof meta>
  * 
  * You may also set the `aria-label` as a fallback. The `aria-labelledby`
  * will override the `aria-label` if an `IDREF` reference was rendered.
+ * 
+ * Important to know that the `<Close/>` button already provides the correct
+ * configuration shown below. One only needs to add the localized text for the
+ * `<localize.close/>` element. For more information on this component, see the
+ * [Close docs](/docs/primitives-close--docs).
  */
 export const Default: Story = {
     args: {
