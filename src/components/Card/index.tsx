@@ -4,15 +4,12 @@ import { box, BoxProps } from '../Box';
 import { Media, MediaProps } from '../Media';
 import { lockup, LockupProps } from '../Lockup';
 
-type FieldProps = BoxProps
+type CardProps = BoxProps
     & MediaProps 
-    & LockupProps
-    & {
+    & LockupProps;
 
-    };
-
-export const card = proxy<HTMLTagsOnly, FieldProps>('card', (TagName) => {
-    return forwardRef<HTMLElement, FieldProps>(({
+export const card = proxy<HTMLTagsOnly, CardProps>('card', (TagName) => {
+    return forwardRef<HTMLElement, CardProps>(({
         stack = true,
         src,
         icon,
@@ -21,13 +18,11 @@ export const card = proxy<HTMLTagsOnly, FieldProps>('card', (TagName) => {
         passiveMessage,
         errorMessage,
         getInputProps,
-        onClose,
         ...props
-    }: FieldProps, ref) => {
+    }: CardProps, ref) => {
 
         const Element = box[TagName];
 
-        // TODO: Reduce density for the lockup
         return (
             <Element
                 { ...props }
@@ -42,8 +37,7 @@ export const card = proxy<HTMLTagsOnly, FieldProps>('card', (TagName) => {
                         subject,
                         passiveMessage,
                         errorMessage,
-                        getInputProps,
-                        onClose
+                        getInputProps
                     }}
                     stack
                     gap/>
