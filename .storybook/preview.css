@@ -116,9 +116,10 @@ table.docblock-argstable.docblock-argstable tbody > tr > * {
     font-size: 1.2em;
 
     h1 {
-        font-size: 3em;
+        font-size: min(3vw + 1.8rem, 3em);
         line-height: 1.1;
-        margin-block-end: 1em;
+        margin-block-start: 0;
+        margin-block-end: 1rem;
     }
 
     h1.sbdocs-title {
