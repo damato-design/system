@@ -44,7 +44,7 @@ export const Modal: Story = {
         docs: {
             story: {
                 inline: false,
-                iframeHeight: 700,
+                iframeHeight: 760,
             },
         },
     },
