@@ -20,7 +20,7 @@ type DialogProps = LockupProps
     & {
         emphasis?: 'critical' | 'warning' | 'success',
         modal?: boolean,
-        onClose: (ev: any) => void
+        onClose?: (ev: any) => void
     };
 
 export const Dialog = forwardRef<HTMLElement, DialogProps>(({

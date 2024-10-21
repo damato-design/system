@@ -17,19 +17,6 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-/**
- * Use the `<input.text/>` to create a standard `<input type="text"/>` element.
- * 
- * > #### Why use the dot-notation for the input type?
- * >
- * > Like other fragments, the kind of element you want to use is closely paired
- * > with the component as a tag name. For inputs, they often render wildly different
- * > as if they were different elements entirely. In this system, we treat them closer
- * > to different elements as we tie their semantics to the host component in a similar
- * > manner to other fragments.
- * 
- * The `name` prop is **required** for this component.
- */
 export const Default: Story = {
     args: {
         id: 'default',
@@ -43,10 +30,6 @@ export const Default: Story = {
     }
 }
 
-/**
- * You can create different types of input fields using the dot-notation on the `input`.
- * The example here shows the `<input type="color"/>` created as `<input.color/>`
- */
 export const Color: Story = {
     args: {
         id: 'color',
@@ -60,9 +43,6 @@ export const Color: Story = {
     }
 }
 
-/**
- * A unique type is `<input.textarea/>` which will create a `<textarea/>` instead of an `<input/>`.
- */
 export const Textarea: Story = {
     args: {
         id: 'textarea-example',

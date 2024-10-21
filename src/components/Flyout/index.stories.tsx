@@ -1,10 +1,14 @@
-import { createRef, useState } from 'react';
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { flyout } from '.';
 import { Button } from '../Button';
 import { box } from '../Box';
 
+/**
+ * The `flyout` primitive attaches itself to an anchor element.
+ * It is effectively invisible and uses new native anchor positioning.
+ */
 const meta = {
     title: 'Primitives/flyout',
     component: flyout.div,

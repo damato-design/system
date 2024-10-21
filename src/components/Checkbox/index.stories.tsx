@@ -7,6 +7,9 @@ import { Button } from '../Button';
 import { field } from '../Field';
 import { input } from '../Input';
 
+/**
+ * A confirmational boolean input
+ */
 const meta = {
     title: 'Components/Checkbox',
     component: Checkbox,
@@ -15,17 +18,12 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-/**
- * The `name` prop is **required** for the component.
- */
+
 export const Default: Story = {
     args: { name: 'default' },
 }
 
-/**
- * The component can behave as a radio button by setting `exclusive`.
- */
-export const Radio: Story = {
+export const RadioButton: Story = {
     args: { 
         name: 'radio',
         exclusive: true,
@@ -33,9 +31,6 @@ export const Radio: Story = {
     }
 }
 
-/**
- * This example is meant to test alignment between commonly paired elements.
- */
 export const Alignment: Story = {
     args: { name: 'alignment' },
     render: (args) => {

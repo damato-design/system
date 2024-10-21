@@ -21,18 +21,6 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-/**
- * The component is very simple. In fact, it is a simple `box` primitive
- * with defaults set.
- * 
- * - `stretch` is set to `true` as default but configurable.
- * - `purpose` is set to `'control'`.
- * - `inset` is set to `{ block: 'center' }`
- * - `outset` is _sometimes_ set to `{ block: 'start }`, depending on `stretch`.
- * 
- * There are other internal configurations set to help with final presentation of children.
- * It is recommended to use this component instead of using `box` directly.
- */
 export const Default: Story = {
     args: {},
     render: (args) => {
@@ -44,9 +32,6 @@ export const Default: Story = {
     }
 }
 
-/**
- * You can add an `icon` or a normal HTML `<hr/>` to the `field`.
- */
 export const Icon: Story = {
     args: {},
     render: (args) => {
@@ -60,13 +45,6 @@ export const Icon: Story = {
     }
 }
 
-/**
- * This example demonstrates how the `field` can include the `<input.number/>`
- * and `<Button/>` elements. This example sets `stretch={ false }`.
- * 
- * Note the use of `fieldSizing='content'` on the `<input.number/>` so the input
- * will adjust to the size of the value.
- */
 export const InnerButton: Story = {
     args: { stretch: false },
     render: (args) => {
@@ -90,18 +68,6 @@ export const InnerButton: Story = {
     }
 }
 
-/**
- * This demonstrates the alignment of a `<Button/>` outside of the `field`.
- * We set the `inset` to `{ block: 'end' }` on the parent to ensure
- * the elements do not stretch, but still align at the bottom.
- * 
- * > #### Why doesn't the field stretch in this example?
- * >
- * > The `field` is composed inside of a `box` where its `stretch` value is
- * > effectively `false`; the default for `box` elements. This means that the
- * > `field` is the default size; similar to if `stretch` was set as `false` without
- * > `fieldSizing='content'`.
- */
 export const OuterButton: Story = {
     args: {},
     render: (args) => {

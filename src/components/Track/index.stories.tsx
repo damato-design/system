@@ -3,7 +3,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { track } from '.';
 
 /**
- * Work in progress
+ * The `track` primitive helps present progress,
+ * sometimes allowing user input to control the progress.
  */
 const meta = {
     title: 'Primitives/track',

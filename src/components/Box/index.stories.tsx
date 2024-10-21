@@ -17,11 +17,6 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-/**
- * You may commonly use `<box.div/>` for most layout needs but it is important to use semantic
- * HTML elements wherever appropriate. Note, the `box` is meant as a generic, non-interactive container
- * for content. There are other primitives for more specialized needs.
- */
 export const Default: Story = {
     args: {
         children: 'Hello World!'

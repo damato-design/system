@@ -7,6 +7,10 @@ import { box } from '../Box';
 import { Button } from '../Button';
 import { Close } from '../Close';
 
+/**
+ * A standardized lockup meant to start a dialog between
+ * the system and the user.
+ */
 const meta = {
     title: 'Components/Dialog',
     component: Dialog,
@@ -21,11 +25,6 @@ export const Default: Story = {
     },
 }
 
-/**
- * Emphasis can inform the message more purpose.
- * 
- * This is also an example of the icon sizing with the title if provided.
- */
 export const Emphasis: Story = {
     args: {
         emphasis: 'warning',
@@ -40,17 +39,6 @@ export const Emphasis: Story = {
     },
 }
 
-/**
- * This is an example of the modal configuration for the `<Dialog/>`.
- * Don't use it, modals are awful for user experience.
- * It is only here to serve as an exploration on how it could be done.
- * 
- * Check the console to see the close events fire (click outside or Escape key).
- * 
- * Note that the `<Close/>` button event is not connected to the component's
- * native close listeners. In a more complete example, you would most likely
- * assign the same listener to both.
- */
 export const Modal: Story = {
     parameters: {
         docs: {

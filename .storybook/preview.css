@@ -26,8 +26,16 @@ body {
         var(--c2); 
     background-size: var(--s) var(--s);
 
+    .sbdocs .sbdocs-content {
+        max-width: 1000px;
+        margin: auto;
+
+        & ~ div {
+            display: none;
+        }
+    }
+
     .sbdocs:is(.sbdocs-wrapper) {
-        justify-content: start;
         padding: 0;
     }
 }
