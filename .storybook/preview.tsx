@@ -45,7 +45,7 @@ const preview: Preview = {
   parameters: {
     options: {
       storySort: {
-        order: ['Welcome']
+        order: ['Welcome', 'Foundations', 'Patterns', 'Primitives', 'Components']
       }
     },
     viewMode: 'docs',
