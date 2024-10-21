@@ -37,7 +37,7 @@ export const Default: Story = {
                 bulb iceland tilde mixtape messenger bag. Pabst tumblr
                 cold-pressed artisan keytar vinyl irony asymmetrical edison bulb.
             </text.p>,
-            <box.div gap wrap key='actions'>
+            <box.div actions key='actions'>
                 <Button priority='primary'>Submit</Button>
                 <Button>Cancel</Button>
             </box.div>

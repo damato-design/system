@@ -4,6 +4,7 @@
 
     &:where(a), a {
         color: inherit;
+        word-break: break-word;
     }
 
     &:is(strong) {

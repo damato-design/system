@@ -35,6 +35,10 @@ interface ModernCSSProperties extends React.CSSProperties {
 
 export type BoxProps = ElementProps & {
   /**
+   * Helps layout a group of buttons
+   */
+  actions?: boolean,
+  /**
    * Use to help with anchor positioning.
    */
   anchorName?: string,
@@ -101,6 +105,7 @@ export type BoxProps = ElementProps & {
 
 export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
   return forwardRef<HTMLElement, BoxProps>(({
+    actions,
     anchorName,
     clip,
     distribute,
@@ -133,13 +138,14 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       justifyContent: distribute ? `space-${distribute}` : innerLayout.at(0),
       alignItems: innerLayout.at(1),
       display: stretch ? 'flex' : 'inline-flex',
-      flex: stretch ? 1 : 'initial',
+      flex: stretch ? 1 : undefined,
       flexDirection: stack ? 'column' : 'row',
-      flexWrap: wrap ? 'wrap' : 'nowrap',
+      flexWrap: wrap || actions ? 'wrap' : 'nowrap',
       justifySelf: outerLayout.at(0),
       alignSelf: outerLayout.at(1),
       padding: padding ? 'var(--padding, 1rem)' : undefined,
-      gap: gap ? 'var(--gap, .5rem)' : undefined
+      gap: gap || actions ? 'var(--gap, .5rem)' : undefined,
+      maxWidth: actions ? 'max-content' : undefined
     };
 
     const appearance: { [key: string]: boolean } = {};
