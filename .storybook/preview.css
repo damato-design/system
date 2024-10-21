@@ -51,6 +51,10 @@ body {
     color: currentColor;
 }
 
+.docblock-source.docblock-source .prismjs [class*="language"] .token.comment {
+    opacity: .5;
+}
+
 .docblock-source.docblock-source {
     border-color: currentColor;
 }

@@ -55,10 +55,11 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
     }
     if (!inline) spacing.padding = true;
 
-    if (!children && !props['aria-label']) {
+    if (!children && !(props['aria-label'] || props['aria-labelledby'])) {
         console.warn(`
             No children were provided,
-            if this is an icon only button please add an 'aria-label' to the component
+            if this is an icon only button please add
+            an 'aria-label' or 'aria-labelledby' to the component.
         `);
     }
 
