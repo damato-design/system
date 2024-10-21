@@ -5,11 +5,13 @@ export const IDREF = {
   close: 'LOCALIZE_CLOSE'
 }
 
-type LocalizeProps = {
+export type IdRefKeys = keyof typeof IDREF;
+
+export type LocalizeProps = {
   children: string,
 }
 
-export const localize = proxy<keyof typeof IDREF, LocalizeProps>('localize', (idRef) => {
+export const localize = proxy<IdRefKeys, LocalizeProps>('localize', (idRef) => {
   return forwardRef<HTMLElement, LocalizeProps>(({
     children
   }: LocalizeProps, ref) => {

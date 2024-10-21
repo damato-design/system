@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { localize, IDREF } from '.';
+import { localize, IDREF, IdRefKeys } from '.';
 
 import { Button } from '../Button';
 
@@ -51,6 +51,45 @@ export const Default: Story = {
                     aria-label='close'
                     icon='close' />
                 <localize.close { ...args }/>
+            </div>
+        )
+    }
+}
+
+/**
+ * If you have a dictionary of translation that can match the lookup
+ * provided by the `IDREF`, you can do the following to render all of
+ * the translated content.
+ * 
+ * ```jsx
+ * function Translate(lang, DICTIONARY) {
+ *  <div lang={ lang }>
+ *      { Object.keys(IDREF).map((key) => {
+ *          const Localize = localize[key as IdRefKeys];
+ *          return <Localize>{ DICTIONARY[key] }</Localize>
+ *      }) }
+ *  </div>
+ * }
+ * ```
+ * 
+ * `idRefKeys` is an exported type from `localize` that represents the
+ * available keys found in `IDREF` for typing.
+ */
+export const Batch: Story = {
+    args: {
+        children: 'cerca'
+    },
+    render: (args) => {
+        const DICTIONARY: { [key: string]: string } = {
+            close: args.children
+        };
+
+        return (
+            <div lang='es'>
+                { Object.keys(IDREF).map((key) => {
+                    const Localize = localize[key as IdRefKeys];
+                    return <Localize>{ DICTIONARY[key] }</Localize>
+                }) }
             </div>
         )
     }
