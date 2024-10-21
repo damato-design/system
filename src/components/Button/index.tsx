@@ -2,8 +2,9 @@ import { createElement, forwardRef } from 'react';
 import { box, BoxProps } from '../Box';
 import { text } from '../Text';
 import { icon } from '../Icon';
+import { IDREF } from '../Localize';
 
-type Accessory = 'menu' | 'external' | undefined;
+type Accessory = 'menu' | 'external' | 'exit' |undefined;
 
 function getAccessory(behavior: Accessory) {
     switch (behavior) {
@@ -11,6 +12,8 @@ function getAccessory(behavior: Accessory) {
             return <icon.expand_more />;
         case 'external':
             return <icon.launch />;
+        case 'exit':
+            return <icon.close />
         default:
             return null;
     }
@@ -63,10 +66,14 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
         `);
     }
 
+    const ariaLabelledby = [props['aria-labelledby']];
+    if (behavior === 'exit') ariaLabelledby.push(IDREF.close);
+
     return (
         <Element
             {...Object.assign({ type }, props)}
             {...spacing}
+            aria-labelledby={ ariaLabelledby.filter(Boolean).join(' ') }
             ref={ref}
             role={role}
             inset={inset}

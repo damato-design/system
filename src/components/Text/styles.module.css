@@ -1,5 +1,6 @@
 .text:is(.text) {
     font-size: 1rem;
+    text-wrap: pretty;
 
     &:is(strong) {
         font-weight: bolder;
@@ -14,6 +15,7 @@
     }
 
     &:is([data-priority="primary"]) {
+        /* text-wrap: balance; */
         font-weight: bolder;
         font-size: 1.2rem;
         &:not(label) {

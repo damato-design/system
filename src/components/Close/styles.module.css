@@ -1,0 +1,13 @@
+.close button {
+    position: absolute;
+    inset-inline-end: .5rem;
+    inset-block-start: .5rem;
+    aspect-ratio: 1;
+    height: calc(1.5rem + 1rlh);
+}
+
+.float {
+    float: inline-end;
+    aspect-ratio: 1;
+    height: calc(1.5rem + 1rlh);
+}
