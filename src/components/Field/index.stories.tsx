@@ -69,7 +69,7 @@ export const InnerButton: Story = {
 }
 
 export const OuterButton: Story = {
-    args: {},
+    args: { stretch: true },
     render: (args) => {
         const [value, setValue] = React.useState('hello@example.com');
 
@@ -82,7 +82,7 @@ export const OuterButton: Story = {
         }, []);
 
         return (
-            <box.form action='' gap inset={{ block: 'end' }}>
+            <box.form action='' actions inset={{ block: 'end' }}>
                 <field.div { ...args }>
                     <input.email name='email' value={ value } onChange={ onChange }/>
                 </field.div>

@@ -23,3 +23,10 @@ export const Default: Story = {
     },
     render: (args) => <box.main { ...args }/>
 }
+
+export const Stretch: Story = {
+    args: {
+        stretch: true,
+        children: 'Stretched box with styles'
+    }
+}

@@ -138,7 +138,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       justifyContent: distribute ? `space-${distribute}` : innerLayout.at(0),
       alignItems: innerLayout.at(1),
       display: stretch ? 'flex' : 'inline-flex',
-      flex: stretch ? 1 : undefined,
+      flex: stretch && !['action', 'control'].includes(purpose as string) ? 1 : undefined,
       flexDirection: stack ? 'column' : 'row',
       flexWrap: wrap || actions ? 'wrap' : 'nowrap',
       justifySelf: outerLayout.at(0),
