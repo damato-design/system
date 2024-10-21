@@ -19,8 +19,16 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 /**
- * In order to get the component to work properly, a `contain` configuration
- * must be set on the `box` that the button is meant to be contained within.
+ * In order to get the component to work properly, use `purpose='surface'`
+ * to apply containment configuration to keep the button connected.
+ * 
+ * > #### What is the connection between a surface and the button?
+ * >
+ * > The `<Close/>` button ships as absolutely positioned so we need to have a
+ * > standard way of assigning where it is positioned against. It is
+ * > reasonable that only surfaces can be dismissed, so we have tied the
+ * > concept of a surface to one that is meant to contain layout; using
+ * > CSS `contain: layout;`.
  * 
  * Then the element is placed as the first element where we expect
  * text to collide. In the example below, we expect text to collide
@@ -28,14 +36,14 @@ type Story = StoryObj<typeof meta>
  * 
  * By default, the `float` is set to `true` which allows the text to wrap.
  * 
- * This is a minimum example for demonstration. For a better composition, review the
- * [Lockup docs](/docs/primitives-lockup--docs) which includes the component inside.
+ * This is a minimum example for demonstration. For a more common composition,
+ * review the [Lockup docs](/docs/primitives-lockup--docs).
  */
 export const Default: Story = {
     args: {},
     render: (args) => {
         return (
-            <box.div contain='paint' stack prose purpose='surface' padding>
+            <box.div stack prose purpose='surface' padding>
                 <text.h2 priority='primary'>
                     <Close { ...args }/>
                     Pok pok raw swag food truck next level man bun palo santo put a bird on it green juice
@@ -63,6 +71,8 @@ export const Default: Story = {
  * 
  * Consider the order of the elements. If the `<Close/>` is first,
  * assistive technology will find it first before other content.
+ * This allows the user to know the area they are currently in
+ * can be dismissed.
  */
 export const MediaUse: Story = {
     args: { float: false },

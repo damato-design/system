@@ -39,10 +39,6 @@ export type BoxProps = ElementProps & {
    */
   anchorName?: string,
   /**
-   * CSS containment
-   */
-  contain?: string,
-  /**
    * How to distribute the space across children.
    */
   distribute?: 'between' | 'around' | 'evenly';
@@ -102,7 +98,6 @@ export type BoxProps = ElementProps & {
 export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
   return forwardRef<HTMLElement, BoxProps>(({
     anchorName,
-    contain,
     distribute,
     gap,
     inset,
@@ -129,7 +124,6 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
 
     const styles: ModernCSSProperties = {
       anchorName: anchorName,
-      contain: contain,
       justifyContent: distribute ? `space-${distribute}` : innerLayout.at(0),
       alignItems: innerLayout.at(1),
       display: stretch ? 'flex' : 'inline-flex',

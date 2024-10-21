@@ -99,7 +99,7 @@ export const InnerButton: Story = {
  * >
  * > The `field` is composed inside of a `box` where its `stretch` value is
  * > effectively `false`; the default for `box` elements. This means that the
- * > `field` is the default size; similar to if `stretc` was set as `false` without
+ * > `field` is the default size; similar to if `stretch` was set as `false` without
  * > `fieldSizing='content'`.
  */
 export const OuterButton: Story = {

@@ -13,7 +13,7 @@ export const Close = forwardRef<HTMLElement, CloseProps>(({
 }: CloseProps, ref) => {
     return (
         <div className={ clsx(css.close, { [css.float]: float }) }>
-            <Button { ...props } ref={ ref } behavior='exit' />
+            <Button { ...props } ref={ ref } behavior='dismiss' />
         </div>
     )
 })

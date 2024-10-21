@@ -120,6 +120,20 @@ export const Behavior: Story = {
 }
 
 /**
+ * The `behavior: 'dismiss'` configuration is special and sets some
+ * exceptions to present a common button for dismissal.
+ * 
+ * Instead of using this configuration, there is a special `<Close/>`
+ * component which is meant to help size and position this kind of button.
+ * For more on this approach, see the [Close docs](/docs/primitives-close--docs).
+ */
+export const Dismiss: Story = {
+    args: {
+        behavior: 'dismiss'
+    }
+}
+
+/**
  * Setting the `disabled` attribute will prevent the user
  * from interacting with the button. Avoid using this in
  * favor of simply not showing a button the user cannot use.

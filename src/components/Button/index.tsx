@@ -4,7 +4,7 @@ import { text } from '../Text';
 import { icon } from '../Icon';
 import { IDREF } from '../Localize';
 
-type Accessory = 'menu' | 'external' | 'exit' |undefined;
+type Accessory = 'menu' | 'external' | 'dismiss' |undefined;
 
 function getAccessory(behavior: Accessory) {
     switch (behavior) {
@@ -12,7 +12,7 @@ function getAccessory(behavior: Accessory) {
             return <icon.expand_more />;
         case 'external':
             return <icon.launch />;
-        case 'exit':
+        case 'dismiss':
             return <icon.close />
         default:
             return null;
@@ -48,17 +48,26 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
 }: ButtonProps, ref) => {
     const Element = 'href' in props ? box.a : box.button;
     const Text = inline ? text.span : text.strong;
-    const spacing: { padding?: boolean } = {};
-    const inset = {
-        block: 'center',
-        inline: 'center'
-    }
-    if (['option', 'menuitem'].includes(role as string)) {
-        inset.inline = 'start'
-    }
-    if (!inline) spacing.padding = true;
 
-    if (!children && !(props['aria-label'] || props['aria-labelledby'])) {
+    const config = Object.assign({}, props, {
+        "aria-labelledby": props['aria-labelledby'],
+        inset: { block: 'center', inline: 'center' },
+        type,
+        role,
+        padding: true
+    });
+
+    const ariaLabelledby = [props['aria-labelledby']];
+    if (behavior === 'exit') ariaLabelledby.push(IDREF.close);
+    config["aria-labelledby"] = ariaLabelledby.filter(Boolean).join(' ');
+
+    if (['option', 'menuitem'].includes(role as string)) {
+        config.inset.inline = 'start'
+    }
+
+    if (inline) config.padding = false;
+
+    if (!children && !(config['aria-label'] || config['aria-labelledby'])) {
         console.warn(`
             No children were provided,
             if this is an icon only button please add
@@ -66,17 +75,10 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
         `);
     }
 
-    const ariaLabelledby = [props['aria-labelledby']];
-    if (behavior === 'exit') ariaLabelledby.push(IDREF.close);
-
     return (
         <Element
-            {...Object.assign({ type }, props)}
-            {...spacing}
-            aria-labelledby={ ariaLabelledby.filter(Boolean).join(' ') }
+            {...config}
             ref={ref}
-            role={role}
-            inset={inset}
             purpose='action'>
             {iconRef ? createElement(icon[iconRef]) : null}
             {children ? <Text priority='secondary'>{children}</Text> : null}

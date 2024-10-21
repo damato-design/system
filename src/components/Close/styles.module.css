@@ -8,6 +8,6 @@
 
 .float {
     float: inline-end;
-    aspect-ratio: 1;
-    height: calc(1.5rem + 1rlh);
+    width: calc(2rem + 1rlh);
+    height: calc(1rem + 1rlh);
 }

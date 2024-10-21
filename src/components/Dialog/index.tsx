@@ -20,6 +20,7 @@ type DialogProps = LockupProps
     & {
         emphasis?: 'critical' | 'warning' | 'success',
         modal?: boolean,
+        onClose: (ev: any) => void
     };
 
 export const Dialog = forwardRef<HTMLElement, DialogProps>(({
@@ -66,7 +67,6 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(({
             <div style={ styles }/>
             <lockup.div
                 {...props}
-                onClose={ onClose }
                 ref={ ref }
                 icon={ getIconRef(emphasis) }
                 padding />

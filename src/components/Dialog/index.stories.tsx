@@ -5,6 +5,7 @@ import { Dialog } from '.';
 import { text } from '../Text';
 import { box } from '../Box';
 import { Button } from '../Button';
+import { Close } from '../Close';
 
 const meta = {
     title: 'Components/Dialog',
@@ -45,6 +46,10 @@ export const Emphasis: Story = {
  * It is only here to serve as an exploration on how it could be done.
  * 
  * Check the console to see the close events fire (click outside or Escape key).
+ * 
+ * Note that the `<Close/>` button event is not connected to the component's
+ * native close listeners. In a more complete example, you would most likely
+ * assign the same listener to both.
  */
 export const Modal: Story = {
     parameters: {
@@ -58,9 +63,14 @@ export const Modal: Story = {
     args: {
         modal: true,
         emphasis: 'critical',
-        subject: <text.h2 priority='primary'>Don't do this</text.h2>,
+        subject: (
+            <text.h2 priority='primary'>
+                <Close onClick={() => console.log('close!')}/>
+                Don't do this
+            </text.h2>
+        ),
         children: [
-            <text.p key='descriptio' priority='secondary'>
+            <text.p key='description' priority='secondary'>
                 Modals are the crutch of the inarticulate designer and developer.
                 Remember to always ask, "Why does this have to be a modal?"
                 <Button href="https://modalzmodalzmodalz.com/" inline>
@@ -68,10 +78,10 @@ export const Modal: Story = {
                 </Button>
             </text.p>,
             <box.div gap key='actions'>
-                <Button priority='primary' autofocus>Submit</Button>
+                <Button priority='primary'>Submit</Button>
                 <Button>Cancel</Button>
             </box.div>
         ],
-        onClose: ($elem) => console.log('Trying to close this!', $elem)
+        onClose: () => console.log('Trying to close this!')
     },
 }

@@ -24,7 +24,6 @@ export type LockupProps = BoxProps & {
   passiveMessage?: string,
   errorMessage?: string,
   getInputProps?: ({}) => void,
-  onClose?: (ev: any) => void,
 };
 
 export const lockup = proxy<HTMLTagsOnly, LockupProps>('lockup', (TagName) => {
@@ -35,7 +34,6 @@ export const lockup = proxy<HTMLTagsOnly, LockupProps>('lockup', (TagName) => {
     passiveMessage,
     errorMessage,
     getInputProps,
-    onClose,
     mode,
     ...props
   }: LockupProps, ref) => {
@@ -54,13 +52,11 @@ export const lockup = proxy<HTMLTagsOnly, LockupProps>('lockup', (TagName) => {
         })
     }, [getInputProps]);
 
-    // TODO: optional onClose button, use bouyant approach, remember no hard code label
-
     return (
       <Element { ...props } ref={ ref } gap>
           { getIcon(iconRef, subject as ReactElement) }
           <box.div stack gap>
-            { subject ? <text.span id={ subjectId }>{ subject }</text.span> : null }
+            { subject ? <text.div id={ subjectId }>{ subject }</text.div> : null }
             { passiveMessage ? <text.p id={ passiveId }>{ passiveMessage }</text.p> : null }
             <box.div mode={ mode } stack gap prose>
                 <text.p aria-live='polite' id={ errorId }>{ errorMessage }</text.p>

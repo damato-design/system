@@ -5,7 +5,7 @@ import { text } from '../Text';
 import { field } from '../Field';
 import { input } from '../Input';
 import { useCallback, useState } from 'react';
-// import { Button } from '../Button';
+import { Close } from '../Close';
 
 /**
  * The `lockup` primitive helps create standardized layouts of content.
@@ -49,6 +49,25 @@ export const Icon: Story = {
         icon: 'info',
         children: 'Hello World!',
         subject: <text.h2 priority='primary'>Title</text.h2>
+    },
+}
+
+/**
+ * You can add the `<Close/>` button to the `subject` element.
+ * You can wire this to state to toggle the visibility for this component.
+ * 
+ * For more information about this button,
+ * see the [Close docs](/docs/primitives-close--docs).
+ */
+export const Dismissable: Story = {
+    args: {
+        children: 'Hello World!',
+        subject: (
+            <text.h2 priority='primary'>
+                <Close onClick={ ()=> console.log('Close!') }/>
+                Maybe you would like this message to be closed?
+            </text.h2>
+        )
     },
 }
 
