@@ -8,6 +8,10 @@
     &.prose:is(.prose) > * + * {
         margin-block-start: var(--gap, .5rem);
     }
+
+    &:focus {
+        outline-offset: -4px;
+    }
 }
 
 .surface:is(.surface) {
