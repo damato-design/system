@@ -4,6 +4,7 @@ import { card } from '.';
 import { text } from '../Text';
 import { box } from '../Box';
 import { Button } from '../Button';
+import { Close } from '../Close';
 
 /**
  * Work in progress
@@ -21,7 +22,12 @@ export const Default: Story = {
         src: 'https://loremflickr.com/1280/720',
         padding: true,
         purpose: 'surface',
-        subject: <text.h2 priority='primary'>Bushwick plaid raw denim</text.h2>,
+        subject: (
+            <text.h2 priority='primary'>
+                <Close float={ false }/>
+                Bushwick plaid raw denim
+            </text.h2>
+        ),
         passiveMessage: new Date().toLocaleDateString(),
         children: [
             <text.p key='description' priority='secondary'>
