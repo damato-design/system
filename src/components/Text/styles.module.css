@@ -2,6 +2,10 @@
     font-size: 1rem;
     text-wrap: pretty;
 
+    &:where(a), a {
+        color: inherit;
+    }
+
     &:is(strong) {
         font-weight: bolder;
     }

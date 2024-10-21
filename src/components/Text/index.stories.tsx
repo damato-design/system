@@ -28,6 +28,17 @@ export const Priority: Story = {
     render: (args) => <text.h2 { ...args } />
 }
 
+export const Links: Story = {
+    args: { 
+        priority: 'secondary'
+    },
+    render: (args) => (
+        <text.p { ...args }>
+            The quick brown fox <text.a href='#'>jumps over</text.a> the lazy dog.
+        </text.p>
+    )
+}
+
 export const ScreenreaderOnly: Story = {
     args: {
         children: 'Hello World!',

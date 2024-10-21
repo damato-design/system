@@ -60,26 +60,8 @@
         opacity: .4;
     }
 
-    /* inline links */
-    &:not([style*="padding"]) {
-        background: transparent;
-        &:focus {
-            outline-offset: 2px;
-        }
-        span {
-            font: inherit;
-            padding: 0;
-        }
-    }
-
-    /* padded buttons */
-    &:not([disabled]):where([style*="padding"]):hover {
+    &:not([disabled]):hover {
         background-color: color-mix(in srgb, var(--bgColor), currentColor 15%);
-    }
-
-    /* non-padded buttons (inline links) */
-    &:not([disabled]):not([style*="padding"]):hover {
-        text-decoration-color: color-mix(in srgb, var(--bgColor), currentColor 25%);
     }
 }
 

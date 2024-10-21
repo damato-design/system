@@ -31,23 +31,17 @@ export type ButtonProps = (React.ButtonHTMLAttributes<HTMLButtonElement>
          * A string reference to an `<icon/>` element.
          */
         icon?: string,
-        /**
-         * If set, component is expected to appear inline with content.
-         */
-        inline?: boolean
     };
 
 export const Button = forwardRef<HTMLElement, ButtonProps>(({
     behavior,
     children,
     icon: iconRef,
-    inline,
     role,
     type = 'button',
     ...props
 }: ButtonProps, ref) => {
     const Element = 'href' in props ? box.a : box.button;
-    const Text = inline ? text.span : text.strong;
 
     const config = Object.assign({}, props, {
         "aria-labelledby": props['aria-labelledby'],
@@ -66,8 +60,6 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
         config.inset.inline = 'start'
     }
 
-    if (inline) config.padding = false;
-
     if (!children && !(config['aria-label'] || config['aria-labelledby'])) {
         console.warn(`
             No children were provided,
@@ -82,7 +74,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
             ref={ref}
             purpose='action'>
             {iconRef ? createElement(icon[iconRef]) : null}
-            {children ? <Text priority='secondary'>{children}</Text> : null}
+            {children ? <text.strong priority='secondary'>{children}</text.strong> : null}
             {getAccessory(behavior)}
         </Element>
     )

@@ -12,8 +12,22 @@
     font-size: 1.2rem;
     outline-offset: -4px;
 
-    &::-webkit-inner-spin-button {
+    &::-webkit-inner-spin-button,
+    &::-webkit-search-cancel-button {
         display: none;
+    }
+
+    &::-ms-reveal,
+    &::-ms-cancel {
+        display: none;
+    }
+
+    &::-webkit-autofill,
+    &::-webkit-autofill:hover,
+    &::-webkit-autofill:focus,
+    &::-webkit-autofill:active {
+        -webkit-text-fill-color: var(--fgColor, black);
+        caret-color: var(--fgColor, black);
     }
 
     &:not(textarea) {

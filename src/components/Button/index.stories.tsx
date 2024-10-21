@@ -41,19 +41,6 @@ export const Secondary: Story = {
     }
 }
 
-export const Link: Story = {
-    args: {
-        children: 'Click here!',
-        inline: true,
-        href: '#'
-    },
-    render: (args) => (
-        <text.p priority='secondary'>
-            The quick brown fox <Button { ...args }>jumps over</Button> the lazy dog.
-        </text.p>
-    )
-}
-
 export const Icon: Story = {
     args: {
         children: 'Search',

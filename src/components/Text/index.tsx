@@ -4,7 +4,8 @@ import clsx from 'clsx';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { element, ElementProps } from '../Element';
 
-export type TextProps = ElementProps & {
+export type TextProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
+  & ElementProps & {
   /**
    * Set the priority intended for this component.
    * This will affect the final presentation.
