@@ -18,7 +18,6 @@ export const field = proxy<HTMLTagsOnly, FieldProps>('field', (TagName) => {
                 { ...props }
                 ref={ ref }
                 stretch={ stretch }
-                data-actions
                 purpose='control'
                 inset={{ block: 'center' }}
                 outset={ outset }/>

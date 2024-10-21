@@ -19,7 +19,7 @@ export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(({
 
     return (
         <box.div stack={ false } gap padding inset='center'>
-            <field.div stretch={ false } round={ exclusive }>
+            <field.div stretch={ false } round={ exclusive } clip={ false }>
                 { exclusive
                     ? <input.radio { ...props } ref={ ref } id={ id }/>
                     : <input.checkbox { ...props } ref={ ref } id={ id }/>

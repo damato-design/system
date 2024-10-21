@@ -10,6 +10,7 @@
     min-width: 1ch;
     flex: 1;
     font-size: 1.2rem;
+    outline-offset: -4px;
 
     &::-webkit-inner-spin-button {
         display: none;
@@ -24,9 +25,11 @@
         aspect-ratio: 1;
         height: 1lh;
         accent-color: green;
+        outline-offset: 2px;
 
         &:not(:checked) {
-            opacity: 0;
+            appearance: none;
+            padding: 0;
         }
     }
 }

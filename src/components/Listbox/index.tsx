@@ -122,8 +122,7 @@ export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) =>
             role={behavior}
             ref={ref}
             className={clsx(css.listbox, { [css.visualfocus]: visualFocus })}
-            style={styles}
-            data-actions>
+            style={styles}>
             { items.map((item) => {
                 return (
                     <Button 

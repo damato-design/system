@@ -39,6 +39,10 @@ export type BoxProps = ElementProps & {
    */
   anchorName?: string,
   /**
+   * Determines if the element should clip overflow
+   */
+  clip?: boolean,
+  /**
    * How to distribute the space across children.
    */
   distribute?: 'between' | 'around' | 'evenly';
@@ -98,6 +102,7 @@ export type BoxProps = ElementProps & {
 export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
   return forwardRef<HTMLElement, BoxProps>(({
     anchorName,
+    clip,
     distribute,
     gap,
     inset,
@@ -124,6 +129,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
 
     const styles: ModernCSSProperties = {
       anchorName: anchorName,
+      overflow: clip ? 'clip' : undefined,
       justifyContent: distribute ? `space-${distribute}` : innerLayout.at(0),
       alignItems: innerLayout.at(1),
       display: stretch ? 'flex' : 'inline-flex',
