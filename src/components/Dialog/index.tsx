@@ -1,4 +1,4 @@
-import { forwardRef, useCallback } from 'react';
+import { forwardRef, useCallback, useEffect } from 'react';
 import { box } from '../Box';
 import { lockup, LockupProps } from '../Lockup';
 
@@ -42,6 +42,8 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(({
         if (!modal || !$elem) return;
         $elem.style?.setProperty('margin', 'auto');
         $elem.showModal();
+        document.body.setAttribute('inert', '');
+        () => document.body.removeAttribute('inert');
     }, [modal, onClose])
 
     const onKeyDown = useCallback((ev: any) => {
