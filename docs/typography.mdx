@@ -51,11 +51,13 @@ Because the resulting font size is determined by `depth`, font size changes for 
 
 > #### Why not add more tokens for explicit font sizes?
 >
-> The average amount of font sizes for public design systems is 12. In reality, we don't need to curate lots of font sizes, we just need to maintain a hierarchy of importance. This is conveyed specifically with the priority divisions. With 4 levels of density you would have 12 font sizes available; 3 levels multiplied by 4 levels of depth.
+> The average amount of font sizes for public design systems is 12. In reality, we don't need to curate lots of font sizes, this is too many choices ([Hick's Law](https://lawsofux.com/hicks-law/)). We aim to maintain a hierarchy of importance through these sizes. This is conveyed specifically with the `priority` divisions. With 4 levels of density you would have 12 font sizes available; 3 levels multiplied by 4 levels of depth.
 
 ### Fluid Primary Text
 
-The `primary` category used for headlines is a bit special as we expect the size of the text to adjust based on the available size of the device. To do this, we follow the conventions explained [here](https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/), specifically the section explaining avoiding reflow. The result is the headline resizing smoothly between two thresholds, maintaining the general optical composition throughout. The two thresholds are `320px` at a minimum representing the smallest device widths and `480px` at a maximum.
+The `primary` category used for headlines is a bit special as we expect the size of the text to adjust based on the available size of the device. To do this, we follow the conventions explained [here](https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/), specifically the section explaining avoiding reflow. The result is the headline resizing smoothly between two thresholds, maintaining the general optical composition throughout.
+
+The two thresholds are `320px` at a minimum representing the smallest device widths and `480px` at a maximum.
 
 > #### What does `480px` represent?
 >
@@ -63,4 +65,4 @@ The `primary` category used for headlines is a bit special as we expect the size
 >
 > More research can be done to adjust this maximum as appropriate.
 
-This minimum and maximum dimensions are then used with the `text.primary.minSize` and `text.primary.typeScale` to determine the maximum font size, (ie., the primary font size when the viewport is `480px` or larger). Further calculations are completed to determine how the text scales between `320px` and `480px` in a smooth linear progression. More detail is found at the earlier post. In the implementation the `320px` and `480px` are translated in terms of unitless `rem` before finally being used in the `clamp()` CSS function.
+This minimum and maximum dimensions are then used with the `text.primary.minSize` and `text.primary.typeScale` to determine the maximum primary font size, (ie., the headline font size when the viewport is `480px` or larger). Further calculations are completed to determine how the text scales between `320px` and `480px` in a smooth linear progression. More detail is found at the earlier post. In the implementation here, the `320px` and `480px` are translated in terms of unitless `rem` before finally being used in the `clamp()` CSS function and assigned appropriate units.
