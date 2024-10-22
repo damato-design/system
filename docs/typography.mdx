@@ -4,32 +4,63 @@ import { Meta } from '@storybook/blocks';
 
 # Typography
 
-{/*
+Everything explained below is contained within [the `text` primitive](/docs/primitives-text--docs). Read on if you'd like to learn how the final resulting values are determined.
 
-### Categories
-There are three categories of typography:
+### Tokens
 
-- **Primary**: Used for headings and titles.
-- **Secondary**: Used for most content.
-- **Default**: Used for auxiliary content, such as disclaimer or help text.
+All typographic tokens are underneath the `text` category in intents. Each token is subdivided by a priority (ie., `primary`, `secondary`, `auxiliary`). Example: `text.primary.fontWeight` describes a headline's font weight.
 
-> #### Why is "Default" not meant for the body copy?
+Priorities are linked to their use within the experience. `primary` is equal to the concept of headlines as they are expected to be the most important content to capture the user's interest before moving to lower priorty content. `secondary` describes most body content and `auxiliary` describes details you might find in help or error messaging and legal text.
+
+Each category has tokens that can be curated for the following properties:
+
+- `fontFamily`
+- `fontWeight`
+- `lineHeight`
+- `minRem` (related to font size)
+- `typeScale` (related to font size)
+
+### Scale
+
+The system creates a scale for each category using the `minRem` and `typeScale` values. In most cases, the result is aligned to what a person might find when using [typescale.com](https://typescale.com/). One clear difference being `minRem` expecting a unitless value of `rem`. For example, if the intention for the minimum font size for a category is `16px`, the value for this token would be `1` (ie., `1rem = 16px`).
+
+> Why expect the minimum font size?
 >
-> When curating the font size, we want to ensure that the base font size set is the smallest expected size. Then all additional calculations for higher levels can be based off of that smallest size in an increasing magnitude.
+> This is to ensure that any resulting calculation of text is accessible as it will always be larger than this number.
+
+> Why use `minRem` and not `minSize`?
 >
-> This means that when applying the font size to the page, we most likely expect to use the "Secondary" size more often. Remember, the names of these types of typography indicate priority to the user, not how often we expect to use the option.
+> In order to compute fluid sizes for `primary` text, we use unitless numbers to calculate ratios in CSS. It is much harder to remove units from calculations than it is to later include them. The `rem` part of the token name helps suggest the expectation, but it is possible that it could suggest `rem` units be included. Alas, it is more terse than `minRemUnitless`. To reduce exceptions based on category, all text tokens has the same composition.
 
-Each category has the ability to adjust font configuration to affect that category. This is helpful when segregating a different typeface between headings and other copy. Due to the ability of changing the typeface, all metrics are also configurable.
+Sizes are generated using the following formula:
 
-### Density effects
+```
+size = minRem * pow(typeScale, depth)
+```
 
-Typography should be directly linked to density. As the density becomes more compact, the content lockups become tighter with less room for larger typography. Importantly, the hierarchy must be maintained such that "Primary" text is presented as more significant than "Secondary" text. This is normally achieved using font size; the larger the font, the more important the content.
+Where `depth` is determined from [the amount of density shifts](/docs/foundations-density--docs) expected to occur in the experience. This means at the most compact parts of the experience (`depth: 0`), the resulting font size will be `minRem * 1rem`. Each level up will scale up the size by the given `typeScale`. Here's what this would look like with `minRem: 1`, `typeScale: 1.125`, with 4 levels of depth:
 
-### Scale factor
+```
+level0 = 1 * 1.125^0 = 1 /* 1rem */
+level1 = 1 * 1.125^1 = 1.125 /* 1.125rem */
+level2 = 1 * 1.125^2 = 1.265 /* 1.265rem */
+level3 = 1 * 1.125^3 = 1.424 /* 1.414rem */
+```
 
-- **Font size** - The smallest font size expected within the interface.
-- **Font scale** - The amount to multiply to determine the next size for the font.
+Because the resulting font size is determined by `depth`, font size changes for any category occur only at density shifts. This allows for page hero areas at `level: 4` to have the possibility of having larger text than what is found in dense tables at `level: 0`.
 
-If no values are set, the base font size is set at `1rem` and the base font scale is set as Major Third (1.25). This means as the density is shifted, we also shift the font size by that font scale.
+> Why not add more tokens for explicit font sizes?
+>
+> The average amount of font sizes for public design systems is 12. In reality, we don't need to curate lots of font sizes, we just need to maintain a hierarchy of importance. This is conveyed specifically with the priority divisions. With 4 levels of density you would have 12 font sizes available; 3 levels multiplied by 4 levels of depth.
 
-*/}
+### Fluid Primary Text
+
+The `primary` category used for headlines is a bit special as we expect the size of the text to adjust based on the available size of the device. To do this, we follow the conventions explained [here](https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/), specifically the section explaining avoiding reflow. The result is the headline resizing smoothly between two thresholds, maintaining the general optical composition throughout. The two thresholds are `320px` at a minimum representing the smallest device widths and `480px` at a maximum.
+
+> What does `480px` represent?
+>
+> This comes from the optimal line length for body copy, which has many debatable ranges for the best amount of characters for readability. The majority of these ranges will include 60 characters, which is roughly equal to `60rch` or `30rem`, which is `480px`. There doesn't seem to be data on the optimal line length for headlines, so to relate headlines with body copy, this upper-bound is used.
+>
+> More research can be done to adjust this maximum as appropriate.
+
+This minimum and maximum dimensions are then used with the `text.primary.minSize` and `text.primary.typeScale` to determine the maximum font size, (ie., the primary font size when the viewport is `480px` or larger). Further calculations are completed to determine how the text scales between `320px` and `480px` in a smooth linear progression. More detail is found at the earlier post. In the implementation the `320px` and `480px` are translated in terms of unitless `rem` before finally being used in the `clamp()` CSS function.

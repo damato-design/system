@@ -30,7 +30,7 @@ export const Default: Story = {
         ),
         passiveMessage: new Date().toLocaleDateString(),
         children: [
-            <text.p key='description' priority='secondary'>
+            <text.p key='description'>
                 Selvage vaporware celiac fit microdosing mukbang solarpunk
                 aesthetic everyday carry offal intelligentsia lo-fi normcore.
                 Kinfolk ugh meh pitchfork actually. Small batch DSA edison

@@ -59,7 +59,7 @@ export const Modal: Story = {
             </text.h2>
         ),
         children: [
-            <text.p key='description' priority='secondary'>
+            <text.p key='description'>
                 Modals are the crutch of the inarticulate designer and developer.
                 Remember to always ask, "Why does this have to be a modal?"
                 <text.a href="https://modalzmodalzmodalz.com/">

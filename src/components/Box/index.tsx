@@ -75,7 +75,7 @@ export type BoxProps = ElementProps & {
    * Set the priority intended for this component.
    * This will affect the final presentation.
    */
-  priority?: 'primary' | 'secondary';
+  priority?: 'primary' | 'secondary' | 'auxiliary';
   /**
    * If content is text, adds additional space between children.
    */
@@ -114,7 +114,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
     logical = true,
     outset,
     padding,
-    priority,
+    priority = 'auxiliary',
     prose,
     purpose,
     round,

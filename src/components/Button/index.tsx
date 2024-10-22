@@ -74,7 +74,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
             ref={ref}
             purpose='action'>
             {iconRef ? createElement(icon[iconRef]) : null}
-            {children ? <text.strong priority='secondary'>{children}</text.strong> : null}
+            {children ? <text.strong>{children}</text.strong> : null}
             {getAccessory(behavior)}
         </Element>
     )

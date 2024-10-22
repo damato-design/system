@@ -5,6 +5,9 @@ import { text } from '.';
 
 /**
  * The `text` primitive helps present text content.
+ * The default `priority` for this component is `'secondary'`
+ * meant to represent body copy. For more information on typography styles
+ * please see the [Typography docs](/docs/foundations-typography--docs).
  */
 const meta = {
     title: 'Primitives/text',
@@ -30,7 +33,7 @@ export const Priority: Story = {
 
 export const Links: Story = {
     args: { 
-        priority: 'secondary'
+        priority: 'auxiliary'
     },
     render: (args) => (
         <text.p { ...args }>
@@ -47,7 +50,7 @@ export const ScreenreaderOnly: Story = {
         const [srProps, setSrProps] = useState({});
         return (
             <>
-                <text.label { ...srProps } priority='secondary'>Tel:</text.label>
+                <text.label { ...srProps }>Tel:</text.label>
                 <text.span { ...args } getScreenreaderProps={ setSrProps }>Telephone Number</text.span>
             </>
         )

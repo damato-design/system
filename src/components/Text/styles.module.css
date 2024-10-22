@@ -34,6 +34,7 @@
     }
 
     & .text:not([data-priority]) {
+        /* TODO: This might need explicit null due to defaulting to secondary */
         font: inherit;
     }
     

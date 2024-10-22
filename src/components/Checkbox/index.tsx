@@ -26,9 +26,7 @@ export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(({
                 }
             </field.div>
             { label
-                ? <text.label
-                    { ...{ htmlFor: id, children: label } }
-                    priority='secondary' />
+                ? <text.label { ...{ htmlFor: id, children: label } }/>
                 : null
             }
         </box.div>
