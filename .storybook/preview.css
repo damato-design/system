@@ -50,6 +50,13 @@ body {
     }
 }
 
+.sb-unstyled :is(.sbdocs-preview) {
+    resize: horizontal;
+    overflow: auto;
+    margin: auto;
+}
+
+
 .sbdocs:is(.sbdocs-wrapper),
 .sb-unstyled :is(.sbdocs-preview, .sb-bar),
 .docblock-source.docblock-source,
