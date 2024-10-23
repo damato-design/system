@@ -6,14 +6,15 @@
     color: #C9CDCF !important;
 }
 
-h1 {
-    text-transform: capitalize;
-}
-
 .sbdocs {
     &.sbdocs-content {
         max-width: 60rch;
-    }    
+    }
+
+    h1 {
+        text-transform: capitalize;
+        margin-block-end: .5em;
+    }
 
     & > h2 {
         display: none;
@@ -31,4 +32,5 @@ h1 {
 
 pre, code, pre :not(button), code * {
     font-family: 'Monaspace Radon', monospace !important;
+    white-space: pre-wrap !important;
 }
