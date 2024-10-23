@@ -3,7 +3,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Button } from '.';
 
 import { box } from '../Box';
-import { text } from '../Text';
 
 /**
  * The `<Button/>` component allows a user to take an action.
@@ -21,12 +20,18 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+/**
+ * The default button is `priority='auxiliary'` but should not be set explicitly on the component. This should be the most commonly placed button within an experience.
+ */
 export const Default: Story = {
     args: {
         children: 'Click here!'
     },
 }
 
+/**
+ * The primary button is `priority='primary'`, indicating it is the primary action the user is expcted to take in the current experience. It should be the _least placed_ button within the experience.
+ */
 export const Primary: Story = {
     args: {
         children: 'Most important thing to do!',
@@ -34,6 +39,13 @@ export const Primary: Story = {
     }
 }
 
+/**
+ * The secondary button is for actions that are less important than primary but remain useful for completing a task. These buttons **should not be used** within the [`field` primitive](/docs/primitives-field--docs).
+ * 
+ * > #### Why should these be avoided inside of `field`?
+ * >
+ * > The `field` component removes the border from its children to maintain the height of the field adjacent to other buttons and controls. That border is typically a defining feature for the secondary button treatment.
+ */
 export const Secondary: Story = {
     args: {
         children: 'Go to dashboard!',
@@ -43,6 +55,15 @@ export const Secondary: Story = {
     }
 }
 
+/**
+ * Providing an icon reference string to the `icon` prop will render an icon before the children. **Do not place `icon` primitives in `children`**. For information about possible values, see the [`icon` primitive](/docs/primitives-icon--docs).
+ * 
+ * > #### Why are `icon` primitives in `children` discouraged?
+ * >
+ * > The placement of icons is standardized internally to the `<Button/>` to always appear on the starting edge. There are exceptions for this placement that have been encoded into the `behavior` prop with specific functionality expected. Having a freeform positioning strategy makes icon placement inconsistent.
+ * 
+ * If you only provide an `icon` without `children`, the component will console warn to include either `aria-label` or `aria-labelledby`. When providing this information, consider using the [`localize` primitive](/docs/primitives-localize--docs).
+ */
 export const Icon: Story = {
     args: {
         children: 'Search',
@@ -51,6 +72,9 @@ export const Icon: Story = {
     }
 }
 
+/**
+ * The `behavior` prop will add additional accessories to the button to manage behavior or convey more information. The example below shows a trailing icon to indicate a menu experience. Note that this example is non-interactive.
+ */
 export const Behavior: Story = {
     args: {
         children: 'Menu',
@@ -59,12 +83,18 @@ export const Behavior: Story = {
     }
 }
 
+/**
+ * The `dismiss` option creates an icon-only button for dismissal. **You should not use this component directly** and instead use the [`<Close/>` primitive](/docs/primitives-close--docs) instead which includes additional configuration options for this specific need.
+ */
 export const Dismiss: Story = {
     args: {
         behavior: 'dismiss'
     }
 }
 
+/**
+ * While the component does possess a treatment for the concept of `disabled`, it should be avoided for better user experience patterns that don't restrict the user by providing unavailable options. This example is for illustrative purpose only.
+ */
 export const Disabled: Story = {
     args: {
         children: 'Please do not do this',
@@ -72,6 +102,9 @@ export const Disabled: Story = {
     }
 }
 
+/**
+ * This example demonstrates a matching alignment between label-only, icon-only, and mixed content buttons. The `inset={{ block: 'start' }}` on the container aligns all buttons to the top of the parent so any size differences would be immediately noticeable.
+ */
 export const Alignment: Story = {
     args: {
         priority: 'primary'

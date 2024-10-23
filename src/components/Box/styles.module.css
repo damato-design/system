@@ -76,6 +76,7 @@
     border-radius: 4px;
     font-size: 1.2rem;
     flex: 1 0 auto;
+    overflow: clip;
 
     > hr {
         height: 1lh;
@@ -83,5 +84,10 @@
 
     > [data-icon] {
         padding-inline: var(--padding, 1rem);
+    }
+
+    > button {
+        border: 0;
+        border-radius: 0;
     }
 }

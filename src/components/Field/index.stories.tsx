@@ -59,11 +59,16 @@ export const InnerButton: Story = {
         }, []);
 
         return (
-            <field.div { ...args }>
-                <Button icon='remove' aria-label='Decrement' value={ -1 } onClick={ onClick }/>
-                <input.number name='number' value={ value } onChange={ onChange } fieldSizing='content'/>
-                <Button icon='add' aria-label='Increment' value={ 1 } onClick={ onClick }/>
-            </field.div>
+            <box.form action='' actions inset={{ block: 'end' }}>
+                <field.div { ...args }>
+                    <Button icon='remove' aria-label='Decrement' value={ -1 } onClick={ onClick }/>
+                    <input.number name='number' value={ value } onChange={ onChange } fieldSizing='content'/>
+                    <Button icon='add' aria-label='Increment' value={ 1 } onClick={ onClick }/>
+                </field.div>
+                <Button priority='primary'>
+                    Submit
+                </Button>
+            </box.form>
         )
     }
 }

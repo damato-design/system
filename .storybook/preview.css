@@ -29,8 +29,7 @@
         display: none;
     }
 
-    & > blockquote,
-    & .sb-anchor > blockquote {
+    & blockquote:not([class]) {
         background: color-mix(in srgb,#222425,#4fb9af 10%);
         padding: 1em 2.5em;
     }
