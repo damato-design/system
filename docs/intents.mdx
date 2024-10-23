@@ -19,12 +19,12 @@ The construction of an intent commonly has three (3) parts: **purpose, priority,
 
 #### Purpose
 
-The first part of the intent name is the **purpose**, which is a generalize category of design meeting user expectations. There are four (4) main categories of purpose:
+The first part of the intent name is the **purpose**, which is a generalized category of design meeting user expectations. There are four (4) main categories of purpose:
 
 - **surface** describes regions where content is placed. This covers modals, cards, dropdowns and even the whole page. These are commonly non-interactive.
 - **action** describes interactive content typically executed by the user with a tap or click; a canonical button.
 - **control** describes interactive regions where the user is expected to enter a value.
-- **text** describes all text using only font specific properties. Colors are associated with other purposes.
+- **text** describes all text using only font specific properties. Colors are associated with other above purposes.
 
 #### Priority
 At first, the concept of **priority** seems to break the first quality of being semantic; including a scale. However, in this model, the scale is describing the importance of the user interface concept to the user. There are three (3) levels of priority:
@@ -33,13 +33,23 @@ At first, the concept of **priority** seems to break the first quality of being 
 - **secondary** describes the next most important thing after primary. For text, this is body copy. For actions, these are the secondary buttons. For surfaces, these are regions created for flyouts as the user has deliberately chosen to interact with these apart from the rest of the experience when they exist.
 - **auxiliary** describes less important things. For text, this is detail for help messages or legal copy. For buttons, these are the most simply designed but also most commonly found in an experience. For surfaces, this describes the body of the page and its stylistic properties.
 
+Note that **auxiliary does not mean default**. This is especially the case for text. What is considered the default priority for component usage depends on the purpose. In the case of the `text` component, the default is secondary. This is because the body copy is expected to be more common than smaller details for passive information.
+
 > #### What about priority for control?
 >
 > The control category doesn't include priority levels because user input isn't seen with priority; all controls are equally important. You may argue that an input showing an error state is more important than another without, however we'll handle this treatment in another way.
 
 #### Property
 
-From here, the last part describes the stylistic property being changed. The available properties depend on the category but in general, the **surface**, **action**, and **control** categories handle properties like color, rounding, and stroke. The **text** category handles all font related properties.
+From here, the last part describes the stylistic property being changed. The available properties depend on the category but in general, the **surface**, **action**, and **control** categories handle properties like color, rounding, and stroke. The **text** category handles all font related properties. In most cases, these are directly related to CSS properties. In fact, the construction of an intent is similar to CSS declaration syntax.
+
+```css
+/* purpose.priority */
+button.primary {
+    /* property */
+    background-color: blue;
+}
+```
 
 > #### What about state?
 >
@@ -49,12 +59,14 @@ From here, the last part describes the stylistic property being changed. The ava
 >
 > As mentioned earlier, the concept of `:invalid` is handled differently since it is considered of an expression that doesn't change the functionality of the page (ie., `:disabled`), nor is it trigged directly by the user (ie., `:hover`).
 
-Examples of intents:
+#### Examples of intents
 
 - `text.primary.fontFamily` describes the font family for headlines.
 - `action.secondary.borderColor` describes the border color for secondary buttons.
 - `control.backgroundColor` describes the background color for input fields.
-- `surface.auxiliary.foregroundColor` describes the color of body copy.
+- `surface.auxiliary.foregroundColor` describes the color of body copy and icons.
+
+Note that the concept of `foregroundColor` is meant to cover **text and icons**. You can consider both of these collections of glyphs which align to having the same color between them. This is similar to setting `<svg fill="currentColor"/>` to inherit the text color in code.
 
 ### Additional intents
 
