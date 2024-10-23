@@ -55,11 +55,11 @@ export const lockup = proxy<HTMLTagsOnly, LockupProps>('lockup', (TagName) => {
     return (
       <Element { ...restrictProps(props) } ref={ ref } gap>
           { getIcon(iconRef, subject as ReactElement) }
-          <box.div stack gap>
-            { subject ? <text.div id={ subjectId }>{ subject }</text.div> : null }
+          <box.div stack gap stretch>
+            { subject ? <text.div id={ subjectId } standby={ false }>{ subject }</text.div> : null }
             { passiveMessage ? <text.p id={ passiveId } priority='auxiliary'>{ passiveMessage }</text.p> : null }
             <box.div mode={ mode } stack gap prose>
-                <text.p aria-live='polite' id={ errorId } priority='auxiliary'>{ errorMessage }</text.p>
+                <text.p aria-live='polite' id={ errorId } priority='auxiliary' standby={ false }>{ errorMessage }</text.p>
                 { children }
             </box.div>
           </box.div>

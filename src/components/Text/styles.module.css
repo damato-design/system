@@ -3,6 +3,10 @@
     font-size: 1.2rem;
     text-wrap: pretty;
 
+    &:where(:empty) {
+        display: none;
+    }
+
     &:where(a), a {
         color: inherit;
         word-break: break-word;

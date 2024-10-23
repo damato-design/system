@@ -12,7 +12,9 @@
     }
 
     &[aria-busy="true"] {
-        :is([data-text], [data-media]) {
+        width: 100%;
+
+        :is([data-standby="true"]) {
             color: transparent;
             display: flex;
             flex: 1;
@@ -36,7 +38,14 @@
             mask: linear-gradient(#000 0 1lh,
                 transparent 1lh calc(1lh + 1ex)) 0 0/100% calc(1lh + 1ex);
 
-            &[data-media] {
+            &[data-icon] {
+                max-width: 1em;
+                min-height: 1em;
+                mask: none;
+                border-radius: 100vw;
+            }
+
+            &:where(picture, video, audio) {
                 min-height: auto;
                 aspect-ratio: 16/9;
                 mask: none;

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { icon } from '.';
+import { box } from '../Box';
 
 /**
  * This component renders an icon using Material Icons.
@@ -43,3 +44,13 @@ export const Size: Story = {
     )
 }
 
+/**
+ * When the `icon` is found within a `standby={true}` element, it will display a loading state.
+ */
+export const Loading: Story = {
+    render: (args) => (
+        <box.div standby>
+            <icon.search { ...args }/>
+        </box.div>
+    )
+}

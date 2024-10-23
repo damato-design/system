@@ -8,6 +8,10 @@ export type MediaProps = (React.ImgHTMLAttributes<HTMLImageElement>
   & ElementProps
   & {
     src: string[] | string,
+    /**
+     * Avoids loading presentation when set to false
+     */
+    standby?: boolean;
   };
 
 function getElement(src: string | undefined) {
@@ -45,6 +49,7 @@ function getElement(src: string | undefined) {
 
 export const Media = forwardRef<HTMLElement, MediaProps>(({
   src,
+  standby = true,
   ...props
 }: MediaProps, ref) => {
 
@@ -59,7 +64,7 @@ export const Media = forwardRef<HTMLElement, MediaProps>(({
   });
 
   return (
-    <Media { ...restrictProps(config) } ref={ ref } className={ css.media } data-media>
+    <Media { ...restrictProps(config) } ref={ ref } className={ css.media } data-standby={ standby }>
       { sources.map((src) => <source {...{ [tagName === 'picture' ? 'srcSet' : 'src']: src }} key={ src }/>) }
       { tagName === 'picture' ? <img src={ sources[0] }/> : null }
     </Media>

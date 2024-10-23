@@ -1,7 +1,7 @@
 .media:is(.media) {
     max-width: 100%;
     display: flex;
-    * > {
+    & > * {
         max-width: 100%;
     }
 }

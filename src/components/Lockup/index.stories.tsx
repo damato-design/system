@@ -52,6 +52,16 @@ export const Minimal: Story = {
     },
 }
 
+export const Loading: Story = {
+    render: (args) => (
+        <lockup.div { ...args }
+            standby
+            subject={ <text.h2 priority='primary'/> }>
+            <text.p/>
+        </lockup.div>
+    )
+}
+
 export const Form: Story = {
     args: {
         subject: <text.label priority='primary'>Email</text.label>,
