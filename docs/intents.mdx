@@ -1,0 +1,71 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Foundations/Intents" />
+
+# Intents
+
+**Intents** are a type of design token that have a strict definition and construction; they are _truly semantic_.
+
+> #### What is "truly semantic"?
+>
+> This is a difficult question to answer however, there are a few quailites that we can consider.
+> - **Semantic tokens avoid scales.** This is the "smedium" problem. You should be able to add and remove truly semantic tokens because they have very few relations to each other.
+> - **Semantic tokens are easily placed.** Finding a token called `action.primary.backgroundColor` more clearly describes _where_ or _when_ the token is expected to be used. In contrast, the token `color.blue.500` does not convey any information about where or when it should be used.
+> - **"Component Tokens" are often highly specific semantic tokens.** A component token is describing the characteristics of a specific component. The best case scenario is generalizing these into categories; which is the fundamental strategy behind intents.
+
+### Anatomy
+
+The construction of an intent commonly has three (3) parts: **purpose, priority, property**.
+
+#### Purpose
+
+The first part of the intent name is the **purpose**, which is a generalize category of design meeting user expectations. There are four (4) main categories of purpose:
+
+- **surface** describes regions where content is placed. This covers modals, cards, dropdowns and even the whole page. These are commonly non-interactive.
+- **action** describes interactive content typically executed by the user with a tap or click; a canonical button.
+- **control** describes interactive regions where the user is expected to enter a value.
+- **text** describes all text using only font specific properties. Colors are associated with other purposes.
+
+#### Priority
+At first, the concept of **priority** seems to break the first quality of being semantic; including a scale. However, in this model, the scale is describing the importance of the user interface concept to the user. There are three (3) levels of priority:
+
+- **primary** describes the most important thing that the user should read or interact with on the page. For text, these are headlines. For actions, these are primary buttons. For surfaces, these are typically modals or other treatments meant to strictly focus the user's attention in a modal-like way.
+- **secondary** describes the next most important thing after primary. For text, this is body copy. For actions, these are the secondary buttons. For surfaces, these are regions created for flyouts as the user has deliberately chosen to interact with these apart from the rest of the experience when they exist.
+- **auxiliary** describes less important things. For text, this is detail for help messages or legal copy. For buttons, these are the most simply designed but also most commonly found in an experience. For surfaces, this describes the body of the page and its stylistic properties.
+
+> #### What about priority for control?
+>
+> The control category doesn't include priority levels because user input isn't seen with priority; all controls are equally important. You may argue that an input showing an error state is more important than another without, however we'll handle this treatment in another way.
+> 
+> Figure has a different way of considering priority altogether.
+
+#### Property
+
+From here, the last part describes the stylistic property being changed. The available properties depend on the category but in general, the **surface**, **action**, and **control** categories handle properties like color, rounding, and stroke. The **text** category handles all font related properties. The **figure** category also handles color, just differently from the commonly used intents.
+
+> #### What about state?
+>
+> States such as `:disabled` or `:hover` are handled with changes internal to the system and its components. This is to reduce the amount of curation required to assign values to all the intents. Especially values which are less frequently seen.
+>
+> For the concept of `:disabled`, the component is presented at `opacity: .4` and `cursor: not-allowed`. For buttons, the concept of `:hover` is handled by mixing the given background and foreground colors by a small percentage to show feedback to the user, along with `cursor: pointer`.
+>
+> As mentioned earlier, the concept of `:invalid` is handled differently since it is considered of an expression that doesn't change the functionality of the page (ie., `:disabled`), nor is it trigged directly by the user (ie., `:hover`).
+
+Examples of intents:
+
+- `text.primary.fontFamily` describes the font family for headlines.
+- `action.secondary.borderColor` describes the border color for secondary buttons.
+- `control.backgroundColor` describes the background color for input fields.
+- `surface.auxiliary.foregroundColor` describes the color of body copy.
+
+### Additional intents
+
+There are other categories of intents that should be addressed for completeness.
+
+#### Figure
+
+The **figure** category has a purpose which describes regions of the same concept meant to be visually segregated (eg., charts, illustrations, default avatar colors). This is less used overall but important to mention for completeness.
+
+#### Space
+
+The **space** category is unique since is meant to convey the intention of relationships using the void between objects.
