@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { text } from '.';
+import { box } from '../Box';
 
 /**
  * The `text` primitive helps present text content.
@@ -86,4 +87,20 @@ export const ScreenreaderOnly: Story = {
             </>
         )
     }
+}
+
+/**
+ * When `text` components are wrapped in a `box` with `standby={true}`, the components will display a skeleton loader. The components displaying as `priority='secondary'` will render a minimum of 3 content lines, other priorities render a single line at a percentage width of the container.
+ * 
+ * If content is present within the `text` component, it is invisible until the `standby` is removed from the parent.
+ */
+export const Loading: Story = {
+    args: {},
+    render: (args) => (
+        <box.div stack gap standby>
+            <text.h2 {...args} priority='primary'/>
+            <text.p {...args}/>
+            <text.span {...args} priority='auxiliary'/>
+        </box.div>
+    )
 }

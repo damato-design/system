@@ -16,10 +16,6 @@
         cursor: pointer;
     }
 
-    &:empty {
-        display: none;
-    }
-
     &:is([data-priority="primary"]) {
         /* text-wrap: balance; */
         font-weight: bolder;
@@ -37,30 +33,6 @@
     & .text:not([data-priority]) {
         font: inherit;
     }
-    
-    &:where([data-standby="true"]) {
-        /* These will need to be intents triggered by mode */
-        --skeleton-bg: #ededed;
-        --skeleton-shine: black;
-        min-height: 1lh;
-        min-width: 1lh;
-        color: transparent;
-        
-        background-color: var(--skeleton-bg);
-        background-image: linear-gradient(
-            100deg,
-            transparent 40%,
-            color-mix(in srgb, var(--skeleton-shine), transparent 50%) 50%,
-            transparent 60%
-        );
-        background-size: 200% 100%;
-        background-position-x: 120%;
-
-        @media (prefers-reduced-motion: no-preference) {
-            background-position-x: 180%;
-		    animation: 2s loading ease-in-out infinite;
-        }
-    }
 }
 
 .sronly {
@@ -73,8 +45,4 @@
         white-space: nowrap; 
         width: 1px;
     }
-}
-
-@keyframes loading {
-	to { background-position-x: -20% }
 }

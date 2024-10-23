@@ -8,17 +8,16 @@ export type MediaProps = (React.ImgHTMLAttributes<HTMLImageElement>
   & ElementProps
   & {
     src: string[] | string,
-    /**
-     * If set, component is shown in a loading state.
-     */
-    standby?: boolean;
   };
 
 function getElement(src: string | undefined) {
   if (!src) return 'picture';
 
-  const { pathname } = new URL(src);
-  const ext = pathname.substring(pathname.lastIndexOf('.'));
+  let ext = '';
+  try {
+    const { pathname } = new URL(src);
+    ext = pathname.substring(pathname.lastIndexOf('.'));
+  } catch (e) {};
 
   switch(ext) {
     case '.avi':
@@ -46,7 +45,6 @@ function getElement(src: string | undefined) {
 
 export const Media = forwardRef<HTMLElement, MediaProps>(({
   src,
-  standby,
   ...props
 }: MediaProps, ref) => {
 
@@ -61,7 +59,7 @@ export const Media = forwardRef<HTMLElement, MediaProps>(({
   });
 
   return (
-    <Media { ...restrictProps(props) } ref={ ref } className={ css.media }>
+    <Media { ...restrictProps(config) } ref={ ref } className={ css.media } data-media>
       { sources.map((src) => <source {...{ [tagName === 'picture' ? 'srcSet' : 'src']: src }} key={ src }/>) }
       { tagName === 'picture' ? <img src={ sources[0] }/> : null }
     </Media>

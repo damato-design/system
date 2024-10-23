@@ -94,6 +94,10 @@ export type BoxProps = ElementProps & {
    */
   stack?: boolean;
   /**
+   * Applies loading treatment to elements within this container.
+   */
+  standby?: boolean;
+  /**
    * If set, makes the component stretch the width of the container.
    */
   stretch?: boolean;
@@ -119,6 +123,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
     purpose,
     round,
     stack,
+    standby,
     stretch,
     wrap,
     ...props
@@ -137,7 +142,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       overflow: clip ? 'clip' : undefined,
       justifyContent: distribute ? `space-${distribute}` : innerLayout.at(0),
       alignItems: innerLayout.at(1),
-      display: stretch ? 'flex' : 'inline-flex',
+      display: stretch || standby ? 'flex' : 'inline-flex',
       flex: stretch && !['action', 'control'].includes(purpose as string) ? 1 : undefined,
       flexDirection: stack ? 'column' : 'row',
       flexWrap: wrap || actions ? 'wrap' : 'nowrap',
@@ -162,6 +167,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       { ...restrictProps(props) }
       ref={ ref }
       className={ classNames }
+      aria-busy={ standby }
       data-priority={ priority }
       style={ styles }/>;
   })

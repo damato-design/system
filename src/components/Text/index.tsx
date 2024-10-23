@@ -16,17 +16,12 @@ export type TextProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
    * that this component is meant to provide for assistive technologies.
    */
   getScreenreaderProps?: (props: TextProps) => void;
-  /**
-   * If set, component is shown in a loading state.
-   */
-  standby?: boolean;
 };
 
 export const text = proxy<HTMLTagsOnly, TextProps>('text', (TagName) => {
   return forwardRef<HTMLElement, TextProps>(({
     priority,
     getScreenreaderProps,
-    standby,
     ...props
   }: TextProps, ref) => {
     const Text = element[TagName];
@@ -48,6 +43,7 @@ export const text = proxy<HTMLTagsOnly, TextProps>('text', (TagName) => {
       ref={ ref }
       id={ id }
       className={ classNames }
+      data-text
       data-priority={ priority }/>;
   })
 });

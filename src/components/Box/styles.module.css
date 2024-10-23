@@ -10,6 +10,64 @@
     &.prose:is(.prose) > * + * {
         margin-block-start: var(--gap, .5rem);
     }
+
+    &[aria-busy="true"] {
+        :is([data-text], [data-media]) {
+            color: transparent;
+            display: flex;
+            flex: 1;
+
+            /* TODO: needs better construction using bg and fg colors */
+            --skeleton-bg: #ededed;
+            --skeleton-shine: white;
+            
+            background-color: var(--skeleton-bg);
+            background-image: linear-gradient(
+                100deg,
+                transparent 40%,
+                color-mix(in srgb, var(--skeleton-shine), transparent 50%) 50%,
+                transparent 60%
+            );
+            background-size: 200% 100%;
+            background-position-x: 120%;
+
+            /* Line rendering */
+            min-height: calc(3lh + 2ex);
+            mask: linear-gradient(#000 0 1lh,
+                transparent 1lh calc(1lh + 1ex)) 0 0/100% calc(1lh + 1ex);
+
+            &[data-media] {
+                min-height: auto;
+                aspect-ratio: 16/9;
+                mask: none;
+
+                > * {
+                    opacity: 0;
+                }
+            }
+
+            &[data-priority="primary"] {
+                mask: none;
+                min-height: 1lh;
+                max-width: 80%;
+            }
+
+            &[data-priority="auxiliary"] {
+                mask: none;
+                min-height: 1lh;
+                max-width: 20%;
+            }
+
+            @media (prefers-reduced-motion: no-preference) {
+                background-position-x: 180%;
+                animation: 2s loading ease-in-out infinite;
+            }
+        }
+    }
+}
+
+@keyframes loading {
+	to { background-position-x: -20% }
 }
 
 .surface:is(.surface) {
