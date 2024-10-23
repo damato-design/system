@@ -86,12 +86,16 @@ The property of color is used to ambiguate the use. For cases such as charts and
 >
 > Possibly not. The general idea is that there will be a set of branded colors that an organization will want to included in visual regions within the experience. In the event more fine-tuned decisions need to be made for these regions, component tokens could be introduced as `chart.rank1.color` and `avatar.rank1.color`.
 
-#### Space
+#### Space & Density
 
 The **space** category is unique since is meant to convey the intention of relationships using the void between objects, not affecting the objects themselves. This category has only two intents:
 
 - `space.minDimension` describes the smallest amount of space that will exist within the experience.
 - `space.scaleFactor` describes the rate in which the spacing scale will increase.
+
+The **density** category has one intent but it affects **text** and **space** category scales.
+
+- `density.maxDepth` describes the maximum depth for elements to appear within an experience.
 
 The resulting amount of space is further determined by a formula using the depth of the current scope. For more about this technique, see the [Density docs](/docs/foundations-density--docs).
 

@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import clsx from 'clsx';
 import css from './styles.module.css';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';
-import { element, ElementProps } from '../Element';
+import { element, ElementProps, restrictProps } from '../Element';
 
 type Position = 'start' | 'center' | 'end' | string | undefined;
 type MixedPosition = { inline?: Position, block?: Position } | Position | undefined;
@@ -159,7 +159,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
     });
 
     return <Box
-      { ...props }
+      { ...restrictProps(props) }
       ref={ ref }
       className={ classNames }
       data-priority={ priority }

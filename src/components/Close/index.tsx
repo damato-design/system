@@ -2,6 +2,7 @@ import { forwardRef } from 'react';
 import clsx from 'clsx';
 import css from './styles.module.css';
 import { Button, ButtonProps } from '../Button';
+import { restrictProps } from '../Element';
 
 export type CloseProps = ButtonProps & {
     float?: boolean
@@ -13,7 +14,7 @@ export const Close = forwardRef<HTMLElement, CloseProps>(({
 }: CloseProps, ref) => {
     return (
         <div className={ clsx(css.close, { [css.float]: float }) }>
-            <Button { ...props } ref={ ref } behavior='dismiss' />
+            <Button { ...restrictProps(props) } ref={ ref } behavior='dismiss' />
         </div>
     )
 })

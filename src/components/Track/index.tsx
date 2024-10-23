@@ -2,7 +2,7 @@ import { forwardRef, createElement } from 'react';
 import css from './styles.module.css';
 import clsx from 'clsx';
 import { proxy } from '../Element/proxy';
-import { element, ElementProps } from '../Element';
+import { element, ElementProps, restrictProps } from '../Element';
 
 export type TrackProps = ElementProps & {
   orientation?: 'horizontal' | 'vertical'
@@ -14,7 +14,7 @@ export const track = proxy<'progress' | 'meter' | 'range', TrackProps>('track', 
     ...props
   }: TrackProps, ref) => {
 
-    const config = Object.assign({}, props, {
+    const config = Object.assign({}, restrictProps(props), {
       'aria-orientation': orientation,
       className: clsx(css.track),
       ref,

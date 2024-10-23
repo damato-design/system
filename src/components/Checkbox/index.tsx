@@ -3,6 +3,7 @@ import { field } from '../Field';
 import { input, InputProps } from '../Input';
 import { box } from '../Box';
 import { text } from '../Text';
+import { restrictProps } from '../Element';
 
 type CheckboxProps = InputProps & {
     exclusive?: boolean,
@@ -12,17 +13,21 @@ type CheckboxProps = InputProps & {
 export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(({
     exclusive,
     label,
+    name,
     ...props
 }, ref) => {
-    // TODO: needs focus-within approach
+
     const id = useId();
+    const config = Object.assign({}, restrictProps(props), {
+        ref, id, name
+    });
 
     return (
         <box.div stack={ false } gap padding inset='center'>
             <field.div stretch={ false } round={ exclusive } clip={ false }>
                 { exclusive
-                    ? <input.radio { ...props } ref={ ref } id={ id }/>
-                    : <input.checkbox { ...props } ref={ ref } id={ id }/>
+                    ? <input.radio { ...config }/>
+                    : <input.checkbox { ...config }/>
                 }
             </field.div>
             { label

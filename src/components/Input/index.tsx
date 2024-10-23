@@ -2,7 +2,7 @@ import { HTMLInputTypeAttribute, forwardRef } from 'react';
 import { Globals } from 'csstype';
 import css from './styles.module.css';
 import { proxy } from '../Element/proxy';
-import { element, ElementProps } from '../Element';
+import { element, ElementProps, restrictProps } from '../Element';
 
 export type InputProps = (React.InputHTMLAttributes<HTMLInputElement>
   | React.TextareaHTMLAttributes<HTMLTextAreaElement>)
@@ -35,7 +35,7 @@ export const input = proxy<HTMLInputTypeAttribute | 'textarea', InputProps>('inp
     }
 
     return <Element
-      {...Object.assign({ type }, props)}
+      {...Object.assign({ type }, restrictProps(props))}
       ref={ref}
       className={css.input}
       style={styles} />;

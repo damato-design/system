@@ -1,6 +1,7 @@
 import { forwardRef } from 'react';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { box, BoxProps } from '../Box';
+import { restrictProps } from '../Element';
 
 type FieldProps = BoxProps & {};
 
@@ -15,7 +16,7 @@ export const field = proxy<HTMLTagsOnly, FieldProps>('field', (TagName) => {
 
         return (
             <Element
-                { ...props }
+                { ...restrictProps(props) }
                 ref={ ref }
                 stretch={ stretch }
                 purpose='control'

@@ -3,6 +3,7 @@ import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { box, BoxProps } from '../Box';
 import { Media, MediaProps } from '../Media';
 import { lockup, LockupProps } from '../Lockup';
+import { restrictProps } from '../Element';
 
 type CardProps = BoxProps
     & MediaProps 
@@ -25,7 +26,7 @@ export const card = proxy<HTMLTagsOnly, CardProps>('card', (TagName) => {
 
         return (
             <Element
-                { ...props }
+                { ...restrictProps(props) }
                 gap
                 stack={ stack }
                 ref={ ref }>

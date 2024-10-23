@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import css from './styles.module.css';
-import { element, ElementProps } from '../Element';
+import { element, ElementProps, restrictProps } from '../Element';
 
 export type MediaProps = (React.ImgHTMLAttributes<HTMLImageElement>
   | React.AudioHTMLAttributes<HTMLAudioElement>
@@ -47,8 +47,6 @@ function getElement(src: string | undefined) {
 export const Media = forwardRef<HTMLElement, MediaProps>(({
   src,
   standby,
-  className,
-  style,
   ...props
 }: MediaProps, ref) => {
 
@@ -63,7 +61,7 @@ export const Media = forwardRef<HTMLElement, MediaProps>(({
   });
 
   return (
-    <Media { ...config } ref={ ref } className={ css.media }>
+    <Media { ...restrictProps(props) } ref={ ref } className={ css.media }>
       { sources.map((src) => <source {...{ [tagName === 'picture' ? 'srcSet' : 'src']: src }} key={ src }/>) }
       { tagName === 'picture' ? <img src={ sources[0] }/> : null }
     </Media>

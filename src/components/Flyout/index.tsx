@@ -1,7 +1,7 @@
 import { forwardRef, useId, useEffect } from 'react';
 import css from './styles.module.css';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';
-import { element, ElementProps } from '../Element';
+import { element, ElementProps, restrictProps } from '../Element';
 
 export type FlyoutProps = ElementProps & {
   /**
@@ -55,7 +55,7 @@ export const flyout = proxy<HTMLTagsOnly, FlyoutProps>('flyout', (TagName) => {
     }
 
     return <Element
-      { ...props }
+      { ...restrictProps(props) }
       id={ targetId }
       role={ behavior }
       popover={ disclosure }

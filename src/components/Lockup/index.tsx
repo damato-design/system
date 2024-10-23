@@ -3,6 +3,7 @@ import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { box, BoxProps } from '../Box';
 import { text, TextProps } from '../Text';
 import { icon } from '../Icon';
+import { restrictProps } from '../Element';
 
 function getIcon(iconRef: string | undefined, subject: ReactElement) {
   if (!iconRef) return null;
@@ -52,13 +53,13 @@ export const lockup = proxy<HTMLTagsOnly, LockupProps>('lockup', (TagName) => {
     }, [getInputProps]);
 
     return (
-      <Element { ...props } ref={ ref } gap>
+      <Element { ...restrictProps(props) } ref={ ref } gap>
           { getIcon(iconRef, subject as ReactElement) }
           <box.div stack gap>
             { subject ? <text.div id={ subjectId }>{ subject }</text.div> : null }
-            { passiveMessage ? <text.p id={ passiveId }>{ passiveMessage }</text.p> : null }
+            { passiveMessage ? <text.p id={ passiveId } priority='auxiliary'>{ passiveMessage }</text.p> : null }
             <box.div mode={ mode } stack gap prose>
-                <text.p aria-live='polite' id={ errorId }>{ errorMessage }</text.p>
+                <text.p aria-live='polite' id={ errorId } priority='auxiliary'>{ errorMessage }</text.p>
                 { children }
             </box.div>
           </box.div>

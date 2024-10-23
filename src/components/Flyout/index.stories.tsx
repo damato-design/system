@@ -17,9 +17,16 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+
+/**
+ * > #### Why doesn't this component work for me?
+ * >
+ * > This uses the new [CSS Anchor Positioning specification](https://www.w3.org/TR/css-anchor-position-1/) which has not yet been launched in all browsers. Please see the [browser compatability table at MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/anchor-name#browser_compatibility) for more information.
+ */
 export const Default: Story = {
     args: {
         children: 'Hello World!',
+        getAnchorProps: () => {},
     },
     render: (args) => {
         const [anchorProps, setAnchorProps] = useState({});
@@ -37,6 +44,7 @@ export const Default: Story = {
 export const Stretch: Story = {
     args: {
         children: 'Hello World!',
+        getAnchorProps: () => {},
         stretch: true
     },
     render: (args) => {

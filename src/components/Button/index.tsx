@@ -3,6 +3,7 @@ import { box, BoxProps } from '../Box';
 import { text } from '../Text';
 import { icon } from '../Icon';
 import { IDREF } from '../Localize';
+import { restrictProps } from '../Element';
 
 type Accessory = 'menu' | 'external' | 'dismiss' |undefined;
 
@@ -70,7 +71,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
 
     return (
         <Element
-            {...config}
+            {...restrictProps(config)}
             ref={ref}
             purpose='action'>
             {iconRef ? createElement(icon[iconRef]) : null}

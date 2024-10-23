@@ -1,6 +1,7 @@
-import { forwardRef, useCallback, useEffect } from 'react';
+import { forwardRef, useCallback } from 'react';
 import { box } from '../Box';
 import { lockup, LockupProps } from '../Lockup';
+import { restrictProps } from '../Element';
 
 function getIconRef(emphasis: string | undefined) {
     switch(emphasis) {
@@ -70,7 +71,7 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(({
             onPointerDown={ onPointerDown }>
             <div style={ styles }/>
             <lockup.div
-                {...props}
+                {...restrictProps(props)}
                 ref={ ref }
                 icon={ getIconRef(emphasis) }
                 padding />

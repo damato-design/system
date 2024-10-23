@@ -3,31 +3,75 @@ import { Meta } from '@storybook/blocks';
 <Meta title="Foundations/Density" />
 
 # Density
-{/*
 
-### Spacing in scopes
+Everything below is contained within [the `box` primitive](/docs/primitives-box--docs), which is the basis for nearly every component. Read on if you'd like to learn how the final resulting values are determined.
 
-Instead of thinking about applying space at focused locations, we consider the relationships between the elements within that region. This is directly linked to [Gestalt's Law of Proximity](https://lawsofux.com/law-of-proximity/) which explains elements that are closer together are more related. Therefore, we expect to apply space between elements to signify a relation.
+### Tokens
 
-Consider the content lockup for a hero banner. We would expect this to have large spacing values, along with relatively large typography in comparison to tighter content lockups for individual cards on the same page. If we consider that both of these use the same content lockup and uniformly change the density between the larger and smaller sizes, we do not need to curate spacing values specifically.
+There are a few tokens that help describe the concept of density.
 
-### Scale factor
+- `space.minDimension` describes the minimum amount of space that will exist in the experience. It is recommended to use a pixel amount over a relative unit for this value.
+- `space.scaleFactor` describes the rate in which the space values increase over steps.
+- `density.maxDepth` describes maximum levels of depth expected to appear within any composition. More of this below.
 
-To determine the values of space used, we use four values:
-
-- **Padding base** - The smallest non-zero amount of space that we expect to be applied around elements, preferrably in non-relative units.
-- **Gap base** - The smallest non-zero amount of space that we expect to be applied between elements, preferrably in non-relative units. 
-- **Padding scale** - The amount to multiply to determine the next size of space for padding.
-- **Gap scale** - The amount to multiple to determine the next size of space for gap.
-
-If no values are provided, the gap base is set at `8px`. Padding is twice the size of gap and the scale for both padding and gap is `2`.
-
-> #### Why are non-relative units preferred?
+> #### Why are pixels recommended for `minDimension`?
 >
-> If we were to link the space to a relative unit such as `(r)em`, if the font size of the interface increases, this would affect the space between the elements. A user increasing the font size does so to make the content more legible. If the space also increased, it could shift content or require the user scroll due to the amount of additional space. Using a non-relative unit such as pixels ensures that the relationships between elements are consistently maintained regardless of the user's font preferences.
-
-> #### Why is the "base" density value meant to be the smallest?
+> This is a matter of accessibility and user preferences. A user may update the font size settings within their operating system to make content eaiser to read. This setting will affect the value representing the `rem` unit (and other font units). When the user increases the font size, they are not typically expecting the space between elements to also increase. This behavior is different from zooming, which scales everything uniformly.
 >
-> If we were to calculate the size of density starting at the largest value working downward, the amount of space at deeper nested regions may result in near-zero values which would be undesired. We set the "base" as smallest to ensure that space will always expect no matter the number of nested regions of density shifts.
+> When we use an absolute unit like pixels as the value, the font scaling setting does not affect the space between elements, so compositions are less large than they would be if the value was related to font size. The more compact composition maintains a similar navigation experience than if everything was to grow to the font size causing more overflows and scrolling to be required.
 
-*/}
+### Depth
+
+The concept of **depth** relates to how deep a concept exists within an interface. As an example, a hero banner would be considered at a higher level of depth than a headline within a card. If you can consider the card as a smaller version of a page, it would be like a page is scaled down to exist as a card. This amount of scaling is a level of depth, something like a [Russian nested doll](https://en.wikipedia.org/wiki/Matryoshka_doll).
+
+Another way to think about this is relative distances. If you consider distance in terms of being near or away, the way we describe a distance will change based on context. If our scope of measuring distance is at the planet level, cities would be considered close together relative to planets. Changing our scope to a single city would change our perspective for cities being very far away.
+
+In this approach, each change in depth is a change in scope executed using a special mode called `depthchange` (rendered simply as `↯` below for brevity). Each time this mode is introduced, the level of depth decreases one step toward `0`. The following is a simplified example of the resulting CSS when `density.maxDepth: 3`:
+
+```css
+:root {
+    --density-maxDepth: 3;
+    --level: calc(var(--density-maxDepth - 0)); /* 3 */
+}
+
+[mode~="↯"] {
+    --level: calc(var(--density-maxDepth - 1)); /* 2 */
+}
+
+[mode~="↯"] [mode~="↯"]{
+     --level: calc(var(--density-maxDepth - 2)); /* 1 */
+}
+
+[mode~="↯"] [mode~="↯"] [mode~="↯"] {
+     --level: calc(var(--density-maxDepth - 3)); /* 0 */
+}
+
+```
+
+The generated repeating selectors are used to indicate how deep the elements appear within the composition. The number of selectors for each declaration is used in the calculation to indicate the depth and compute the level.
+
+### Generating the Scale
+
+The resulting `level` will affect scale based calculations for `space` and `text` using the following forumla:
+
+```
+size = min * pow(scale, level)
+```
+
+For more about how this affects typography, see the [Typography docs](/docs/foundations-typography--docs).
+
+### Gap & Padding
+
+The system uses only `gap` and `padding` as CSS properties wired into the `box` primitive. These are `boolean` and not configurable further past introducing the `depthchange` mode.
+
+The **gap** value at `level: 0` equals the value provided by `minDimension`. The **padding** value is the next step above (ie., `0 + 1 = 1`) in the spacing scale. See example below for calculations using CSS custom property abbreviations:
+
+```css
+.box-with-space {
+    --level: 0;
+    gap: calc(var(--min) * pow(var(--scale), var(--level)));
+    padding: calc(var(--min) * pow(var(--scale), var(--level) + 1));
+}
+```
+
+The amount of space will increase at each level higher in depth, with a maximum level equal to the given `density.maxDepth` value. Adjusting the distance between steps is done by increasing the `space.scaleFactor`.
