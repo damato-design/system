@@ -11,6 +11,11 @@
         max-width: 60rch;
     }
 
+    &.sbdocs-preview {
+        resize: horizontal;
+        overflow: auto;
+    }
+
     h1 {
         text-transform: capitalize;
         margin-block-end: .5em;
@@ -33,4 +38,9 @@
 pre, code, pre :not(button), code * {
     font-family: 'Monaspace Radon', monospace !important;
     white-space: pre-wrap !important;
+    word-break: break-word;
+}
+
+code {
+    display: inline !important
 }

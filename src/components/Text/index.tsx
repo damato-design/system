@@ -10,7 +10,7 @@ export type TextProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
    * Set the priority intended for this component.
    * This will affect the final presentation.
    */
-  priority?: 'primary' | 'secondary' | 'auxiliary';
+  priority?: 'primary' | 'auxiliary';
   /**
    * A function that provides accessible attributes for more clarity
    * that this component is meant to provide for assistive technologies.
@@ -24,7 +24,7 @@ export type TextProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
 
 export const text = proxy<HTMLTagsOnly, TextProps>('text', (TagName) => {
   return forwardRef<HTMLElement, TextProps>(({
-    priority = 'secondary',
+    priority,
     getScreenreaderProps,
     standby,
     className,

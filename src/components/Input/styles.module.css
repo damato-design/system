@@ -8,24 +8,6 @@
     font-size: 1.2rem;
     outline-offset: -4px;
 
-    &::-webkit-inner-spin-button,
-    &::-webkit-search-cancel-button {
-        display: none;
-    }
-
-    &::-ms-reveal,
-    &::-ms-cancel {
-        display: none;
-    }
-
-    &::-webkit-autofill,
-    &::-webkit-autofill:hover,
-    &::-webkit-autofill:focus,
-    &::-webkit-autofill:active {
-        -webkit-text-fill-color: var(--fgColor, black);
-        caret-color: var(--fgColor, black);
-    }
-
     &:not(textarea) {
         line-height: 1lh;
     }
@@ -37,9 +19,30 @@
         accent-color: green;
         outline-offset: 2px;
 
+        /* TODO: Not centered in frame?? */
+        /* scale: 1.15; */
+
         &:not(:checked) {
             appearance: none;
             padding: 0;
         }
+    }
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-search-cancel-button {
+        display: none;
+    }
+
+    &::-webkit-autofill,
+    &::-webkit-autofill:hover,
+    &::-webkit-autofill:focus,
+    &::-webkit-autofill:active {
+        -webkit-text-fill-color: var(--fgColor, black);
+        caret-color: var(--fgColor, black);
+    }
+
+    &::-ms-reveal,
+    &::-ms-cancel {
+        display: none;
     }
 }

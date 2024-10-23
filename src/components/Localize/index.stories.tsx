@@ -93,7 +93,7 @@ export const Batch: Story = {
             <div lang='es'>
                 { Object.keys(IDREF).map((key) => {
                     const Localize = localize[key as IdRefKeys];
-                    return <Localize>{ DICTIONARY[key] }</Localize>
+                    return <Localize key={ key }>{ DICTIONARY[key] }</Localize>
                 }) }
             </div>
         )

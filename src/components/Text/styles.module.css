@@ -1,5 +1,6 @@
 .text:is(.text) {
-    font-size: 1rem;
+    /* default is secondary */
+    font-size: 1.2rem;
     text-wrap: pretty;
 
     &:where(a), a {
@@ -29,8 +30,8 @@
         }
     }
 
-    &:is([data-priority="secondary"]) {
-        font-size: 1.2rem;
+    &:is([data-priority="auxiliary"]) {
+        font-size: 1rem;
     }
 
     & .text:not([data-priority]) {
