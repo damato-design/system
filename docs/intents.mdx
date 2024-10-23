@@ -66,8 +66,6 @@ button.primary {
 - `control.backgroundColor` describes the background color for input fields.
 - `surface.auxiliary.foregroundColor` describes the color of body copy and icons.
 
-Note that the concept of `foregroundColor` is meant to cover **text and icons**. You can consider both of these collections of glyphs which align to having the same color between them. This is similar to setting `<svg fill="currentColor"/>` to inherit the text color in code.
-
 ### Additional intents
 
 There are other categories of intents that should be addressed for completeness.
@@ -79,3 +77,21 @@ The **figure** category has a purpose which describes regions of the same concep
 #### Space
 
 The **space** category is unique since is meant to convey the intention of relationships using the void between objects.
+
+### Curating values
+
+The act of selecting values to associate with an intent is called **curation**. As described earlier, the name of the intent should provide a clear indication about where or when the token is meant to be used within an experience, typically a group of similar components or user expectations.
+
+This section will mention parts of intents that are less immediately clear.
+
+#### foregroundColor
+
+The concept of `foregroundColor` is meant to cover **text and icons**. You can consider both of these collections of glyphs which align to having the same color between them. This is similar to setting `<svg fill="currentColor"/>` to inherit the text color in code. This is included in surface, action, and control categories.
+
+When curating the `foregroundColor` you should consider this decision along with the `backgroundColor` for the current intent. For example, the `action.primary.foregroundColor` **should always exist** on top of the `action.primary.backgroundColor`. As an incorrect example, the `ACTION.secondary.foregroundColor` **should not exist** on top of a `SURFACE.secondary.backgroundColor` as they are in separate categories of intents. This connection exists for accessibility; to ensure adequate contrast with each pairing.
+
+You should also consider the `borderColor` with this set as well, but is less critical from an accessibility standpoint. Best practice is to work on curating each set at a time; all `action.primary` colors, then all `action.secondary` colors and so on.
+
+#### minRem & scaleFactor
+
+The text and space categories compute sizing scales for their respective purposes. The `minRem` represents the smallest size for that category in `rem` _without units_. This means expecting to curate a value of `20px` would result in `minRem: 1.5` (eg., `1.5rem`).The `scaleFactor` is used to create the exponential scale of values for the category to choose from. For more about how this works for typography, see the [Typography docs](docs/foundations-typography--docs). For more about how this works for space, see the [Density docs](/docs/foundations-density--docs).

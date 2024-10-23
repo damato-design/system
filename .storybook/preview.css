@@ -16,6 +16,10 @@
         overflow: auto;
     }
 
+    &:is(a.sbdocs-a) {
+        text-decoration: underline;
+    }
+
     h1 {
         text-transform: capitalize;
         margin-block-end: .5em;
