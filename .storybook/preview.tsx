@@ -1,7 +1,6 @@
 import React from 'react';
 import type { Preview } from "@storybook/react";
-import { Title, Description, Primary, Controls, Stories, useOf, DocsContainer } from '@storybook/addon-docs';
-import { Unstyled } from "@storybook/blocks";
+import { Title, Description, Primary, Controls, Stories, useOf } from '@storybook/addon-docs';
 import theme from './theme';
 
 import './preview.css';

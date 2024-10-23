@@ -11,7 +11,7 @@ import { Meta } from '@storybook/blocks';
 > This is a difficult question to answer however, there are a few quailites that we can consider.
 > - **Semantic tokens avoid scales.** This is the "smedium" problem. You should be able to add and remove truly semantic tokens because they have very few relations to each other.
 > - **Semantic tokens are easily placed.** Finding a token called `action.primary.backgroundColor` more clearly describes _where_ or _when_ the token is expected to be used. In contrast, the token `color.blue.500` does not convey any information about where or when it should be used.
-> - **"Component Tokens" are often highly specific semantic tokens.** A component token is describing the characteristics of a specific component. The best case scenario is generalizing these into categories; which is the fundamental strategy behind intents.
+> - **"Component Tokens" are often highly specific semantic tokens.** A component token is describing the characteristics of a specific component. The best case scenario is generalizing these into categories for more reuse; which is the fundamental strategy behind intents.
 
 ### Anatomy
 
@@ -19,7 +19,7 @@ The construction of an intent commonly has three (3) parts: **purpose, priority,
 
 #### Purpose
 
-The first part of the intent name is the **purpose**, which is a generalized category of design meeting user expectations. There are four (4) main categories of purpose:
+The first part of the intent name is the **purpose**, which is a generalized user interface concept with a known user expectation. There are four (4) main categories of purpose:
 
 - **surface** describes regions where content is placed. This covers modals, cards, dropdowns and even the whole page. These are commonly non-interactive.
 - **action** describes interactive content typically executed by the user with a tap or click; a canonical button.
@@ -72,11 +72,28 @@ There are other categories of intents that should be addressed for completeness.
 
 #### Figure
 
-The **figure** category has a purpose which describes regions of the same concept meant to be visually segregated (eg., charts, illustrations, default avatar colors). This is less used overall but important to mention for completeness.
+The **figure** category has a purpose which describes regions of the same concept meant to be visually segregated (eg., charts, illustrations, default avatar colors, syntax highlighting, etc.).
+
+The tokens in this category have no meaning past segregated color. In other words, the first slice of a pie chart is too specific of a concept to have a token named for it. Instead, we provide a collection of tokens meant to cover this regions generally where they are identified using a scale. This is appropriate because the meaning of the color being used isn't attached to the region. The region doesn't have meaning past existing as a colored region next to other colored regions.
+
+An example of a figure color token is `figure.rank1.color`. While this does follow the general anatomy of the common intents, there are some slight differences.
+
+The priority is less about importance to the user, and more about how frequently we expect to see this color in the region. Imagine a color-by-number book where the colors are ranked in terms of expected frequency of use for the entire book. We then use that ranking to assign the numbers to the regions where we expect the color.
+
+The property of color is used to ambiguate the use. For cases such as charts and illustrations, it is possible that the color is used for a background fill. For syntax highlighing, this could be used as the text color.
+
+> #### Is it appropriate for the same set of colors to be used for all these regions?
+>
+> Possibly not. The general idea is that there will be a set of branded colors that an organization will want to included in visual regions within the experience. In the event more fine-tuned decisions need to be made for these regions, component tokens could be introduced as `chart.rank1.color` and `avatar.rank1.color`.
 
 #### Space
 
-The **space** category is unique since is meant to convey the intention of relationships using the void between objects.
+The **space** category is unique since is meant to convey the intention of relationships using the void between objects, not affecting the objects themselves. This category has only two intents:
+
+- `space.minDimension` describes the smallest amount of space that will exist within the experience.
+- `space.scaleFactor` describes the rate in which the spacing scale will increase.
+
+The resulting amount of space is further determined by a formula using the depth of the current scope. For more about this technique, see the [Density docs](/docs/foundations-density--docs).
 
 ### Curating values
 
@@ -92,6 +109,22 @@ When curating the `foregroundColor` you should consider this decision along with
 
 You should also consider the `borderColor` with this set as well, but is less critical from an accessibility standpoint. Best practice is to work on curating each set at a time; all `action.primary` colors, then all `action.secondary` colors and so on.
 
-#### minRem & scaleFactor
+#### minDimension, minRem, & scaleFactor
 
-The text and space categories compute sizing scales for their respective purposes. The `minRem` represents the smallest size for that category in `rem` _without units_. This means expecting to curate a value of `20px` would result in `minRem: 1.5` (eg., `1.5rem`).The `scaleFactor` is used to create the exponential scale of values for the category to choose from. For more about how this works for typography, see the [Typography docs](docs/foundations-typography--docs). For more about how this works for space, see the [Density docs](/docs/foundations-density--docs).
+The text and space categories compute sizing scales for their respective purposes. In order to create these scales we need two numbers, a starting point and exponential growth from that point to create the scale. The formula looks like this:
+
+```
+size = min * pow(scale, level)
+```
+
+Where the `level` is determined by the depth. For more on this value, see the [Density docs](/docs/foundations-density--docs).
+
+The `minDimension` expects a value with a unit such as `8px` or `.5rem` to use as the base for further scale calculations. The minimum is used to ensure that the resulting value is never smaller than expected.
+
+The `minRem` represents the smallest font size for that category of text in terms of `rem`. This means expecting to curate a value of `20px` would be expected as `minRem: 1.5` (eg., `1.5rem`).
+
+> #### Why not use `minDimension` for consistency?
+>
+> To complete the necessary calculations for the text category, every number provided needs to unitless as CSS `calc()` functions can't make unitless ratios from division operations. This may be possible in the future, in which case `minRem` will be replaced with `minDimension`.
+
+The `scaleFactor` is used to create the exponential scale of values for the category to choose from. For more about how this works for typography, see the [Typography docs](docs/foundations-typography--docs). For more about how this works for space, see the [Density docs](/docs/foundations-density--docs).

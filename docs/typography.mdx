@@ -28,9 +28,11 @@ The system creates a scale for each category using the `minRem` and `scaleFactor
 >
 > This is to ensure that any resulting calculation of text is accessible as it will always be larger than this number.
 
-> #### Why use `minRem` and not `minSize`?
+> #### Why is it `minRem` and not something else?
 >
-> In order to compute fluid sizes for `primary` text, we use unitless numbers to calculate ratios in CSS. It is much harder to remove units from calculations than it is to later include them. The `rem` part of the token name helps suggest the expectation, but it is possible that it could suggest `rem` units be included. Alas, it is more terse than `minRemUnitless`. To reduce exceptions based on category, all text tokens has the same composition.
+> In order to compute fluid sizes for `primary` text, we use unitless numbers to calculate ratios in CSS. It is much harder to remove units from calculations than it is to later include them. To reduce exceptions based on category, all text tokens has the same composition.
+> 
+> Once units can be removed from CSS calculations, this should be changed to align with `minDimension` instead.
 
 Sizes are generated using the following formula:
 
@@ -40,11 +42,11 @@ size = minRem * pow(scaleFactor, depth)
 
 Where `depth` is determined from [the amount of density shifts](/docs/foundations-density--docs) expected to occur in the experience. This means at the most compact parts of the experience (`depth: 0`), the resulting font size will be `minRem * 1rem`. Each level up will scale up the size by the given `scaleFactor`. Here's what this would look like with `minRem: 1`, `scaleFactor: 1.125`, with 4 levels of depth:
 
-```
-level0 = 1 * 1.125^0 = 1 /* 1rem */
-level1 = 1 * 1.125^1 = 1.125 /* 1.125rem */
-level2 = 1 * 1.125^2 = 1.265 /* 1.265rem */
-level3 = 1 * 1.125^3 = 1.424 /* 1.414rem */
+```yml
+level0 = 1 * 1.125^0 = 1 # 1rem
+level1 = 1 * 1.125^1 = 1.125 # 1.125rem
+level2 = 1 * 1.125^2 = 1.265 # 1.265rem
+level3 = 1 * 1.125^3 = 1.424 # 1.414rem
 ```
 
 Because the resulting font size is determined by `depth`, font size changes for any category occur only at density shifts. This allows for page hero areas at `level: 4` to have the possibility of having larger text than what is found in dense tables at `level: 0`.
