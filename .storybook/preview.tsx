@@ -66,13 +66,6 @@ const preview: Preview = {
       source: {
         excludeDecorators: true,
       },
-      container: ({ children, context }) => (
-        <DocsContainer context={context}>
-          <Unstyled>
-              {children}
-          </Unstyled>
-        </DocsContainer>
-      ),
     }
   },
   tags: ["autodocs"]
