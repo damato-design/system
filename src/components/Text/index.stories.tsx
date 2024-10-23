@@ -25,7 +25,7 @@ export const Default: Story = {
 
 export const Priority: Story = {
     args: {
-        children: 'Hello World!',
+        children: 'Whereas disregard and contempt for human rights have resulted',
         priority: 'primary'
     },
     render: (args) => <text.h2 { ...args } />

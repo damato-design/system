@@ -1,4 +1,5 @@
-import { Meta } from '@storybook/blocks';
+import { Meta, Canvas } from '@storybook/blocks';
+import { Priority } from '../src/components/Text/index.stories';
 
 <Meta title="Foundations/Typography" />
 
@@ -58,6 +59,8 @@ Because the resulting font size is determined by `depth`, font size changes for 
 ### Fluid Primary Text
 
 The `primary` category used for headlines is a bit special as we expect the size of the text to adjust based on the available size of the device. To do this, we follow the conventions explained [here](https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/), specifically the section explaining avoiding reflow. The result is the headline resizing smoothly between two thresholds, maintaining the general optical composition throughout.
+
+<Canvas of={ Priority }/>
 
 The two thresholds are `320px` at a minimum representing the smallest device widths and `480px` at a maximum.
 
