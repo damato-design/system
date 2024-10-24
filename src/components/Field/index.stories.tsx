@@ -59,7 +59,7 @@ export const InnerButton: Story = {
         }, []);
 
         return (
-            <box.form action='' actions inset={{ block: 'end' }}>
+            <box.form action='' gap inset={{ block: 'end' }}>
                 <field.div { ...args }>
                     <Button icon='remove' aria-label='Decrement' value={ -1 } onClick={ onClick }/>
                     <input.number name='number' value={ value } onChange={ onChange } fieldSizing='content'/>

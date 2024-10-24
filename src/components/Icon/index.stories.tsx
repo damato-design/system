@@ -26,9 +26,14 @@ type Story = StoryObj<typeof meta>
 /**
  * This example shows the [Question Answer icon](https://fonts.google.com/icons?icon.set=Material+Icons&selected=Material+Icons+Outlined:question_answer:&icon.size=24&icon.color=%23e8eaed).
  * 
- * Icons are all set as `role='presentation'` so they are invisible to screen readers.
+ * Icons are all set as `role='presentation'` so they are ignored by screen readers.
  * This means that you should have some labelling to ensure a user can understand the context
  * meant by the icon. This is especially important for areas where only a single icon exists.
+ * 
+ * > #### Why does the `icon` use the `<i/>` HTML tag?
+ * >
+ * > This makes the element slightly more semantic than using a normal `<span/>`,
+ * > conveying an "alternate voice or mood" ([MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/i)).
  */
 export const Default: Story = {}
 

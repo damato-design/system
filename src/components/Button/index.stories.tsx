@@ -42,7 +42,7 @@ export const Primary: Story = {
 /**
  * The secondary button is for actions that are less important than primary but remain useful for completing a task. These buttons **should not be used** within the [`field` primitive](/docs/primitives-field--docs).
  * 
- * > #### Why should these be avoided inside of `field`?
+ * > #### Why should `<Button priority='secondary'/>` be avoided inside of `field`?
  * >
  * > The `field` component removes the border from its children to maintain the height of the field adjacent to other buttons and controls. That border is typically a defining feature for the secondary button treatment.
  */

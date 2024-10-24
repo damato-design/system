@@ -34,7 +34,7 @@
             mask: linear-gradient(#000 0 1lh,
                 transparent 1lh calc(1lh + 1ex)) 0 0/100% calc(1lh + 1ex);
 
-            &[data-icon] {
+            &:where(i[role="presentation"]) {
                 max-width: 1em;
                 min-height: 1em;
                 mask: none;
@@ -100,6 +100,11 @@
     text-decoration: none;
     flex: 1 1 auto;
 
+    /* Icon only buttons */
+    &:has(:not(strong)) {
+        flex-grow: 0;
+    }
+
     --bgColor: #fefefe;
     background-color: color-mix(in srgb, var(--bgColor), currentColor 5%);
     transition: background .218s ease;
@@ -145,7 +150,7 @@
         height: 1lh;
     }
 
-    > [data-icon] {
+    > i[role="presentation"] {
         padding-inline: var(--padding, 1rem);
     }
 
