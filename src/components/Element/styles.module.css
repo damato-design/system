@@ -1,14 +1,9 @@
 .element {
     margin: 0;
-    border: 0;
     padding: 0;
+    border: 0;
     color: inherit;
     font: inherit;
-    box-sizing: border-box;
     font-variant-numeric: tabular-nums;
-
-    &[style*="overflow: clip"] button {
-        border: 0;
-        border-radius: 0;
-    }
+    box-sizing: border-box
 }

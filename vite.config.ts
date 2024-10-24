@@ -10,6 +10,13 @@ import svgr from 'vite-plugin-svgr';
 export default defineConfig({
   plugins: [react(), libInjectCss(), dts({ exclude: ['**/*.stories.tsx'] }), svgr()],
   server: {watch: {usePolling: true}},
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern'
+      }
+    }
+  },
   build: {
     lib: {
       entry: resolve(__dirname, 'src/main.ts'),

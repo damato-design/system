@@ -1,4 +1,5 @@
 .input:is(.input) {
+    border: 0;
     padding: var(--padding, 1rem);
     scroll-padding-block: var(--padding, 1rem);
     box-sizing: content-box;

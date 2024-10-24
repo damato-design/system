@@ -34,7 +34,6 @@ export const lockup = proxy<HTMLTagsOnly, LockupProps>('lockup', (TagName) => {
     passiveMessage,
     errorMessage,
     getInputProps,
-    mode,
     ...props
   }: LockupProps, ref) => {
 
@@ -52,14 +51,40 @@ export const lockup = proxy<HTMLTagsOnly, LockupProps>('lockup', (TagName) => {
         })
     }, [getInputProps]);
 
+    const subjectElem = (
+      <text.div
+        id={ subjectId }
+        standby={ false }>
+        { subject }
+      </text.div>
+    );
+
+    const passiveElem = (
+      <text.p 
+        id={ passiveId }
+        priority='auxiliary'>
+        { passiveMessage }
+      </text.p>
+    );
+
+    const errorElem = (
+      <text.p 
+        aria-live='polite'
+        id={ errorId }
+        priority='auxiliary'
+        standby={ false }>
+        { errorMessage }
+      </text.p>
+    );
+
     return (
       <Element { ...restrictProps(props) } ref={ ref } gap>
           { getIcon(iconRef, subject as ReactElement) }
           <box.div stack gap stretch>
-            { subject ? <text.div id={ subjectId } standby={ false }>{ subject }</text.div> : null }
-            { passiveMessage ? <text.p id={ passiveId } priority='auxiliary'>{ passiveMessage }</text.p> : null }
-            <box.div mode={ mode } stack gap>
-                <text.p aria-live='polite' id={ errorId } priority='auxiliary' standby={ false }>{ errorMessage }</text.p>
+            { subject ? subjectElem : null }
+            { passiveMessage ? passiveElem : null }
+            <box.div stack gap stretch>
+                { errorElem }
                 { children }
             </box.div>
           </box.div>
