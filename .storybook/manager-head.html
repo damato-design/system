@@ -39,9 +39,18 @@
     }
 
     @keyframes appear { to { visibility: visible; } }
+
+    #storybook-preview-iframe {
+        visibility: hidden;
+        animation: appear 0s linear forwards;
+    }
+
 </style>
 
 <script>
+
+    /*  ========== Replace page title ========== */    
+
     const title = document.querySelector('title');
 
     new MutationObserver(([entry]) => {
@@ -53,22 +62,61 @@
     { subtree: true, characterData: true, childList: true }
 );
 
+    /*  ========== Wait for DOM nodes ========== */
+
+    window.addEventListener('animationend', (ev) => {
+        if (ev.animationName === 'appear') {
+            if (ev.target.tagName === 'INPUT') handleInput(ev.target);
+            if (ev.target.tagName === 'IFRAME') handleIframe(ev.target);
+        }
+    });
+
+    /*  ========== Update placeholder in search ========== */
+
+    function handleInput(input) {
+        updatePlaceholder(input);
+        new MutationObserver(([entry]) => updatePlaceholder(input))
+            .observe(
+                input,
+                { attributes: true, attributeFilter: ['placeholder'], subtree: true,
+                childList: true, }
+            );
+    }
+
     function updatePlaceholder(node) {
         if (node.getAttribute('placeholder').includes('components')) {
             node.setAttribute('placeholder', 'Search docs');
         }
     }
 
-    window.addEventListener('animationend', (ev) => {
-        if (ev.animationName === 'appear') {
-            updatePlaceholder(ev.target);
-            new MutationObserver(([entry]) => {
-            updatePlaceholder(entry.target);
-    }).observe(
-        ev.target,
-        { attributes: true, attributeFilter: ['placeholder'], subtree: true,
-        childList: true, }
-    );
-        }
-    });
+    /*  ========== Update iframe heights to match content ========== */
+
+    function handleIframe(iframe) {
+        iframe.addEventListener('load', preview);
+        preview.call(iframe);
+    }
+
+    function adjustHeight() {
+        const adjustedHeight = this.contentWindow.document.body.scrollHeight;
+        const currentHeight = this.parentElement.style.height;
+        if (currentHeight !== '400px' || !adjustedHeight) return;
+        this.parentElement.style.height = `${adjustedHeight}px`;
+    }
+
+    function preview() {
+        const doc = (this?.contentDocument)
+            ? this.contentDocument
+            : this.contentWindow.document;
+
+        // TODO: Need better way of waiting for iframes, observe again??
+        // replace src to force reload?
+        // Update with resize also?
+        setTimeout(() => {
+            const $iframes = doc.getElementsByTagName('IFRAME');
+            [...$iframes].forEach(($iframe) => {
+                $iframe.addEventListener('load', adjustHeight);
+                adjustHeight.call($iframe);
+            });
+        }, 5000);
+    }
 </script>

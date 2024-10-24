@@ -65,6 +65,10 @@ const preview: Preview = {
       source: {
         excludeDecorators: true,
       },
+      story: {
+        inline: false,
+        iframeHeight: 400,
+      },
     }
   },
   tags: ["autodocs"]

@@ -1,4 +1,25 @@
 .text:is(.text) {
+
+    --depth: 0;
+	--text-primary-scale: 1.125;
+	--text-primary-minrem: 2; /* rem */
+	
+	--viewminrem: 20; /* 320px */
+	--viewmaxrem: 30; /* 480px */
+
+    /* (2 * 1.125^0) = 2 */
+	--font1minrem: calc(var(--text-primary-minrem) * pow(var(--text-primary-scale), var(--depth)));
+	/* (30 * 2 / 20) = 3 */
+	--font1maxrem: calc((var(--viewmaxrem) * var(--font1minrem)) / var(--viewminrem));
+	
+	/* (3 - 2) = 1 */
+	--font1delta: calc(var(--font1maxrem) - var(--font1minrem));
+	/* (30 - 20) = 10 */
+	--view1delta: calc(var(--viewmaxrem) - var(--viewminrem));
+	
+	/* (1 / 10) = .1 */
+	--slope: calc(var(--font1delta) / var(--view1delta));
+
     /* default is secondary */
     font-size: 1.2rem;
     text-wrap: pretty;
@@ -25,7 +46,11 @@
         font-weight: bolder;
         font-size: 1.2rem;
         &:not(label) {
-            font-size: 1.8rem;
+            font-size: clamp(
+                var(--font1minrem) * 1rem,
+                var(--slope) * 100vw,
+                var(--font1maxrem) * 1rem
+            );
             line-height: 1.1;
         }
     }

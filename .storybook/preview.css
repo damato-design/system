@@ -6,6 +6,16 @@
     color: #C9CDCF !important;
 }
 
+#storybook-preview-iframe {
+    visibility: hidden;
+    transition: visibility .001s step-start;
+    transition-behavior: allow-discrete;
+
+    &[data-is-loaded="true"] {
+        visibility: visible;
+    }
+}
+
 .sbdocs {
     &.sbdocs-content {
         max-width: 60rch;

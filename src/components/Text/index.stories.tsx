@@ -35,7 +35,7 @@ export const Default: Story = {
  */
 export const Priority: Story = {
     args: {
-        children: 'Whereas disregard and contempt for human rights have resulted',
+        children: 'Fluid typography for headlines',
         priority: 'primary'
     },
     render: (args) => <text.h2 { ...args } />
