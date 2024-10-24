@@ -1,0 +1,73 @@
+import { Meta, Canvas } from '@storybook/blocks';
+import { Priority } from '../src/components/Text/index.stories';
+
+<Meta title="Foundations/Typography" />
+
+# Typography
+
+Everything explained below is contained within [the `text` primitive](/docs/primitives-text--docs). Read on if you'd like to learn how the final resulting values are determined.
+
+### Tokens
+
+All typographic tokens are underneath the `text` category in intents. Each token is subdivided by a priority (ie., `primary`, `secondary`, `auxiliary`). Example: `text.primary.fontWeight` describes a headline's font weight.
+
+Priorities are linked to their use within the experience. `primary` is equal to the concept of headlines as they are expected to be the most important content to capture the user's interest before moving to lower priorty content. `secondary` describes most body content and `auxiliary` describes details you might find in help or error messaging and legal text.
+
+Each category has tokens that can be curated for the following properties:
+
+- `fontFamily`
+- `fontWeight`
+- `lineHeight`
+- `minRem` (related to font size)
+- `scaleFactor` (related to font size)
+
+### Generating the Scale
+
+The system creates a scale for each category using the `minRem` and `scaleFactor` values. In most cases, the result is aligned to what a person might find when using [typescale.com](https://typescale.com/). One clear difference being `minRem` expecting a unitless value of `rem`. For example, if the intention for the minimum font size for a category is `16px`, the value for this token would be `1` (ie., `1rem = 16px`).
+
+> #### Why expect the minimum font size?
+>
+> This is to ensure that any resulting calculation of text is accessible as it will always be larger than this number.
+
+> #### Why is it `minRem` and not something else?
+>
+> In order to compute fluid sizes for `primary` text, we use unitless numbers to calculate ratios in CSS. It is much harder to remove units from calculations than it is to later include them. To reduce exceptions based on category, all text tokens has the same composition.
+> 
+> Once units can be removed from CSS calculations, this should be changed to align with `minDimension` instead.
+
+Sizes are generated using the following formula:
+
+```
+size = minRem * pow(scaleFactor, level)
+```
+
+Where `level` is determined from [the amount of depth changes](/docs/foundations-density--docs) expected to occur in the experience. This means at the most compact parts of the experience (`level: 0`), the resulting font size will be `minRem * 1rem`. Each level up will scale up the size by the given `scaleFactor`. Here's what this would look like with `minRem: 1`, `scaleFactor: 1.125`, with 4 levels of depth:
+
+```yml
+level0 = 1 * 1.125^0 = 1.000 # 1rem
+level1 = 1 * 1.125^1 = 1.125 # 1.125rem
+level2 = 1 * 1.125^2 = 1.265 # 1.265rem
+level3 = 1 * 1.125^3 = 1.424 # 1.414rem
+```
+
+Because the resulting font size is determined by `level`, font size changes for any category occur only at depth changes. This allows for page hero areas at `level: 3` to have the possibility of having larger text than what is found in dense tables at `level: 0`.
+
+> #### Why not add more tokens for explicit font sizes?
+>
+> The average amount of font sizes for public design systems is 12. In reality, we don't need to curate lots of font sizes, this is too many choices ([Hick's Law](https://lawsofux.com/hicks-law/)). We aim to maintain a hierarchy of importance through these sizes. This is conveyed specifically with the `priority` divisions. With 4 levels you would have 12 font sizes available; 3 kinds of text multiplied by 4 levels of depth.
+
+### Fluid Primary Text
+
+The `primary` category used for headlines is a bit special as we expect the size of the text to adjust based on the available size of the device. To do this, we follow the conventions explained [here](https://css-tricks.com/linearly-scale-font-size-with-css-clamp-based-on-the-viewport/), specifically the section explaining avoiding reflow. The result is the headline resizing smoothly between two thresholds, maintaining the general optical composition throughout.
+
+<Canvas of={ Priority }/>
+
+The two thresholds are `320px` at a minimum representing the smallest device widths and `480px` at a maximum.
+
+> #### What does `480px` represent?
+>
+> This comes from the optimal line length for body copy, which has many debatable ranges for the best amount of characters for readability. The majority of these ranges will include 60 characters, which is roughly equal to `60rch` or `30rem`, which is `480px`. There doesn't seem to be data on the optimal line length for headlines, so to relate headlines with body copy, this upper-bound is used.
+>
+> More research can be done to adjust this maximum as appropriate.
+
+This minimum and maximum dimensions are then used with the `text.primary.minSize` and `text.primary.scaleFactor` to determine the maximum primary font size, (ie., the headline font size when the viewport is `480px` or larger). Further calculations are completed to determine how the text scales between `320px` and `480px` in a smooth linear progression. More detail is found at the earlier post. In the implementation here, the `320px` and `480px` are translated in terms of unitless `rem` before finally being used in the `clamp()` CSS function and assigned appropriate units.
