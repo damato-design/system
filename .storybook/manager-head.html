@@ -118,9 +118,13 @@
     function adjustHeight($iframe, $body) {
         const adjustedHeight = $body.scrollHeight;
         const currentHeight = $iframe.parentElement.style.height;
-        if (currentHeight !== '400px' || !adjustedHeight) return;
-        $iframe.parentElement.style.height = `${adjustedHeight}px`;
-        $iframe.parentElement.setAttribute('data-adjusted', '');
+        const allow = $iframe.parentElement.hasAttribute('data-adjusted')
+            || currentHeight === '400px';
+
+        if (allow && adjustedHeight) {
+            $iframe.parentElement.style.height = `${adjustedHeight}px`;
+            $iframe.parentElement.setAttribute('data-adjusted', '');
+        }
     }
 
     function preview() {
@@ -130,7 +134,17 @@
 
         this.contentWindow.addEventListener('animationend', (ev) => {
             if (ev.animationName === 'appear') {
-                if (ev.target.tagName === 'IFRAME') handleIframe(ev.target);
+                if (ev.target.tagName === 'IFRAME') {
+                    const $iframe = ev.target
+                    handleIframe($iframe);
+
+                    const resizer = $iframe.closest('.sbdocs-preview');
+                    if (!resizer) return;
+
+                    resizer.addEventListener('pointerup', () => {
+                        adjustHeight($iframe, $iframe.contentWindow.document.body);
+                    });
+                }
             }
         });
     }
