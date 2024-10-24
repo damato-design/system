@@ -2,7 +2,7 @@
 
     --depth: 0;
 	--text-primary-scale: 1.125;
-	--text-primary-minrem: 2; /* rem */
+	--text-primary-minrem: 1.5; /* rem */
 	
 	--viewminrem: 20; /* 320px */
 	--viewmaxrem: 30; /* 480px */

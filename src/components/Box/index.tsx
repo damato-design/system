@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import clsx from 'clsx';
 import css from './styles.module.css';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';
-import { element, ElementProps, restrictProps } from '../Element';
+import { element, ElementProps } from '../Element';
 
 type Position = 'start' | 'center' | 'end' | string | undefined;
 type MixedPosition = { inline?: Position, block?: Position } | Position | undefined;
@@ -77,10 +77,6 @@ export type BoxProps = ElementProps & {
    */
   priority?: 'primary' | 'secondary';
   /**
-   * If content is text, adds additional space between children.
-   */
-  prose?: boolean;
-  /**
    * Set the purpose for this component.
    * This will affect the final presentation.
    */
@@ -119,7 +115,6 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
     outset,
     padding,
     priority,
-    prose,
     purpose,
     round,
     stack,
@@ -160,11 +155,10 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
 
     const classNames = clsx(css.box, appearance, { 
       [css.round]: round,
-      [css.prose]: prose
     });
 
     return <Box
-      { ...restrictProps(props) }
+      { ...props }
       ref={ ref }
       className={ classNames }
       aria-busy={ standby }

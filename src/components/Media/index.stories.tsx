@@ -9,6 +9,14 @@ import { box } from '../Box';
 const meta = {
     title: 'Primitives/Media',
     component: Media,
+    parameters: {
+        docs: {
+            story: {
+                inline: false,
+                iframeHeight: 460,
+            },
+        },
+    },
 } satisfies Meta<typeof Media>
 
 export default meta

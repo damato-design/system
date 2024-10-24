@@ -12,6 +12,14 @@ import { box } from '../Box';
 const meta = {
     title: 'Primitives/flyout',
     component: flyout.div,
+    parameters: {
+        docs: {
+            story: {
+                inline: false,
+                iframeHeight: 200,
+            },
+        },
+    },
 } satisfies Meta<typeof flyout.div>
 
 export default meta

@@ -7,10 +7,6 @@
         border-radius: 100vw;
     }
 
-    &.prose:is(.prose) > * + * {
-        margin-block-start: var(--gap, .5rem);
-    }
-
     &[aria-busy="true"] {
         width: 100%;
 
@@ -92,7 +88,7 @@
 
     &:is([data-priority="secondary"]) {
         background: #fafafa;
-        box-shadow: 0 12px 8px -2px rgba(0,0,0,.8);
+        box-shadow: 0 12px 8px -2px rgba(128, 128, 128, 0.4);
     }
 }
 

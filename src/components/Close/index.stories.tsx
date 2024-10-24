@@ -22,7 +22,7 @@ export const Default: Story = {
     args: {},
     render: (args) => {
         return (
-            <box.div stack prose purpose='surface' padding>
+            <box.div stack gap purpose='surface' padding>
                 <text.h2 priority='primary'>
                     <Close { ...args }/>
                     Pok pok raw swag food truck next level man bun palo santo put a bird on it green juice
@@ -44,6 +44,14 @@ export const Default: Story = {
 }
 
 export const MediaUse: Story = {
+    parameters: {
+        docs: {
+            story: {
+                inline: false,
+                iframeHeight: 460,
+            },
+        },
+    },
     args: { float: false },
     render: (args) => {
         return (

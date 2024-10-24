@@ -12,6 +12,14 @@ import { Close } from '../Close';
 const meta = {
     title: 'Components/card',
     component: card.div,
+    parameters: {
+        docs: {
+            story: {
+                inline: false,
+                iframeHeight: 760,
+            },
+        },
+    },
 } satisfies Meta<typeof card.div>
 
 export default meta

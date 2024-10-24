@@ -62,6 +62,14 @@ export const Default: Story = {
 }
 
 export const Menu: Story = {
+    parameters: {
+        docs: {
+            story: {
+                inline: false,
+                iframeHeight: 360,
+            },
+        },
+    },
     args: {
         activeDescendant: 'option2',
         onActiveDescendantChange: () => {},

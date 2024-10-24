@@ -7,12 +7,11 @@
         font-family: 'Monaspace Radon', monospace;
         src: url(https://cdn.jsdelivr.net/gh/githubnext/monaspace@v1.000/fonts/webfonts/MonaspaceRadon-Regular.woff);
     }
+
+    @keyframes appear { to { visibility: visible; } }
+
+    iframe {
+        visibility: hidden;
+        animation: appear 0s linear forwards;
+    }
 </style>
-
-<script defer>
-
-    // const $preview = document.getElementById('storybook-preview-iframe');
-    // $preview.addEventListener('load', preview);
-
-    
-</script>

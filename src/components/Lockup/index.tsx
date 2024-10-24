@@ -13,7 +13,7 @@ function getIcon(iconRef: string | undefined, subject: ReactElement) {
     style: {
       display: 'inline-flex',
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'start'
     },
   }, createElement(icon[iconRef]));
 }
@@ -58,7 +58,7 @@ export const lockup = proxy<HTMLTagsOnly, LockupProps>('lockup', (TagName) => {
           <box.div stack gap stretch>
             { subject ? <text.div id={ subjectId } standby={ false }>{ subject }</text.div> : null }
             { passiveMessage ? <text.p id={ passiveId } priority='auxiliary'>{ passiveMessage }</text.p> : null }
-            <box.div mode={ mode } stack gap prose>
+            <box.div mode={ mode } stack gap>
                 <text.p aria-live='polite' id={ errorId } priority='auxiliary' standby={ false }>{ errorMessage }</text.p>
                 { children }
             </box.div>

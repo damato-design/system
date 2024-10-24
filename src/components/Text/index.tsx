@@ -2,7 +2,7 @@ import { forwardRef, useEffect, useId } from 'react';
 import css from './styles.module.css';
 import clsx from 'clsx';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';
-import { element, ElementProps, restrictProps } from '../Element';
+import { element, ElementProps } from '../Element';
 
 export type TextProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
   & ElementProps & {
@@ -44,7 +44,7 @@ export const text = proxy<HTMLTagsOnly, TextProps>('text', (TagName) => {
     });
 
     return <Text
-      { ...restrictProps(props) }
+      { ...props }
       ref={ ref }
       id={ id }
       className={ classNames }
