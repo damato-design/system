@@ -122,7 +122,7 @@
             || currentHeight === '400px';
 
         if (allow && adjustedHeight) {
-            $iframe.parentElement.style.height = `${adjustedHeight}px`;
+            $iframe.parentElement.style.height = `${adjustedHeight + 12}px`;
             $iframe.parentElement.setAttribute('data-adjusted', '');
         }
     }
