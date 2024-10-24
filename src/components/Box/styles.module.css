@@ -101,7 +101,7 @@
     flex: 1 1 auto;
 
     /* Icon only buttons */
-    &:has(:not(strong)) {
+    &:has(i[role="presentation"]:only-child) {
         flex-grow: 0;
     }
 
