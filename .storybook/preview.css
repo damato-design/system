@@ -50,7 +50,7 @@
 }
 
 pre, code, pre :not(button), code * {
-    font-family: 'Monaspace Radon', monospace !important;
+    font-family: Radon, monospace !important;
     white-space: pre-wrap !important;
     word-break: break-word;
 }
