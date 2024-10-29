@@ -3,27 +3,98 @@ import { Meta } from '@storybook/blocks';
 <Meta title="Foundations/Color" />
 
 # Color
-{/*
-The color system does not include swatches of color and instead focuses on maintaining a contrast between colors and supporting accessible accents. A theme can choose to use the grayscale or accents in whatever combinations that produce suitable contrast for inclusive experiences.
 
-### Grayscale
+> #### Is this approach implemented yet?
+>
+> Not yet. There's a great deal of work that needs to be completed to support the token ecosystem. The following describes the expectations of the system and is subject to change.
 
-The color steps of gray follow a [logistic curve](https://mathworld.wolfram.com/LogisticEquation.html), meaning they increment exponentially from the gray with the least amount of contrast (ie. the middle gray). The formula to determine the level of gray is the following:
+### Tokens
 
-- RGB: 255 / 1 + grayscale<sup>step</sup>, result is the number for each color channel.
-- HSL: 100 / 1 + grayscale<sup>step</sup>, result is the percentage of lightness (0% saturation).
+WIP.
 
-Step 0 results in middle gray, each step either goes toward black (ultragray) or white (infragray). The grayscale value is where curation occurs as we can tune this to have more or less contrast between the grays. The higher the grayscale value, the more contrast between infragray and ultragray (which also results in less contrast between grays on the same side of the scale). You can see the effect of the value with the range control below.
+### Mixing
 
-In choosing these shades, accessibility is a priority. With the layout colors selected at opposite ends of the scale, this ensures that if a gray on one side appears as text on top of a gray on the other side. The text should pass accessibility standards (assuming the font size is appropriate).
+Colors are eventually presented in the interface through a mixing system of 3 tiers.
 
-While there are now [different standards between AA and AAA](https://www.w3.org/TR/WCAG21/#contrast-minimum) which also relate to font size, a general rule is to ensure a 4.5:1 contrast ratio between the background color and text. Throughout the site, this ratio is typically much higher. You can use the colorfield control below to test the ratio between a chosen text color and the current background color of the site. This should also update when changing the system color.
+- **User preference** which informs the base layer of luminance for accessible contrast.
+- **Brand** which informs the customized presentation to identify branding needs.
+- **Cultural feedback** which enhances specific messaging using color related to the priority of the content.
 
-This isn't enough to simply select a high contrast between the background and text. Certain contrasts cause [Irlen Syndrome](https://irlen.com/what-is-irlen-syndrome/) which some people perceive the text to move on the page due to contrast sensitivity. The contrast between grayscale steps was adjusted to mitigate this.
+#### User preference
 
-### Accent Colors
+First, the base layer of colors is provided by the system. As an example, the `Canvas` keyword represents the page background color according to the user's system preferences. This should be a light color in light mode and a dark color in dark mode.
 
-Accent colors were chosen first by general hue then by accessibility measurements and finally applied to denote a user interaction or areas of interest. Many of the components that expect the user to take action or provide feedback are indicated using an accent color.
+```css
+body {
+    background-color: Canvas;
+}
+```
 
-Unlike many other systems, no color is selected to represent something good or bad. [Different colors mean different things to different cultures](https://uxplanet.org/understanding-color-psychology-though-culture-symbolism-and-emotion-215102347276). This could be rectified with localized color theming with a large effort for coverage or by choosing not including color as status. The system expects to use other patterns to help guide the user in understanding a meaning of state.
-*/}
+> #### Why is this always a light color for me?
+>
+> In order for this to activate, you also need to include `color-scheme: light dark` within a high declaration in the page (eg., `:root`, `html`, `body`).
+
+#### Brand
+
+Next, we will introduce the branding to the color using `color-mix()`. The tokens below are named to demonstrate the expected values for this area more clearly:
+
+```css
+body {
+    background-color: color-mix(
+        in oklch,
+        oklch(from Canvas l 0 0),
+        var(--brand-page-bg-value) var(--brand-page-bg-influence)
+    );
+}
+```
+
+The `color-mix()` function takes three arguments.
+
+The first is the color space where we use `oklch` to maintain the perceived luminance of the color as we mix. This is to standardize the contrast of the colors for accessibility.
+
+The second argument is returning the perceived lightness for the current `Canvas` and setting the amount of color and hue angle to `0`, effectively removing the color. This is the amount of gray we'll use to inform the lightness of final branded color.
+
+The third is the expected page background color provided by the brand and the amount of influence as a percentage that this color is meant to have at this location. Setting the influence to `100%` would cause this color to take over anything provided by the earlier `Canvas` information.
+
+For a property like background color, we most likely do not expect a large amount of influence to be present. In other areas like buttons, we might expect the influence to be higher.
+
+> #### Why doesn't the browser devtools recognize this statement?
+>
+> As of the time of this writing, only Safari supports relative color syntax for keywords like `Canvas` or `currentColor`. However, [other browsers are expecting to release this feature soon](https://caniuse.com/css-relative-colors).
+
+#### Cultural feedback
+
+In some areas of the page, a special mode can be introduced which expects to enhance the current messaging provided by the system. An example of this could be when a form field means to display an error.
+
+Traditionally, we might support this by including additional tokens for a red color intended in certain places to highlight the error. In this system, we consider the area to be a new mode conveying the concept of being in a critical state and affecting the values of the intents within.
+
+Furthemore, that red color is culturally specific. In other words, the color red might not mean "danger" to the person it is presented. In Eastern cultures, the color red means "prosperity", which could be considered far from dangerous. This means that the color being provided here may need to change based on the user's culture to provide an accurate expression.
+
+To do this, we introduce a final mix.
+
+```css
+body {
+    --bg: color-mix(
+        in oklch,
+        oklch(from Canvas l 0 0 / alpha),
+        var(--brand-page-bg-value) var(--brand-page-bg-influence)
+    );
+    background-color: var(--bg);
+}
+
+[data-mode="critical"]:lang(en-us) {
+    --brand-page-bg-value: red;
+    --brand-page-bg-influence: 90%;
+    background-color: color-mix(in oklch
+        var(--bg)
+        var(--brand-page-bg-value) var(--brand-page-bg-influence)
+    );
+}
+```
+The first declaration is identical to what we completed in the previous section, only now setting to a reusable CSS custom property.
+
+Using the mode metadata to construct a `:lang()` CSS selector, we provide the appropriate color updated to the scoped mode. We also expect the influence of this value to be much higher due to the expression this attempts to convey.
+
+> #### Can the brand also be affected by culture?
+>
+> Yes! It is possible that the chosen brand colors are less effective for certain cultures, so it may be appropriate to curate these values differently. As an example, Eastern cultures don't respond well to black buttons so consider changing the action background color to a more culturally appropriate value.
