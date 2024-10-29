@@ -1,0 +1,56 @@
+surface:
+  primary:
+    backgroundColor: color-mix(in oklch, Canvas, white 10%)
+    foregroundColor: CanvasText
+    borderColor: GrayText
+  secondary:
+    backgroundColor: color-mix(in oklch, Canvas, white 5%)
+    foregroundColor: CanvasText
+    borderColor: GrayText
+  auxiliary:
+    backgroundColor: color-mix(in oklch, Canvas, white 0%)
+    foregroundColor: CanvasText
+    borderColor: GrayText
+
+action:
+  primary:
+    backgroundColor: AccentColor
+    foregroundColor AccentColorText
+    borderColor: transparent
+  secondary:
+    backgroundColor: ButtonFace
+    foregroundColor ButtonText
+    borderColor: GrayText
+  auxiliary:
+    backgroundColor: transparent
+    foregroundColor ActiveText
+    borderColor: transparent
+
+control:
+  backgroundColor: Field
+  foregroundColor: FieldText
+  borderColor: GrayText
+
+text:
+  primary:
+    fontFamily: serif
+    fontWeight: 700
+    lineHeight: 1.1
+    minRem: 2
+    scaleFactor: 1.125
+  secondary:
+    fontFamily: sans-serif
+    fontWeight: 400
+    lineHeight: 1.4
+    minRem: 1.4
+    scaleFactor: 1.125
+  auxiliary:
+    fontFamily: sans-serif
+    fontWeight: 400
+    lineHeight: 1.4
+    minRem: 1
+    scaleFactor: 1.125
+
+space:
+  minDimension: .5rem
+  scaleFactor: 1.618
