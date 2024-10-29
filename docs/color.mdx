@@ -85,8 +85,9 @@ body {
 [data-mode="critical"]:lang(en-us) {
     --brand-page-bg-value: red;
     --brand-page-bg-influence: 90%;
-    background-color: color-mix(in oklch
-        var(--bg)
+    background-color: color-mix(
+        in oklch,
+        var(--bg),
         var(--brand-page-bg-value) var(--brand-page-bg-influence)
     );
 }
