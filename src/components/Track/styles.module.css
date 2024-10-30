@@ -5,29 +5,61 @@
     height: 1lh;
     display: flex;
     width: -webkit-fill-available;
+    border: 1px solid #aaa;
+
+    /* indeterminate */
+    &:not([value]) {
+        background-image: repeating-linear-gradient(
+            45deg,
+            green,
+            green 25%,
+            color-mix(in oklch, green, transparent 25%) 25%,
+            color-mix(in oklch, green, transparent 25%) 50%
+        );
+        background-size: 1.5em 1.5em;
+        background-position: 1.5em 0;
+        animation: indeterminate 1s linear infinite paused;
+
+        @media (prefers-reduced-motion: no-preference) {
+            animation-play-state: running;
+        }
+    }
+
+    &[value] {
+        background: linear-gradient(
+            90deg,
+            green 0,
+            green var(--fill),
+            transparent var(--fill),
+            transparent 100%
+        ) no-repeat;
+    }
 
     &:where(progress) {
-        color: red;
-        border: 1px solid;
         &::-webkit-progress-bar {
             background-color: transparent;
         }
     }
 
     &:where(meter) {
-        color: green;
-        border: 1px solid;
+        
     }
 
     &:where(input[type="range"]) {
-        color: blue;
-        border: 1px solid;
         &::-webkit-slider-thumb {
             appearance: none;
             height: 1lh;
             aspect-ratio: 1;
             border-radius: 100vw;
-            background-color: currentColor;
+            border: 1px solid #aaa;
+            /* checkbox checked color */
+            background-color: green;
+            cursor: ew-resize;
+            transform: scale(1.5);
         }
     }
+}
+
+@keyframes indeterminate {
+    to { background-position: 0 0; }
 }

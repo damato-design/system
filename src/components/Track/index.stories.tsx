@@ -19,11 +19,11 @@ export const Default: Story = {
 }
 
 export const Meter: Story = {
-    args: {},
+    args: { value: 50 },
     render: (args) => <track.meter { ...args }/> 
 }
 
 export const Range: Story = {
-    args: {},
+    args: { value: 30 },
     render: (args) => <track.range { ...args }/> 
 }
