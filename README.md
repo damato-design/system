@@ -1,52 +1,14 @@
-[Following](https://victorlillo.dev/blog/react-typescript-vite-component-library)
+# [Design System Playground](https://system.damato.design)
 
-# React + TypeScript + Vite
+This site is meant as an exploration of design system ideas. Some of the approaches found within these pages are highly experimental but remain as a proof of concept for organization and composition of resources within our practice.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The design system...
 
-Currently, two official plugins are available:
+- Supports designing with intentions, not arbitrary feelings.
+- Invokes deliberate restrictions for the purpose of reducing decisions.
+- Should aim to fill gaps produced by wireframing and user flows.
+- Provides guidance for implementing common patterns and themes.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+We believe that proper adoption of a design system suggests a trustworthy experience to the user. If parts of a user flow deviate from expectations with novel concepts, the user will lose trust and patience in the system unless prompted. It is imperative that user expectations are met from the smallest tokens and components which are the foundations to our larger experiences.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+User discretion is advised. 😊
