@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react';
+import { useCallback, useState } from 'react';
 
 import { track } from '.';
 
@@ -25,5 +26,9 @@ export const Meter: Story = {
 
 export const Range: Story = {
     args: { value: 30 },
-    render: (args) => <track.range { ...args }/> 
+    render: ({ value, ...args }) => {
+        const [val, setValue] = useState(value);
+        const onChange = useCallback((ev: any) => setValue(ev.target.valueAsNumber), []);
+        return <track.range { ...args } value={ val } onChange={ onChange }/>
+    } 
 }

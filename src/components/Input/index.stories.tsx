@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { useCallback, useState } from 'react';
 
 import { input } from '.';
-import { useCallback, useState } from 'react';
+
 
 /**
  * The `input` primitive creates elements meant for user input.
