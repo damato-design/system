@@ -21,7 +21,7 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
     args: {
         id: 'default',
-        value: 'Hello World!',
+        value: 'email@example.com',
         name: 'default'
     },
     render: ({ value: givenValue, ...args }) => {

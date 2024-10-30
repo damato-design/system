@@ -19,7 +19,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     args: {
-        children: 'Hello World!'
+        children: 'Content within the box'
     },
     render: (args) => <box.main { ...args }/>
 }

@@ -80,6 +80,7 @@
     border-radius: 8px;
     overflow: clip;
     contain: layout;
+    color: black;
 
     &:is([data-priority="primary"]) {
         background: #fff;

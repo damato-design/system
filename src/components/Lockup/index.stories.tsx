@@ -20,8 +20,8 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     args: {
-        children: 'Hello World!',
-        subject: <text.h2 priority='primary'>Title</text.h2>
+        subject: <text.h2 priority='primary'>Profound Story</text.h2>,
+        children: 'Once upon a time, there was a great protagonist.'
     },
 }
 
