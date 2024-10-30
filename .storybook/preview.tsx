@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Preview } from "@storybook/react";
-import { Title, Description, Primary, Controls, Stories, useOf } from '@storybook/addon-docs';
+import { Title, Description, Stories, useOf } from '@storybook/addon-docs';
+import Github from '../docs/components/Github';
 import theme from './theme';
 
 import './preview.css';
@@ -29,14 +30,8 @@ const page = () => (
     <Title/>
     <Install/>
     <Description/>
-    {/* <Primary/> */}
-    {/* <details>
-      <summary className='controls-summary'>
-        <h3>Controls</h3>
-      </summary>
-      <Controls/>
-    </details> */}
     <Stories/>
+    <Github/>
   </>
 );
 
