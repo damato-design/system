@@ -19,6 +19,12 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
+    args: {
+        float: false
+    }
+}
+
+export const ContentUse: Story = {
     args: {},
     render: (args) => {
         return (

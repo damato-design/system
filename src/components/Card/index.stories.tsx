@@ -29,6 +29,14 @@ export const Default: Story = {
     args: {
         src: 'https://loremflickr.com/1280/720',
         padding: true,
+        purpose: 'surface'
+    }
+}
+
+export const Full: Story = {
+    args: {
+        src: 'https://loremflickr.com/1280/720',
+        padding: true,
         purpose: 'surface',
         subject: (
             <text.h2 priority='primary'>
