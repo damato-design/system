@@ -10,7 +10,21 @@ import { Meta } from '@storybook/blocks';
 
 ### Tokens
 
-WIP.
+The `surface`, `action`, and `control` categories will include the following properties:
+
+- `backgroundColor` describes the color used to fill the region.
+- `foregroundColor` describes the color used for elements that appear within the region. This includes text and icons.
+- `borderColor` describes the color that may surround the region.
+
+The value applied is a combination of the color and the amount of influence that color should have when being mixed with the system color. In the curation of these values, these are prepared in the following way:
+
+```yml
+action:
+    primary:
+        backgroundColor:
+            value: purple
+            influence: 80%
+```
 
 ### Mixing
 
