@@ -12,9 +12,14 @@ export default function Github() {
     return (
         <a
             href={ url.toString() }
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '.5em' }}>
+            style={{ 
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '.5em',
+                textDecoration: 'underline'
+            }}>
             <Icon/>
-            View source on Github
+            View source on github.com
         </a>
     )
 }

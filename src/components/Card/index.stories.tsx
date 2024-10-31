@@ -63,7 +63,7 @@ export const Full: Story = {
                 bulb iceland tilde mixtape messenger bag. Pabst tumblr
                 cold-pressed artisan keytar vinyl irony asymmetrical edison bulb.
             </text.p>,
-            <box.div actions key='actions'>
+            <box.div infill key='actions'>
                 <Button priority='primary'>Submit</Button>
                 <Button>Cancel</Button>
             </box.div>

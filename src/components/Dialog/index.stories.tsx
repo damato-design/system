@@ -80,7 +80,7 @@ export const Modal: Story = {
                     modalzmodalzmodalz.com
                 </text.a>
             </text.p>,
-            <box.div actions key='actions'>
+            <box.div infill key='actions'>
                 <Button priority='primary'>Submit</Button>
                 <Button>Cancel</Button>
             </box.div>

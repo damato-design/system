@@ -94,7 +94,7 @@ export const InnerButton: Story = {
 
 /**
  * This example demonstrates the alignment of a `field` without
- * internal `<Button/>` elements. This also makes use of the `actions`
+ * internal `<Button/>` elements. This also makes use of the `infill`
  * flag for `box` which can allow elements to stack and stretch when
  * minimal space is available.
  */
@@ -112,7 +112,7 @@ export const OuterButton: Story = {
         }, []);
 
         return (
-            <box.form action='' actions inset={{ block: 'end' }}>
+            <box.form action='' infill inset={{ block: 'end' }}>
                 <field.div { ...args }>
                     <input.email name='email' value={ value } onChange={ onChange }/>
                 </field.div>

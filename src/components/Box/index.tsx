@@ -35,10 +35,6 @@ interface ModernCSSProperties extends React.CSSProperties {
 
 export type BoxProps = ElementProps & {
   /**
-   * Helps layout a group of buttons
-   */
-  actions?: boolean,
-  /**
    * Use to help with anchor positioning.
    */
   anchorName?: string,
@@ -59,6 +55,10 @@ export type BoxProps = ElementProps & {
    * @default true
    */
   logical?: boolean;
+  /**
+   * Helps layout a group of buttons
+   */
+  infill?: boolean,
   /**
    * Set the alignment for the children within the element.
    */
@@ -105,11 +105,11 @@ export type BoxProps = ElementProps & {
 
 export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
   return forwardRef<HTMLElement, BoxProps>(({
-    actions,
     anchorName,
     clip,
     distribute,
     gap,
+    infill,
     inset,
     logical = true,
     outset,
@@ -140,12 +140,12 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       display: stretch ? 'flex' : 'inline-flex',
       flex: stretch && !['action', 'control'].includes(purpose as string) ? 1 : undefined,
       flexDirection: stack ? 'column' : 'row',
-      flexWrap: wrap || actions ? 'wrap' : 'nowrap',
+      flexWrap: wrap || infill ? 'wrap' : 'nowrap',
       justifySelf: outerLayout.at(0),
       alignSelf: outerLayout.at(1),
       padding: padding ? 'var(--padding, 1rem)' : undefined,
-      gap: gap || actions ? 'var(--gap, .5rem)' : undefined,
-      maxWidth: actions ? 'max-content' : undefined
+      gap: gap || infill ? 'var(--gap, .5rem)' : undefined,
+      maxWidth: infill ? 'max-content' : undefined
     };
 
     const appearance: { [key: string]: boolean } = {};
