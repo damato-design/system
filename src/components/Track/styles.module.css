@@ -38,12 +38,22 @@
 
     &:where(progress) {
         &::-webkit-progress-bar {
-            background-color: transparent;
+            opacity: 0;
+        }
+
+        &::-moz-progress-bar {
+            opacity: 0;
         }
     }
 
     &:where(meter) {
-        
+        &::-webkit-meter-bar {
+            opacity: 0;
+        }
+
+        &::-moz-meter-bar {
+            opacity: 0;
+        }
     }
 
     &:where(input[type="range"]) {
@@ -52,12 +62,12 @@
             height: 1lh;
             aspect-ratio: 1;
             border-radius: 100vw;
-            border: 1px solid #aaa;
-            /* surface secondary color */
-            background: #fafafa;
-            box-shadow: 0 8px 8px -2px rgba(128, 128, 128, 0.4);
             cursor: ew-resize;
             transform: scale(1.5);
+            /* secondary surface */
+            border: 1px solid #aaa;
+            background: #fafafa;
+            box-shadow: 0 8px 8px -2px rgba(128, 128, 128, 0.4);
         }
     }
 }
