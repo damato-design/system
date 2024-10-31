@@ -26,7 +26,7 @@ export const Default: Story = {
 
 /**
  * The meter type is meant to measure a fractional amount of countable items.
- * Example: amount of available disk spac in kilobytes.
+ * Example: amount of available disk space in kilobytes.
  */
 export const Meter: Story = {
     args: { value: 50 },

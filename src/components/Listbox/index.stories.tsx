@@ -30,6 +30,16 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+/**
+ * This example shows a basic composition for the component.
+ * There are two states to manage, the `activeDescendant` which
+ * indicates the currently chosen item and the `visualFocus` which
+ * indicates if the user is currently navigating within the component.
+ * 
+ * If you'd need additional listeners to determine when a specific item
+ * is clicked, an `onClick` listener can be added to the object in the `items`
+ * array as this represents the props for the `<Button/>`.
+ */
 export const Default: Story = {
     args: {
         activeDescendant: 'option2',
@@ -61,6 +71,12 @@ export const Default: Story = {
     }
 }
 
+/**
+ * The following demonstrates how to wire the `listbox` to other components
+ * to create a complete menu experience. Note that both the `listbox` and
+ * the `flyout` have their own `getAnchorProps()` method which are expected
+ * to provide attributes to the `<Button/>`. These props do not conflict.
+ */
 export const Menu: Story = {
     parameters: {
         docs: {

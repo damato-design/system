@@ -12,6 +12,11 @@ import { Button } from '../Button';
  * The `field` primitive helps compose user input fields.
  * Generally, you'll be adding a single `<input.text/>` as the child,
  * but you can include other accessories within the field.
+ * 
+ * > #### Why is the `field` separate from the `input`?
+ * >
+ * > This allows for mixed content to appear within the field, such
+ * > as icons and buttons.
  */
 const meta = {
     title: 'Primitives/field',
@@ -21,6 +26,10 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+/**
+ * By default, the `field` expects at least an `input` primitive
+ * to complete the experience of allowing the user to fill out a form.
+ */
 export const Default: Story = {
     args: {},
     render: (args) => {
@@ -32,6 +41,11 @@ export const Default: Story = {
     }
 }
 
+/**
+ * An `icon` can be placed in the field to draw attention to the input expectation.
+ * You can also separate regions within the `field` by using a native HTML `<hr/>`
+ * element.
+ */
 export const Icon: Story = {
     args: {},
     render: (args) => {
@@ -45,6 +59,11 @@ export const Icon: Story = {
     }
 }
 
+/**
+ * This example demonstrates the alignment of `<Button/>` elements
+ * internal to the `field` in comparison to buttons that
+ * may appear adjacent to the `field`.
+ */
 export const InnerButton: Story = {
     args: { stretch: false },
     render: (args) => {
@@ -73,6 +92,12 @@ export const InnerButton: Story = {
     }
 }
 
+/**
+ * This example demonstrates the alignment of a `field` without
+ * internal `<Button/>` elements. This also makes use of the `actions`
+ * flag for `box` which can allow elements to stack and stretch when
+ * minimal space is available.
+ */
 export const OuterButton: Story = {
     args: { stretch: true },
     render: (args) => {

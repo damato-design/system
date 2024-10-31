@@ -18,6 +18,10 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+/**
+ * All `input` primitives require a type of input to be referenced with
+ * the dot-notation. This example demonstrates how to render the `email` type.
+ */
 export const Default: Story = {
     args: {
         id: 'default',
@@ -27,10 +31,18 @@ export const Default: Story = {
     render: ({ value: givenValue, ...args }) => {
         const [value, setValue] = useState(givenValue);
         const onChange = useCallback((ev: any) => setValue(ev.target.value), []);
-        return <input.text { ...args } value={ value } onChange={ onChange }/>
+        return <input.email { ...args } value={ value } onChange={ onChange }/>
     }
 }
 
+/**
+ * While any HTML `<input/>` element could be rendered,
+ * some are better prepared than others. More work will need to be done
+ * to fully support less common input types.
+ * 
+ * For checkbox and radio button components, consider using the
+ * `<Checkbox/>` component.
+ */
 export const Color: Story = {
     args: {
         id: 'color',
@@ -44,6 +56,11 @@ export const Color: Story = {
     }
 }
 
+/**
+ * For multiline input, the `<input.textarea/>` type will render
+ * a native HTML `<textarea/>` with some additional features to
+ * help with alignment and composition.
+ */
 export const Textarea: Story = {
     args: {
         id: 'textarea-example',

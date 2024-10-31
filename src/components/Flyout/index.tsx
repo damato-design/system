@@ -41,8 +41,8 @@ export const flyout = proxy<HTMLTagsOnly, FlyoutProps>('flyout', (TagName) => {
     useEffect(() => {
       typeof getAnchorProps === 'function'
         && getAnchorProps({
-          popovertarget: targetId,
           anchorName: name,
+          popovertarget: targetId,
           popovertargetaction: disclosure ? 'toggle' : null
         });
     }, [getAnchorProps]);
