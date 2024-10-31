@@ -81,6 +81,13 @@ export const Default: Story = {
  * available keys found in `IDREF` for typing.
  */
 export const Batch: Story = {
+    parameters: {
+        docs: {
+            story: {
+                height: 0
+            }
+        }
+    },
     args: {
         children: 'cerca'
     },

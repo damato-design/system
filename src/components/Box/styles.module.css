@@ -23,7 +23,7 @@
             background-image: linear-gradient(
                 100deg,
                 transparent 40%,
-                color-mix(in srgb, var(--skeleton-shine), transparent 50%) 50%,
+                color-mix(in oklch, var(--skeleton-shine), transparent 50%) 50%,
                 transparent 60%
             );
             background-size: 200% 100%;
@@ -107,7 +107,7 @@
     }
 
     --bgColor: #fefefe;
-    background-color: color-mix(in srgb, var(--bgColor), currentColor 5%);
+    background-color: color-mix(in oklch, var(--bgColor), currentColor 5%);
     transition: background .218s ease;
     color: black;
 
@@ -136,7 +136,7 @@
     }
 
     &:not([disabled]):hover {
-        background-color: color-mix(in srgb, var(--bgColor), currentColor 15%);
+        background-color: color-mix(in oklch, var(--bgColor), currentColor 15%);
     }
 }
 

@@ -5,7 +5,7 @@
 
     &.visualfocus {
         [aria-selected="true"] {
-            background-color: color-mix(in srgb, var(--bgColor), currentColor 15%);
+            background-color: color-mix(in oklch, var(--bgColor), currentColor 15%);
         }
     }
 

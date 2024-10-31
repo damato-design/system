@@ -40,13 +40,17 @@
     }
 
     & blockquote:not([class]) {
-        background: color-mix(in srgb,#222425,#4fb9af 10%);
+        background: color-mix(in oklch,#222425,#4fb9af 10%);
         padding: 1em 2.5em;
     }
 }
 
 .docs-story {
     background: white;
+
+    &:has(.sb-story > [style*="height: 0px"]) {
+        display: none;
+    }
 }
 
 pre, code, pre :not(button), code * {
