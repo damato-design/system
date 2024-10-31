@@ -1,0 +1,115 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Foundations/Color" />
+
+# Color
+
+> #### Is this approach implemented yet?
+>
+> Not yet. There's a great deal of work that needs to be completed to support the token ecosystem. The following describes the expectations of the system and is subject to change.
+
+### Tokens
+
+The `surface`, `action`, and `control` categories will include the following properties:
+
+- `backgroundColor` describes the color used to fill the region.
+- `foregroundColor` describes the color used for elements that appear within the region. This includes text and icons.
+- `borderColor` describes the color that may surround the region.
+
+The value applied is a combination of the color and the amount of influence that color should have when being mixed with the system color. In the curation of these values, these are prepared in the following way:
+
+```yml
+action:
+    primary:
+        backgroundColor:
+            value: purple
+            influence: 80%
+```
+
+### Mixing
+
+Colors are eventually presented in the interface through a mixing system of 3 tiers.
+
+- **User preference** which informs the base layer of perceived lightness for accessible contrast.
+- **Brand** which informs the customized presentation to identify branding needs.
+- **Symbolic** which enhances specific messaging using color related to the subjective meaning of the content.
+
+#### User preference
+
+First, the base layer of colors is provided by a [system color](https://developer.mozilla.org/en-US/docs/Web/CSS/system-color). As an example, the `Canvas` keyword represents the page background color according to the user's system preferences. This should be a light color in light mode and a dark color in dark mode.
+
+```css
+body {
+    background-color: Canvas;
+}
+```
+
+> #### Why is this always a light color for me?
+>
+> In order for this to activate, you also need to include `color-scheme: light dark` within a high declaration in the page (eg., `:root`, `html`, `body`).
+
+#### Brand
+
+Next, we will introduce the branding to the color using `color-mix()`. The tokens below are named to demonstrate the expected values for this area more clearly:
+
+```css
+body {
+    background-color: color-mix(
+        in oklch,
+        oklch(from Canvas l 0 0),
+        var(--brand-page-bg-value) var(--brand-page-bg-influence)
+    );
+}
+```
+
+The `color-mix()` function takes three arguments.
+
+The first is the color space where we use `oklch` to maintain the perceived luminance of the color as we mix. This is to standardize the contrast of the colors for accessibility.
+
+The second argument is returning the perceived lightness for the current `Canvas` and setting the amount of color and hue angle to `0`, effectively removing the color. This is the amount of gray we'll use to inform the lightness of final branded color.
+
+The third is the expected page background color provided by the brand and the amount of influence as a percentage that this color is meant to have at this location. Setting the influence to `100%` would cause this color to take over anything provided by the earlier `Canvas` information.
+
+For a property like background color, we most likely do not expect a large amount of influence to be present. In other areas like buttons, we might expect the influence to be higher.
+
+> #### Why doesn't the browser devtools recognize this statement?
+>
+> As of the time of this writing, only Safari supports relative color syntax for keywords like `Canvas` or `currentColor`. However, [other browsers are expecting to release this feature soon](https://caniuse.com/css-relative-colors).
+
+#### Symbolic
+
+Color symbolism is the cultural evolution of our psychological associations with color. In some areas of the page, a special mode can be introduced which expects to enhance the current messaging provided by the system in a largely brand agnostic way. An example of this could be when a form field means to display an error. We can leverage a change in color to indicate this area needs special attention.
+
+Traditionally, we might support this by including additional tokens for a red color intended in certain places to highlight the error. In this system, we consider the area to be a new mode conveying the concept of being in a critical state and affecting the values of the intents within.
+
+Furthemore, that red color is culturally specific. In other words, the color red might not mean "danger" to the person it is presented. In Eastern cultures, the color red means "prosperity", which could be considered far from dangerous depending on how it is used. This means that the color being provided here may need to change based on the user's culture to provide an accurate expression.
+
+To do this, we introduce a final mix:
+
+```css
+body {
+    --bg: color-mix(
+        in oklch,
+        oklch(from Canvas l 0 0 / alpha),
+        var(--brand-page-bg-value) var(--brand-page-bg-influence)
+    );
+    background-color: var(--bg);
+}
+
+[mode="critical"]:lang(en-us) {
+    --brand-page-bg-value: red;
+    --brand-page-bg-influence: 90%;
+    background-color: color-mix(
+        in oklch,
+        var(--bg),
+        var(--brand-page-bg-value) var(--brand-page-bg-influence)
+    );
+}
+```
+The first declaration is identical to what we completed in the previous section, only now setting to a reusable CSS custom property.
+
+Using the mode metadata to construct a `:lang()` CSS selector, we provide the appropriate color updated to the scoped mode. We also expect the influence of this value to be much higher due to the expression this attempts to convey.
+
+> #### Can the brand also be affected by culture?
+>
+> Yes! It is possible that the chosen brand colors are less effective for certain cultures, so it may be appropriate to curate these values differently. As an example, Eastern cultures don't respond well to black buttons so consider changing the action background color to a more culturally appropriate value.

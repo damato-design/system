@@ -1,0 +1,23 @@
+@import 'material-icons/iconfont/material-icons.css';
+
+.icon:is(.icon) {
+    display: inline-flex;
+    flex-shrink: 0;
+    min-width: 0;
+    box-sizing: content-box;
+    align-items: center;
+    pointer-events: none;
+    font-family: 'Material Icons Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 1.5em;
+    line-height: 1lh;
+    height: 1lh;
+    letter-spacing: normal;
+    text-transform: none;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}

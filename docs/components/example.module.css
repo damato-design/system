@@ -1,0 +1,40 @@
+.card {
+    color: white;
+    border: 1px solid;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.window {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    display: flex;
+}
+
+.example {
+    filter: grayscale(1);
+    transform: scale(.5);
+    pointer-events: none;
+    height: 0;
+    padding: 1rem;
+    /* color: white; */
+    transition: .218s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin: auto;
+}
+
+.window:hover .example {
+    filter: grayscale(0);
+    transform: scale(.6);
+}
+
+.title {
+    background: #222425;
+    padding: 1rem;
+    margin: 0;
+    font-weight: bolder;
+    text-transform: capitalize;
+}

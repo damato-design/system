@@ -1,0 +1,52 @@
+import { Meta } from '@storybook/blocks';
+import * as BoxStories from '../src/components/Box/index.stories';
+import * as CloseStories from '../src/components/Close/index.stories';
+import * as FieldStories from '../src/components/Field/index.stories';
+import * as FlyoutStories from '../src/components/Flyout/index.stories';
+import * as IconStories from '../src/components/Icon/index.stories';
+import * as InputStories from '../src/components/Input/index.stories';
+import * as ListboxStories from '../src/components/Listbox/index.stories';
+import * as LocalizeStories from '../src/components/Localize/index.stories';
+import * as LockupStories from '../src/components/Lockup/index.stories';
+import * as MediaStories from '../src/components/Media/index.stories';
+import * as TextStories from '../src/components/Text/index.stories';
+import * as TrackStories from '../src/components/Track/index.stories';
+import Grid from './components/Grid';
+import Example from './components/Example';
+
+<Meta title="Primitives/Overview" />
+
+# Primitives
+
+Primitives are low-level components that are the foundational building blocks to more complex compositions. In many cases, you can think of them as super-charged HTML elements.
+
+Generally speaking, primitives aren't expected to be used on their own but instead as a part of a larger composition. For example the `input` primitive is practically invisible itself. The more appropriate choice for displaying a user input is to use the `field` primitive and add the `input` primitive as a child.
+
+```jsx
+<field.div>
+    <input.text/>
+</field.div>
+```
+See visual examples in the [Field component docs](/docs/components-field--docs).
+
+### Priniciples
+
+- Elements should be composable such that no additional styles need to be declared.
+- Authors cannot add `id`, `class`, or `style` attributes to any component. These are handled internally to the library as needed and are removed if provided.
+
+### Gallery
+
+<Grid>
+    <Example stories={ BoxStories }/>
+    <Example stories={ CloseStories }/>
+    <Example stories={ FieldStories }/>
+    <Example stories={ FlyoutStories }/>
+    <Example stories={ IconStories }/>
+    <Example stories={ InputStories }/>
+    <Example stories={ ListboxStories }/>
+    <Example stories={ LocalizeStories }/>
+    <Example stories={ LockupStories }/>
+    <Example stories={ MediaStories }/>
+    <Example stories={ TextStories }/>
+    <Example stories={ TrackStories }/>
+</Grid>

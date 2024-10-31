@@ -1,14 +1,3 @@
 [build]
-  publish = "_site"
+  publish = "storybook-static"
   command = "npm run build"
-  # functions = "functions" # https://system.damato.design/searchIndex.json
-
-# [[redirects]]
-#   from = "/"
-#   to = "/introduction"
-#   status = 200 # Hide the url as index
-
-[[plugins]]
-  package = "netlify-plugin-a11y"
-  [plugins.inputs]
-    resultMode = "warn"
