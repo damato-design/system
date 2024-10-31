@@ -30,9 +30,9 @@ action:
 
 Colors are eventually presented in the interface through a mixing system of 3 tiers.
 
-- **User preference** which informs the base layer of luminance for accessible contrast.
+- **User preference** which informs the base layer of perceived lightness for accessible contrast.
 - **Brand** which informs the customized presentation to identify branding needs.
-- **Cultural feedback** which enhances specific messaging using color related to the priority of the content.
+- **Symbolic** which enhances specific messaging using color related to the subjective meaning of the content.
 
 #### User preference
 
@@ -76,15 +76,15 @@ For a property like background color, we most likely do not expect a large amoun
 >
 > As of the time of this writing, only Safari supports relative color syntax for keywords like `Canvas` or `currentColor`. However, [other browsers are expecting to release this feature soon](https://caniuse.com/css-relative-colors).
 
-#### Cultural feedback
+#### Symbolic
 
-In some areas of the page, a special mode can be introduced which expects to enhance the current messaging provided by the system. An example of this could be when a form field means to display an error.
+Color symbolism is the cultural evolution of our psychological associations with color. In some areas of the page, a special mode can be introduced which expects to enhance the current messaging provided by the system in a largely brand agnostic way. An example of this could be when a form field means to display an error. We can leverage a change in color to indicate this area needs special attention.
 
 Traditionally, we might support this by including additional tokens for a red color intended in certain places to highlight the error. In this system, we consider the area to be a new mode conveying the concept of being in a critical state and affecting the values of the intents within.
 
-Furthemore, that red color is culturally specific. In other words, the color red might not mean "danger" to the person it is presented. In Eastern cultures, the color red means "prosperity", which could be considered far from dangerous. This means that the color being provided here may need to change based on the user's culture to provide an accurate expression.
+Furthemore, that red color is culturally specific. In other words, the color red might not mean "danger" to the person it is presented. In Eastern cultures, the color red means "prosperity", which could be considered far from dangerous depending on how it is used. This means that the color being provided here may need to change based on the user's culture to provide an accurate expression.
 
-To do this, we introduce a final mix.
+To do this, we introduce a final mix:
 
 ```css
 body {
