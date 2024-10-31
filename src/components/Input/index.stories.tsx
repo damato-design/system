@@ -20,18 +20,18 @@ type Story = StoryObj<typeof meta>
 
 /**
  * All `input` primitives require a type of input to be referenced with
- * the dot-notation. This example demonstrates how to render the `email` type.
+ * the dot-notation. This example demonstrates how to render the `password` type.
  */
 export const Default: Story = {
     args: {
         id: 'default',
-        value: 'email@example.com',
+        value: 'whiterabbit',
         name: 'default'
     },
     render: ({ value: givenValue, ...args }) => {
         const [value, setValue] = useState(givenValue);
         const onChange = useCallback((ev: any) => setValue(ev.target.value), []);
-        return <input.email { ...args } value={ value } onChange={ onChange }/>
+        return <input.password { ...args } value={ value } onChange={ onChange }/>
     }
 }
 
