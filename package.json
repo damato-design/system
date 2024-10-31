@@ -14,12 +14,14 @@
     "vite:build": "tsc -b && vite build",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
+    "build-storybook": "npm run storybook:build",
     "dev": "npm run storybook",
     "start": "npm run storybook",
     "prepublishOnly": "npm run build",
     "test": "vitest",
     "storybook:test": "npx vitest --project=storybook",
-    "generate:schema": "node ./scripts/generate-schema.js"
+    "generate:schema": "node ./scripts/generate-schema.js",
+    "chromatic": "npx chromatic --project-token=chpt_1ac7335dd9a0584"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -30,7 +32,6 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^2.0.2",
     "@storybook/addon-essentials": "^8.4.0",
-    "@storybook/addon-interactions": "^8.4.0",
     "@storybook/addon-links": "^8.4.0",
     "@storybook/addon-onboarding": "^8.4.0",
     "@storybook/blocks": "^8.4.0",
@@ -46,10 +47,11 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "@vitest/browser": "^2.1.1",
+    "chromatic": "^11.16.3",
     "csstype": "^3.1.3",
     "globals": "^15.9.0",
     "js-yaml": "^4.1.0",
-    "playwright": "^1.47.2",
+    "playwright": "^1.48.2",
     "sass": "^1.80.4",
     "sass-embedded": "^1.80.4",
     "storybook": "^8.4.0",
