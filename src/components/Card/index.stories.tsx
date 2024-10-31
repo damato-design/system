@@ -7,7 +7,7 @@ import { Button } from '../Button';
 import { Close } from '../Close';
 
 /**
- * Work in progress
+ * The card component represents an entity as an informative visual.
  */
 const meta = {
     title: 'Components/card',
@@ -25,6 +25,12 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+/**
+ * Using the `src` prop will engage the internal `<Media/>` element to display
+ * images or video as the central focus.
+ * You can create a padded version by setting the `padding` flag.
+ * Otherwise media will be presented as full-bleed.
+ */
 export const Default: Story = {
     args: {
         src: 'https://loremflickr.com/1280/720',
@@ -33,6 +39,10 @@ export const Default: Story = {
     }
 }
 
+/**
+ * The rest of the component is composed similarly to `lockup`,
+ * allowing for many different presentations of content.
+ */
 export const Full: Story = {
     args: {
         src: 'https://loremflickr.com/1280/720',

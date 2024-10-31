@@ -19,10 +19,17 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 
+/**
+ * The default configuration is a box that can be checked or unchecked.
+ */
 export const Default: Story = {
     args: { name: 'default' },
 }
 
+/**
+ * When setting the `exclusive` flag, the component is presented as a radio button.
+ * Then the component can only be unchecked by selecting another option with the same `name`.
+ */
 export const RadioButton: Story = {
     args: { 
         name: 'radio',
@@ -31,6 +38,9 @@ export const RadioButton: Story = {
     }
 }
 
+/**
+ * This demonstrates the alignment between form elements.
+ */
 export const Alignment: Story = {
     args: { name: 'alignment' },
     render: (args) => {

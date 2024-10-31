@@ -19,12 +19,19 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+/**
+ * This is a minimal representation of content to display to a user.
+ */
 export const Default: Story = {
     args: {
         children: 'Something you might want to know.'
     },
 }
 
+/**
+ * You can present a more important version of your message by including `emphasis`.
+ * This will introduce further presentational attributes to convey the importance of your message.
+ */
 export const Emphasis: Story = {
     args: {
         emphasis: 'warning',
@@ -39,6 +46,13 @@ export const Emphasis: Story = {
     },
 }
 
+/**
+ * Modals are generally an awful pattern, akin to popup advertisements.
+ * They are a legacy pattern in human-computer interaction for creating a dialog
+ * between the system and the user. As an alternative, we can create these dialogs
+ * inline with the rest of the content. This example is for demonstrative purposes
+ * by using the `disrupt` flag on the `<Dialog/>` meant to disrupt the user.
+ */
 export const Modal: Story = {
     parameters: {
         docs: {
@@ -49,7 +63,7 @@ export const Modal: Story = {
         },
     },
     args: {
-        modal: true,
+        disrupt: true,
         emphasis: 'critical',
         priority: 'primary',
         subject: (

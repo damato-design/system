@@ -20,19 +20,19 @@ function getIconRef(emphasis: string | undefined) {
 type DialogProps = LockupProps
     & {
         emphasis?: 'critical' | 'warning' | 'success',
-        modal?: boolean,
+        disrupt?: boolean,
         onClose?: (ev: any) => void
     };
 
 export const Dialog = forwardRef<HTMLElement, DialogProps>(({
     emphasis,
-    modal,
+    disrupt,
     onClose,
     priority,
     ...props
 }: DialogProps, ref) => {
     
-    const Element = modal ? box.dialog : box.div;
+    const Element = disrupt ? box.dialog : box.div;
     const styles = { 
         background: 'currentColor',
         width: '8px',
@@ -40,27 +40,27 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(({
     };
 
     const showModal = useCallback(($elem: HTMLDialogElement) => {
-        if (!modal || !$elem) return;
+        if (!disrupt || !$elem) return;
         $elem.style?.setProperty('margin', 'auto');
         $elem.showModal();
         document.body.setAttribute('inert', '');
         () => document.body.removeAttribute('inert');
-    }, [modal, onClose])
+    }, [disrupt, onClose])
 
     const onKeyDown = useCallback((ev: any) => {
-        if (!modal) return;
+        if (!disrupt) return;
         if (ev.key === 'Escape') {
             ev.preventDefault();
             typeof onClose === 'function' && onClose(ev);
         }
-    }, [modal, onClose]);
+    }, [disrupt, onClose]);
 
     const onPointerDown = useCallback((ev: any) => {
-        if (!modal) return;
+        if (!disrupt) return;
         if (ev.target === ev.currentTarget) {
             typeof onClose === 'function' && onClose(ev);
         }
-    }, [modal, onClose]);
+    }, [disrupt, onClose]);
 
     return (
         <Element
