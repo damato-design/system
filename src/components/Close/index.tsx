@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import clsx from 'clsx';
-import css from './styles.module.css';
+import css from './styles.module.scss';
 import { Button, ButtonProps } from '../Button';
 import { restrictProps } from '../Element';
 

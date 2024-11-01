@@ -1,6 +1,6 @@
 import { forwardRef, createElement } from 'react';
 import clsx from 'clsx';
-import css from './styles.module.css';
+import css from './styles.module.scss';
 import { proxy, Props, HTMLTagsOnly } from './proxy';
 
 export function restrictProps({

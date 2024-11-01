@@ -1,5 +1,5 @@
 import { forwardRef, createElement } from 'react';
-import css from './styles.module.css';
+import css from './styles.module.scss';
 import clsx from 'clsx';
 import { proxy } from '../Element/proxy';
 import { element, ElementProps, restrictProps } from '../Element';

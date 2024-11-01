@@ -1,4 +1,4 @@
-import css from './styles.module.css';
+import css from './styles.module.scss';
 import { proxy, Props } from '../Element/proxy';
 
 type IconProps = Props & {

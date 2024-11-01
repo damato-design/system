@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import css from './styles.module.css';
+import css from './styles.module.scss';
 import { element, ElementProps, restrictProps } from '../Element';
 
 export type MediaProps = (React.ImgHTMLAttributes<HTMLImageElement>

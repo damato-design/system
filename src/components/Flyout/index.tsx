@@ -1,5 +1,5 @@
 import { forwardRef, useId, useEffect } from 'react';
-import css from './styles.module.css';
+import css from './styles.module.scss';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { element, ElementProps, restrictProps } from '../Element';
 

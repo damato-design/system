@@ -1,6 +1,6 @@
 import { HTMLInputTypeAttribute, forwardRef } from 'react';
 import { Globals } from 'csstype';
-import css from './styles.module.css';
+import css from './styles.module.scss';
 import { proxy } from '../Element/proxy';
 import { element, ElementProps, restrictProps } from '../Element';
 
