@@ -4,29 +4,43 @@ import css from './styles.module.scss';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { element, ElementProps } from '../Element';
 
-type Position = 'start' | 'center' | 'end' | string | undefined;
-type MixedPosition = { inline?: Position, block?: Position } | Position | undefined;
+type Position = string | undefined;
 
-function updateLogical(position: string | undefined) {
-  switch (position) {
-    case 'left':
-    case 'top':
-      return 'start';
-    case 'right':
-    case 'bottom':
-      return 'end';
-    default:
-      return position;
-  }
+const LOGICAL_REPLACEMENT = {
+  top: 'start',
+  bottom: 'end',
+  left: 'start',
+  right: 'end',
+};
+
+function updateLogical(position: string) {
+  return (LOGICAL_REPLACEMENT as any)[position] || position;
 }
 
-function createLayout(position: MixedPosition, logical: boolean) {
-  const layout: [string?, string?] = [
-    typeof position === 'object' ? position?.inline : position,
-    typeof position === 'object' ? position?.block : position,
-  ];
+function createLayout(position: Position, logical: boolean) {
+  if (!position) return [null, null];
 
-  return logical ? layout.map(updateLogical) : layout;
+  // Expecting vertical-horizontal (eg., top-start)
+  const layout = position.split('-');
+
+  if (layout.length === 1) {
+    // Shorthand is missing center
+
+    if (!['top', 'bottom'].includes(layout[0])) {
+      // Horizontal placement, center is vertical
+      layout.unshift('center');
+    }
+
+    if (layout.length === 1) {
+      // Vertical placeholder, center is horizontal
+      layout.push('center');
+    }
+  }
+
+  return [
+    updateLogical(layout[0]),
+    !logical ? layout[1] : updateLogical(layout[1])
+  ];
 }
 
 interface ModernCSSProperties extends React.CSSProperties {
@@ -62,11 +76,11 @@ export type BoxProps = ElementProps & {
   /**
    * Set the alignment for the children within the element.
    */
-  inset?: MixedPosition;
+  placeChildren?: Position;
   /**
    * Set the alignment for this component.
    */
-  outset?: MixedPosition;
+  placeSelf?: Position;
   /**
    * Add a standardized padding around the children.
    */
@@ -110,9 +124,9 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
     distribute,
     gap,
     infill,
-    inset,
+    placeChildren,
     logical = true,
-    outset,
+    placeSelf,
     padding,
     priority,
     purpose,
@@ -125,8 +139,8 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
   }: BoxProps, ref) => {
     const Box = element[TagName];
 
-    const innerLayout = createLayout(inset, logical);
-    const outerLayout = createLayout(outset, logical);
+    const innerLayout = createLayout(placeChildren, logical);
+    const outerLayout = createLayout(placeSelf, logical);
 
     if (stack) {
       innerLayout.reverse();
@@ -135,14 +149,14 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
     const styles: ModernCSSProperties = {
       anchorName: anchorName,
       overflow: clip ? 'clip' : undefined,
-      justifyContent: distribute ? `space-${distribute}` : innerLayout.at(0),
-      alignItems: innerLayout.at(1),
+      justifyContent: distribute ? `space-${distribute}` : innerLayout.at(1),
+      alignItems: innerLayout.at(0),
       display: stretch ? 'flex' : 'inline-flex',
       flex: stretch && !['action', 'control'].includes(purpose as string) ? 1 : undefined,
       flexDirection: stack ? 'column' : 'row',
       flexWrap: wrap || infill ? 'wrap' : 'nowrap',
-      justifySelf: outerLayout.at(0),
-      alignSelf: outerLayout.at(1),
+      justifySelf: outerLayout.at(1),
+      alignSelf: outerLayout.at(0),
       padding: padding ? 'var(--padding, 1rem)' : undefined,
       gap: gap || infill ? 'var(--gap, .5rem)' : undefined,
       maxWidth: infill ? 'max-content' : undefined

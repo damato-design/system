@@ -103,7 +103,8 @@ export const Disabled: Story = {
 }
 
 /**
- * This example demonstrates a matching alignment between label-only, icon-only, and mixed content buttons. The `inset={{ block: 'start' }}` on the container aligns all buttons to the top of the parent so any size differences would be immediately noticeable.
+ * This example demonstrates a matching alignment between label-only,
+ * icon-only, and mixed content buttons. The `placeChildren='top'` on the container aligns all buttons to the top of the parent so any size differences would be immediately noticeable.
  */
 export const Alignment: Story = {
     args: {
@@ -111,7 +112,7 @@ export const Alignment: Story = {
     },
     render: (args) => {
         return (
-            <box.div gap inset={{ block: 'start' }}>
+            <box.div gap placeChildren='top'>
                 <Button { ...args }>Content</Button>
                 <Button { ...args } icon='anchor'>Icon</Button>
                 <Button { ...args } icon='addchart' aria-label='Add Chart'/>

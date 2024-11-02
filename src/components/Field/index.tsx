@@ -12,7 +12,7 @@ export const field = proxy<HTMLTagsOnly, FieldProps>('field', (TagName) => {
     }: FieldProps, ref) => {
 
         const Element = box[TagName];
-        const outset = !stretch ? { block: 'start' } : undefined;
+        const placeSelf = !stretch ? 'start' : undefined;
 
         return (
             <Element
@@ -20,8 +20,8 @@ export const field = proxy<HTMLTagsOnly, FieldProps>('field', (TagName) => {
                 ref={ ref }
                 stretch={ stretch }
                 purpose='control'
-                inset={{ block: 'center' }}
-                outset={ outset }/>
+                placeChildren='center'
+                placeSelf={ placeSelf }/>
         )
     });
 });

@@ -45,7 +45,7 @@ export const Alignment: Story = {
     args: { name: 'alignment' },
     render: (args) => {
         return (
-            <box.div gap inset={{ block: 'end' }}>
+            <box.div gap placeChildren='top'>
                 <Checkbox { ...args }/>
                 <field.div>
                     <input.text name='alignment' placeholder='Ready'/>

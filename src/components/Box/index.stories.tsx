@@ -67,43 +67,34 @@ export const Stack: Story = {
  * Alignment works with a slightly different mental modal from
  * the traditional flexbox interface.
  * 
- * The `inset` prop (ie., inside setup) determines how the inner children
- * of the `box` are positioned. This can accept a shorthand `String` of
- * `'start'`, `'center'`, or `'end'` which will apply that value
+ * The `placeChildren` prop determines how the inner children
+ * of the `box` are positioned. This can accept a `String`different
+ * options which will apply the position to the children
  * in both the horizontal and vertical directions.
  * 
- * If you want to apply alignment uniquely between these axes, use an object
- * as the value:
- * 
- * ```jsx
- * <box.div inset={{ inline: 'center', block: 'start' }} />
- * ```
- * 
- * `inline` represents the horizontal axis, `block` represents the vertical axis.
  * Unlike flexbox, changing the orientation using `stack` will not require
  * these values to also be changed.
  * 
  * If you need to justify the content in a more specific way, the `distribute` prop
  * can accept values such as `'between'`, `'around'`, and `'evenly'` which
  * describe how the elements will bee arranged with the available space. This will
- * override the `inset.inline` value if provided either directly or through the
- * shorthand.
+ * override some alignment values if provided either directly.
  * 
  * In the case where using logical properties such as `'start'` and `'end'` is
  * inappropriate, you can opt-out of this behavior. This is helpful for layouts
  * where flipping the content is not expected, such as displaying a duration of time.
  * 
  * ```jsx
- * <box.div logical={ false } inset={{ inline: 'center', block: 'left' }} />
+ * <box.div logical={ false } placeChildren='top-left' />
  * ```
  * 
- * The `outset` prop (ie., outside setup) works like `inset`, except it affects the alignment
+ * The `placeSelf` prop works like `placeChildren`, except it affects the alignment
  * of the `box` itself when placed within another `box`.
  */
 export const Alignment: Story = {
     args: {
         stretch: true,
-        inset: 'center',
+        placeChildren: 'center',
         children: <box.span>Centered in the box</box.span>
     }
 }

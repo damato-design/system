@@ -78,7 +78,7 @@ export const InnerButton: Story = {
         }, []);
 
         return (
-            <box.form action='' gap inset={{ block: 'end' }}>
+            <box.form action='' gap placeChildren='top'>
                 <field.div { ...args }>
                     <Button icon='remove' aria-label='Decrement' value={ -1 } onClick={ onClick }/>
                     <input.number name='number' value={ value } onChange={ onChange } fieldSizing='content'/>
@@ -112,7 +112,7 @@ export const OuterButton: Story = {
         }, []);
 
         return (
-            <box.form action='' infill inset={{ block: 'end' }}>
+            <box.form action='' infill placeChildren='top'>
                 <field.div { ...args }>
                     <input.email name='email' value={ value } onChange={ onChange }/>
                 </field.div>

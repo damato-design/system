@@ -46,7 +46,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
     const config = Object.assign({}, props, {
         "aria-labelledby": props['aria-labelledby'],
         "aria-label": behavior === 'dismiss' ? 'Close' : props['aria-label'],
-        inset: { block: 'center', inline: 'center' },
+        placeChildren: 'center',
         type,
         role,
         padding: true
@@ -57,7 +57,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
     config["aria-labelledby"] = ariaLabelledby.filter(Boolean).join(' ');
 
     if (['option', 'menuitem'].includes(role as string)) {
-        config.inset.inline = 'start'
+        config.placeChildren = 'start'
     }
 
     if (!children && !(config['aria-label'] || config['aria-labelledby'])) {
