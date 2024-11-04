@@ -23,6 +23,10 @@
     /* default is secondary */
     font-size: 1.2rem;
     text-wrap: pretty;
+    font-feature-settings: "kern";
+    font-kerning: normal;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
 
     &:where(:empty) {
         display: none;
