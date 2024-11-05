@@ -41,7 +41,7 @@ type ItemProps = ButtonProps & {
     id: string,
 }
 
-type ListboxProps = ElementProps
+export type ListboxProps = ElementProps
     & {
         getAnchorProps?: (props: ElementProps) => void,
         activeDescendant?: string,

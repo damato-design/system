@@ -105,7 +105,10 @@ export const Menu: Story = {
         const anchorRef = useRef(null);
 
         const menu = (
-            <flyout.div getAnchorProps={ setAnchorProps } stretch>
+            <flyout.div
+                getAnchorProps={ setAnchorProps }
+                behavior='menu'
+                stretch>
                 <box.div
                     stretch
                     purpose='surface'
