@@ -29,6 +29,16 @@ Generally speaking, primitives aren't expected to be used on their own but inste
 ```
 See visual examples in the [Field component docs](/docs/components-field--docs).
 
+> #### Why use the dot-notation syntax?
+>
+> While many systems will opt to use the `as` prop to inform the internal tag name
+> (eg., `<Box as='main'/>`), I've found that the syntax made popular by
+> [Styled Components](https://styled-components.com/) is more clear as affecting
+> the tag name since it is directly connected. This also encourages the user to select
+> the most semantic HTML element instead of needing to remember to add a prop to change it.
+>
+> Resources that use the dot-notation syntax to choose the HTML element are lowercase (eg., `<box.div/>`) while those which do not because they have been semantically curated are uppercase (eg., `<Close/>` is always a button).
+
 ### Priniciples
 
 - Elements should be composable such that no additional styles need to be declared.
