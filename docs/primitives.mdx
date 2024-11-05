@@ -34,6 +34,18 @@ See visual examples in the [Field component docs](/docs/components-field--docs).
 - Elements should be composable such that no additional styles need to be declared.
 - Authors cannot add `id`, `class`, or `style` attributes to any component. These are handled internally to the library as needed and are removed if provided.
 
+> #### Why choose React over Web Components?
+>
+> While I am a proponent of web components for their style encapsulation and focus on native 
+> DOM methods, the compositional aspect is lacking.
+>
+> As an example, in order to create a button 
+> using web components, you'd either need to update the custom tag to make it semantic through 
+> additional attributes or wrap the existing button in a component. Both cases are undesirable 
+> from a maintenance perspective. In React, we can have a component alias (ie., `<Button/>`) 
+> that renders the native `<button/>` element. If [component built-ins](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is) were widely available, 
+> then this would be a more difficult decision.
+
 ### Gallery
 
 <Grid>
