@@ -102,12 +102,14 @@ export const Menu: Story = {
         const [anchorProps, setAnchorProps] = useState({});
         const [active, setActive] = useState(args.activeDescendant);
         const [focus, setFocus] = useState(args.visualFocus);
+        const [show, setShow] = useState(false);
         const anchorRef = useRef(null);
 
         const menu = (
             <flyout.div
                 getAnchorProps={ setAnchorProps }
                 behavior='menu'
+                onClose={ () => setShow(false) }
                 stretch>
                 <box.div
                     stretch
@@ -131,11 +133,12 @@ export const Menu: Story = {
                     ref={ anchorRef }
                     onFocus={ () => setFocus(true) }
                     onBlur={ () => setFocus(false) }
+                    onClick={ () => setShow(!show) }
                     behavior='menu'
                     priority='primary'>
                     { active }
                 </Button>
-                { menu }
+                { show ? menu : null }
             </>
         )
     }

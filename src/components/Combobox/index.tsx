@@ -1,13 +1,11 @@
-import { forwardRef, useState, useRef, useEffect } from 'react';
+import { forwardRef, useState, useRef } from 'react';
 import { input, InputProps } from '../Input';
 import { listbox, ListboxProps } from '../Listbox';
 import { field, FieldProps } from '../Field';
 import { box } from '../Box';
 import { flyout } from '../Flyout';
 
-type ComboBoxProps = Omit<InputProps & FieldProps & ListboxProps, 'visualFocus'> & {
-    show?: boolean
-};
+type ComboBoxProps = Omit<InputProps & FieldProps & ListboxProps, 'visualFocus'>
 
 export const Combobox = forwardRef<HTMLElement, ComboBoxProps>(({
     activeDescendant,
@@ -16,23 +14,14 @@ export const Combobox = forwardRef<HTMLElement, ComboBoxProps>(({
     items,
     rtl,
     loop,
-    show,
     ...rest
 }: ComboBoxProps, ref) => {
     const [inputProps, setInputProps] = useState({});
     const [anchorProps, setAnchorProps] = useState({});
     const [focus, setFocus] = useState(false);
+    const [show, setShow] = useState(false);
     const anchorRef = useRef(null);
     const flyoutRef = useRef(null);
-
-    useEffect(() => {
-        if (!flyoutRef?.current) return;
-        if (show) {
-            flyoutRef.current.showPopover();
-        } else {
-            flyoutRef.current.hidePopover();
-        }
-    }, [show]);
 
     const control = (
         <field.div
@@ -43,7 +32,10 @@ export const Combobox = forwardRef<HTMLElement, ComboBoxProps>(({
                 { ...rest }
                 { ...inputProps }
                 autoComplete='off'
-                onFocus={ () => setFocus(true) }
+                onFocus={ () => {
+                    setFocus(true);
+                    setShow(true);
+                } }
                 onBlur={ () => setFocus(false) }
                 />
         </field.div>
@@ -53,8 +45,8 @@ export const Combobox = forwardRef<HTMLElement, ComboBoxProps>(({
         <flyout.div
             ref={ flyoutRef }
             behavior='listbox'
-            disclosure='manual'
             getAnchorProps={ setAnchorProps }
+            onClose={ () => setShow(false) }
             stretch>
             <box.div
                 stretch
@@ -77,7 +69,7 @@ export const Combobox = forwardRef<HTMLElement, ComboBoxProps>(({
     return (
         <>
             { control }
-            { menu }
+            { show ? menu : null }
         </>
     )
 });

@@ -18,6 +18,7 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
     const [buttonProps, setButtonProps] = useState({});
     const [anchorProps, setAnchorProps] = useState({});
     const [focus, setFocus] = useState(false);
+    const [show, setShow] = useState(false);
     const anchorRef = useRef(null);
 
     const button = (
@@ -29,6 +30,7 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
             stretch={ false }
             onFocus={ () => setFocus(true) }
             onBlur={ () => setFocus(false) }
+            onClick={ () => setShow(!show) }
             behavior='menu'/>
     );
 
@@ -36,6 +38,7 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
         <flyout.div
             behavior='menu'
             getAnchorProps={ setAnchorProps }
+            onClose={ () => setShow(false) }
             stretch>
             <box.div
                 stretch
@@ -58,7 +61,7 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
     return (
         <>
             { button }
-            { menu }
+            { show ? menu : null }
         </>
     )
 });

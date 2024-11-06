@@ -33,13 +33,9 @@ export const Default: Story = {
     },
     render: ({ onActiveDescendantChange: _, ...args}) => {
         const [active, setActive] = useState(args.activeDescendant);
-        const [show, setShow] = useState(false);
         const [value, setValue] = useState(args.value);
 
-        const onChange = useCallback((ev: any) => {
-            setValue(ev.target.value);
-            if (ev.target.tagName === 'BUTTON') setShow(false);
-        }, []);
+        const onChange = useCallback((ev: any) => setValue(ev.target.value), []);
 
         const enhancedItems = useMemo(() => {
             const items = [
@@ -60,19 +56,16 @@ export const Default: Story = {
         }, [value, active]);
 
         const onKeyUp = useCallback((ev: any) => {
-            setShow(Boolean(value));
-            if (ev.key !== 'Enter' || !show) return;
+            if (ev.key !== 'Enter') return;
             const item = enhancedItems.find((item) => item.id === active);
             if (!item) return;
             setValue(item.value);
-            setShow(false);
-        }, [show, active, enhancedItems, value]);
+        }, [active, enhancedItems, value]);
 
         return (
             <Combobox
                 { ...args }
                 items={ enhancedItems }
-                show={ show }
                 onKeyUp={ onKeyUp }
                 value={ value }
                 onChange={ onChange }
