@@ -2,12 +2,9 @@ import { useCallback, useState, useMemo } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Combobox } from '.';
-import { input } from '../Input';
 
 /**
- * The `<Combobox/>` component is primarily composed
- * of the `listbox` and `field` elements. For a more
- * in-depth structure, please see the [Listbox docs](/docs/primitives-listbox--docs).
+ * This component is a work-in-progress
  */
 const meta = {
     title: 'Components/Combobox',
@@ -25,11 +22,6 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-/**
- * The user will need to wire the `activeDescendant` and
- * `onActiveDescendantChange` props to state for the component
- * to behave properly. The `items` array is required.
- */
 export const Default: Story = {
     args: {
         activeDescendant: 'option2',
