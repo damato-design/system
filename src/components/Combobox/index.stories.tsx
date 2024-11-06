@@ -27,7 +27,11 @@ export const Default: Story = {
     args: {
         activeDescendant: 'option2',
         onActiveDescendantChange: () => {},
-        items: [{ id: 'null' }],
+        items: [
+            { id: 'option1', value: 'option1' },
+            { id: 'option2', value: 'option2' },
+            { id: 'option3', value: 'option3' }
+        ],
         name: 'default',
         value: 'option2'
     },
@@ -35,16 +39,12 @@ export const Default: Story = {
         const [active, setActive] = useState(args.activeDescendant);
         const [value, setValue] = useState(args.value);
 
-        const onChange = useCallback((ev: any) => setValue(ev.target.value), []);
-
         const enhancedItems = useMemo(() => {
-            const items = [
-                { id: 'option1', value: 'option1', onClick: onChange },
-                { id: 'option2', value: 'option2', onClick: onChange },
-                { id: 'option3', value: 'option3', onClick: onChange }
-            ];
 
-            const filtered = items.filter((item) => item.id.startsWith(value as string));
+            const filtered = args.items.filter((item) => value
+                && typeof value === 'string'
+                && item.id.startsWith(value)
+            );
             const hasActive = filtered.some((item) => item.id === active);
 
             if (!hasActive && filtered[0]) {
@@ -55,20 +55,16 @@ export const Default: Story = {
             return filtered;
         }, [value, active]);
 
-        const onKeyUp = useCallback((ev: any) => {
-            if (ev.key !== 'Enter') return;
-            const item = enhancedItems.find((item) => item.id === active);
-            if (!item) return;
-            setValue(item.value);
-        }, [active, enhancedItems, value]);
-
         return (
             <Combobox
                 { ...args }
-                items={ enhancedItems }
-                onKeyUp={ onKeyUp }
+                // items={ enhancedItems }
                 value={ value }
-                onChange={ onChange }
+                onChange={ (ev: any) => {
+                    console.log('change');
+                    setValue(ev.target.value);
+                } }
+                onConfirm={ setValue }
                 activeDescendant={ active }
                 onActiveDescendantChange={ setActive }/>
         )

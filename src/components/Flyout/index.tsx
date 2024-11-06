@@ -1,13 +1,24 @@
-import { forwardRef, useId, useEffect, useLayoutEffect } from 'react';
+import { forwardRef, useId, useLayoutEffect, createContext, useContext } from 'react';
 import css from './styles.module.scss';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { element, ElementProps, restrictProps } from '../Element';
 
+const FlyoutContext = createContext(null);
+
+export const useFlyout = () => {
+  const context = useContext(FlyoutContext);
+  return context || { anchorId: undefined, targetId: undefined, anchorName: undefined };
+};
+
+export const FlyoutProvider = (props: any) => {
+  const anchorId = useId()
+  const targetId = useId();
+  const anchorName = `--${anchorId.replaceAll(':', '')}`;
+
+  return <FlyoutContext.Provider { ...props } value={{ anchorId, targetId, anchorName }}/>
+}
+
 export type FlyoutProps = ElementProps & {
-  /**
-    * The `ref` linked to the "anchor" element associated with the `<Flyout/>`.
-    */
-  getAnchorProps: ({}) => void,
   /**
    * Matches the accessibility role for the content.
    */
@@ -24,7 +35,6 @@ export type FlyoutProps = ElementProps & {
 
 export const flyout = proxy<HTMLTagsOnly, FlyoutProps>('flyout', (TagName) => {
   return forwardRef<HTMLElement, FlyoutProps>(({
-    getAnchorProps,
     behavior,
     stretch,
     onClose,
@@ -33,20 +43,11 @@ export const flyout = proxy<HTMLTagsOnly, FlyoutProps>('flyout', (TagName) => {
     ...props
   }: FlyoutProps, ref) => {
 
-    const anchorId = useId();
-    const targetId = useId();
-    const name = `--${anchorId.replaceAll(':', '')}`;
-
     const Element = element[TagName];
-    useLayoutEffect(() => {
-      typeof getAnchorProps === 'function'
-        && getAnchorProps({
-          anchorName: name,
-        });
-    }, [getAnchorProps]);
+    const { targetId, anchorName } = useFlyout();
 
     useLayoutEffect(() => {
-      if (!document) return;
+      if (!document || typeof targetId !=='string') return;
       const $target = document.getElementById(targetId);
 
       const onEscape = (ev: any) => {
@@ -56,8 +57,8 @@ export const flyout = proxy<HTMLTagsOnly, FlyoutProps>('flyout', (TagName) => {
       const onOutside = (ev: any) => {
         const $elems = ev.composedPath();
         const isOutside = ![...$elems].some(($elem) => {
-          const { anchorName, positionAnchor } = $elem?.style || {};
-          return anchorName === name || positionAnchor === name;
+          const { anchorName: name, positionAnchor } = $elem?.style || {};
+          return name === anchorName || positionAnchor === anchorName;
         });
         if (isOutside && typeof onClose === 'function') onClose(ev);
       }
@@ -71,13 +72,13 @@ export const flyout = proxy<HTMLTagsOnly, FlyoutProps>('flyout', (TagName) => {
         document.documentElement.removeEventListener('keyup', onEscape);
         document.documentElement.removeEventListener('pointerdown', onOutside);
       };
-    }, [targetId, anchorId, name, onClose]);
+    }, [targetId, anchorName, onClose]);
 
     const styles = {
-      positionAnchor: name,
+      positionAnchor: anchorName,
       minWidth: stretch ? 'anchor-size(width)' : 'fit-content',
-      top: `anchor(${name} bottom)`,
-      left: `anchor(${name} left)`,
+      top: `anchor(${anchorName} bottom)`,
+      left: `anchor(${anchorName} left)`,
     }
 
     return <Element

@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { listbox } from '.';
 import { box } from '../Box';
 import { Button } from '../Button';
-import { flyout } from '../Flyout'; 
+import { flyout, FlyoutProvider } from '../Flyout'; 
 
 /**
  * The `listbox` primitive helps a user select from a list of
@@ -99,7 +99,6 @@ export const Menu: Story = {
     },
     render: ({ onActiveDescendantChange: _, ...args}) => {
         const [buttonProps, setButtonProps] = useState({});
-        const [anchorProps, setAnchorProps] = useState({});
         const [active, setActive] = useState(args.activeDescendant);
         const [focus, setFocus] = useState(args.visualFocus);
         const [show, setShow] = useState(false);
@@ -108,7 +107,6 @@ export const Menu: Story = {
         const anchor = (
             <Button
                 { ...buttonProps }
-                { ...anchorProps }
                 ref={ anchorRef }
                 onFocus={ () => setFocus(true) }
                 onBlur={ () => setFocus(false) }
@@ -121,7 +119,6 @@ export const Menu: Story = {
         
         const menu = (
             <flyout.div
-                getAnchorProps={ setAnchorProps }
                 behavior='menu'
                 onClose={ () => setShow(false) }
                 stretch>
@@ -140,10 +137,10 @@ export const Menu: Story = {
         )
 
         return (
-            <>
+            <FlyoutProvider>
                 { anchor }
                 { show ? menu : null }
-            </>
+            </FlyoutProvider>
         )
     }
 }

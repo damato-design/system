@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { flyout } from '.';
+import { flyout, FlyoutProvider } from '.';
 import { Button } from '../Button';
 import { box } from '../Box';
 
@@ -39,30 +39,26 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
     args: {
         children: 'Hello World!',
-        getAnchorProps: () => {},
     },
     render: (args) => {
-        const [anchorProps, setAnchorProps] = useState({});
         const [show, setShow] = useState(false);
         const popover = (
             <flyout.div
                 { ...args }
-                getAnchorProps={ setAnchorProps }
                 onClose={ () => setShow(false) }>
                 flyout is open!
             </flyout.div>
         )
 
         return (
-            <>
+            <FlyoutProvider>
                 <Button
-                    { ...anchorProps }
-                    priority='primary'
-                    onClick={ () => setShow(!show) }>
-                    anchor element
-                    </Button>
+                priority='primary'
+                onClick={ () => setShow(!show) }>
+                anchor element
+                </Button>
                 { show ? popover : null }
-            </>
+            </FlyoutProvider>
         )
     }
 }
@@ -80,41 +76,40 @@ export const Default: Story = {
  * > aren't precisely a surface with this specific priority. Keeping these
  * > separate will allow for further composition explorations to happen.
  */
-export const Stretch: Story = {
-    args: {
-        children: 'Hello World!',
-        getAnchorProps: () => {},
-        stretch: true
-    },
-    render: (args) => {
-        const [anchorProps, setAnchorProps] = useState({});
-        const [show, setShow] = useState(false);
+// export const Stretch: Story = {
+//     args: {
+//         children: 'Hello World!',
+//         stretch: true
+//     },
+//     render: (args) => {
+//         const { anchorProps } = useContext(FlyoutContext);
+//         console.log(anchorProps);
+//         const [show, setShow] = useState(false);
 
-        const popover = (
-            <flyout.div
-                { ...args }
-                getAnchorProps={ setAnchorProps }
-                onClose={ () => setShow(false) }>
-                <box.div
-                    stretch={ args.stretch }
-                    padding
-                    purpose='surface'
-                    priority='secondary'>
-                    Hi! 👋
-                </box.div>
-            </flyout.div>
-        );
+//         const popover = (
+//             <flyout.div
+//                 { ...args }
+//                 onClose={ () => setShow(false) }>
+//                 <box.div
+//                     stretch={ args.stretch }
+//                     padding
+//                     purpose='surface'
+//                     priority='secondary'>
+//                     Hi! 👋
+//                 </box.div>
+//             </flyout.div>
+//         );
 
-        return (
-            <>
-                <Button
-                    { ...anchorProps }
-                    onClick={() => setShow(!show)}
-                    priority='primary'>
-                    anchor element
-                </Button>
-                { show ? popover : null }
-            </>
-        )
-    }
-}
+//         return (
+//             <>
+//                 <Button
+//                     anchorName={ anchorProps.anchorName }
+//                     onClick={() => setShow(!show)}
+//                     priority='primary'>
+//                     anchor element
+//                 </Button>
+//                 { show ? popover : null }
+//             </>
+//         )
+//     }
+// }

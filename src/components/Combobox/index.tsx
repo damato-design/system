@@ -1,11 +1,13 @@
-import { forwardRef, useState, useRef } from 'react';
+import { forwardRef, useState, useRef, useCallback } from 'react';
 import { input, InputProps } from '../Input';
 import { listbox, ListboxProps } from '../Listbox';
 import { field, FieldProps } from '../Field';
 import { box } from '../Box';
-import { flyout } from '../Flyout';
+import { flyout, FlyoutProvider } from '../Flyout';
 
-type ComboBoxProps = Omit<InputProps & FieldProps & ListboxProps, 'visualFocus'>
+type ComboBoxProps = Omit<InputProps & FieldProps & ListboxProps, 'visualFocus'> & {
+    onConfirm?: (str: string | undefined) => void;
+}
 
 export const Combobox = forwardRef<HTMLElement, ComboBoxProps>(({
     activeDescendant,
@@ -14,38 +16,56 @@ export const Combobox = forwardRef<HTMLElement, ComboBoxProps>(({
     items,
     rtl,
     loop,
+    value,
+    onConfirm,
     ...rest
 }: ComboBoxProps, ref) => {
     const [inputProps, setInputProps] = useState({});
-    const [anchorProps, setAnchorProps] = useState({});
     const [focus, setFocus] = useState(false);
     const [show, setShow] = useState(false);
     const anchorRef = useRef(null);
-    const flyoutRef = useRef(null);
 
-    const control = (
+    const onKeyUp = useCallback((ev: any) => {
+        if (typeof rest.onKeyUp === 'function') rest.onKeyUp(ev);
+        if (ev.key === 'Enter' && activeDescendant) {
+            ev.preventDefault();
+            typeof onConfirm === 'function' && onConfirm(activeDescendant);
+        }
+    }, [onConfirm]);
+
+    const onItemClick = useCallback((ev: any) => {
+        typeof onConfirm === 'function' && onConfirm(ev.target.value);
+    }, [onConfirm]);
+
+    // const _items = useMemo(() => {
+    //     return items.map((item) => ({ onClick: (ev: any) => {
+    //         typeof item.onClick === 'function' && item.onClick(ev);
+    //         onItemClick(ev);
+    //     }, ...item }));
+    // }, [items]);
+
+    const anchor = (
         <field.div
-            { ...anchorProps }
             ref={ anchorRef }
             >
             <input.text
                 { ...rest }
                 { ...inputProps }
+                value={ value }
                 autoComplete='off'
                 onFocus={ () => {
                     setFocus(true);
                     setShow(true);
                 } }
                 onBlur={ () => setFocus(false) }
+                onKeyUp={ onKeyUp }
                 />
         </field.div>
-    );
+    )
 
-    const menu = (
+    const popover = (
         <flyout.div
-            ref={ flyoutRef }
             behavior='listbox'
-            getAnchorProps={ setAnchorProps }
             onClose={ () => setShow(false) }
             stretch>
             <box.div
@@ -61,15 +81,18 @@ export const Combobox = forwardRef<HTMLElement, ComboBoxProps>(({
                     getAnchorProps={ setInputProps }
                     visualFocus={ focus }
                     activeDescendant={ activeDescendant }
-                    onActiveDescendantChange={ onActiveDescendantChange } />
+                    onActiveDescendantChange={ (id) => {
+                        console.log('change');
+                        onActiveDescendantChange(id);
+                    } } />
             </box.div>
         </flyout.div>
     );
 
     return (
-        <>
-            { control }
-            { show ? menu : null }
-        </>
+        <FlyoutProvider>
+            { anchor }
+            { show ? popover : null }
+        </FlyoutProvider>
     )
 });

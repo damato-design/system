@@ -2,7 +2,7 @@ import { forwardRef, useState, useRef } from "react";
 import { Button, ButtonProps } from "../Button"
 import { listbox, ListboxProps } from "../Listbox";
 import { box } from "../Box";
-import { flyout } from "../Flyout";
+import { flyout, FlyoutProvider } from "../Flyout";
 
 export type MenuProps = Omit<ButtonProps & ListboxProps, 'visualFocus'>;
 
@@ -16,7 +16,6 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
     ...rest
 }: MenuProps, ref) => {
     const [buttonProps, setButtonProps] = useState({});
-    const [anchorProps, setAnchorProps] = useState({});
     const [focus, setFocus] = useState(false);
     const [show, setShow] = useState(false);
     const anchorRef = useRef(null);
@@ -25,7 +24,6 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
         <Button
             { ...rest }
             { ...buttonProps }
-            { ...anchorProps }
             ref={ anchorRef }
             stretch={ false }
             onFocus={ () => setFocus(true) }
@@ -37,7 +35,6 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
     const menu = (
         <flyout.div
             behavior='menu'
-            getAnchorProps={ setAnchorProps }
             onClose={ () => setShow(false) }
             stretch>
             <box.div
@@ -58,10 +55,12 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
         </flyout.div>
     );
 
+    console.log('render');
+
     return (
-        <>
+        <FlyoutProvider>
             { button }
             { show ? menu : null }
-        </>
+        </FlyoutProvider>
     )
 });
