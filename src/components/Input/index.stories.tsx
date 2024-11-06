@@ -57,6 +57,22 @@ export const Color: Story = {
 }
 
 /**
+ * Default `<Button/>` styles are copied onto the `::file-selector-button`
+ * when `<input.file/>` is used.
+ */
+export const File: Story = {
+    args: {
+        id: 'file',
+        name: 'file'
+    },
+    render: ({ value: givenValue, ...args }) => {
+        const [value, setValue] = useState(givenValue);
+        const onChange = useCallback((ev: any) => setValue(ev.target.value), []);
+        return <input.file { ...args } value={ value } onChange={ onChange }/>
+    }
+}
+
+/**
  * For multiline input, the `<input.textarea/>` type will render
  * a native HTML `<textarea/>` with some additional features to
  * help with alignment and composition.

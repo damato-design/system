@@ -101,15 +101,15 @@
     text-decoration: none;
     flex: 1 1 auto;
 
-    /* Icon only buttons */
-    &:has(i[role="presentation"]:only-child) {
-        flex-grow: 0;
-    }
-
     --bgColor: #fefefe;
     background-color: color-mix(in oklch, var(--bgColor), currentColor 5%);
     transition: background .218s ease;
     color: black;
+
+    /* Icon only buttons */
+    &:has(i[role="presentation"]:only-child) {
+        flex-grow: 0;
+    }
 
     & > * {
         pointer-events: none;
@@ -155,7 +155,8 @@
         padding-inline: var(--padding, 1rem);
     }
 
-    > button {
+    > button,
+    > input[type="file"]::file-selector-button {
         border: 0;
         border-radius: 0;
     }
