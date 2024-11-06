@@ -39,31 +39,11 @@ export const Default: Story = {
         const [active, setActive] = useState(args.activeDescendant);
         const [value, setValue] = useState(args.value);
 
-        const enhancedItems = useMemo(() => {
-
-            const filtered = args.items.filter((item) => value
-                && typeof value === 'string'
-                && item.id.startsWith(value)
-            );
-            const hasActive = filtered.some((item) => item.id === active);
-
-            if (!hasActive && filtered[0]) {
-                // If the active item no longer exists, update to the first
-                setActive(filtered[0].id);
-            }
-
-            return filtered;
-        }, [value, active]);
-
         return (
             <Combobox
                 { ...args }
-                // items={ enhancedItems }
                 value={ value }
-                onChange={ (ev: any) => {
-                    console.log('change');
-                    setValue(ev.target.value);
-                } }
+                onChange={ (ev: any) => setValue(ev.target.value) }
                 onConfirm={ setValue }
                 activeDescendant={ active }
                 onActiveDescendantChange={ setActive }/>

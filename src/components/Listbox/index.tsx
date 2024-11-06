@@ -109,7 +109,7 @@ export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) =>
         useLayoutEffect(() => {
             if (!document) return;
             const onKeyDown = (ev: any) => {
-                if (document.activeElement !== ev.target) return;
+                if (ev.target !== document.activeElement) return;
                 if (ALL_KEYS.includes(ev.key)) ev.preventDefault();
                 const id = activeDescendant || itemIds[0];
                 const update = nextId(ev.key, id, itemIds, arrows, loop);

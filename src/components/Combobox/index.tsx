@@ -1,4 +1,4 @@
-import { forwardRef, useState, useRef, useCallback, useMemo } from 'react';
+import { forwardRef, useCallback, useState } from 'react';
 import { input, InputProps } from '../Input';
 import { listbox, ListboxProps, ListboxProvider } from '../Listbox';
 import { field, FieldProps } from '../Field';
@@ -20,44 +20,22 @@ export const Combobox = forwardRef<HTMLElement, ComboBoxProps>(({
     onConfirm,
     ...rest
 }: ComboBoxProps, ref) => {
-    const [focus, setFocus] = useState(false);
     const [show, setShow] = useState(false);
-    const anchorRef = useRef(null);
 
-    const onKeyUp = useCallback((ev: any) => {
-        if (typeof rest.onKeyUp === 'function') rest.onKeyUp(ev);
-        if (ev.key === 'Enter' && activeDescendant) {
-            ev.preventDefault();
-            typeof onConfirm === 'function' && onConfirm(activeDescendant);
-        }
-    }, [onConfirm]);
-
-    const onItemClick = useCallback((ev: any) => {
-        typeof onConfirm === 'function' && onConfirm(ev.target.value);
-    }, [onConfirm]);
-
-    const _items = useMemo(() => {
-        return items.map((item) => ({ onClick: (ev: any) => {
-            typeof item.onClick === 'function' && item.onClick(ev);
-            onItemClick(ev);
-        }, ...item }));
-    }, [items]);
+    const _onConfirm = useCallback(() => {
+        if (!activeDescendant || typeof onConfirm !== 'function') return;
+        onConfirm(activeDescendant)
+        setShow(false);
+    }, [activeDescendant, onConfirm]);
 
     const anchor = (
-        <field.div
-            ref={ anchorRef }
-            >
+        <field.div>
             <input.text
                 { ...rest }
                 value={ value }
                 autoComplete='off'
-                onFocus={ () => {
-                    setFocus(true);
-                    setShow(true);
-                } }
-                onBlur={ () => setFocus(false) }
-                onKeyUp={ onKeyUp }
-                />
+                onInput={ () => setShow(Boolean(value)) }
+                onKeyDown={ (ev: any) => ev.key === 'Enter' && _onConfirm() }/>
         </field.div>
     )
 
@@ -72,11 +50,12 @@ export const Combobox = forwardRef<HTMLElement, ComboBoxProps>(({
                 priority='secondary'>
                 <listbox.div
                     ref={ ref }
+                    onPointerUp={ () => _onConfirm() }
                     behavior='menu'
-                    items={ _items }
+                    items={ items }
                     rtl={ rtl }
                     loop={ loop }
-                    visualFocus={ focus }
+                    visualFocus={ true }
                     activeDescendant={ activeDescendant }
                     onActiveDescendantChange={ onActiveDescendantChange } />
             </box.div>
