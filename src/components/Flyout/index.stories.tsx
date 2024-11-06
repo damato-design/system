@@ -27,8 +27,6 @@ type Story = StoryObj<typeof meta>
 
 
 /**
- * The `getAnchorProps()` method will deliver the props necessary to
- * connect the `flyout` element to its anchor.
  * 
  * > #### Why doesn't this component work for me?
  * >

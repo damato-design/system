@@ -1,6 +1,6 @@
 import { forwardRef, useState, useRef } from "react";
 import { Button, ButtonProps } from "../Button"
-import { listbox, ListboxProps } from "../Listbox";
+import { listbox, ListboxProps, ListboxProvider } from "../Listbox";
 import { box } from "../Box";
 import { flyout, FlyoutProvider } from "../Flyout";
 
@@ -15,7 +15,6 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
     loop,
     ...rest
 }: MenuProps, ref) => {
-    const [buttonProps, setButtonProps] = useState({});
     const [focus, setFocus] = useState(false);
     const [show, setShow] = useState(false);
     const anchorRef = useRef(null);
@@ -23,7 +22,6 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
     const button = (
         <Button
             { ...rest }
-            { ...buttonProps }
             ref={ anchorRef }
             stretch={ false }
             onFocus={ () => setFocus(true) }
@@ -47,7 +45,6 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
                     rtl={ rtl }
                     loop={ loop }
                     items={ items }
-                    getAnchorProps={ setButtonProps }
                     visualFocus={ focus }
                     activeDescendant={ activeDescendant }
                     onActiveDescendantChange={ onActiveDescendantChange } />
@@ -59,8 +56,10 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
 
     return (
         <FlyoutProvider>
-            { button }
-            { show ? menu : null }
+            <ListboxProvider>
+                { button }
+                { show ? menu : null }
+            </ListboxProvider>
         </FlyoutProvider>
     )
 });

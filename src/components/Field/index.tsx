@@ -13,14 +13,13 @@ export const field = proxy<HTMLTagsOnly, FieldProps>('field', (TagName) => {
     }: FieldProps, ref) => {
 
         const Element = box[TagName];
-        const { anchorId, anchorName } = useFlyout();
+        const { anchor } = useFlyout();
         const placeSelf = !stretch ? 'start' : undefined;
 
         return (
             <Element
                 { ...restrictProps(props) }
-                id={ anchorId }
-                anchorName={ anchorName }
+                { ...anchor }
                 ref={ ref }
                 stretch={ stretch }
                 purpose='control'

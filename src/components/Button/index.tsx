@@ -4,6 +4,7 @@ import { text } from '../Text';
 import { icon } from '../Icon';
 import { IDREF } from '../Localize';
 import { useFlyout } from '../Flyout';
+import { useListbox } from '../Listbox';
 
 type Accessory = 'menu' | 'external' | 'dismiss' |undefined;
 
@@ -43,7 +44,8 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
     ...props
 }: ButtonProps, ref) => {
     const Element = 'href' in props ? box.a : box.button;
-    const { anchorName, anchorId } = useFlyout();
+    const { anchor: flyoutProps } = useFlyout();
+    const { anchor: listboxProps } = useListbox();
 
     const config = Object.assign({}, props, {
         "aria-labelledby": props['aria-labelledby'],
@@ -72,9 +74,9 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
 
     return (
         <Element
-            {...config}
-            anchorName={ anchorName }
-            id={ anchorId }
+            { ...config }
+            { ...flyoutProps }
+            { ...listboxProps }
             ref={ref}
             purpose='action'>
             {iconRef ? createElement(icon[iconRef]) : null}

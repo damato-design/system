@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { listbox } from '.';
+import { listbox, ListboxProvider } from '.';
 import { box } from '../Box';
 import { Button } from '../Button';
 import { flyout, FlyoutProvider } from '../Flyout'; 
@@ -73,9 +73,7 @@ export const Default: Story = {
 
 /**
  * The following demonstrates how to wire the `listbox` to other components
- * to create a complete menu experience. Note that both the `listbox` and
- * the `flyout` have their own `getAnchorProps()` method which are expected
- * to provide attributes to the `<Button/>`. These props do not conflict.
+ * to create a complete menu experience.
  */
 export const Menu: Story = {
     parameters: {
@@ -98,7 +96,6 @@ export const Menu: Story = {
         ]
     },
     render: ({ onActiveDescendantChange: _, ...args}) => {
-        const [buttonProps, setButtonProps] = useState({});
         const [active, setActive] = useState(args.activeDescendant);
         const [focus, setFocus] = useState(args.visualFocus);
         const [show, setShow] = useState(false);
@@ -106,7 +103,6 @@ export const Menu: Story = {
 
         const anchor = (
             <Button
-                { ...buttonProps }
                 ref={ anchorRef }
                 onFocus={ () => setFocus(true) }
                 onBlur={ () => setFocus(false) }
@@ -128,7 +124,6 @@ export const Menu: Story = {
                     priority='secondary'>
                     <listbox.div
                         { ...args }
-                        getAnchorProps={ setButtonProps }
                         visualFocus={ focus }
                         activeDescendant={ active }
                         onActiveDescendantChange={ setActive } />
@@ -138,8 +133,10 @@ export const Menu: Story = {
 
         return (
             <FlyoutProvider>
-                { anchor }
-                { show ? menu : null }
+                <ListboxProvider>
+                    { anchor }
+                    { show ? menu : null }
+                </ListboxProvider>
             </FlyoutProvider>
         )
     }

@@ -1,6 +1,6 @@
-import { forwardRef, useState, useRef, useCallback } from 'react';
+import { forwardRef, useState, useRef, useCallback, useMemo } from 'react';
 import { input, InputProps } from '../Input';
-import { listbox, ListboxProps } from '../Listbox';
+import { listbox, ListboxProps, ListboxProvider } from '../Listbox';
 import { field, FieldProps } from '../Field';
 import { box } from '../Box';
 import { flyout, FlyoutProvider } from '../Flyout';
@@ -20,7 +20,6 @@ export const Combobox = forwardRef<HTMLElement, ComboBoxProps>(({
     onConfirm,
     ...rest
 }: ComboBoxProps, ref) => {
-    const [inputProps, setInputProps] = useState({});
     const [focus, setFocus] = useState(false);
     const [show, setShow] = useState(false);
     const anchorRef = useRef(null);
@@ -37,12 +36,12 @@ export const Combobox = forwardRef<HTMLElement, ComboBoxProps>(({
         typeof onConfirm === 'function' && onConfirm(ev.target.value);
     }, [onConfirm]);
 
-    // const _items = useMemo(() => {
-    //     return items.map((item) => ({ onClick: (ev: any) => {
-    //         typeof item.onClick === 'function' && item.onClick(ev);
-    //         onItemClick(ev);
-    //     }, ...item }));
-    // }, [items]);
+    const _items = useMemo(() => {
+        return items.map((item) => ({ onClick: (ev: any) => {
+            typeof item.onClick === 'function' && item.onClick(ev);
+            onItemClick(ev);
+        }, ...item }));
+    }, [items]);
 
     const anchor = (
         <field.div
@@ -50,7 +49,6 @@ export const Combobox = forwardRef<HTMLElement, ComboBoxProps>(({
             >
             <input.text
                 { ...rest }
-                { ...inputProps }
                 value={ value }
                 autoComplete='off'
                 onFocus={ () => {
@@ -75,10 +73,9 @@ export const Combobox = forwardRef<HTMLElement, ComboBoxProps>(({
                 <listbox.div
                     ref={ ref }
                     behavior='menu'
-                    items={ items }
+                    items={ _items }
                     rtl={ rtl }
                     loop={ loop }
-                    getAnchorProps={ setInputProps }
                     visualFocus={ focus }
                     activeDescendant={ activeDescendant }
                     onActiveDescendantChange={ (id) => {
@@ -91,8 +88,10 @@ export const Combobox = forwardRef<HTMLElement, ComboBoxProps>(({
 
     return (
         <FlyoutProvider>
-            { anchor }
-            { show ? popover : null }
+            <ListboxProvider>
+                { anchor }
+                { show ? popover : null }
+            </ListboxProvider>
         </FlyoutProvider>
     )
 });

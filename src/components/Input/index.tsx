@@ -3,6 +3,7 @@ import { Globals } from 'csstype';
 import css from './styles.module.scss';
 import { proxy } from '../Element/proxy';
 import { element, ElementProps, restrictProps } from '../Element';
+import { useListbox } from '../Listbox';
 
 export type InputProps = (React.InputHTMLAttributes<HTMLInputElement>
   | React.TextareaHTMLAttributes<HTMLTextAreaElement>)
@@ -24,6 +25,7 @@ export const input = proxy<HTMLInputTypeAttribute | 'textarea', InputProps>('inp
     ...props
   }: InputProps, ref) => {
     const type = inputType !== 'textarea' ? inputType : null;
+    const { anchor: listboxProps } = useListbox();
 
     const Element = inputType === 'textarea'
       ? element.textarea
@@ -36,6 +38,7 @@ export const input = proxy<HTMLInputTypeAttribute | 'textarea', InputProps>('inp
 
     return <Element
       {...Object.assign({ type }, restrictProps(props))}
+      { ...listboxProps }
       ref={ref}
       className={css.input}
       style={styles} />;

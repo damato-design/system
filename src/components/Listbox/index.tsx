@@ -3,7 +3,9 @@ import {
     useCallback,
     useEffect,
     useId,
-    useMemo
+    useMemo,
+    createContext,
+    useContext
 } from 'react';
 import clsx from 'clsx';
 import css from './styles.module.scss';
@@ -15,6 +17,28 @@ const JUMP_KEYS = ['End', 'Home'];
 const HORIZONTAL_KEYS = ['ArrowLeft', 'ArrowRight']
 const VERTICAL_KEYS = ['ArrowUp', 'ArrowDown'];
 const ALL_KEYS = JUMP_KEYS.concat(HORIZONTAL_KEYS, VERTICAL_KEYS);
+
+const ListboxContext = createContext(null);
+
+export const useListbox = () => {
+    const context = useContext(ListboxContext);
+    return context || { anchor: {}, target: { id: undefined } };
+};
+
+export const ListboxProvider = (props: any) => {
+    const targetId = useId();
+    
+    const value = {
+        anchor: {
+            // 'aria-haspopup': '',
+            'aria-controls': targetId,
+            'aria-owns': targetId,
+        },
+        target: { id: targetId }
+    }
+    
+    return <ListboxContext.Provider { ...props } value={ value }/>
+}
 
 function getIcon(behavior: 'listbox' | 'menu', selected: boolean) {
     if (behavior !== 'listbox') return;
@@ -44,7 +68,6 @@ type ItemProps = ButtonProps & {
 
 export type ListboxProps = ElementProps
     & {
-        getAnchorProps?: (props: ElementProps) => void,
         activeDescendant?: string,
         onActiveDescendantChange: (id: string) => void,
         behavior?: 'listbox' | 'menu',
@@ -57,7 +80,6 @@ export type ListboxProps = ElementProps
 
 export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) => {
     return forwardRef<HTMLElement, ListboxProps>(({
-        getAnchorProps,
         activeDescendant,
         onActiveDescendantChange,
         behavior = 'listbox',
@@ -75,7 +97,7 @@ export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) =>
             flexDirection: stack ? 'column' : 'row'
         }
 
-        const listboxId = useId();
+        const { target } = useListbox();
         const itemIds = useMemo(() => items.map(({ id }) => id), [items]);
 
         const arrows = useMemo(() => {
@@ -101,25 +123,31 @@ export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) =>
                 && onActiveDescendantChange(ev.currentTarget.id);
         }, [onActiveDescendantChange]);
 
-        const anchorProps = useMemo(() => ({
-            onPointerDown: (ev: any) => ev.currentTarget.focus(),
-            tabIndex: 0,
-            onKeyDown,
-        }), [onKeyDown]);
+        const onFocus = useCallback(() => (ev: any) => ev.currentTarget.focus(), []);
 
         useEffect(() => {
-            typeof getAnchorProps === 'function'
-                && getAnchorProps(Object.assign(anchorProps, {
-                    "aria-haspopup": behavior,
-                    "aria-controls": listboxId,
-                    "aria-owns": listboxId,
-                }))
-        }, [anchorProps, getAnchorProps, behavior]);
+            if (!document || typeof target.id !== 'string') return;
+            const $anchor = document.querySelector(`[aria-controls="${target.id}"]`);
+            if (!$anchor) return;
+
+            $anchor.addEventListener('pointerdown', onFocus);
+            $anchor.addEventListener('keydown', onKeyDown);
+            return () => {
+                $anchor.removeEventListener('pointerdown', onFocus);
+                $anchor.removeEventListener('keydown', onKeyDown);
+            }
+        }, [target.id]);
+
+        const targetProps = !target.id ? {
+            onPointerDown: onFocus,
+            onKeyDown,
+            tabIndex: 0,
+        } : {};
         
         return <Element
             {...restrictProps(props)}
-            {...typeof getAnchorProps !== 'function' ? anchorProps : {}}
-            id={listboxId}
+            { ...target }
+            { ...targetProps }
             role={behavior}
             ref={ref}
             className={clsx(css.listbox, { [css.visualfocus]: visualFocus })}
