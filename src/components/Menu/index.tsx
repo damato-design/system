@@ -52,8 +52,6 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
         </flyout.div>
     );
 
-    console.log('render');
-
     return (
         <FlyoutProvider>
             <ListboxProvider>

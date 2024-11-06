@@ -129,7 +129,7 @@ export const Menu: Story = {
                         onActiveDescendantChange={ setActive } />
                 </box.div>
             </flyout.div>
-        )
+        );
 
         return (
             <FlyoutProvider>

@@ -1,7 +1,6 @@
-import { 
+import {
     forwardRef,
-    useCallback,
-    useEffect,
+    useLayoutEffect,
     useId,
     useMemo,
     createContext,
@@ -27,7 +26,7 @@ export const useListbox = () => {
 
 export const ListboxProvider = (props: any) => {
     const targetId = useId();
-    
+
     const value = {
         anchor: {
             // 'aria-haspopup': '',
@@ -36,8 +35,8 @@ export const ListboxProvider = (props: any) => {
         },
         target: { id: targetId }
     }
-    
-    return <ListboxContext.Provider { ...props } value={ value }/>
+
+    return <ListboxContext.Provider {...props} value={value} />
 }
 
 function getIcon(behavior: 'listbox' | 'menu', selected: boolean) {
@@ -107,70 +106,50 @@ export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) =>
                 : HORIZONTAL_KEYS;
         }, [rtl, stack]);
 
-        // TODO: Is there a way to improve render performance by dropping deps;
-        // especially activeDescendant?
-        const onKeyDown = useCallback((ev: any) => {
-            if (ALL_KEYS.includes(ev.key)) ev.preventDefault();
-            const id = activeDescendant || itemIds[0];
-            const update = nextId(ev.key, id, itemIds, arrows, loop);
-            typeof onActiveDescendantChange === 'function'
-                && onActiveDescendantChange(update);
+        useLayoutEffect(() => {
+            if (!document) return;
+            const onKeyDown = (ev: any) => {
+                if (document.activeElement !== ev.target) return;
+                if (ALL_KEYS.includes(ev.key)) ev.preventDefault();
+                const id = activeDescendant || itemIds[0];
+                const update = nextId(ev.key, id, itemIds, arrows, loop);
+                typeof onActiveDescendantChange === 'function'
+                    && onActiveDescendantChange(update);
+            }
+
+            document.documentElement.addEventListener('keydown', onKeyDown);
+            return () => document.documentElement.removeEventListener('keydown', onKeyDown);
         }, [onActiveDescendantChange, itemIds, arrows, activeDescendant, loop]);
 
-        const onPointerDown = useCallback((ev: any) => {
-            ev.preventDefault();
-            typeof onActiveDescendantChange === 'function'
-                && onActiveDescendantChange(ev.currentTarget.id);
-        }, [onActiveDescendantChange]);
-
-        const onFocus = useCallback(() => (ev: any) => ev.currentTarget.focus(), []);
-
-        useEffect(() => {
-            if (!document || typeof target.id !== 'string') return;
-            const $anchor = document.querySelector(`[aria-controls="${target.id}"]`);
-            if (!$anchor) return;
-
-            $anchor.addEventListener('pointerdown', onFocus);
-            $anchor.addEventListener('keydown', onKeyDown);
-            return () => {
-                $anchor.removeEventListener('pointerdown', onFocus);
-                $anchor.removeEventListener('keydown', onKeyDown);
-            }
-        }, [target.id]);
-
-        const targetProps = !target.id ? {
-            onPointerDown: onFocus,
-            onKeyDown,
-            tabIndex: 0,
-        } : {};
-        
         return <Element
             {...restrictProps(props)}
-            { ...target }
-            { ...targetProps }
+            {...target}
+            tabIndex={ !target.id ? 0 : undefined }
+            onClick={ (ev) => !target.id && ev.currentTarget.focus() }
             role={behavior}
             ref={ref}
             className={clsx(css.listbox, { [css.visualfocus]: visualFocus })}
             style={styles}>
-            { items.map((item) => {
+            {items.map((item) => {
                 return (
-                    <Button 
-                        { ...item}
+                    <Button
+                        {...item}
                         stretch
-                        key={ item.id }
-                        icon={ getIcon(behavior, item.id === activeDescendant) }
-                        aria-selected={ item.id === activeDescendant }
-                        role={ behavior === 'menu' ? 'menuitem' : 'option' }
-                        onPointerDown={ (ev: any) => {
+                        key={item.id}
+                        icon={getIcon(behavior, item.id === activeDescendant)}
+                        aria-selected={item.id === activeDescendant}
+                        role={behavior === 'menu' ? 'menuitem' : 'option'}
+                        onPointerDown={(ev: any) => {
                             typeof item.onPointerDown === 'function'
                                 && item.onPointerDown(ev);
-                            onPointerDown(ev);
-                        } }
-                        tabIndex={ -1 }>
-                        { item.children || item.id }
+                            typeof onActiveDescendantChange === 'function'
+                                && onActiveDescendantChange(item.id);
+                        }}
+                        tabIndex={-1}>
+                        {item.children || item.id}
                     </Button>
                 )
-            }) }
+            })}
         </Element>;
     })
 });

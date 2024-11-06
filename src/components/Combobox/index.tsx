@@ -78,10 +78,7 @@ export const Combobox = forwardRef<HTMLElement, ComboBoxProps>(({
                     loop={ loop }
                     visualFocus={ focus }
                     activeDescendant={ activeDescendant }
-                    onActiveDescendantChange={ (id) => {
-                        console.log('change');
-                        onActiveDescendantChange(id);
-                    } } />
+                    onActiveDescendantChange={ onActiveDescendantChange } />
             </box.div>
         </flyout.div>
     );
