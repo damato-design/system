@@ -3,7 +3,7 @@ import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { box, BoxProps } from '../Box';
 import { restrictProps } from '../Element';
 
-type FieldProps = BoxProps & {};
+export type FieldProps = BoxProps & {};
 
 export const field = proxy<HTMLTagsOnly, FieldProps>('field', (TagName) => {
     return forwardRef<HTMLElement, FieldProps>(({

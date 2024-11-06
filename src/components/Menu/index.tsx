@@ -7,11 +7,9 @@ import { flyout } from "../Flyout";
 type MenuProps = Omit<ButtonProps & ListboxProps, 'visualFocus'>;
 
 export const Menu = forwardRef<HTMLElement, MenuProps>(({
-    getAnchorProps,
     activeDescendant,
     onActiveDescendantChange,
     behavior,
-    stack,
     items,
     rtl,
     loop,
@@ -45,6 +43,8 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
                 <listbox.div
                     ref={ ref }
                     behavior='menu'
+                    rtl={ rtl }
+                    loop={ loop }
                     items={ items }
                     getAnchorProps={ setButtonProps }
                     visualFocus={ focus }
