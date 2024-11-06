@@ -9,6 +9,7 @@ import { Combobox } from '.';
 const meta = {
     title: 'Components/Combobox',
     component: Combobox,
+    tags: ['draft'],
     parameters: {
         docs: {
             story: {

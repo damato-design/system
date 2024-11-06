@@ -2,7 +2,9 @@ import { forwardRef } from 'react';
 import { proxy } from '../Element/proxy';
 
 export const IDREF = {
-  close: 'LOCALIZE_CLOSE'
+  close: 'LOCALIZE_CLOSE',
+  previous: 'LOCALIZE_PREVIOUS',
+  next: 'LOCALIZE_NEXT'
 }
 
 export type IdRefKeys = keyof typeof IDREF;

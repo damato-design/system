@@ -64,8 +64,8 @@ export const Full: Story = {
                 cold-pressed artisan keytar vinyl irony asymmetrical edison bulb.
             </text.p>,
             <box.div infill key='actions'>
-                <Button priority='primary'>Submit</Button>
-                <Button>Cancel</Button>
+                <Button priority='primary' stretch>Submit</Button>
+                <Button stretch>Cancel</Button>
             </box.div>
         ]
     },

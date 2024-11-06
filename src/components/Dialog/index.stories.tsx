@@ -81,8 +81,8 @@ export const Modal: Story = {
                 </text.a>
             </text.p>,
             <box.div infill key='actions'>
-                <Button priority='primary'>Submit</Button>
-                <Button>Cancel</Button>
+                <Button priority='primary' stretch>Submit</Button>
+                <Button stretch>Cancel</Button>
             </box.div>
         ],
         onClose: () => console.log('Trying to close this!')

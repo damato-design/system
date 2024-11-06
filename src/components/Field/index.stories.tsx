@@ -113,10 +113,10 @@ export const OuterButton: Story = {
 
         return (
             <box.form action='' infill placeChildren='top'>
-                <field.div { ...args }>
+                <field.div { ...args } stretch>
                     <input.email name='email' value={ value } onChange={ onChange }/>
                 </field.div>
-                <Button priority='primary' icon='email' onClick={ onClick }>
+                <Button priority='primary' icon='email' onClick={ onClick } stretch>
                     Subscribe
                 </Button>
             </box.form>

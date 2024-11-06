@@ -4,7 +4,7 @@ import { listbox, ListboxProps } from "../Listbox";
 import { box } from "../Box";
 import { flyout } from "../Flyout";
 
-type MenuProps = Omit<ButtonProps & ListboxProps, 'visualFocus'>;
+export type MenuProps = Omit<ButtonProps & ListboxProps, 'visualFocus'>;
 
 export const Menu = forwardRef<HTMLElement, MenuProps>(({
     activeDescendant,
@@ -26,6 +26,7 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
             { ...buttonProps }
             { ...anchorProps }
             ref={ anchorRef }
+            stretch={ false }
             onFocus={ () => setFocus(true) }
             onBlur={ () => setFocus(false) }
             behavior='menu'/>
