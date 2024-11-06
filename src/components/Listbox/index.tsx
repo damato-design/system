@@ -39,6 +39,7 @@ function nextId(
 
 type ItemProps = ButtonProps & {
     id: string,
+    value: string,
 }
 
 export type ListboxProps = ElementProps

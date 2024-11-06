@@ -46,9 +46,9 @@ export const Default: Story = {
         onActiveDescendantChange: () => {},
         visualFocus: false,
         items: [
-            { id: 'option1' },
-            { id: 'option2' },
-            { id: 'option3' }
+            { id: 'option1', value: 'option1' },
+            { id: 'option2', value: 'option2' },
+            { id: 'option3', value: 'option3' }
         ]
     },
     render: ({ onActiveDescendantChange: _, ...args}) => {
@@ -92,9 +92,9 @@ export const Menu: Story = {
         behavior: 'menu',
         visualFocus: false,
         items: [
-            { id: 'option1' },
-            { id: 'option2' },
-            { id: 'option3' }
+            { id: 'option1', value: 'option1' },
+            { id: 'option2', value: 'option2' },
+            { id: 'option3', value: 'option3' }
         ]
     },
     render: ({ onActiveDescendantChange: _, ...args}) => {
@@ -105,6 +105,20 @@ export const Menu: Story = {
         const [show, setShow] = useState(false);
         const anchorRef = useRef(null);
 
+        const anchor = (
+            <Button
+                { ...buttonProps }
+                { ...anchorProps }
+                ref={ anchorRef }
+                onFocus={ () => setFocus(true) }
+                onBlur={ () => setFocus(false) }
+                onClick={ () => setShow(!show) }
+                behavior='menu'
+                priority='primary'>
+                { active }
+            </Button>
+        );
+        
         const menu = (
             <flyout.div
                 getAnchorProps={ setAnchorProps }
@@ -127,17 +141,7 @@ export const Menu: Story = {
 
         return (
             <>
-                <Button
-                    { ...buttonProps }
-                    { ...anchorProps }
-                    ref={ anchorRef }
-                    onFocus={ () => setFocus(true) }
-                    onBlur={ () => setFocus(false) }
-                    onClick={ () => setShow(!show) }
-                    behavior='menu'
-                    priority='primary'>
-                    { active }
-                </Button>
+                { anchor }
                 { show ? menu : null }
             </>
         )

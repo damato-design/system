@@ -35,9 +35,9 @@ export const Default: Story = {
         activeDescendant: 'option2',
         onActiveDescendantChange: () => {},
         items: [
-            { id: 'option1' },
-            { id: 'option2' },
-            { id: 'option3' }
+            { id: 'option1', value: 'option1' },
+            { id: 'option2', value: 'option2' },
+            { id: 'option3', value: 'option3' }
         ]
     },
     render: ({ onActiveDescendantChange: _, ...args}) => {
