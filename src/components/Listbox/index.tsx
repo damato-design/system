@@ -136,7 +136,7 @@ export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) =>
                         {...item}
                         stretch
                         key={item.id}
-                        icon={getIcon(behavior, item.id === activeDescendant)}
+                        icon={getIcon(behavior, item.id === activeDescendant) || item.icon}
                         aria-selected={item.id === activeDescendant}
                         role={behavior === 'menu' ? 'menuitem' : 'option'}
                         onPointerDown={(ev: any) => {
