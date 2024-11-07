@@ -69,7 +69,7 @@ export type ItemsProps = [ItemProps, ...ItemProps[]];
 
 export type ListboxProps = ElementProps
     & {
-        activeDescendant?: string,
+        activeDescendant: string,
         onActiveDescendantChange: (id: string) => void,
         behavior?: 'listbox' | 'menu',
         rtl?: boolean,
@@ -100,6 +100,7 @@ export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) =>
 
         const { target } = useListbox();
         const itemIds = useMemo(() => items.map(({ id }) => id), [items]);
+        const active = itemIds.includes(activeDescendant) ? activeDescendant : itemIds[0];
 
         const arrows = useMemo(() => {
             if (stack) return VERTICAL_KEYS;
@@ -113,15 +114,14 @@ export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) =>
             const onKeyDown = (ev: any) => {
                 if (ev.target !== document.activeElement) return;
                 if (ALL_KEYS.includes(ev.key)) ev.preventDefault();
-                const id = activeDescendant || itemIds[0];
-                const update = nextId(ev.key, id, itemIds, arrows, loop);
+                const update = nextId(ev.key, active, itemIds, arrows, loop);
                 typeof onActiveDescendantChange === 'function'
                     && onActiveDescendantChange(update);
             }
 
             document.documentElement.addEventListener('keydown', onKeyDown);
             return () => document.documentElement.removeEventListener('keydown', onKeyDown);
-        }, [onActiveDescendantChange, itemIds, arrows, activeDescendant, loop]);
+        }, [onActiveDescendantChange, itemIds, arrows, active, loop]);
 
         return <Element
             {...restrictProps(props)}
@@ -138,8 +138,8 @@ export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) =>
                         {...item}
                         stretch
                         key={item.id}
-                        icon={getIcon(behavior, item.id === activeDescendant) || item.icon}
-                        aria-selected={item.id === activeDescendant}
+                        icon={getIcon(behavior, item.id === active) || item.icon}
+                        aria-selected={item.id === active}
                         role={behavior === 'menu' ? 'menuitem' : 'option'}
                         onPointerDown={(ev: any) => {
                             typeof item.onPointerDown === 'function'

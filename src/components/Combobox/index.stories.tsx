@@ -1,7 +1,7 @@
-import { useCallback, useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Combobox } from '.';
+import { Combobox, ItemsProps } from '.';
 
 /**
  * This component is a work-in-progress
@@ -38,9 +38,14 @@ export const Default: Story = {
         const [active, setActive] = useState(args.activeDescendant);
         const [value, setValue] = useState(args.items[0].value);
 
+        const filtered = useMemo(() => {
+            return args.items.filter((item) => item.value.startsWith(value)) as ItemsProps;
+        }, [args.items, value]);
+
         return (
             <Combobox
                 { ...args }
+                items={ filtered }
                 value={ value }
                 onChange={ (ev: any) => setValue(ev.target.value) }
                 onConfirm={ (item) => setValue(item.value) }
