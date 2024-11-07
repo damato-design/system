@@ -60,10 +60,12 @@ function nextId(
     return itemIds[update] || id;
 }
 
-type ItemProps = ButtonProps & {
+export type ItemProps = ButtonProps & {
     id: string,
     value: any,
 }
+
+export type ItemsProps = [ItemProps, ...ItemProps[]];
 
 export type ListboxProps = ElementProps
     & {
@@ -73,7 +75,7 @@ export type ListboxProps = ElementProps
         rtl?: boolean,
         loop?: boolean,
         stack?: boolean,
-        items: [ItemProps, ...ItemProps[]],
+        items: ItemsProps,
         visualFocus: boolean,
     };
 

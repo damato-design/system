@@ -4,6 +4,8 @@ import { listbox, ListboxProps, ListboxProvider } from "../Listbox";
 import { box } from "../Box";
 import { flyout, FlyoutProvider } from "../Flyout";
 
+export type { ItemProps, ItemsProps } from '../Listbox';
+
 export type MenuProps = Omit<ButtonProps & ListboxProps, 'visualFocus'> & {
     onConfirm?: (value: any) => void;
 };

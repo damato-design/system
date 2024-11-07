@@ -5,6 +5,8 @@ import { field, FieldProps } from '../Field';
 import { box } from '../Box';
 import { flyout, FlyoutProvider } from '../Flyout';
 
+export type { ItemProps, ItemsProps } from '../Listbox';
+
 type ComboBoxProps = Omit<InputProps & FieldProps & ListboxProps, 'visualFocus'> & {
     onConfirm?: (value: any) => void;
 }

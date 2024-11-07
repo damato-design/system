@@ -4,6 +4,8 @@ import { Button } from '../Button';
 import { box } from '../Box';
 import { IDREF } from '../Localize';
 
+export type { ItemProps, ItemsProps } from '../Menu';
+
 type PaginationProps = Omit<MenuProps, 'activeDescendant' | 'onActiveDescendantChange'> & {
     index: number,
 };
