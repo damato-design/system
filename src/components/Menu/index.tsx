@@ -1,10 +1,12 @@
-import { forwardRef, useState, useRef } from "react";
+import { forwardRef, useState, useRef, useCallback, useMemo, act } from "react";
 import { Button, ButtonProps } from "../Button"
 import { listbox, ListboxProps, ListboxProvider } from "../Listbox";
 import { box } from "../Box";
 import { flyout, FlyoutProvider } from "../Flyout";
 
-export type MenuProps = Omit<ButtonProps & ListboxProps, 'visualFocus'>;
+export type MenuProps = Omit<ButtonProps & ListboxProps, 'visualFocus'> & {
+    onConfirm?: (value: any) => void;
+};
 
 export const Menu = forwardRef<HTMLElement, MenuProps>(({
     activeDescendant,
@@ -13,11 +15,21 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
     items,
     rtl,
     loop,
+    onConfirm,
     ...rest
 }: MenuProps, ref) => {
     const [focus, setFocus] = useState(false);
     const [show, setShow] = useState(false);
     const anchorRef = useRef(null);
+
+    const item = useMemo(() => {
+        return items.find((item) => item.id === activeDescendant);
+    }, [items, activeDescendant]);
+
+    const _onConfirm = useCallback(() => {
+        if (show && typeof onConfirm === 'function') onConfirm(item);
+        setShow(!show);
+    }, [item, onConfirm, show]);
 
     const button = (
         <Button
@@ -26,7 +38,8 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
             stretch={ false }
             onFocus={ () => setFocus(true) }
             onBlur={ () => setFocus(false) }
-            onClick={ () => setShow(!show) }
+            onKeyDown={ (ev: any) => ev.key === 'Enter' && _onConfirm() }
+            onPointerDown={ () => setShow(!show) }
             behavior='menu'/>
     );
 
@@ -41,6 +54,7 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
                 priority='secondary'>
                 <listbox.div
                     ref={ ref }
+                    onPointerUp={ () => _onConfirm() }
                     behavior='menu'
                     rtl={ rtl }
                     loop={ loop }

@@ -23,45 +23,27 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+function makePages(length: number): object[] {
+    return Array.from({ length }, (_, i) => ({
+        id: `page-${i + 1}`,
+        children: i + 1,
+        value: i,
+    }))
+}
+
 export const Default: Story = {
     args: {
-        activeDescendant: 'option2',
-        onActiveDescendantChange: () => {},
-        onClick: () => {},
-        items: [{ id: 'null' }],
+        items: makePages(4),
     },
-    render: ({ onActiveDescendantChange: _, ...args}) => {
-        const PAGES = 4;
-        const [active, setActive] = useState(args.activeDescendant);
-        const [value, setValue] = useState(1);
-
-        const onChange = useCallback((ev: any) => {
-            // check for previous / next
-            setValue(ev.target.value);
-        }, []);
-
-        const enhancedItems = useMemo(() => {
-            return Array.from({ length: PAGES }, (_, i) => {
-                const page = i + 1;
-                return {
-                    id: `page-${page}`,
-                    children: page,
-                    value: page,
-                    onClick: onChange
-                }
-            });
-        }, []);
+    render: (args) => {
+        const [item, setItem] = useState(args.items[0]);
 
         return (
             <Pagination
                 { ...args }
-                items={ enhancedItems }
-                value={ value }
-                onChange={ onChange }
-                onClick={ onChange }
-                activeDescendant={ active }
-                onActiveDescendantChange={ setActive }>
-                { value }
+                index={ item.value }
+                onConfirm={ setItem }>
+                { item.children }
             </Pagination>
         )
     }

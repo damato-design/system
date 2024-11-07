@@ -33,18 +33,17 @@ export const Default: Story = {
             { id: 'option3', value: 'option3' }
         ],
         name: 'default',
-        value: 'option2'
     },
     render: ({ onActiveDescendantChange: _, ...args}) => {
         const [active, setActive] = useState(args.activeDescendant);
-        const [value, setValue] = useState(args.value);
+        const [value, setValue] = useState(args.items[0].value);
 
         return (
             <Combobox
                 { ...args }
                 value={ value }
                 onChange={ (ev: any) => setValue(ev.target.value) }
-                onConfirm={ setValue }
+                onConfirm={ (item) => setValue(item.value) }
                 activeDescendant={ active }
                 onActiveDescendantChange={ setActive }/>
         )
