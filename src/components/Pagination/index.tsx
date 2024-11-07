@@ -8,9 +8,11 @@ export type { ItemProps, ItemsProps } from '../Menu';
 
 type PaginationProps = Omit<MenuProps, 'activeDescendant' | 'onActiveDescendantChange'> & {
     index: number,
+    cta?: string,
 };
 
 export const Pagination = forwardRef<HTMLElement, PaginationProps>(({
+    cta,
     items,
     onConfirm,
     index = 0,
@@ -19,10 +21,11 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(({
     const [activeDescendant, onActiveDescendantChange] = useState(items[index].id);
 
     const onButton = useCallback((ev: any) => {
-        const direction = Number(ev.target.value);
-        const clamp = Math.min(Math.max(index + direction, 0), items.length - 1);
-        typeof onConfirm === 'function' && onConfirm(items[clamp]);
-    }, [index, items]);
+        if (typeof onConfirm !== 'function') return;
+        if (cta && index === items.length - 1) return onConfirm(null);
+        const clamp = Math.min(Math.max(index + Number(ev.target.value), 0), items.length - 1);
+        onConfirm(items[clamp]);
+    }, [index, items, cta]);
 
     return (
         <box.nav ref={ ref } gap stretch placeChildren='end'>
@@ -42,11 +45,14 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(({
                 value={ -1 }/>
             <Button
                 icon='navigate_next'
-                disabled={ index === items.length - 1 }
+                priority={ Boolean(cta) ? 'primary' : undefined }
+                disabled={ !Boolean(cta) && index === items.length - 1 }
                 aria-labelledby={ IDREF.next }
                 aria-label='next'
                 onClick={ onButton }
-                value={ 1 }/>
+                value={ 1 }>
+                { cta }
+            </Button>
         </box.nav>
     )
 });
