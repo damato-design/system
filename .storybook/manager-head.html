@@ -84,14 +84,18 @@
 
     const title = document.querySelector('title');
 
-    new MutationObserver(([entry]) => {
-        if (title.textContent.includes('Storybook')) {
-            title.textContent = title.textContent.replace('Docs ⋅ Storybook', `DAMATO Design System`)
-        }
-}).observe(
-    title,
-    { subtree: true, characterData: true, childList: true }
-);
+    const change = new MutationObserver(([entry]) => {
+        window.requestAnimationFrame(() => {
+            if (!title.innerText.includes('DAMATO')) {
+                title.innerText = title.innerText.replace(/Docs.{3}Storybook/, `DAMATO Design System`);   
+            }
+        });
+    });
+
+    change.observe(
+        title,
+        { subtree: true, characterData: true, childList: true }
+    );
 
     /*  ========== Wait for DOM nodes ========== */
 
