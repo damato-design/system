@@ -12,6 +12,10 @@ function makeItems(length: number, fn: (_: any, i: number) => ItemProps) {
  * user to move through pages of data. It is a composition using
  * `<Menu/>` and `<Button/>`. Most of the configuration is passed
  * into the `<Menu/>`. The `activeDescendant` is managed internally.
+ * 
+ * - The `value` for each of the `items` should be the `index` of the item.
+ * - Anything can be rendered within the `<Menu/>`, this is provided as the
+ * children for `<Pagination/>`.
  */
 const meta = {
     title: 'Components/Pagination',
@@ -30,14 +34,14 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 function makePage(_: any, i: number) {
-    return { id: `page-${i + 1}`, value: i } as ItemProps
+    return { id: `page-${i + 1}`, value: i, children: i + 1 } as ItemProps
 }
 
 /**
  * A common use-case for pagination would be to traverse pages
  * of data. The `index` prop is a 0-based positive integer representing
- * the current page. In this example, we display the current page by using
- * `index + 1`.
+ * the current page. This simple example could display the current page
+ * by using `index + 1`.
  */
 export const Default: Story = {
     args: {
@@ -115,6 +119,10 @@ export const Months: Story = {
     }
 }
 
+function makeStep(_: any, i: number) {
+    return { id: `page-${i + 1}`, value: i, children: `Step ${i + 1}` } as ItemProps
+}
+
 /**
  * We can use the `<Pagination/>` to create the navigation
  * for wizard experiences. When the content for the next button is
@@ -136,7 +144,7 @@ export const Months: Story = {
 export const Wizard: Story = {
     args: {
         index: 0,
-        items: makeItems(4, makePage),
+        items: makeItems(4, makeStep),
         cta: 'Next'
     },
     render: (args) => {
@@ -152,7 +160,7 @@ export const Wizard: Story = {
                 { ...args }
                 index={ item.value }
                 onConfirm={ onConfirm }>
-                { item.value + 1 }
+                { item.children }
             </Pagination>
         )
     }

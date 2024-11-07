@@ -22,8 +22,9 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(({
 
     const onButton = useCallback((ev: any) => {
         if (typeof onConfirm !== 'function') return;
-        if (cta && index === items.length - 1) return onConfirm(null);
-        const clamp = Math.min(Math.max(index + Number(ev.target.value), 0), items.length - 1);
+        const value = Number(ev.target.value);
+        if (cta && value === 1 && index === items.length - 1) return onConfirm(null);
+        const clamp = Math.min(Math.max(index + value, 0), items.length - 1);
         onConfirm(items[clamp]);
     }, [index, items, cta]);
 
