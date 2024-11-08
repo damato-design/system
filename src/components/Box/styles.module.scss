@@ -148,6 +148,9 @@
     & > strong {
         padding-inline: var(--padding, 1rem);
         margin-inline: calc(var(--padding, 1rem) / -2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     & > strong + i {

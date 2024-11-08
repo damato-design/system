@@ -38,7 +38,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(({
                 onActiveDescendantChange={ onActiveDescendantChange }
                 onConfirm={ onConfirm }
                 items={ items }/>
-            <box.div stretch={ infill } gap>
+            <box.div stretch={ infill } gap placeChildren="center">
                 <Button
                     icon='navigate_before'
                     disabled={ index === 0 }

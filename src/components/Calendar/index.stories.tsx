@@ -33,7 +33,7 @@ function makeMonth(_: any, i: number) {
 export const Paginate: Story = {
     args: {},
     render: (args) => {
-        const items = Array.from({ length: 12 }, makeMonth);
+        const items = Array.from({ length: 12 }, makeMonth) as ItemsProps;
         const [item, setItem] = useState(items[0]);
 
         return (
