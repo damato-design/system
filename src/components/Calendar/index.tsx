@@ -75,7 +75,8 @@ function DateButton({ date, month, year, day, onConfirm, formatter }: any) {
             aria-label={ formatter.format(d) }
             aria-selected={ day === date }
             id={ id }
-            onClick={ onClick }>
+            onClick={ onClick }
+            square>
             { date }
         </Button>
     );

@@ -1,25 +1,11 @@
 .table {
     text-align: center;
     border-collapse: collapse;
-    margin: calc(var(--padding, .5rem) / -2);
+    margin: calc(var(--gap, .5rem) / -2);
 }
 
 .td {
-
-    padding: calc(var(--padding, .5rem) / 2);
-
-    strong {
-        font-size: 1rem !important;
-        height: 1lh;
-        width: 1lh;
-        line-height: 1lh;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-    &[aria-current] {
-        font-weight: bolder;
-    }
+    padding: calc(var(--gap, .5rem) / 2);
 
     &:empty {
         visibility: hidden;

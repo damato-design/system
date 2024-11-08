@@ -33,6 +33,10 @@ export type ButtonProps = (React.ButtonHTMLAttributes<HTMLButtonElement>
          * A string reference to an `<icon/>` element.
          */
         icon?: string,
+        /**
+         * Forces a square size for the children (ie., label) when provided.
+         */
+        square?: boolean,
     };
 
 export const Button = forwardRef<HTMLElement, ButtonProps>(({
@@ -40,6 +44,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
     children,
     icon: iconRef,
     role,
+    square,
     type = 'button',
     ...props
 }: ButtonProps, ref) => {
@@ -72,6 +77,15 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
         `);
     }
 
+    const styles = square ?
+        {
+            margin: 0,
+            padding: 0,
+            width: '1lh',
+            height: '1lh',
+            lineHeight: '1lh'
+        } : null;
+
     return (
         <Element
             { ...config }
@@ -80,7 +94,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
             ref={ref}
             purpose='action'>
             {iconRef ? createElement(icon[iconRef]) : null}
-            {children ? <text.strong>{children}</text.strong> : null}
+            {children ? <text.strong style={ styles }>{children}</text.strong> : null}
             {getAccessory(behavior)}
         </Element>
     )

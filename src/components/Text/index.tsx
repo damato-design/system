@@ -29,7 +29,6 @@ export const text = proxy<HTMLTagsOnly, TextProps>('text', (TagName) => {
     ...props
   }: TextProps, ref) => {
     const Text = element[TagName];
-    const id = useId();
 
     const classNames = clsx(css.text, { 
       [css.sronly]: screenreaderOnly
@@ -38,7 +37,6 @@ export const text = proxy<HTMLTagsOnly, TextProps>('text', (TagName) => {
     return <Text
       { ...props }
       ref={ ref }
-      id={ id }
       className={ classNames }
       data-standby={ standby }
       data-priority={ priority }/>;

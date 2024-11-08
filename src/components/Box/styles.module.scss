@@ -136,6 +136,11 @@
     transition: background .218s ease;
     color: black;
 
+    &[aria-current] {
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+
     /* Icon only buttons */
     &:has(i[role="presentation"]:only-child) {
         flex-grow: 0;
