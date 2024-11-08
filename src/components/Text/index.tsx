@@ -12,10 +12,9 @@ export type TextProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
    */
   priority?: 'primary' | 'auxiliary';
   /**
-   * A function that provides accessible attributes for more clarity
-   * that this component is meant to provide for assistive technologies.
+   * Content is only meant to be found by assistive technology.
    */
-  getScreenreaderProps?: (props: TextProps) => void;
+  screenreaderOnly?: boolean;
   /**
    * Avoids loading presentation when set to false
    */
@@ -26,21 +25,14 @@ export const text = proxy<HTMLTagsOnly, TextProps>('text', (TagName) => {
   return forwardRef<HTMLElement, TextProps>(({
     priority,
     standby = true,
-    getScreenreaderProps,
+    screenreaderOnly,
     ...props
   }: TextProps, ref) => {
     const Text = element[TagName];
     const id = useId();
 
-    useEffect(() => {
-      typeof getScreenreaderProps === 'function'
-        && getScreenreaderProps({
-          'aria-describedby': id
-        });
-    }, [getScreenreaderProps]);
-
     const classNames = clsx(css.text, { 
-      [css.sronly]: typeof getScreenreaderProps === 'function'
+      [css.sronly]: screenreaderOnly
     });
 
     return <Text

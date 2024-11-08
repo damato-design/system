@@ -54,7 +54,8 @@ body {
     background: white;
 
     &:has(.sb-story > [style*="height: 0px"]) {
-        display: none;
+        /* display: none; */
+        height: 0;
     }
 }
 
