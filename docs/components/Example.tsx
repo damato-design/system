@@ -8,6 +8,8 @@ export default function Example({ stories }) {
     const [group, component] = stories.default.title.toLowerCase().split('/');
 
     const [href, setHref] = useState('');
+    const { tags } = stories.default;
+    const isDraft = tags && tags.includes('draft');
 
     useEffect(() => {
         // http://localhost:6006/?path=/docs/components-button--docs
@@ -26,7 +28,7 @@ export default function Example({ stories }) {
                     <Story of={ stories.Default } meta={ stories } inline={ true } />
                 </figure>
             </div>
-            <div className={ css.title }>{ displayName.split('.')[0] }</div>
+            <div className={ css.title } data-draft={ isDraft }>{ displayName.split('.')[0] }</div>
         </a>
     );
 }

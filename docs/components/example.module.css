@@ -9,6 +9,8 @@
     aspect-ratio: 16/9;
     overflow: hidden;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .example {
@@ -37,4 +39,20 @@
     margin: 0;
     font-weight: bolder;
     text-transform: capitalize;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title[data-draft]:after {
+    content: 'DRAFT';
+    font-size: .8em;
+    text-transform: uppercase;
+    font-weight: bolder;
+    display: inline-flex;
+    align-items: center;
+    padding-inline: .4em;
+    border: 1px solid;
+    border-radius: .2em;
+    opacity: .8;
 }

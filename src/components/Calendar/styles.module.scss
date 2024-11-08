@@ -1,0 +1,25 @@
+.table {
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.tr {
+
+}
+
+.td {
+    // padding: 0;
+
+    button {
+        aspect-ratio: 1;
+        width: 100%;
+    }
+
+    &[aria-current] {
+        font-weight: bolder;
+    }
+
+    &:empty {
+        visibility: hidden;
+    }
+}
