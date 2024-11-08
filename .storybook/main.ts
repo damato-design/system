@@ -8,24 +8,21 @@ const config: StorybookConfig = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@chromatic-com/storybook",
-    "@storybook/experimental-addon-test"
+    "@storybook/experimental-addon-test",
+    "@storybook/addon-mdx-gfm"
   ],
-
-  core: {
-    builder: {
-      name: "@storybook/builder-vite",
-      options: { fsCache: false }
-    },
-  },
 
   framework: {
     name: "@storybook/react-vite",
-    options: {},
+    options: {
+      builder: {
+        fsCache: false
+      }
+    },
   },
 
   docs: {
-    docsMode: true,
-    autodocs: true,
+    docsMode: true
   },
 
   typescript: {
