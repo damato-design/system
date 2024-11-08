@@ -4,16 +4,18 @@ import { icon } from '../Icon';
 
 type DisclosureProps = BoxProps & {
     subject: ReactNode,
+    name?: string
 };
 
 export const Disclosure = forwardRef<HTMLElement, DisclosureProps>(({
+    name,
     subject,
     children,
     ...rest
 }: DisclosureProps, ref) => {
 
     return (
-        <box.details { ...rest } ref={ ref } stretch stack>
+        <box.details { ...rest } ref={ ref } name={ name } stretch stack>
             <box.summary
                 purpose='action'
                 padding

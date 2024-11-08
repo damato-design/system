@@ -11,7 +11,6 @@ import { text } from '../Text';
 const meta = {
     title: 'Components/Disclosure',
     component: Disclosure,
-    tags: ['draft'],
     parameters: {
         docs: {
             story: {
@@ -37,6 +36,12 @@ export const Default: Story = {
 
 /**
  * You can use a `lockup` in either the `subject` or the `children`.
+ * 
+ * > #### Why are the headings the same size?
+ * >
+ * > The size of the `text` depends on the density of the container.
+ * > Update the `mode` for the element to reduce the density. For
+ * > more about density see the [Density docs](/docs/foundations-density--docs).
  */
 export const Lockups: Story = {
     args: {
@@ -55,4 +60,29 @@ export const Lockups: Story = {
             </lockup.div>
         )
     }  
+}
+
+/**
+ * Using a shared `name` across `<Disclosure/>` components will
+ * make their behavior exclusive; only one will be open at a time.
+ */
+export const Accordion: Story = {
+    args: {
+        subject: ''
+    },
+    render: ({ subject, ...args }) => {
+        return (
+            <>
+                <Disclosure { ...args} subject='item 1' name='accordion'>
+                    This is first
+                </Disclosure>
+                <Disclosure { ...args} subject='item 2' name='accordion'>
+                    This is second
+                </Disclosure>
+                <Disclosure { ...args} subject='item 3' name='accordion'>
+                    This is third
+                </Disclosure>
+            </>
+        )
+    }
 }

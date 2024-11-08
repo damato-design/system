@@ -10,6 +10,10 @@
     &:where(details) {
         display: block !important;
 
+        summary > i {
+            transition: transform .218s ease;
+        }
+
         @media (prefers-reduced-motion: no-preference) {
             interpolate-size: allow-keywords;
         }
@@ -26,6 +30,10 @@
         &[open]::details-content {
             opacity: 1;
             block-size: auto;
+        }
+
+        &[open] summary > i {
+            transform: rotate(.5turn);
         }
     }
 
