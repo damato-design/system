@@ -16,6 +16,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(({
     items,
     onConfirm,
     index = 0,
+    infill = true,
     ...rest
 }: PaginationProps, ref) => {
     const [activeDescendant, onActiveDescendantChange] = useState(items[index].id);
@@ -29,31 +30,34 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(({
     }, [index, items, cta]);
 
     return (
-        <box.nav ref={ ref } gap stretch placeChildren='end'>
+        <box.nav ref={ ref } gap stretch infill={ infill } placeChildren='end'>
             <Menu
                 { ...rest }
+                stretch
                 activeDescendant={ activeDescendant }
                 onActiveDescendantChange={ onActiveDescendantChange }
                 onConfirm={ onConfirm }
                 items={ items }
                 placeSelf='start'/>
-            <Button
-                icon='navigate_before'
-                disabled={ index === 0 }
-                aria-labelledby={ IDREF.previous }
-                aria-label='previous'
-                onClick={ onButton }
-                value={ -1 }/>
-            <Button
-                icon='navigate_next'
-                priority={ Boolean(cta) ? 'primary' : undefined }
-                disabled={ !Boolean(cta) && index === items.length - 1 }
-                aria-labelledby={ IDREF.next }
-                aria-label='next'
-                onClick={ onButton }
-                value={ 1 }>
-                { cta }
-            </Button>
+            <box.div stretch gap>
+                <Button
+                    icon='navigate_before'
+                    disabled={ index === 0 }
+                    aria-labelledby={ IDREF.previous }
+                    aria-label='previous'
+                    onClick={ onButton }
+                    value={ -1 }/>
+                <Button
+                    icon='navigate_next'
+                    priority={ Boolean(cta) ? 'primary' : undefined }
+                    disabled={ !Boolean(cta) && index === items.length - 1 }
+                    aria-labelledby={ IDREF.next }
+                    aria-label='next'
+                    onClick={ onButton }
+                    value={ 1 }>
+                    { cta }
+                </Button>
+            </box.div>
         </box.nav>
     )
 });

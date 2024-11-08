@@ -37,7 +37,6 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
         <Button
             { ...rest }
             ref={ anchorRef }
-            stretch={ false }
             onFocus={ () => setFocus(true) }
             onBlur={ () => setFocus(false) }
             onKeyDown={ (ev: any) => ev.key === 'Enter' && _onConfirm() }
