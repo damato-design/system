@@ -65,8 +65,8 @@
                 transparent 1lh calc(1lh + 1ex)) 0 0/100% calc(1lh + 1ex);
 
             &:where(i[role="presentation"]) {
-                max-width: 1em;
-                min-height: 1em;
+                max-width: 1lh;
+                min-height: 1lh;
                 mask: none;
                 border-radius: 100vw;
             }
