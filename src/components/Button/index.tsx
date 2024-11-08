@@ -58,7 +58,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
 
     const ariaLabelledby = [props['aria-labelledby']];
     if (behavior === 'dismiss') ariaLabelledby.push(IDREF.close);
-    config["aria-labelledby"] = ariaLabelledby.filter(Boolean).join(' ');
+    config["aria-labelledby"] = ariaLabelledby.filter(Boolean).join(' ') || undefined;
 
     if (['option', 'menuitem'].includes(role as string)) {
         config.placeChildren = 'start'

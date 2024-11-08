@@ -30,16 +30,15 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(({
     }, [index, items, cta]);
 
     return (
-        <box.nav ref={ ref } gap stretch infill={ infill } placeChildren='end'>
+        <box.nav ref={ ref } gap stretch infill={ infill } distribute="between">
             <Menu
                 { ...rest }
-                stretch
+                stretch={ infill }
                 activeDescendant={ activeDescendant }
                 onActiveDescendantChange={ onActiveDescendantChange }
                 onConfirm={ onConfirm }
-                items={ items }
-                placeSelf='start'/>
-            <box.div stretch gap>
+                items={ items }/>
+            <box.div stretch={ infill } gap>
                 <Button
                     icon='navigate_before'
                     disabled={ index === 0 }
