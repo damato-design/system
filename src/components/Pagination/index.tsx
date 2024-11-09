@@ -6,7 +6,7 @@ import { IDREF } from '../Localize';
 
 export type { ItemProps, ItemsProps } from '../Menu';
 
-type PaginationProps = Omit<MenuProps, 'activeDescendant' | 'onActiveDescendantChange'> & {
+type PaginationProps = MenuProps & {
     index: number,
     cta?: string,
 };
@@ -14,12 +14,13 @@ type PaginationProps = Omit<MenuProps, 'activeDescendant' | 'onActiveDescendantC
 export const Pagination = forwardRef<HTMLElement, PaginationProps>(({
     cta,
     items,
+    activeDescendant,
+    onActiveDescendantChange,
     onConfirm,
     index = 0,
     infill = true,
     ...rest
 }: PaginationProps, ref) => {
-    const [activeDescendant, onActiveDescendantChange] = useState(items[index].id);
 
     const onButton = useCallback((ev: any) => {
         if (typeof onConfirm !== 'function') return;

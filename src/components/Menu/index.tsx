@@ -69,7 +69,7 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
 
     return (
         <FlyoutProvider>
-            <ListboxProvider>
+            <ListboxProvider behavior='menu'>
                 { button }
                 { show ? menu : null }
             </ListboxProvider>

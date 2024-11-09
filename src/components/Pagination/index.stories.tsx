@@ -47,13 +47,19 @@ export const Default: Story = {
     args: {
         index: 0,
         items: makeItems(4, makePage),
+        activeDescendant: 'null',
+        onActiveDescendantChange: () => {}
     },
     render: (args) => {
-        const [item, setItem] = useState(args.items[args.index]);
+        const target = args.items[args.index];
+        const [activeDescendant, onActiveDescendantChange] = useState(target.id);
+        const [item, setItem] = useState(target);
 
         return (
             <Pagination
                 { ...args }
+                activeDescendant={activeDescendant}
+                onActiveDescendantChange={onActiveDescendantChange}
                 index={ item.value }
                 onConfirm={ setItem }>
                 { item.value + 1 }
@@ -104,13 +110,19 @@ export const Months: Story = {
     args: {
         index: 6,
         items: makeItems(12, makeMonth),
+        activeDescendant: 'null',
+        onActiveDescendantChange: () => {}
     },
     render: (args) => {
-        const [item, setItem] = useState(args.items[args.index]);
+        const target = args.items[args.index];
+        const [activeDescendant, onActiveDescendantChange] = useState(target.id);
+        const [item, setItem] = useState(target);
 
         return (
             <Pagination
                 { ...args }
+                activeDescendant={activeDescendant}
+                onActiveDescendantChange={onActiveDescendantChange}
                 index={ item.value }
                 onConfirm={ setItem }>
                 { item.children }
@@ -145,10 +157,14 @@ export const Wizard: Story = {
     args: {
         index: 0,
         items: makeItems(4, makeStep),
-        cta: 'Next'
+        cta: 'Next',
+        activeDescendant: 'null',
+        onActiveDescendantChange: () => {}
     },
     render: (args) => {
-        const [item, setItem] = useState(args.items[args.index]);
+        const target = args.items[args.index];
+        const [activeDescendant, onActiveDescendantChange] = useState(target.id);
+        const [item, setItem] = useState(target);
 
         const onConfirm = useCallback((update: any) => {
             if (!update) return console.log('Done!');
@@ -158,6 +174,8 @@ export const Wizard: Story = {
         return (
             <Pagination
                 { ...args }
+                activeDescendant={activeDescendant}
+                onActiveDescendantChange={onActiveDescendantChange}
                 index={ item.value }
                 onConfirm={ onConfirm }>
                 { item.children }

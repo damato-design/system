@@ -1,4 +1,4 @@
-import { memo, useMemo, useState } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Calendar } from '.';
@@ -19,22 +19,22 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {};
 
-function makePages(month: number, offset: number) {
+function makePages(target: number, offset: number) {
     const d = new Date();
     // Set to prior month before computing months
-    d.setMonth((month - offset) - 1);
+    d.setMonth((target - offset) - 1);
     return Array.from({ length: 12 }, (_) => {
         const m = d.getMonth();
         d.setMonth(m + 1);
         const monthName = d.toLocaleString(undefined, { month: 'long' });
         const month = d.getMonth() + 1;
         const year = d.getFullYear();
+        const id = ['d', year, month].join('-');
         return {
             item: {
                 children: `${monthName} ${year}`,
                 value: m + 1, // month index, December = 11
-                key: monthName,
-                id: d.toISOString()
+                id
             },
             month,
             year,
@@ -56,18 +56,25 @@ export const Paginate: Story = {
     },
     render: (args) => {
         const MID_INDEX = 5;
-
+        
         const [monthIndex, setMonthIndex] = useState(args?.value?.month! - 1);
-        const pages = makePages(monthIndex, MID_INDEX);
+        const pages = useMemo(() => makePages(monthIndex, MID_INDEX), [monthIndex, MID_INDEX]);
         const { month, year, item } = pages[MID_INDEX];
+
+        const onActChange = useCallback((id: string) => {
+            const target = pages.find((page) => page.item.id === id);
+            setMonthIndex(target!.item.value);
+        }, [monthIndex]);
 
         return (
             <box.div stack gap>
                 <Pagination
+                    activeDescendant={item.id}
+                    onActiveDescendantChange={onActChange}
                     infill={ false }
                     items={ pages.map((page) => page.item) as ItemsProps }
                     index={ MID_INDEX }
-                    onConfirm={ (item) => setMonthIndex(item.value) }>
+                    onConfirm={ (item) => setMonthIndex(item.value)}>
                     { item.children }
                 </Pagination>
                 <Calendar { ...args } value={{

@@ -24,12 +24,12 @@ export const useListbox = () => {
     return context || { anchor: {}, target: { id: undefined } };
 };
 
-export const ListboxProvider = (props: any) => {
+export const ListboxProvider = ({ behavior = 'listbox', ...props }: any) => {
     const targetId = useId();
 
     const value = {
         anchor: {
-            // 'aria-haspopup': '',
+            'aria-haspopup': behavior,
             'aria-controls': targetId,
             'aria-owns': targetId,
         },

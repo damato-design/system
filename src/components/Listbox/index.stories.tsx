@@ -133,7 +133,7 @@ export const Menu: Story = {
 
         return (
             <FlyoutProvider>
-                <ListboxProvider>
+                <ListboxProvider behavior='menu'>
                     { anchor }
                     { show ? menu : null }
                 </ListboxProvider>
