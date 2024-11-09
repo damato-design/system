@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { memo, useMemo, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Calendar } from '.';
-import { Pagination, ItemProps, ItemsProps } from '../Pagination';
+import { Pagination, ItemsProps } from '../Pagination';
 import { box } from '../Box';
 
 /**
@@ -17,35 +17,63 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {}
+export const Default: Story = {};
 
-function makeMonth(_: any, i: number) {
+function makePages(month: number, offset: number) {
     const d = new Date();
-    d.setMonth(i);
-    const month = d.toLocaleString(undefined, { month: 'long' });
-    return { 
-        id: `date-${d.getFullYear()}-${d.getMonth()+1}`,
-        children: `${month} ${d.getFullYear()}`,
-        value: i
-    } as ItemProps
+    // Set to prior month before computing months
+    d.setMonth((month - offset) - 1);
+    return Array.from({ length: 12 }, (_) => {
+        const m = d.getMonth();
+        d.setMonth(m + 1);
+        const monthName = d.toLocaleString(undefined, { month: 'long' });
+        const month = d.getMonth() + 1;
+        const year = d.getFullYear();
+        return {
+            item: {
+                children: `${monthName} ${year}`,
+                value: m + 1, // month index, December = 11
+                key: monthName,
+                id: d.toISOString()
+            },
+            month,
+            year,
+        }
+    });
 }
 
 export const Paginate: Story = {
-    args: {},
+    parameters: {
+        docs: {
+            story: {
+                inline: false,
+                iframeHeight: 760,
+            },
+        },
+    },
+    args: {
+        value: { month: new Date().getMonth() + 1 }
+    },
     render: (args) => {
-        const items = Array.from({ length: 12 }, makeMonth) as ItemsProps;
-        const [item, setItem] = useState(items[0]);
+        const MID_INDEX = 5;
+
+        const [monthIndex, setMonthIndex] = useState(args?.value?.month! - 1);
+        const pages = makePages(monthIndex, MID_INDEX);
+        const { month, year, item } = pages[MID_INDEX];
 
         return (
             <box.div stack gap>
                 <Pagination
                     infill={ false }
-                    items={ items }
-                    index={ item.value }
-                    onConfirm={ setItem }>
+                    items={ pages.map((page) => page.item) as ItemsProps }
+                    index={ MID_INDEX }
+                    onConfirm={ (item) => setMonthIndex(item.value) }>
                     { item.children }
                 </Pagination>
-                <Calendar {...args} />
+                <Calendar { ...args } value={{
+                    year,
+                    month
+                }} />
             </box.div>
         )
     }
