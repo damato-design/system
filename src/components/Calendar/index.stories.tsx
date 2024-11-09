@@ -40,7 +40,7 @@ function makePages(value: string, offset: number) {
         d.setUTCMonth(d.getUTCMonth() + 1);
         const children = d.toLocaleString(navigator.language, { month: 'long', year: 'numeric' });
         const value = [d.getUTCFullYear(), d.getUTCMonth() + 1].join('-');
-        return { id: `d-${value}`, children, value };
+        return { id: `page-${value}`, children, value };
     });
 }
 
