@@ -38,7 +38,10 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
             { ...rest }
             ref={ anchorRef }
             onFocus={ () => setFocus(true) }
-            onBlur={ () => setFocus(false) }
+            onBlur={ () => {
+                setFocus(false);
+                requestAnimationFrame(() => setShow(false))
+            } }
             onKeyDown={ (ev: any) => ev.key === 'Enter' && _onConfirm() }
             onPointerDown={ () => setShow(!show) }
             behavior='menu'/>
