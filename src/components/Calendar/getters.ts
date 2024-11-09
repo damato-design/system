@@ -49,7 +49,7 @@ export function getOffset(date: Date) {
 }
 
 export function getDate(year: number, month: number, day: number) {
-    return new Date(Date.UTC(year, month, day, 12));
+    return new Date(Date.UTC(year, month, day, 15));
 }
 
 export function getString(year: number, ...parts: number[]) {

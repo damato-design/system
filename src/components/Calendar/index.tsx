@@ -89,6 +89,7 @@ function DateButton({
     }: any) {
     const value = getString(year, month, date);
     const d = getDate(year, month, date);
+    const isSelected = day === date;
 
     const onClick = useCallback(() => {
         typeof onActiveDescendantChange === 'function' && onActiveDescendantChange(value);
@@ -110,13 +111,14 @@ function DateButton({
         <Button
             aria-current={ getTodayString() === value ? 'date' : undefined }
             aria-label={ formatter.format(d) }
-            aria-selected={ day === date }
+            aria-selected={ isSelected }
             tabIndex={ activeDescendant === value ? 0 : -1 }
             onClick={ onClick }
             onKeyDown={ onKeyDown }
             ref={ onRef }
             onFocus={() => setShouldFocus(true)}
             onBlur={() => setShouldFocus(false)}
+            priority={ isSelected ? 'primary' : undefined }
             square>
             { date }
         </Button>

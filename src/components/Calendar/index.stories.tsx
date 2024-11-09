@@ -24,8 +24,11 @@ export const Default: Story = {
     },
     render: (args) => {
         const [activeDescendant, onActiveDescendantChange] = useState(args.value);
+        const [val, setVal] = useState(args.value);
         return <Calendar
             { ...args }
+            value={ val }
+            onConfirm={ setVal }
             activeDescendant={ activeDescendant }
             onActiveDescendantChange={ onActiveDescendantChange }/>
     }
@@ -61,29 +64,31 @@ export const Paginate: Story = {
         const MID_INDEX = 5;
         
         const [activeDescendant, onActiveDescendantChange] = useState(args.value);
+        const [pageDate, setPageDate] = useState(args.value!);
         const [val, setVal] = useState(args.value!);
-        const pages = useMemo(() => makePages(val, MID_INDEX), [val, MID_INDEX]);
+        const pages = makePages(pageDate, MID_INDEX);
         const page = pages[MID_INDEX];
 
-        const onActChange = useCallback((id: string) => {
+        const onPageChange = useCallback((id: string) => {
             const { value } = pages.find((item) => item.id === id) || args;
-            setVal(value!);
-        }, [val]);
+            setPageDate(value!);
+        }, [pageDate]);
 
         return (
             <box.div stack gap>
                 <Pagination
                     activeDescendant={page.id}
-                    onActiveDescendantChange={onActChange}
+                    onActiveDescendantChange={onPageChange}
                     infill={ false }
                     items={ pages as ItemsProps }
                     index={ MID_INDEX }
-                    onConfirm={ (item) => setVal(item.value)}>
+                    onConfirm={ (item) => setPageDate(item.value)}>
                     { page.children }
                 </Pagination>
                 <Calendar
                     { ...args }
-                    value={ page.value }
+                    value={ val.includes(page.value) ? val : page.value }
+                    onConfirm={ setVal }
                     activeDescendant={activeDescendant}
                     onActiveDescendantChange={ onActiveDescendantChange }/>
             </box.div>
