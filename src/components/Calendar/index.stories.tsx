@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react'
 
 import { Calendar } from '.';
@@ -17,14 +17,26 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {};
+export const Default: Story = {
+    args: {
+        value: '2024-11',
+        onActiveDescendantChange: () => {}
+    },
+    render: (args) => {
+        const [activeDescendant, onActiveDescendantChange] = useState(args.value);
+        return <Calendar
+            { ...args }
+            activeDescendant={ activeDescendant }
+            onActiveDescendantChange={ onActiveDescendantChange }/>
+    }
+};
 
 function makePages(value: string, offset: number) {
     const [y, m] = value.split('-').map(Number);
     const d = new Date(Date.UTC(y, m - 1, 15));
     // Set to prior month before computing months
     d.setUTCMonth((d.getUTCMonth() - offset) - 1);
-    return Array.from({ length: 12 }, (_) => {
+    return Array.from({ length: 12 }, () => {
         d.setUTCMonth(d.getUTCMonth() + 1);
         const children = d.toLocaleString(navigator.language, { month: 'long', year: 'numeric' });
         const value = [d.getUTCFullYear(), d.getUTCMonth() + 1].join('-');
@@ -42,11 +54,13 @@ export const Paginate: Story = {
         },
     },
     args: {
-        value: '2024-11'
+        value: '2024-11',
+        onActiveDescendantChange: () => {}
     },
     render: (args) => {
         const MID_INDEX = 5;
         
+        const [activeDescendant, onActiveDescendantChange] = useState(args.value);
         const [val, setVal] = useState(args.value!);
         const pages = useMemo(() => makePages(val, MID_INDEX), [val, MID_INDEX]);
         const page = pages[MID_INDEX];
@@ -67,7 +81,11 @@ export const Paginate: Story = {
                     onConfirm={ (item) => setVal(item.value)}>
                     { page.children }
                 </Pagination>
-                <Calendar { ...args } value={ page.value } />
+                <Calendar
+                    { ...args }
+                    value={ page.value }
+                    activeDescendant={activeDescendant}
+                    onActiveDescendantChange={ onActiveDescendantChange }/>
             </box.div>
         )
     }

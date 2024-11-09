@@ -1,6 +1,6 @@
 import { forwardRef, useCallback } from "react";
 import css from './styles.module.scss';
-import { 
+import {
     getDate,
     getOffset,
     getFormatter,
@@ -8,6 +8,7 @@ import {
     getTodayString,
     getDays,
     getWeeks,
+    getActiveDescendant
 } from './getters';
 import { Button } from "../Button";
 import { text } from '../Text';
@@ -15,7 +16,26 @@ import { text } from '../Text';
 type CalendarProps = {
     value?: string,
     onConfirm?: (value: string) => void,
+    activeDescendant?: string,
+    onActiveDescendantChange: (value: string) => void
 }
+
+function isLTR(ev: any) {
+    return (ev.target as HTMLElement).matches(":dir(ltr)");
+}
+
+type KeyNavigation = {
+    [key: string]: (ev: any, y: number, m: number, d: number) => string,
+}
+
+const KEY_NAVIGATION = {
+    ArrowUp: (_, y, m, d) => getString(y, m, d - 7),
+    ArrowDown: (_, y, m, d) => getString(y, m, d + 7),
+    ArrowLeft: (ev, y, m, d) => isLTR(ev) ? getString(y, m, d - 1) : getString(y, m, d + 1),
+    ArrowRight: (ev, y, m, d) => isLTR(ev) ? getString(y, m, d + 1) : getString(y, m, d - 1),
+    PageUp: (ev, y, m, d) => ev.shiftKey ? getString(y - 1, m, d) : getString(y, m - 1, d),
+    PageDown: (ev, y, m, d) => ev.shiftKey ? getString(y + 1, m, d) : getString(y, m + 1, d),
+} as KeyNavigation
 
 function Th({ narrow, long }: any) {
     return (
@@ -55,22 +75,44 @@ function Header({ year, month }: any) {
     )
 }
 
-function DateButton({ date, month, year, day, onConfirm, formatter }: any) {
-    const id = getString(year, month, date);
-    const d = new Date(year, month, date);
+function DateButton({ 
+    date,
+    month,
+    year,
+    day,
+    onConfirm,
+    formatter,
+    activeDescendant,
+    onActiveDescendantChange
+    }: any) {
+    const value = getString(year, month, date);
+    const d = new Date(Date.UTC(year, month, date));
 
     const onClick = useCallback(() => {
-        typeof onConfirm === 'function' && onConfirm(id);
-    }, [id, onConfirm]);
+        typeof onActiveDescendantChange === 'function' && onActiveDescendantChange(value);
+        typeof onConfirm === 'function' && onConfirm(value);
+    }, [value, onConfirm]);
+
+    const onKeyDown = useCallback((ev: any) => {
+        if (!(ev.key in KEY_NAVIGATION)) return;
+        ev.preventDefault();
+        const update = KEY_NAVIGATION[ev.key](ev, year, month, date);
+        typeof onActiveDescendantChange === 'function' && onActiveDescendantChange(update);
+    }, []);
+
+    const onRef = useCallback(($btn: any) => {
+        activeDescendant === value && $btn?.focus();
+    }, [activeDescendant, value]);
 
     return (
         <Button
-            aria-current={ getTodayString() === id ? 'date' : undefined }
+            aria-current={ getTodayString() === value ? 'date' : undefined }
             aria-label={ formatter.format(d) }
             aria-selected={ day === date }
-            // tabIndex={ day === date ? 0 : -1 }
-            id={ id }
+            tabIndex={ activeDescendant === value ? 0 : -1 }
             onClick={ onClick }
+            onKeyDown={ onKeyDown }
+            ref={ onRef }
             square>
             { date }
         </Button>
@@ -115,6 +157,8 @@ function Body({ year, month, ...rest }: any) {
 export const Calendar = forwardRef<HTMLTableElement, CalendarProps>(({
     value,
     onConfirm,
+    activeDescendant: act,
+    onActiveDescendantChange,
     ...rest
 }: CalendarProps, ref) => {
 
@@ -123,10 +167,12 @@ export const Calendar = forwardRef<HTMLTableElement, CalendarProps>(({
         ? value.split('-').map(Number)
         : [d.getFullYear(), d.getMonth() + 1];
 
+    const activeDescendant = getActiveDescendant(act);
+
     return (
         <table { ...rest } ref={ ref } className={ css.table } role='grid'>
             <Header { ...{ year, month, day } }/>
-            <Body { ...{ year, month, day } } onConfirm={ onConfirm }/>
+            <Body { ...{ year, month, day, onConfirm, activeDescendant, onActiveDescendantChange } }/>
         </table>
     );
 });

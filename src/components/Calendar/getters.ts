@@ -3,6 +3,17 @@ export function getLang() {
     return 'dv-MV';
 }
 
+export function getActiveDescendant(value: string | undefined) {
+    const [year, month, day] = typeof value === 'string' ? value.split('-').map(Number) : [];
+    const d = new Date();
+    const v = {
+        year: typeof year === 'number' ? year : d.getFullYear(),
+        month: typeof month === 'number' ? month : d.getMonth() + 1,
+        day: typeof day === 'number' ? day : 1
+    }
+    return getString(v.year, v.month, v.day);
+}
+
 export function getDays(year: number, month: number) {
     return getDate(year, month, 0).getDate();
 }
