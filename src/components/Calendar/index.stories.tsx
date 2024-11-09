@@ -21,20 +21,14 @@ export const Default: Story = {};
 
 function makePages(value: string, offset: number) {
     const [y, m] = value.split('-').map(Number);
-    const d = new Date(Date.UTC(y, m - 1));
+    const d = new Date(Date.UTC(y, m - 1, 15));
     // Set to prior month before computing months
     d.setUTCMonth((d.getUTCMonth() - offset) - 1);
     return Array.from({ length: 12 }, (_) => {
         d.setUTCMonth(d.getUTCMonth() + 1);
-        const monthName = d.toLocaleString(undefined, { month: 'long' });
-        const month = d.getUTCMonth() + 1;
-        const year = d.getUTCFullYear();
-        const value = [year, month].join('-');
-        return {
-            value,
-            id: `d-${value}`,
-            children: `${monthName} ${year}`,
-        }
+        const children = d.toLocaleString(navigator.language, { month: 'long', year: 'numeric' });
+        const value = [d.getUTCFullYear(), d.getUTCMonth() + 1].join('-');
+        return { id: `d-${value}`, children, value };
     });
 }
 
