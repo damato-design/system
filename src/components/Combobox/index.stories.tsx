@@ -1,15 +1,15 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Combobox, ItemsProps } from '.';
 
 /**
- * This component is a work-in-progress
+ * The `<Combobox/>` component connects several parts of the system together
+ * into a single component for the purpose of entering a value.
  */
 const meta = {
     title: 'Components/Combobox',
     component: Combobox,
-    tags: ['draft'],
     parameters: {
         docs: {
             story: {
@@ -23,6 +23,15 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+/**
+ * The `items` is expecting an array of `<Button/>`-like props to describe
+ * each item. This configuration is supporting the presentation for the
+ * internal `<listbox.div/>`.
+ * 
+ * In this example, we filter the `items` based on the `value` found within
+ * the `<input.text/>`. All non-specific props are spread onto this element
+ * such that fine-grain settings can be applied to this control.
+ */
 export const Default: Story = {
     args: {
         activeDescendant: 'option2',
@@ -34,18 +43,18 @@ export const Default: Story = {
         ],
         name: 'default',
     },
-    render: ({ onActiveDescendantChange: _, ...args}) => {
+    render: (args) => {
         const [active, setActive] = useState(args.activeDescendant);
         const [value, setValue] = useState(args.items[0].value);
 
         const filtered = useMemo(() => {
-            return args.items.filter((item) => item.value.startsWith(value)) as ItemsProps;
+            return args.items.filter((item) => item.value.startsWith(value));
         }, [args.items, value]);
 
         return (
             <Combobox
                 { ...args }
-                items={ filtered }
+                items={ filtered as ItemsProps }
                 value={ value }
                 onChange={ (ev: any) => setValue(ev.target.value) }
                 onConfirm={ (item) => setValue(item.value) }
