@@ -29,17 +29,25 @@ function makePages(target: number, offset: number) {
         const monthName = d.toLocaleString(undefined, { month: 'long' });
         const month = d.getMonth() + 1;
         const year = d.getFullYear();
-        const id = ['d', year, month].join('-');
+        const value = [year, month].join('-');
         return {
             item: {
                 children: `${monthName} ${year}`,
-                value: m + 1, // month index, December = 11
-                id
+                value,
+                id: `${d}-${value}`
             },
             month,
             year,
         }
     });
+}
+
+function getMonthIndex(value: string | undefined) {
+    const d = new Date();
+    const [_, month] = typeof value === 'string'
+        ? value.split('-').map(Number)
+        : [null, d.getMonth() + 1];
+    return month - 1;
 }
 
 export const Paginate: Story = {
@@ -52,18 +60,18 @@ export const Paginate: Story = {
         },
     },
     args: {
-        value: { month: new Date().getMonth() + 1 }
+        value: '2024-11'
     },
     render: (args) => {
         const MID_INDEX = 5;
         
-        const [monthIndex, setMonthIndex] = useState(args?.value?.month! - 1);
+        const [monthIndex, setMonthIndex] = useState(getMonthIndex(args.value));
         const pages = useMemo(() => makePages(monthIndex, MID_INDEX), [monthIndex, MID_INDEX]);
         const { month, year, item } = pages[MID_INDEX];
 
         const onActChange = useCallback((id: string) => {
             const target = pages.find((page) => page.item.id === id);
-            setMonthIndex(target!.item.value);
+            setMonthIndex(getMonthIndex(target!.item.value));
         }, [monthIndex]);
 
         return (
@@ -74,13 +82,10 @@ export const Paginate: Story = {
                     infill={ false }
                     items={ pages.map((page) => page.item) as ItemsProps }
                     index={ MID_INDEX }
-                    onConfirm={ (item) => setMonthIndex(item.value)}>
+                    onConfirm={ (item) => setMonthIndex(getMonthIndex(item.value))}>
                     { item.children }
                 </Pagination>
-                <Calendar { ...args } value={{
-                    year,
-                    month
-                }} />
+                <Calendar { ...args } value={ [year, month].join('-') } />
             </box.div>
         )
     }

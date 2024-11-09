@@ -12,20 +12,14 @@ import {
 import { Button } from "../Button";
 import { text } from '../Text';
 
-type CalendarValue = {
-    year?: number,
-    month?: number,
-    day?: number
-}
-
 type CalendarProps = {
-    value?: CalendarValue,
-    onConfirm?: (value: CalendarValue) => void  
+    value?: string,
+    onConfirm?: (value: string) => void,
 }
 
 function Th({ narrow, long }: any) {
     return (
-        <th>
+        <th role='columnheader'>
             <text.span aria-hidden='true'>{ narrow }</text.span>
             <text.span screenreaderOnly>{ long }</text.span>
         </th>
@@ -51,8 +45,8 @@ function Header({ year, month }: any) {
     });
 
     return (
-        <thead>
-            <tr>
+        <thead role='rowgroup'>
+            <tr role='row'>
                 { cells.map((cell, idx) => (
                     <Th { ...cell } key={ idx } />
                 )) }
@@ -66,14 +60,15 @@ function DateButton({ date, month, year, day, onConfirm, formatter }: any) {
     const d = new Date(year, month, date);
 
     const onClick = useCallback(() => {
-        typeof onConfirm === 'function' && onConfirm({ year, month, day: date });
-    }, [year, month, date, onConfirm]);
+        typeof onConfirm === 'function' && onConfirm(id);
+    }, [id, onConfirm]);
 
     return (
         <Button
             aria-current={ getTodayString() === id ? 'date' : undefined }
             aria-label={ formatter.format(d) }
             aria-selected={ day === date }
+            tabIndex={ day === date ? 0 : -1 }
             id={ id }
             onClick={ onClick }
             square>
@@ -84,10 +79,11 @@ function DateButton({ date, month, year, day, onConfirm, formatter }: any) {
 
 function Row({ week, ...rest }: any) {
     return (
-        <tr>
+        <tr role='row'>
             { week.map((date: number, idx: number) => (
                 <td
                     className={ css.td }
+                    role={ date ? 'gridcell' : undefined }
                     key={ idx }>
                     { date ? <DateButton { ...rest } date={ date }/> : null }
                 </td>
@@ -105,7 +101,7 @@ function Body({ year, month, ...rest }: any) {
     const formatter = getFormatter({ dateStyle: 'long' });
 
     return (
-        <tbody>
+        <tbody role='rowgroup'>
            { matrix.map((week: number[], idx: number) => (
                 <Row
                     { ...rest }
@@ -123,16 +119,14 @@ export const Calendar = forwardRef<HTMLTableElement, CalendarProps>(({
 }: CalendarProps, ref) => {
 
     const d = new Date();
-    const payload = Object.assign({
-        year: d.getFullYear(),
-        month: d.getMonth() + 1,
-        // day: d.getDate(),
-    }, value) as CalendarValue;
+    const [year, month, day] = typeof value === 'string'
+        ? value.split('-').map(Number)
+        : [d.getFullYear(), d.getMonth() + 1];
 
     return (
-        <table { ...rest } ref={ ref } className={ css.table }>
-            <Header { ...payload }/>
-            <Body { ...payload } onConfirm={ onConfirm }/>
+        <table { ...rest } ref={ ref } className={ css.table } role='grid'>
+            <Header { ...{ year, month, day } }/>
+            <Body { ...{ year, month, day } } onConfirm={ onConfirm }/>
         </table>
     );
 });
