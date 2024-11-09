@@ -34,7 +34,7 @@ function makePages(target: number, offset: number) {
             item: {
                 children: `${monthName} ${year}`,
                 value,
-                id: `${d}-${value}`
+                id: `d-${value}`
             },
             month,
             year,
