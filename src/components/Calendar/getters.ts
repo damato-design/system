@@ -1,23 +1,37 @@
+type ParsedDate = {
+    year?: number,
+    month?: number,
+    day?: number
+}
+
+function parseValue(value: string) {
+    const [ year, month, day ] = value.split('-').map(Number);
+    return { year, month, day };
+}
+
 export function getLang() {
     return  navigator.language;
     return 'dv-MV';
 }
 
-function parseValue(value: string) {
-    return value.split('-').map(Number);
-}
+export function getActiveDescendant(value: string, active: string | undefined) {
+    const { year, month }: ParsedDate = parseValue(value);
+    const parsedActive: ParsedDate = typeof active === 'string' ? parseValue(active) : {};
 
-export function getActiveDescendant(active: string | undefined, value: string | undefined) {
-    console.log(value);
-    // TODO: match the act with the value if supplied
-    const [year, month, day] = typeof active === 'string' ? parseValue(active) : [];
-    const d = new Date();
-    const v = {
-        year: typeof year === 'number' ? year : d.getFullYear(),
-        month: typeof month === 'number' ? month : d.getMonth() + 1,
-        day: typeof day === 'number' ? day : 1
+    if (parsedActive.year !== year) {
+        parsedActive.year = year;
     }
-    return getString(v.year, v.month, v.day);
+
+    if (parsedActive.month !== month) {
+        parsedActive.month = month;
+    }
+
+    parsedActive.day = typeof parsedActive.day === 'number' ? parsedActive.day : 1;
+
+    const days = getDays(parsedActive.year, parsedActive.month);
+    parsedActive.day = Math.min(Math.max(parsedActive.day, 1), days);
+
+    return getString(parsedActive.year, parsedActive.month, parsedActive.day);
 }
 
 export function getDays(year: number, month: number) {

@@ -88,19 +88,19 @@ function DateButton({
     setShouldFocus
     }: any) {
     const value = getString(year, month, date);
-    const d = new Date(Date.UTC(year, month, date));
+    const d = getDate(year, month, date);
 
     const onClick = useCallback(() => {
         typeof onActiveDescendantChange === 'function' && onActiveDescendantChange(value);
         typeof onConfirm === 'function' && onConfirm(value);
-    }, [value, onConfirm]);
+    }, [value, onConfirm, onActiveDescendantChange]);
 
     const onKeyDown = useCallback((ev: any) => {
         if (!(ev.key in KEY_NAVIGATION)) return;
         ev.preventDefault();
         const update = KEY_NAVIGATION[ev.key](ev, year, month, date);
         typeof onActiveDescendantChange === 'function' && onActiveDescendantChange(update);
-    }, []);
+    }, [activeDescendant, onActiveDescendantChange, value]);
 
     const onRef = useCallback(($btn: any) => {
         shouldFocus && activeDescendant === value && $btn?.focus();
@@ -173,7 +173,7 @@ export const Calendar = forwardRef<HTMLTableElement, CalendarProps>(({
         ? value.split('-').map(Number)
         : [d.getFullYear(), d.getMonth() + 1];
 
-    const activeDescendant = getActiveDescendant(active, value);
+    const activeDescendant = getActiveDescendant(getString(year, month, day), active);
 
     return (
         <table { ...rest } ref={ ref } className={ css.table } role='grid'>
