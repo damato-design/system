@@ -68,7 +68,7 @@ function DateButton({ date, month, year, day, onConfirm, formatter }: any) {
             aria-current={ getTodayString() === id ? 'date' : undefined }
             aria-label={ formatter.format(d) }
             aria-selected={ day === date }
-            tabIndex={ day === date ? 0 : -1 }
+            // tabIndex={ day === date ? 0 : -1 }
             id={ id }
             onClick={ onClick }
             square>

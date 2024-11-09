@@ -19,35 +19,23 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {};
 
-function makePages(target: number, offset: number) {
-    const d = new Date();
+function makePages(value: string, offset: number) {
+    const [y, m] = value.split('-').map(Number);
+    const d = new Date(Date.UTC(y, m - 1));
     // Set to prior month before computing months
-    d.setMonth((target - offset) - 1);
+    d.setUTCMonth((d.getUTCMonth() - offset) - 1);
     return Array.from({ length: 12 }, (_) => {
-        const m = d.getMonth();
-        d.setMonth(m + 1);
+        d.setUTCMonth(d.getUTCMonth() + 1);
         const monthName = d.toLocaleString(undefined, { month: 'long' });
-        const month = d.getMonth() + 1;
-        const year = d.getFullYear();
+        const month = d.getUTCMonth() + 1;
+        const year = d.getUTCFullYear();
         const value = [year, month].join('-');
         return {
-            item: {
-                children: `${monthName} ${year}`,
-                value,
-                id: `d-${value}`
-            },
-            month,
-            year,
+            value,
+            id: `d-${value}`,
+            children: `${monthName} ${year}`,
         }
     });
-}
-
-function getMonthIndex(value: string | undefined) {
-    const d = new Date();
-    const [_, month] = typeof value === 'string'
-        ? value.split('-').map(Number)
-        : [null, d.getMonth() + 1];
-    return month - 1;
 }
 
 export const Paginate: Story = {
@@ -65,27 +53,27 @@ export const Paginate: Story = {
     render: (args) => {
         const MID_INDEX = 5;
         
-        const [monthIndex, setMonthIndex] = useState(getMonthIndex(args.value));
-        const pages = useMemo(() => makePages(monthIndex, MID_INDEX), [monthIndex, MID_INDEX]);
-        const { month, year, item } = pages[MID_INDEX];
+        const [val, setVal] = useState(args.value!);
+        const pages = useMemo(() => makePages(val, MID_INDEX), [val, MID_INDEX]);
+        const page = pages[MID_INDEX];
 
         const onActChange = useCallback((id: string) => {
-            const target = pages.find((page) => page.item.id === id);
-            setMonthIndex(getMonthIndex(target!.item.value));
-        }, [monthIndex]);
+            const { value } = pages.find((item) => item.id === id) || args;
+            setVal(value!);
+        }, [val]);
 
         return (
             <box.div stack gap>
                 <Pagination
-                    activeDescendant={item.id}
+                    activeDescendant={page.id}
                     onActiveDescendantChange={onActChange}
                     infill={ false }
-                    items={ pages.map((page) => page.item) as ItemsProps }
+                    items={ pages as ItemsProps }
                     index={ MID_INDEX }
-                    onConfirm={ (item) => setMonthIndex(getMonthIndex(item.value))}>
-                    { item.children }
+                    onConfirm={ (item) => setVal(item.value)}>
+                    { page.children }
                 </Pagination>
-                <Calendar { ...args } value={ [year, month].join('-') } />
+                <Calendar { ...args } value={ page.value } />
             </box.div>
         )
     }
