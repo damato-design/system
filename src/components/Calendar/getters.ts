@@ -3,8 +3,14 @@ export function getLang() {
     return 'dv-MV';
 }
 
-export function getActiveDescendant(value: string | undefined) {
-    const [year, month, day] = typeof value === 'string' ? value.split('-').map(Number) : [];
+function parseValue(value: string) {
+    return value.split('-').map(Number);
+}
+
+export function getActiveDescendant(active: string | undefined, value: string | undefined) {
+    console.log(value);
+    // TODO: match the act with the value if supplied
+    const [year, month, day] = typeof active === 'string' ? parseValue(active) : [];
     const d = new Date();
     const v = {
         year: typeof year === 'number' ? year : d.getFullYear(),

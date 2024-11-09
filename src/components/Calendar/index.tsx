@@ -1,4 +1,4 @@
-import { forwardRef, useCallback } from "react";
+import { forwardRef, useCallback, useState } from "react";
 import css from './styles.module.scss';
 import {
     getDate,
@@ -83,7 +83,9 @@ function DateButton({
     onConfirm,
     formatter,
     activeDescendant,
-    onActiveDescendantChange
+    onActiveDescendantChange,
+    shouldFocus,
+    setShouldFocus
     }: any) {
     const value = getString(year, month, date);
     const d = new Date(Date.UTC(year, month, date));
@@ -101,7 +103,7 @@ function DateButton({
     }, []);
 
     const onRef = useCallback(($btn: any) => {
-        activeDescendant === value && $btn?.focus();
+        shouldFocus && activeDescendant === value && $btn?.focus();
     }, [activeDescendant, value]);
 
     return (
@@ -113,6 +115,8 @@ function DateButton({
             onClick={ onClick }
             onKeyDown={ onKeyDown }
             ref={ onRef }
+            onFocus={() => setShouldFocus(true)}
+            onBlur={() => setShouldFocus(false)}
             square>
             { date }
         </Button>
@@ -136,6 +140,8 @@ function Row({ week, ...rest }: any) {
 
 function Body({ year, month, ...rest }: any) {
 
+    const [shouldFocus, setShouldFocus] = useState(false);
+
     const days = getDays(year, month);
     const day1 = getDate(year, month - 1, 1);
     const offset = getOffset(day1);
@@ -147,7 +153,7 @@ function Body({ year, month, ...rest }: any) {
            { matrix.map((week: number[], idx: number) => (
                 <Row
                     { ...rest }
-                    {...{ week, month, year, formatter }}
+                    {...{ week, month, year, formatter, shouldFocus, setShouldFocus }}
                     key={ idx } />
            )) }
         </tbody>
@@ -157,7 +163,7 @@ function Body({ year, month, ...rest }: any) {
 export const Calendar = forwardRef<HTMLTableElement, CalendarProps>(({
     value,
     onConfirm,
-    activeDescendant: act,
+    activeDescendant: active,
     onActiveDescendantChange,
     ...rest
 }: CalendarProps, ref) => {
@@ -167,7 +173,7 @@ export const Calendar = forwardRef<HTMLTableElement, CalendarProps>(({
         ? value.split('-').map(Number)
         : [d.getFullYear(), d.getMonth() + 1];
 
-    const activeDescendant = getActiveDescendant(act);
+    const activeDescendant = getActiveDescendant(active, value);
 
     return (
         <table { ...rest } ref={ ref } className={ css.table } role='grid'>
