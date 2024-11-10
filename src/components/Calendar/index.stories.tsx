@@ -5,6 +5,11 @@ import { Calendar } from '.';
 import { Pagination, ItemsProps } from '../Pagination';
 import { box } from '../Box';
 
+function getThisMonth() {
+    const d = new Date();
+    return [d.getFullYear(), d.getMonth() + 1].join('-');
+}
+
 /**
  * The `<Calendar/>` component creates a calendar page based on the `value`
  * provided.
@@ -36,7 +41,7 @@ type Story = StoryObj<typeof meta>
  */
 export const Default: Story = {
     args: {
-        value: '2024-11',
+        value: getThisMonth(),
         onActiveDescendantChange: () => {}
     },
     render: (args) => {
@@ -107,7 +112,7 @@ export const Paginate: Story = {
         },
     },
     args: {
-        value: '2024-11',
+        value: getThisMonth(),
         onActiveDescendantChange: () => {}
     },
     render: (args) => {
