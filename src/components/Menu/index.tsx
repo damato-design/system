@@ -40,7 +40,8 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
             onFocus={ () => setFocus(true) }
             onBlur={ () => {
                 setFocus(false);
-                requestAnimationFrame(() => setShow(false))
+                // TODO: Need a way to check if menu item selected after blur
+                // requestAnimationFrame(() => setShow(false))
             } }
             onKeyDown={ (ev: any) => ev.key === 'Enter' && _onConfirm() }
             onPointerDown={ () => setShow(!show) }
