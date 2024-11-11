@@ -5,9 +5,14 @@ import { element, ElementProps, restrictProps } from '../Element';
 
 const FlyoutContext = createContext(null);
 
+type FlyoutConfig = {
+  anchor: { anchorName: string },
+  target: { id: string }
+}
+
 export const useFlyout = () => {
   const context = useContext(FlyoutContext);
-  return context || { anchor: {}, target: {} };
+  return context || { anchor: {}, target: {} } as FlyoutConfig;
 };
 
 export const FlyoutProvider = (props: any) => {
@@ -71,11 +76,13 @@ export const flyout = proxy<HTMLTagsOnly, FlyoutProps>('flyout', (TagName) => {
       if (!$target) return;
       document.documentElement.addEventListener('keyup', onEscape);
       document.documentElement.addEventListener('pointerdown', onOutside);
+      document.documentElement.addEventListener('focusin', onOutside);
 
       $target.showPopover();
       return () => {
         document.documentElement.removeEventListener('keyup', onEscape);
         document.documentElement.removeEventListener('pointerdown', onOutside);
+        document.documentElement.removeEventListener('focusin', onOutside);
       };
     }, [target.id, anchor.anchorName, onClose]);
 
