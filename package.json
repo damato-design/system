@@ -20,7 +20,9 @@
     "prepublishOnly": "npm run build",
     "test": "vitest",
     "storybook:test": "npx vitest --project=storybook",
+    "generate:module": "node ./scripts/generate-module.js",
     "generate:schema": "node ./scripts/generate-schema.js",
+    "generate:template": "node ./scripts/generate-template.js",
     "chromatic": "npx chromatic --project-token=chpt_1ac7335dd9a0584"
   },
   "dependencies": {
