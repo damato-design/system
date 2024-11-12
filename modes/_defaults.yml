@@ -1,3 +1,5 @@
+# yaml-language-server: $schema=../mode-schema.json
+
 surface:
   primary:
     backgroundColor: color-mix(in oklch, Canvas, white 10%)
@@ -15,15 +17,15 @@ surface:
 action:
   primary:
     backgroundColor: AccentColor
-    foregroundColor AccentColorText
+    foregroundColor: AccentColorText
     borderColor: transparent
   secondary:
     backgroundColor: ButtonFace
-    foregroundColor ButtonText
+    foregroundColor: ButtonText
     borderColor: GrayText
   auxiliary:
     backgroundColor: transparent
-    foregroundColor ActiveText
+    foregroundColor: ActiveText
     borderColor: transparent
 
 control:

@@ -23,7 +23,7 @@ function permutate(...arrays) {
         keys.reduceRight((acc, key) => ({
             type: 'object',
             properties: { [key]: acc }
-        }), { type: 'string' });
+        }), { type: ['string', 'number'] });
 
     const buildCombinations = (arrays, prefix = []) =>
         arrays[0].flatMap((value) => {
@@ -42,7 +42,7 @@ function permutate(...arrays) {
                 if (!target[key]) {
                     target[key] = { type: 'object', properties: {} };
                 }
-                if (source[key].type === 'string') {
+                if (source[key].type !== 'object') {
                     target[key] = source[key];
                 } else {
                     mergeRecursive(target[key].properties, source[key].properties);

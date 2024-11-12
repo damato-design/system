@@ -9,13 +9,22 @@
           "type": "object",
           "properties": {
             "backgroundColor": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "foregroundColor": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "borderColor": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             }
           }
         },
@@ -23,13 +32,22 @@
           "type": "object",
           "properties": {
             "backgroundColor": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "foregroundColor": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "borderColor": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             }
           }
         },
@@ -37,13 +55,22 @@
           "type": "object",
           "properties": {
             "backgroundColor": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "foregroundColor": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "borderColor": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             }
           }
         }
@@ -56,13 +83,22 @@
           "type": "object",
           "properties": {
             "backgroundColor": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "foregroundColor": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "borderColor": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             }
           }
         },
@@ -70,13 +106,22 @@
           "type": "object",
           "properties": {
             "backgroundColor": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "foregroundColor": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "borderColor": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             }
           }
         },
@@ -84,13 +129,22 @@
           "type": "object",
           "properties": {
             "backgroundColor": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "foregroundColor": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "borderColor": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             }
           }
         }
@@ -100,13 +154,22 @@
       "type": "object",
       "properties": {
         "backgroundColor": {
-          "type": "string"
+          "type": [
+            "string",
+            "number"
+          ]
         },
         "foregroundColor": {
-          "type": "string"
+          "type": [
+            "string",
+            "number"
+          ]
         },
         "borderColor": {
-          "type": "string"
+          "type": [
+            "string",
+            "number"
+          ]
         }
       }
     },
@@ -117,19 +180,34 @@
           "type": "object",
           "properties": {
             "fontFamily": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "fontWeight": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "lineHeight": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "minRem": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "scaleFactor": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             }
           }
         },
@@ -137,19 +215,34 @@
           "type": "object",
           "properties": {
             "fontFamily": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "fontWeight": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "lineHeight": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "minRem": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "scaleFactor": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             }
           }
         },
@@ -157,19 +250,34 @@
           "type": "object",
           "properties": {
             "fontFamily": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "fontWeight": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "lineHeight": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "minRem": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             },
             "scaleFactor": {
-              "type": "string"
+              "type": [
+                "string",
+                "number"
+              ]
             }
           }
         }
@@ -179,10 +287,16 @@
       "type": "object",
       "properties": {
         "minDimension": {
-          "type": "string"
+          "type": [
+            "string",
+            "number"
+          ]
         },
         "scaleFactor": {
-          "type": "string"
+          "type": [
+            "string",
+            "number"
+          ]
         }
       }
     }
