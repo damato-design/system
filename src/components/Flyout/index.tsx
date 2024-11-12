@@ -6,7 +6,7 @@ import { element, ElementProps, restrictProps } from '../Element';
 const FlyoutContext = createContext(null);
 
 type FlyoutConfig = {
-  anchor: { anchorName: string },
+  anchor: { id: string, anchorName: string },
   target: { id: string }
 }
 

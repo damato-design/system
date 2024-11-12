@@ -1,0 +1,190 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "surface": {
+      "type": "object",
+      "properties": {
+        "primary": {
+          "type": "object",
+          "properties": {
+            "backgroundColor": {
+              "type": "string"
+            },
+            "foregroundColor": {
+              "type": "string"
+            },
+            "borderColor": {
+              "type": "string"
+            }
+          }
+        },
+        "secondary": {
+          "type": "object",
+          "properties": {
+            "backgroundColor": {
+              "type": "string"
+            },
+            "foregroundColor": {
+              "type": "string"
+            },
+            "borderColor": {
+              "type": "string"
+            }
+          }
+        },
+        "auxiliary": {
+          "type": "object",
+          "properties": {
+            "backgroundColor": {
+              "type": "string"
+            },
+            "foregroundColor": {
+              "type": "string"
+            },
+            "borderColor": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "action": {
+      "type": "object",
+      "properties": {
+        "primary": {
+          "type": "object",
+          "properties": {
+            "backgroundColor": {
+              "type": "string"
+            },
+            "foregroundColor": {
+              "type": "string"
+            },
+            "borderColor": {
+              "type": "string"
+            }
+          }
+        },
+        "secondary": {
+          "type": "object",
+          "properties": {
+            "backgroundColor": {
+              "type": "string"
+            },
+            "foregroundColor": {
+              "type": "string"
+            },
+            "borderColor": {
+              "type": "string"
+            }
+          }
+        },
+        "auxiliary": {
+          "type": "object",
+          "properties": {
+            "backgroundColor": {
+              "type": "string"
+            },
+            "foregroundColor": {
+              "type": "string"
+            },
+            "borderColor": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "control": {
+      "type": "object",
+      "properties": {
+        "backgroundColor": {
+          "type": "string"
+        },
+        "foregroundColor": {
+          "type": "string"
+        },
+        "borderColor": {
+          "type": "string"
+        }
+      }
+    },
+    "text": {
+      "type": "object",
+      "properties": {
+        "primary": {
+          "type": "object",
+          "properties": {
+            "fontFamily": {
+              "type": "string"
+            },
+            "fontWeight": {
+              "type": "string"
+            },
+            "lineHeight": {
+              "type": "string"
+            },
+            "minRem": {
+              "type": "string"
+            },
+            "scaleFactor": {
+              "type": "string"
+            }
+          }
+        },
+        "secondary": {
+          "type": "object",
+          "properties": {
+            "fontFamily": {
+              "type": "string"
+            },
+            "fontWeight": {
+              "type": "string"
+            },
+            "lineHeight": {
+              "type": "string"
+            },
+            "minRem": {
+              "type": "string"
+            },
+            "scaleFactor": {
+              "type": "string"
+            }
+          }
+        },
+        "auxiliary": {
+          "type": "object",
+          "properties": {
+            "fontFamily": {
+              "type": "string"
+            },
+            "fontWeight": {
+              "type": "string"
+            },
+            "lineHeight": {
+              "type": "string"
+            },
+            "minRem": {
+              "type": "string"
+            },
+            "scaleFactor": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "space": {
+      "type": "object",
+      "properties": {
+        "minDimension": {
+          "type": "string"
+        },
+        "scaleFactor": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
