@@ -97,8 +97,6 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       flexGrow: stretch ? 1 : 0,
       flexDirection: stack ? 'column' : 'row',
       flexWrap: wrap || infill ? 'wrap' : 'nowrap',
-      padding: padding ? 'var(--padding, 1rem)' : undefined,
-      gap: gap || infill ? 'var(--gap, .5rem)' : undefined,
       maxWidth: infill ? 'max-content' : undefined
     };
 
@@ -109,6 +107,8 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
 
     const classNames = clsx(css.box, appearance, { 
       [css.round]: round,
+      [css.padding]: padding,
+      [css.gap]: gap || infill
     });
 
     return <Box

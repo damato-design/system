@@ -7,6 +7,14 @@
         border-radius: 100vw;
     }
 
+    &.padding:is(.padding) {
+        padding: var(--padding, 1rem);
+    }
+
+    &.gap:is(.gap) {
+        gap: var(--gap, .5rem);
+    }
+
     &:where(details) {
         display: block !important;
 
