@@ -1,15 +1,483 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
+  "required": [
+    "tokens"
+  ],
   "properties": {
-    "surface": {
+    "tokens": {
       "type": "object",
+      "required": [
+        "surface",
+        "action",
+        "control",
+        "text",
+        "space"
+      ],
       "properties": {
-        "primary": {
+        "surface": {
           "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "primary",
+            "secondary",
+            "auxiliary"
+          ],
+          "properties": {
+            "primary": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "backgroundColor",
+                "foregroundColor",
+                "borderColor"
+              ],
+              "properties": {
+                "backgroundColor": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                },
+                "foregroundColor": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                },
+                "borderColor": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "secondary": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "backgroundColor",
+                "foregroundColor",
+                "borderColor"
+              ],
+              "properties": {
+                "backgroundColor": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                },
+                "foregroundColor": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                },
+                "borderColor": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "auxiliary": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "backgroundColor",
+                "foregroundColor",
+                "borderColor"
+              ],
+              "properties": {
+                "backgroundColor": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                },
+                "foregroundColor": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                },
+                "borderColor": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "action": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "primary",
+            "secondary",
+            "auxiliary"
+          ],
+          "properties": {
+            "primary": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "backgroundColor",
+                "foregroundColor",
+                "borderColor"
+              ],
+              "properties": {
+                "backgroundColor": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                },
+                "foregroundColor": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                },
+                "borderColor": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "secondary": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "backgroundColor",
+                "foregroundColor",
+                "borderColor"
+              ],
+              "properties": {
+                "backgroundColor": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                },
+                "foregroundColor": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                },
+                "borderColor": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            "auxiliary": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "backgroundColor",
+                "foregroundColor",
+                "borderColor"
+              ],
+              "properties": {
+                "backgroundColor": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                },
+                "foregroundColor": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                },
+                "borderColor": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "control": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "backgroundColor",
+            "foregroundColor",
+            "borderColor"
+          ],
           "properties": {
             "backgroundColor": {
               "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "$value"
+              ],
               "properties": {
                 "$value": {
                   "type": [
@@ -26,6 +494,10 @@
             },
             "foregroundColor": {
               "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "$value"
+              ],
               "properties": {
                 "$value": {
                   "type": [
@@ -42,6 +514,10 @@
             },
             "borderColor": {
               "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "$value"
+              ],
               "properties": {
                 "$value": {
                   "type": [
@@ -58,387 +534,370 @@
             }
           }
         },
-        "secondary": {
+        "text": {
           "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "primary",
+            "secondary",
+            "auxiliary"
+          ],
           "properties": {
-            "backgroundColor": {
+            "primary": {
               "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "fontFamily",
+                "fontWeight",
+                "lineHeight",
+                "minRem",
+                "scaleFactor"
+              ],
               "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
+                "fontFamily": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
                 },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
+                "fontWeight": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                },
+                "lineHeight": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                },
+                "minRem": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                },
+                "scaleFactor": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
                 }
               }
             },
-            "foregroundColor": {
+            "secondary": {
               "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "fontFamily",
+                "fontWeight",
+                "lineHeight",
+                "minRem",
+                "scaleFactor"
+              ],
               "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
+                "fontFamily": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
                 },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
+                "fontWeight": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                },
+                "lineHeight": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                },
+                "minRem": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                },
+                "scaleFactor": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
                 }
               }
             },
-            "borderColor": {
+            "auxiliary": {
               "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "fontFamily",
+                "fontWeight",
+                "lineHeight",
+                "minRem",
+                "scaleFactor"
+              ],
               "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
+                "fontFamily": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
                 },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
+                "fontWeight": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                },
+                "lineHeight": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                },
+                "minRem": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
+                },
+                "scaleFactor": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "$value"
+                  ],
+                  "properties": {
+                    "$value": {
+                      "type": [
+                        "number",
+                        "string"
+                      ]
+                    },
+                    "$influence": {
+                      "type": [
+                        "number"
+                      ]
+                    }
+                  }
                 }
               }
             }
           }
         },
-        "auxiliary": {
+        "space": {
           "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minDimension",
+            "scaleFactor"
+          ],
           "properties": {
-            "backgroundColor": {
+            "minDimension": {
               "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            },
-            "foregroundColor": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            },
-            "borderColor": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "action": {
-      "type": "object",
-      "properties": {
-        "primary": {
-          "type": "object",
-          "properties": {
-            "backgroundColor": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            },
-            "foregroundColor": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            },
-            "borderColor": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "secondary": {
-          "type": "object",
-          "properties": {
-            "backgroundColor": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            },
-            "foregroundColor": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            },
-            "borderColor": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "auxiliary": {
-          "type": "object",
-          "properties": {
-            "backgroundColor": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            },
-            "foregroundColor": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            },
-            "borderColor": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "control": {
-      "type": "object",
-      "properties": {
-        "backgroundColor": {
-          "type": "object",
-          "properties": {
-            "$value": {
-              "type": [
-                "number",
-                "string"
-              ]
-            },
-            "$influence": {
-              "type": [
-                "number"
-              ]
-            }
-          }
-        },
-        "foregroundColor": {
-          "type": "object",
-          "properties": {
-            "$value": {
-              "type": [
-                "number",
-                "string"
-              ]
-            },
-            "$influence": {
-              "type": [
-                "number"
-              ]
-            }
-          }
-        },
-        "borderColor": {
-          "type": "object",
-          "properties": {
-            "$value": {
-              "type": [
-                "number",
-                "string"
-              ]
-            },
-            "$influence": {
-              "type": [
-                "number"
-              ]
-            }
-          }
-        }
-      }
-    },
-    "text": {
-      "type": "object",
-      "properties": {
-        "primary": {
-          "type": "object",
-          "properties": {
-            "fontFamily": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            },
-            "fontWeight": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            },
-            "lineHeight": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            },
-            "minRem": {
-              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "$value"
+              ],
               "properties": {
                 "$value": {
                   "type": [
@@ -455,6 +914,10 @@
             },
             "scaleFactor": {
               "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "$value"
+              ],
               "properties": {
                 "$value": {
                   "type": [
@@ -468,213 +931,6 @@
                   ]
                 }
               }
-            }
-          }
-        },
-        "secondary": {
-          "type": "object",
-          "properties": {
-            "fontFamily": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            },
-            "fontWeight": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            },
-            "lineHeight": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            },
-            "minRem": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            },
-            "scaleFactor": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            }
-          }
-        },
-        "auxiliary": {
-          "type": "object",
-          "properties": {
-            "fontFamily": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            },
-            "fontWeight": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            },
-            "lineHeight": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            },
-            "minRem": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            },
-            "scaleFactor": {
-              "type": "object",
-              "properties": {
-                "$value": {
-                  "type": [
-                    "number",
-                    "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "space": {
-      "type": "object",
-      "properties": {
-        "minDimension": {
-          "type": "object",
-          "properties": {
-            "$value": {
-              "type": [
-                "number",
-                "string"
-              ]
-            },
-            "$influence": {
-              "type": [
-                "number"
-              ]
-            }
-          }
-        },
-        "scaleFactor": {
-          "type": "object",
-          "properties": {
-            "$value": {
-              "type": [
-                "number",
-                "string"
-              ]
-            },
-            "$influence": {
-              "type": [
-                "number"
-              ]
             }
           }
         }
