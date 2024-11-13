@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=../mode-schema.json
+# yaml-language-server: $schema=./_schema.json
 
 
 tokens:

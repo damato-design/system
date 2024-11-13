@@ -11,6 +11,15 @@ const schema = {
     type: 'object',
     required: ['tokens'],
     properties: {
+        alias: {
+            type: 'string'
+        },
+        symbolic: {
+            type: 'boolean'
+        },
+        lang: {
+            type: 'string'
+        },
         tokens: {
             type: 'object',
             required: ['surface', 'action', 'control', 'text', 'space'],
@@ -66,4 +75,4 @@ function permutate(...arrays) {
     return host;
 }
 
-fs.writeFileSync('mode-schema.json', JSON.stringify(schema, null, 2), 'utf-8');
+fs.writeFileSync('src/modes/_schema.json', JSON.stringify(schema, null, 2), 'utf-8');
