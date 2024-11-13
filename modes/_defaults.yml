@@ -2,57 +2,95 @@
 
 surface:
   primary:
-    backgroundColor: color-mix(in oklch, Canvas, white 10%)
-    foregroundColor: CanvasText
-    borderColor: GrayText
+    backgroundColor:
+      $value: color-mix(in oklch, Canvas, white 10%)
+    foregroundColor:
+      $value: CanvasText
+    borderColor:
+      $value: GrayText
   secondary:
-    backgroundColor: color-mix(in oklch, Canvas, white 5%)
-    foregroundColor: CanvasText
-    borderColor: GrayText
+    backgroundColor:
+      $value: color-mix(in oklch, Canvas, white 5%)
+    foregroundColor:
+      $value: CanvasText
+    borderColor:
+      $value: GrayText
   auxiliary:
-    backgroundColor: color-mix(in oklch, Canvas, white 0%)
-    foregroundColor: CanvasText
-    borderColor: GrayText
+    backgroundColor:
+      $value: color-mix(in oklch, Canvas, white 0%)
+    foregroundColor:
+      $vsalue: CanvasText
+    borderColor:
+      $value: GrayText
 
 action:
   primary:
-    backgroundColor: AccentColor
-    foregroundColor: AccentColorText
-    borderColor: transparent
+    backgroundColor:
+      $value: AccentColor
+    foregroundColor:
+      $value: AccentColorText
+    borderColor:
+      $value: transparent
   secondary:
-    backgroundColor: ButtonFace
-    foregroundColor: ButtonText
-    borderColor: GrayText
+    backgroundColor:
+      $value: ButtonFace
+    foregroundColor:
+      $value: ButtonText
+    borderColor:
+      $value: GrayText
   auxiliary:
-    backgroundColor: transparent
-    foregroundColor: ActiveText
-    borderColor: transparent
+    backgroundColor:
+      $value: transparent
+    foregroundColor:
+      $value: ActiveText
+    borderColor:
+      $value: transparent
 
 control:
-  backgroundColor: Field
-  foregroundColor: FieldText
-  borderColor: GrayText
+  backgroundColor:
+    $value: Field
+  foregroundColor:
+    $value: FieldText
+  borderColor:
+    $value: GrayText
 
 text:
   primary:
-    fontFamily: serif
-    fontWeight: 700
-    lineHeight: 1.1
-    minRem: 2
-    scaleFactor: 1.125
+    fontFamily:
+      $value: serif
+    fontWeight:
+      $value: 700
+    lineHeight:
+      $value: 1.1
+    minRem:
+      $value: 2
+    scaleFactor:
+      $value: 1.125
   secondary:
-    fontFamily: sans-serif
-    fontWeight: 400
-    lineHeight: 1.4
-    minRem: 1.4
-    scaleFactor: 1.125
+    fontFamily:
+      $value: sans-serif
+    fontWeight:
+      $value: 400
+    lineHeight:
+      $value: 1.4
+    minRem:
+      $value: 1.4
+    scaleFactor:
+      $value: 1.125
   auxiliary:
-    fontFamily: sans-serif
-    fontWeight: 400
-    lineHeight: 1.4
-    minRem: 1
-    scaleFactor: 1.125
+    fontFamily:
+      $value: sans-serif
+    fontWeight:
+      $value: 400
+    lineHeight:
+      $value: 1.4
+    minRem:
+      $value: 1
+    scaleFactor:
+      $value: 1.125
 
 space:
-  minDimension: .5rem
-  scaleFactor: 1.618
+  minDimension:
+    $value: .5rem
+  scaleFactor:
+    $value: 1.618

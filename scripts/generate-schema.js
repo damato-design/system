@@ -18,46 +18,38 @@ const schema = {
     }
 }
 
+function final() {
+    return {
+        type: 'object',
+        properties: {
+            $value: {
+                type: ['number', 'string']
+            },
+            $influence: {
+                type: ['number']
+            }
+        }
+    }
+}
+
 function permutate(...arrays) {
-    const createNestedObject = (keys) =>
-        keys.reduceRight((acc, key) => ({
-            type: 'object',
-            properties: { [key]: acc }
-        }), { type: ['string', 'number'] });
+    const host = {};
 
-    const buildCombinations = (arrays, prefix = []) =>
-        arrays[0].flatMap((value) => {
-            const newPrefix = [...prefix, value];
-            if (arrays.length === 1) {
-                // At innermost level, create nested structure
-                return [createNestedObject(newPrefix)];
+    const recurse = (acc, remaining) => {
+        const [next, ...rest] = remaining;
+        next.forEach((key) => {
+            acc[key] = final();
+            if (rest.length) {
+                acc[key].type = 'object';
+                acc[key].properties = {};
+                recurse(acc[key].properties, rest);
             }
-            // Recurse into remaining arrays
-            return buildCombinations(arrays.slice(1), newPrefix);
         });
+    }
 
-    const mergeResults = (result, nestedObject) => {
-        const mergeRecursive = (target, source) => {
-            for (const key in source) {
-                if (!target[key]) {
-                    target[key] = { type: 'object', properties: {} };
-                }
-                if (source[key].type !== 'object') {
-                    target[key] = source[key];
-                } else {
-                    mergeRecursive(target[key].properties, source[key].properties);
-                }
-            }
-        };
+    recurse(host, arrays);
 
-        mergeRecursive(result, nestedObject.properties);
-        return result;
-    };
-
-    // Start with an empty result object and merge all combinations
-    return buildCombinations(arrays).reduce((result, nestedObject) => {
-        return mergeResults(result, nestedObject);
-    }, {});
+    return host;
 }
 
 fs.writeFileSync('mode-schema.json', JSON.stringify(schema, null, 2), 'utf-8');
