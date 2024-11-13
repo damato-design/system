@@ -26,3 +26,5 @@ _site
 *.sw?
 
 *storybook.log
+
+src/modes/newmode.yml

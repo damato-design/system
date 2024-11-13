@@ -10,6 +10,7 @@ import {
 } from './properties.js';
 
 const SYSTEM_YAML_PATH = path.join(process.cwd(), 'src', 'modes', '_system.yml');
+const TOKENS_SCSS_PATH = path.join(process.cwd(), 'src', 'components', '_tokens.module.scss');
 const _system = yaml.load(fs.readFileSync(SYSTEM_YAML_PATH, 'utf8'));
 
 function permutate(...arrays) {
@@ -28,13 +29,13 @@ function prefix(pre, value) {
     return `--${pre}-${value}`;
 }
 
+// $action_primary_backgroundColor: var(--symbolic, var(--brand, _system));
 function variable(token) {
     const { $value } = token.split('_').reduce((acc, key) => acc[key], _system.tokens);
     const value =  `var(${prefix('symbolic', token)}, var(${prefix('brand', token)}, ${$value}))`;
     return `$${token}: ${value};`;
 }
 
-// $action_primary_backgroundColor: var(--symbolic, var(--brand, _system));
 function variables(arr) {
     return arr.map(variable).join('\n');
 }
@@ -67,4 +68,4 @@ function content() {
 
 }
 
-fs.writeFileSync('src/components/_tokens.module.scss', content(), 'utf-8');
+fs.writeFileSync(TOKENS_SCSS_PATH, content(), 'utf-8');

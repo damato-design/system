@@ -1,10 +1,14 @@
 import fs from 'fs';
+import path from 'path';
+
 import {
     PRIORITY,
     PROPERTY_COLOR,
     PROPERTY_FONT,
     PROPERTY_SPACE
 } from './properties.js';
+
+const SCHEMA_JSON_PATH = path.join(process.cwd(), 'src', 'modes', '_schema.json');
 
 const schema = {
     $schema: 'http://json-schema.org/draft-07/schema#',
@@ -75,4 +79,4 @@ function permutate(...arrays) {
     return host;
 }
 
-fs.writeFileSync('src/modes/_schema.json', JSON.stringify(schema, null, 2), 'utf-8');
+fs.writeFileSync(SCHEMA_JSON_PATH, JSON.stringify(schema, null, 2), 'utf-8');
