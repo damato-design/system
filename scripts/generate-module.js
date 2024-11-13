@@ -6,7 +6,9 @@ import {
     PRIORITY,
     PROPERTY_COLOR,
     PROPERTY_FONT,
-    PROPERTY_SPACE
+    PROPERTY_SPACE,
+    prefix,
+    toCSSVar,
 } from './properties.js';
 
 const SYSTEM_YAML_PATH = path.join(process.cwd(), 'src', 'modes', '_system.yml');
@@ -25,15 +27,12 @@ function permutate(...arrays) {
     return recurse(arrays);
 }
 
-function prefix(pre, value) {
-    return `--${pre}-${value}`;
-}
-
 // $action_primary_backgroundColor: var(--symbolic, var(--brand, _system));
 function variable(token) {
     const { $value } = token.split('_').reduce((acc, key) => acc[key], _system.tokens);
-    const value =  `var(${prefix('symbolic', token)}, var(${prefix('brand', token)}, ${$value}))`;
-    return `$${token}: ${value};`;
+    const brand = toCSSVar(prefix('brand', token), $value);
+    const symbolic = toCSSVar(prefix('symbolic', token), brand);
+    return `$${token}: ${symbolic};`;
 }
 
 function variables(arr) {
