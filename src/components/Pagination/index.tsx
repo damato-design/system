@@ -27,6 +27,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(({
         const value = Number(ev.target.value);
         if (cta && value === 1 && index === items.length - 1) return onConfirm(null);
         const clamp = Math.min(Math.max(index + value, 0), items.length - 1);
+        if (typeof onActiveDescendantChange === 'function') onActiveDescendantChange(items[clamp].id)
         onConfirm(items[clamp]);
     }, [index, items, cta]);
 

@@ -21,7 +21,7 @@ function declaration(name, { tokens, symbolic }) {
     // Assume we are going to use this as the result
     const decl = [toCustomIdent(prefix('brand', name)), value.$value];
     if (name.endsWith('Color')) {
-        const system = name.split('_').reduce((acc, key) => acc[key], _system);
+        const system = name.split('_').reduce((acc, key) => acc[key], _system.tokens);
         decl[1] = colorMix(value, system.$value);
         if (symbolic) {
             decl[1] = colorMix(value, decl[0]);
