@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { lockup } from '.';
+import { lockup, LockupProvider, useLockup } from '.';
 import { text } from '../Text';
 import { field } from '../Field';
 import { input } from '../Input';
@@ -92,9 +92,6 @@ export const Loading: Story = {
  * The component can also be used for form field composition.
  * The `passiveMessage` can be used to include helpful context about the field.
  * The `errorMessage` will politely announce its content when it is provided.
- * 
- * The `getInputProps()` method helps receive the props meant to connect
- * the `input` primitive to the `lockup` with accessibility attributes when appropriate.
  */
 export const Form: Story = {
     args: {
@@ -105,16 +102,15 @@ export const Form: Story = {
     },
     render: (args) => {
         const [value, setValue] = useState('hello@example');
-        const [inputProps, setInputProps] = useState({});
 
         const onChange = useCallback((ev: any) => {
             setValue(ev.target.value);
         }, []);
 
         return (
-            <lockup.fieldset { ...args } getInputProps={ setInputProps }>
+            <lockup.fieldset { ...args }>
                 <field.div>
-                    <input.email { ...inputProps } name='email' value={ value } onChange={ onChange }/>
+                    <input.email name='email' value={ value } onChange={ onChange }/>
                 </field.div>
             </lockup.fieldset>
         )

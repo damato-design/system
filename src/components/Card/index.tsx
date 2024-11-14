@@ -18,7 +18,6 @@ export const card = proxy<HTMLTagsOnly, CardProps>('card', (TagName) => {
         subject,
         passiveMessage,
         errorMessage,
-        getInputProps,
         ...props
     }: CardProps, ref) => {
 
@@ -38,7 +37,6 @@ export const card = proxy<HTMLTagsOnly, CardProps>('card', (TagName) => {
                         subject,
                         passiveMessage,
                         errorMessage,
-                        getInputProps
                     }}
                     stack
                     gap/>
