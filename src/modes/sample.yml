@@ -1,0 +1,93 @@
+# yaml-language-server: $schema=./_schema.json
+alias: sample
+tokens:
+  surface:
+    primary:
+      backgroundColor:
+        $value: white
+      foregroundColor:
+        $value: black
+      borderColor:
+        $value: transparent
+    secondary:
+      backgroundColor:
+        $value: white
+      foregroundColor:
+        $value: black
+      borderColor:
+        $value: transparent
+    auxiliary:
+      backgroundColor:
+        $value: white
+      foregroundColor:
+        $value: black
+      borderColor:
+        $value: transparent
+  action:
+    primary:
+      backgroundColor:
+        $value: purple
+      foregroundColor:
+        $value: white
+      borderColor:
+        $value: purple
+    secondary:
+      backgroundColor:
+        $value: transparent
+      foregroundColor:
+        $value: purple
+      borderColor:
+        $value: purple
+    auxiliary:
+      backgroundColor:
+        $value: transparent
+      foregroundColor:
+        $value: purple
+      borderColor:
+        $value: transparent
+  control:
+    backgroundColor:
+      $value: white
+    foregroundColor:
+      $value: black
+    borderColor:
+      $value: grey
+  text:
+    primary:
+      fontFamily:
+        $value: serif
+      fontWeight:
+        $value: 700
+      lineHeight:
+        $value: 1.1
+      minRem:
+        $value: 2
+      scaleFactor:
+        $value: 1.125
+    secondary:
+      fontFamily:
+        $value: sans-serif
+      fontWeight:
+        $value: 400
+      lineHeight:
+        $value: 1.5
+      minRem:
+        $value: 1.2
+      scaleFactor:
+        $value: 1.125
+    auxiliary:
+      fontFamily:
+        $value: sans-serif
+      fontWeight:
+        $value: 400
+      lineHeight:
+        $value: 1.5
+      minRem:
+        $value: 1
+      scaleFactor:
+        $value: 1.125
+  space:
+    minDimension:
+      $value: .5rem
+    scaleFactor:
+      $value: 1.168 

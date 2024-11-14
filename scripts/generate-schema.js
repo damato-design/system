@@ -13,7 +13,7 @@ const SCHEMA_JSON_PATH = path.join(process.cwd(), 'src', 'modes', '_schema.json'
 const schema = {
     $schema: 'http://json-schema.org/draft-07/schema#',
     type: 'object',
-    required: ['tokens'],
+    required: ['alias','tokens'],
     properties: {
         alias: {
             type: 'string'
