@@ -1,5 +1,4 @@
 import type { StorybookConfig } from "@storybook/react-vite";
-import svgr from 'vite-plugin-svgr';
 
 const config: StorybookConfig = {
   stories: ["../docs/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
@@ -8,9 +7,12 @@ const config: StorybookConfig = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@chromatic-com/storybook",
-    "@storybook/experimental-addon-test",
-    "@storybook/addon-mdx-gfm"
+    "@storybook/experimental-addon-test"
   ],
+
+  core: {
+    disableTelemetry: true,
+  },
 
   framework: {
     name: "@storybook/react-vite",
@@ -40,16 +42,5 @@ const config: StorybookConfig = {
   },
 
   staticDirs: ['./public'],
-
-  viteFinal: (config) => {
-    // Add the svgr plugin to the Vite configuration
-    config.plugins.push(svgr());
-    config.optimizeDeps = {
-      exclude: ['node_modules/.cache/sb-vite', 'node_modules/.cache/storybook']
-    };
-    
-    // Return the modified config
-    return config;
-  }
 };
 export default config;

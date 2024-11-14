@@ -4,11 +4,13 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { libInjectCss } from 'vite-plugin-lib-inject-css'
 import dts from 'vite-plugin-dts'
-import svgr from 'vite-plugin-svgr';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), libInjectCss(), dts({ exclude: ['**/*.stories.tsx'] }), svgr()],
+  optimizeDeps: {
+    exclude: ['node_modules/.cache']
+  },
+  plugins: [react(), libInjectCss(), dts({ exclude: ['**/*.stories.tsx'] })],
   server: {watch: {usePolling: true}},
   css: {
     preprocessorOptions: {
