@@ -44,6 +44,9 @@ const config: StorybookConfig = {
   viteFinal: (config) => {
     // Add the svgr plugin to the Vite configuration
     config.plugins.push(svgr());
+    config.optimizeDeps = {
+      exclude: ['node_modules/.cache/sb-vite', 'node_modules/.cache/storybook']
+    };
     
     // Return the modified config
     return config;

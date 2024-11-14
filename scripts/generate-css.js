@@ -1,8 +1,10 @@
 import fs from 'fs';
 import path from 'path';
-import { prefix, toCustomIdent } from './properties';
+import yaml from 'js-yaml';
+import { prefix, toCustomIdent } from './properties.js';
 
-const SYSTEM_YAML_PATH = path.join(process.cwd(), 'src', 'modes', '_system.yml');
+const MODE_YAML_PATH = path.join(process.cwd(), 'src', 'modes');
+const SYSTEM_YAML_PATH = path.join(MODE_YAML_PATH, '_system.yml');
 const MODE_CSS_PATH = path.join(process.cwd(), 'src', 'assets');
 const _system = yaml.load(fs.readFileSync(SYSTEM_YAML_PATH, 'utf8'));
 const fileName = 'alias.css';
@@ -31,10 +33,33 @@ function declaration(name, { tokens, symbolic }) {
     return `${decl.join(':')};`;
 }
 
-function content({ tokens, alias, symbolic }) {
-    return `[data-mode~="${alias}"] {
+function getNames(obj, path = '') {
+    return Object.entries(obj).reduce((names, [key, value]) => {
+        const update = [path, key].join('_');
+        return typeof value === 'object' && value !== null
+            ? names.concat(getNames(value, update))
+            : names.concat(update);
+    }, []);
+}
 
+function content({ tokens, alias, symbolic }) {
+
+
+    return `[data-mode~="${alias}"] {
+        ${getNames(tokens).map((name) => declaration(name, { tokens, symbolic }).join('\n'))}
     }`
 }
 
-fs.writeFileSync(path.join(MODE_CSS_PATH, fileName), content(), 'utf-8');
+function main() {
+    const files = fs.readdirSync(MODE_YAML_PATH);
+    const f = files.filter((file) => {
+        const { name, ext } = path.parse(file);
+        return !(name.startsWith('_') || !ext.endsWith('yml'))
+    });
+
+    console.log(f);
+    // fs.writeFileSync(path.join(MODE_CSS_PATH, fileName), content(), 'utf-8');
+}
+
+
+main();
