@@ -26,7 +26,6 @@ const schema = {
         },
         tokens: {
             type: 'object',
-            required: ['surface', 'action', 'control', 'text', 'space'],
             properties: {
                 ...permutate(['surface'], PRIORITY, PROPERTY_COLOR),
                 ...permutate(['action'], PRIORITY, PROPERTY_COLOR),

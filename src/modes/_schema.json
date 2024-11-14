@@ -17,13 +17,6 @@
     },
     "tokens": {
       "type": "object",
-      "required": [
-        "surface",
-        "action",
-        "control",
-        "text",
-        "space"
-      ],
       "properties": {
         "surface": {
           "type": "object",

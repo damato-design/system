@@ -4,6 +4,7 @@ import css from './styles.module.scss';
 import { proxy } from '../Element/proxy';
 import { element, ElementProps, restrictProps } from '../Element';
 import { useListbox } from '../Listbox';
+import { useLockup } from '../Lockup';
 
 export type InputProps = (React.InputHTMLAttributes<HTMLInputElement>
   | React.TextareaHTMLAttributes<HTMLTextAreaElement>)
@@ -26,6 +27,7 @@ export const input = proxy<HTMLInputTypeAttribute | 'textarea', InputProps>('inp
   }: InputProps, ref) => {
     const type = inputType !== 'textarea' ? inputType : null;
     const { anchor: listboxProps } = useListbox();
+    const { input: lockupProps } = useLockup();
 
     const Element = inputType === 'textarea'
       ? element.textarea
@@ -39,6 +41,7 @@ export const input = proxy<HTMLInputTypeAttribute | 'textarea', InputProps>('inp
     return <Element
       {...Object.assign({ type }, restrictProps(props))}
       { ...listboxProps }
+      { ...lockupProps }
       ref={ref}
       className={css.input}
       style={styles} />;
