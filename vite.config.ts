@@ -10,6 +10,7 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['node_modules/.cache']
   },
+  assetsInclude: ['/mode-listener.js'],
   plugins: [react(), libInjectCss(), dts({ exclude: ['**/*.stories.tsx'] })],
   server: {watch: {usePolling: true}},
   css: {
