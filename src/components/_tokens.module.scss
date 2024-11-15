@@ -38,7 +38,7 @@ $text_auxiliary_scaleFactor: var(--symbolic-text_auxiliary_scaleFactor, var(--br
 $space_minDimension: var(--symbolic-space_minDimension, var(--brand-space_minDimension, .5rem));
 $space_scaleFactor: var(--symbolic-space_scaleFactor, var(--brand-space_scaleFactor, 1.618));
 :exports {
-    	#{'surface_primary_backgroundColor'}: $surface_primary_backgroundColor;
+	#{'surface_primary_backgroundColor'}: $surface_primary_backgroundColor;
 	#{'surface_primary_foregroundColor'}: $surface_primary_foregroundColor;
 	#{'surface_primary_borderColor'}: $surface_primary_borderColor;
 	#{'surface_secondary_backgroundColor'}: $surface_secondary_backgroundColor;
@@ -67,7 +67,7 @@ $space_scaleFactor: var(--symbolic-space_scaleFactor, var(--brand-space_scaleFac
 	#{'text_secondary_fontFamily'}: $text_secondary_fontFamily;
 	#{'text_secondary_fontWeight'}: $text_secondary_fontWeight;
 	#{'text_secondary_lineHeight'}: $text_secondary_lineHeight;
-        #{'text_secondary_minRem'}: $text_secondary_minRem;
+	#{'text_secondary_minRem'}: $text_secondary_minRem;
 	#{'text_secondary_scaleFactor'}: $text_secondary_scaleFactor;
 	#{'text_auxiliary_fontFamily'}: $text_auxiliary_fontFamily;
 	#{'text_auxiliary_fontWeight'}: $text_auxiliary_fontWeight;

@@ -7,7 +7,7 @@ import {
     PROPERTY_COLOR,
     PROPERTY_FONT,
     PROPERTY_SPACE,
-    prefix,
+    prefixType,
     toCSSVar,
 } from './properties.js';
 
@@ -30,8 +30,8 @@ function permutate(...arrays) {
 // $action_primary_backgroundColor: var(--symbolic, var(--brand, _system));
 function variable(token) {
     const { $value } = token.split('_').reduce((acc, key) => acc[key], _system.tokens);
-    const brand = toCSSVar(prefix('brand', token), $value);
-    const symbolic = toCSSVar(prefix('symbolic', token), brand);
+    const brand = toCSSVar(prefixType(token, 'brand'), $value);
+    const symbolic = toCSSVar(prefixType(token, 'symbolic'), brand);
     return `$${token}: ${symbolic};`;
 }
 
@@ -42,8 +42,8 @@ function variables(arr) {
 // #{'action_primary_backgroundColor'}: $action_primary_backgroundColor;
 function exports(arr) {
     return `:exports {
-    ${ arr.map((token) => `\t#{'${token}'}: $${token};`).join('\n') }
-    }`;
+${ arr.map((token) => `\t#{'${token}'}: $${token};`).join('\n') }
+}`;
 }
 
 /**

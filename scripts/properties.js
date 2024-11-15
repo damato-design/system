@@ -20,7 +20,7 @@ export const PROPERTY_SPACE = [
     'scaleFactor',
 ];
 
-export function prefix(token, pre) {
+export function prefixType(token, pre) {
     return [pre, token].filter(Boolean).join('-');
 }
 

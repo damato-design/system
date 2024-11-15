@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';
-import { prefix, toCustomIdent } from './properties.js';
+import { prefixType, toCustomIdent } from './properties.js';
 
 const MODE_YAML_PATH = path.join(process.cwd(), 'src', 'modes');
 const SYSTEM_YAML_PATH = path.join(MODE_YAML_PATH, '_system.yml');
@@ -31,13 +31,13 @@ function declaration(name, { tokens, symbolic }) {
     // Get value within tokens
     const value = name.split('_').reduce((acc, key) => acc[key], tokens);
     // Assume we are going to use this as the result
-    const decl = [toCustomIdent(prefix(name, 'brand')), value.$value];
+    const decl = [toCustomIdent(prefixType(name, 'brand')), value.$value];
     if (name.endsWith('Color')) {
         const system = name.split('_').reduce((acc, key) => acc[key], _system.tokens);
         decl[1] = colorMix(value, system.$value);
         if (symbolic) {
             decl[1] = colorMix(value, decl[0]);
-            decl[0] = toCustomIdent(prefix(name, 'symbolic'));
+            decl[0] = toCustomIdent(prefixType(name, 'symbolic'));
         }
     }
     return `\t${decl.join(': ')};`;
