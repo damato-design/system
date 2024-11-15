@@ -74,40 +74,37 @@ export const Default: Story = {
  * > aren't precisely a surface with this specific priority. Keeping these
  * > separate will allow for further composition explorations to happen.
  */
-// export const Stretch: Story = {
-//     args: {
-//         children: 'Hello World!',
-//         stretch: true
-//     },
-//     render: (args) => {
-//         const { anchorProps } = useContext(FlyoutContext);
-//         console.log(anchorProps);
-//         const [show, setShow] = useState(false);
+export const Stretch: Story = {
+    args: {
+        children: 'Hello World!',
+        stretch: true
+    },
+    render: (args) => {
+        const [show, setShow] = useState(false);
 
-//         const popover = (
-//             <flyout.div
-//                 { ...args }
-//                 onClose={ () => setShow(false) }>
-//                 <box.div
-//                     stretch={ args.stretch }
-//                     padding
-//                     purpose='surface'
-//                     priority='secondary'>
-//                     Hi! 👋
-//                 </box.div>
-//             </flyout.div>
-//         );
+        const popover = (
+            <flyout.div
+                { ...args }
+                onClose={ () => setShow(false) }>
+                <box.div
+                    stretch={ args.stretch }
+                    padding
+                    purpose='surface'
+                    priority='secondary'>
+                    Hi! 👋
+                </box.div>
+            </flyout.div>
+        );
 
-//         return (
-//             <>
-//                 <Button
-//                     anchorName={ anchorProps.anchorName }
-//                     onClick={() => setShow(!show)}
-//                     priority='primary'>
-//                     anchor element
-//                 </Button>
-//                 { show ? popover : null }
-//             </>
-//         )
-//     }
-// }
+        return (
+            <FlyoutProvider>
+                <Button
+                    onClick={() => setShow(!show)}
+                    priority='primary'>
+                    anchor element
+                </Button>
+                { show ? popover : null }
+            </FlyoutProvider>
+        )
+    }
+}
