@@ -41,6 +41,6 @@ const config: StorybookConfig = {
     <link rel="prefetch" as="image" href="https://analytics.damato.design/api/track?domain=system.damato.design" />`;
   },
 
-  staticDirs: ['./public'],
+  staticDirs: ['./public', '../src/assets'],
 };
 export default config;

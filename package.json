@@ -20,6 +20,7 @@
     "prepublishOnly": "npm run build",
     "test": "vitest",
     "storybook:test": "npx vitest --project=storybook",
+    "generate:all":"npm run generate:schema && npm run generate:module && npm run generate:css",
     "generate:css": "node ./scripts/generate-css.js",
     "generate:module": "node ./scripts/generate-module.js",
     "generate:schema": "node ./scripts/generate-schema.js",

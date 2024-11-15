@@ -6,7 +6,18 @@ import { prefix, toCustomIdent } from './properties.js';
 const MODE_YAML_PATH = path.join(process.cwd(), 'src', 'modes');
 const SYSTEM_YAML_PATH = path.join(MODE_YAML_PATH, '_system.yml');
 const MODE_CSS_PATH = path.join(process.cwd(), 'src', 'assets');
+const INVENTORY_JSON_PATH = path.join(process.cwd(), '.storybook', 'public', 'inventory.json');
 const _system = yaml.load(fs.readFileSync(SYSTEM_YAML_PATH, 'utf8'));
+
+function qualifyingYaml(file) {
+    const { name, ext } = path.parse(file);
+    return !(name.startsWith('_') || !ext.endsWith('yml'))
+}
+
+function createCSSFileName(file) {
+    const { name } = path.parse(file);
+    return `${name}.css`;
+}
 
 function colorMix(value, base) {
     const { $value, $influence } = Object.assign({
@@ -51,23 +62,24 @@ ${rules.join('\n')}
 }`
 }
 
-function qualifyingFile(file) {
-    const { name, ext } = path.parse(file);
-    return !(name.startsWith('_') || !ext.endsWith('yml'))
-}
-
-function processFile(file) {
-    const { name } = path.parse(file);
+function processFile(acc, file) {
     const fullPath = path.join(MODE_YAML_PATH, file);
     const contents = yaml.load(fs.readFileSync(fullPath, 'utf8'));
-    if (!contents.alias) throw new Error(`Alias is missing for ${file}`);
-    const css = mode(contents);
-    fs.writeFileSync(path.join(MODE_CSS_PATH, `${name}.css`), css, 'utf8');
+    const { alias, lang } = contents;
+    if (!alias) throw new Error(`Alias is missing for ${file}`);
+    const fileName = createCSSFileName(file);
+    fs.writeFileSync(path.join(MODE_CSS_PATH, fileName), mode(contents), 'utf8');
+    if (!acc[alias]) acc[alias] = [];
+    acc[alias] = lang
+        ? acc[alias].concat(fileName)
+        : [fileName].concat(acc[alias]);
+    return acc;
 }
 
 function main() {
     const files = fs.readdirSync(MODE_YAML_PATH);
-    files.filter(qualifyingFile).map(processFile);
+    const inventory = files.filter(qualifyingYaml).reduce(processFile, {});
+    fs.writeFileSync(INVENTORY_JSON_PATH, JSON.stringify(inventory, null, 2), 'utf8');
 }
 
 main();
