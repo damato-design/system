@@ -118,7 +118,6 @@ function DateButton({
             ref={ onRef }
             onFocus={() => setShouldFocus(true)}
             onBlur={() => setShouldFocus(false)}
-            priority={ isSelected ? 'primary' : undefined }
             square>
             { date }
         </Button>
