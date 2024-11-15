@@ -1,4 +1,4 @@
-import inventory from './inventory.json' with { type: "json" };
+import inventory from './_inventory.json' with { type: "json" };
 const PRELOADED_MODES = [];
 const ANIMATION_NAME = '__MODE_LISTENER__';
 

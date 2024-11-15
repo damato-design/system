@@ -6,7 +6,7 @@ import { prefixType, toCustomIdent } from './properties.js';
 const MODE_YAML_PATH = path.join(process.cwd(), 'src', 'modes');
 const SYSTEM_YAML_PATH = path.join(MODE_YAML_PATH, '_system.yml');
 const MODE_CSS_PATH = path.join(process.cwd(), 'src', 'assets');
-const INVENTORY_JSON_PATH = path.join(process.cwd(), '.storybook', 'public', 'inventory.json');
+const INVENTORY_JSON_PATH = path.join(process.cwd(), '.storybook', 'public', '_inventory.json');
 const _system = yaml.load(fs.readFileSync(SYSTEM_YAML_PATH, 'utf8'));
 
 function qualifyingYaml(file) {
@@ -16,7 +16,7 @@ function qualifyingYaml(file) {
 
 function createCSSFileName(file) {
     const { name } = path.parse(file);
-    return `${name}.css`;
+    return `_${name}.css`;
 }
 
 function colorMix(value, base) {
@@ -57,7 +57,9 @@ function mode({ tokens, alias, symbolic, lang }) {
     const selector = [`[data-mode~="${alias}"]`];
     if (lang) selector.push(`:lang(${lang})`);
     const rules = getNames(tokens).map((name) => declaration(name, { tokens, symbolic }));
-    return `${selector.join('')} {
+    const message = `/** Generated file: npm run generate:css */`
+    return `${message}
+${selector.join('')} {
 ${rules.join('\n')}
 }`
 }
