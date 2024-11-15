@@ -1,6 +1,4 @@
 import { forwardRef, createElement } from 'react';
-import clsx from 'clsx';
-import css from './styles.module.scss';
 import { proxy, Props, HTMLTagsOnly } from './proxy';
 
 export function restrictProps({
@@ -27,7 +25,6 @@ export const element = proxy<HTMLTagsOnly, ElementProps>('element', (TagName) =>
     ...rest
   }: ElementProps, ref) => {
 
-    const classNames = clsx(css.element, className);
-    return createElement(TagName, { ...rest, ref, className: classNames, 'data-mode': mode });
+    return createElement(TagName, { ...rest, ref, className, 'data-mode': mode });
   })
 });

@@ -1,6 +1,10 @@
 .media:is(.media) {
     max-width: 100%;
     display: flex;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
     & > * {
         max-width: 100%;
     }
