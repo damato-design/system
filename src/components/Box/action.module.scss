@@ -1,15 +1,17 @@
+@use '../tokens.module';
+
 .action {
     cursor: pointer;
     font-size: 1.2rem;
-    border: 1px solid transparent;
     border-radius: 4px;
     text-decoration: none;
     flex: 1 1 auto;
-
-    --bgColor: #fefefe;
-    background-color: color-mix(in oklch, var(--bgColor), currentColor 5%);
     transition: .218s ease;
-    color: #720e9e;
+    border-width: 1px;
+    border-style: solid;
+    border-color: tokens.$action_auxiliary_borderColor;
+    color: tokens.$action_auxiliary_foregroundColor;
+    background: tokens.$action_auxiliary_backgroundColor;
 
     &:where([aria-current]) {
         text-decoration: underline;
@@ -26,22 +28,20 @@
     }
 
     &:where([data-priority="primary"]) {
-        --bgColor: #720e9e;
-        color: white;
+        border-color: tokens.$action_primary_borderColor;
+        color: tokens.$action_primary_foregroundColor;
+        background: tokens.$action_primary_backgroundColor;
     }
 
     &:where([data-priority="secondary"]) {
-        /* --bgColor: #c999c9; */
-        border-color: #c999c9;
+        border-color: tokens.$action_secondary_borderColor;
+        color: tokens.$action_secondary_foregroundColor;
+        background: tokens.$action_secondary_backgroundColor;
     }
 
     &:where([disabled], [aria-disabled="true"]) {
         cursor: not-allowed;
         opacity: .4;
-    }
-
-    &:not([disabled], [aria-disabled="true"]):hover {
-        background-color: color-mix(in oklch, var(--bgColor), currentColor 15%);
     }
 
     & > * {

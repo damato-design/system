@@ -23,7 +23,7 @@ function appendModeCSS(mode) {
     inventory[mode].forEach((file) => {
         const $link = document.createElement('link');
         $link.rel = 'stylesheet';
-        $link.src = file;
+        $link.href = file;
         document.head.appendChild($link);
     });
 }
@@ -34,4 +34,5 @@ const onAnimationEnd = (ev) => {
         incomingModes.filter((mode) => !modes.has(mode)).forEach(appendModeCSS);
     }
 }
-document.documentElement.addEventListener('onanimationend', onAnimationEnd);
+document.documentElement.addEventListener('animationend', onAnimationEnd);
+[...modes].forEach(appendModeCSS);
