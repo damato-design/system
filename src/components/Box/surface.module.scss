@@ -1,0 +1,17 @@
+.surface {
+    background: #f0f0f0;
+    border-radius: 8px;
+    overflow: clip;
+    contain: layout;
+    color: black;
+
+    &:where([data-priority="primary"]) {
+        background: #fff;
+        box-shadow: 0 14px 20px -4px rgba(0,0,0,.2);
+    }
+
+    &:where([data-priority="secondary"]) {
+        background: #fafafa;
+        box-shadow: 0 8px 8px -2px rgba(128, 128, 128, 0.4);
+    }
+}

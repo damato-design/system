@@ -1,6 +1,9 @@
 import { forwardRef } from 'react';
 import clsx from 'clsx';
-import css from './styles.module.scss';
+import boxClass from './box.module.scss';
+import surfaceClass from './surface.module.scss';
+import actionClass from './action.module.scss';
+import controlClass from './control.module.scss';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { element, ElementProps } from '../Element';
 import { alignmentStyle, AlignmentConfig } from './alignment';
@@ -100,15 +103,13 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       maxWidth: infill ? 'max-content' : undefined
     };
 
-    const appearance: { [key: string]: boolean } = {};
-    if (typeof purpose === 'string') {
-      appearance[css[purpose]] = true;
-    }
-
-    const classNames = clsx(css.box, appearance, { 
-      [css.round]: round,
-      [css.padding]: padding,
-      [css.gap]: gap || infill
+    const classNames = clsx(boxClass.box, { 
+      [boxClass.round]: round,
+      [boxClass.padding]: padding,
+      [boxClass.gap]: gap || infill,
+      [surfaceClass.surface]: purpose === 'surface',
+      [actionClass.action]: purpose === 'action',
+      [controlClass.control]: purpose === 'control'
     });
 
     return <Box

@@ -1,0 +1,37 @@
+@use 'details.module' as *;
+@use 'standby.module' as *;
+
+.box {
+    min-width: 0;
+    font-size: 1.2rem;
+    outline-offset: -4px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: inherit;
+
+    &.round {
+        border-radius: 100vw;
+    }
+
+    &.padding {
+        padding: var(--padding, 1rem);
+    }
+
+    &.gap {
+        gap: var(--gap, .5rem);
+    }
+
+    &:where(details) {
+        @include details;
+    }
+
+    &:where([aria-busy="true"]) {
+        width: 100%;
+
+        :where([data-standby="true"]) {
+            @include standby;
+        }
+    }
+}

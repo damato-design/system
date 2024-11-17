@@ -1,4 +1,4 @@
-.text:is(.text) {
+.text {
 
     --depth: 0;
 	--text-primary-scale: 1.125;
@@ -34,7 +34,7 @@
     border: 0;
     color: inherit;
 
-    &:where(:empty) {
+    &:where(:empty):not([data-standby="true"]) {
         display: none;
     }
 
@@ -43,15 +43,15 @@
         word-break: break-word;
     }
 
-    &:is(strong) {
+    &:where(strong) {
         font-weight: bolder;
     }
 
-    &:is(label[for]) {
+    &:where(label[for]) {
         cursor: pointer;
     }
 
-    &:is([data-priority="primary"]) {
+    &:where([data-priority="primary"]) {
         /* text-wrap: balance; */
         font-weight: bolder;
         font-size: 1.2rem;
@@ -65,7 +65,7 @@
         }
     }
 
-    &:is([data-priority="auxiliary"]) {
+    &:where([data-priority="auxiliary"]) {
         font-size: 1rem;
     }
 

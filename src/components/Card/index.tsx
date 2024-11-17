@@ -22,6 +22,18 @@ export const card = proxy<HTMLTagsOnly, CardProps>('card', (TagName) => {
     }: CardProps, ref) => {
 
         const Element = box[TagName];
+        const content = (
+            <lockup.div
+                {...{
+                    children,
+                    icon,
+                    subject,
+                    passiveMessage,
+                    errorMessage,
+                }}
+                stack
+                gap/>
+        )
 
         return (
             <Element
@@ -30,16 +42,7 @@ export const card = proxy<HTMLTagsOnly, CardProps>('card', (TagName) => {
                 stack={ stack }
                 ref={ ref }>
                 <Media src={ src }/>
-                <lockup.div
-                    {...{
-                        children,
-                        icon,
-                        subject,
-                        passiveMessage,
-                        errorMessage,
-                    }}
-                    stack
-                    gap/>
+                { subject || children ? content : null }
             </Element>
         )
     });

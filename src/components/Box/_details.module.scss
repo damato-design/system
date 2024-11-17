@@ -1,0 +1,33 @@
+@mixin details {
+    display: block !important;
+
+    summary {
+        font-weight: bolder;
+    }
+
+    summary > i {
+        transition: transform .218s ease;
+    }
+
+    &::details-content {
+        opacity: 0;
+        block-size: 0;
+        overflow-y: clip;
+        transition: content-visibility .218s allow-discrete,
+            opacity .218s,
+            block-size .218s;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        interpolate-size: allow-keywords;
+    }
+
+    &[open]::details-content {
+        opacity: 1;
+        block-size: auto;
+    }
+
+    &[open] summary > i {
+        transform: rotate(.5turn);
+    }
+}
