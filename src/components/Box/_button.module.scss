@@ -12,4 +12,8 @@
     border-color: tokens.$action_auxiliary_borderColor;
     color: tokens.$action_auxiliary_foregroundColor;
     background: tokens.$action_auxiliary_backgroundColor;
+
+    &:not([disabled], [aria-disabled="true"]):hover {
+       filter: brightness(1.2);
+    }
 }
