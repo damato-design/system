@@ -1,8 +1,8 @@
 @use '../tokens.module';
 
 @mixin button {
+    font: inherit;
     cursor: pointer;
-    font-size: 1.2rem;
     border-radius: 4px;
     text-decoration: none;
     flex: 1 1 auto;

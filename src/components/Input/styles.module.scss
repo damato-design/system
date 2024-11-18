@@ -2,6 +2,8 @@
 @use '../Box/button.module' as *;
 
 .input {
+    font: inherit;
+    margin: 0;
     border: 0;
     padding: var(--padding, 1rem);
     scroll-padding-block: var(--padding, 1rem);
@@ -9,7 +11,6 @@
     background: transparent;
     min-width: 1ch;
     flex: 1;
-    font-size: 1.2rem;
     outline-offset: -4px;
 
     &:not(textarea) {

@@ -1,12 +1,11 @@
 @use '../tokens.module';
 
 .control {
-    border-width: 1px;
-    border-style: solid;
     border-radius: 4px;
-    font-size: 1.2rem;
     flex: 1 0 auto;
     overflow: clip;
+    border-width: 1px;
+    border-style: solid;
     border-color: tokens.$control_borderColor;
     color: tokens.$control_foregroundColor;
     background: tokens.$control_backgroundColor;

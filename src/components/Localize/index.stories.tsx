@@ -89,11 +89,13 @@ export const Batch: Story = {
         }
     },
     args: {
-        children: 'cerca'
+        children: ''
     },
-    render: (args) => {
+    render: (args: _) => {
         const DICTIONARY: { [key: string]: string } = {
-            close: args.children
+            close: 'cerca',
+            previous: 'previa',
+            next: 'próxima'
         };
 
         return (
