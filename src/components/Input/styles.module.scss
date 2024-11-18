@@ -1,3 +1,6 @@
+@use '../tokens.module';
+@use '../Box/button.module' as *;
+
 .input {
     border: 0;
     padding: var(--padding, 1rem);
@@ -17,11 +20,8 @@
         cursor: pointer;
         aspect-ratio: 1;
         height: 1lh;
-        accent-color: green;
+        accent-color: tokens.$action_primary_backgroundColor;
         outline-offset: 2px;
-
-        /* TODO: Not centered in frame?? */
-        /* scale: 1.15; */
 
         &:not(:checked) {
             appearance: none;
@@ -30,28 +30,14 @@
     }
 
     &:where([type="file"])::file-selector-button {
-        /* button styles */
         display: inline-flex;
         justify-content: center;
         align-items: center;
         font: inherit;
-        cursor: pointer;
-        font-size: 1.2rem;
-        border: 1px solid transparent;
-        border-radius: 4px;
-        text-decoration: none;
-        flex: 1 1 auto;
-        --bgColor: #fefefe;
-        background-color: color-mix(in oklch, var(--bgColor), currentColor 5%);
-        transition: background .218s ease;
-        color: black;
         padding: var(--padding, 1rem);
         margin-inline-end: 1ch;
         font-weight: bolder;
-    }
-
-    &:where([type="file"]:hover):not([disabled])::file-selector-button {
-        background-color: color-mix(in oklch, var(--bgColor), currentColor 15%);
+        @include button;
     }
 
     &::-webkit-inner-spin-button,
@@ -63,8 +49,8 @@
     &::-webkit-autofill:hover,
     &::-webkit-autofill:focus,
     &::-webkit-autofill:active {
-        -webkit-text-fill-color: var(--fgColor, black);
-        caret-color: var(--fgColor, black);
+        -webkit-text-fill-color: tokens.$control_foregroundColor;
+        caret-color: tokens.$control_foregroundColor;
     }
 
     &::-ms-reveal,

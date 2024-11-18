@@ -1,17 +1,8 @@
 @use '../tokens.module';
+@use 'button.module' as *;
 
 .action {
-    cursor: pointer;
-    font-size: 1.2rem;
-    border-radius: 4px;
-    text-decoration: none;
-    flex: 1 1 auto;
-    transition: .218s ease;
-    border-width: 1px;
-    border-style: solid;
-    border-color: tokens.$action_auxiliary_borderColor;
-    color: tokens.$action_auxiliary_foregroundColor;
-    background: tokens.$action_auxiliary_backgroundColor;
+    @include button;
 
     &:where([aria-current]) {
         text-decoration: underline;

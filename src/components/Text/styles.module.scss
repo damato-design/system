@@ -32,7 +32,6 @@
     margin: 0;
     padding: 0;
     border: 0;
-    color: inherit;
 
     &:where(:empty):not([data-standby="true"]) {
         display: none;
