@@ -19,15 +19,15 @@
     }
 
     &:where([data-priority="primary"]) {
+        --btn-bg: #{tokens.$action_primary_backgroundColor};
         border-color: tokens.$action_primary_borderColor;
         color: tokens.$action_primary_foregroundColor;
-        background: tokens.$action_primary_backgroundColor;
     }
 
     &:where([data-priority="secondary"]) {
+        --btn-bg: #{tokens.$action_secondary_backgroundColor};
         border-color: tokens.$action_secondary_borderColor;
         color: tokens.$action_secondary_foregroundColor;
-        background: tokens.$action_secondary_backgroundColor;
     }
 
     &:where([disabled], [aria-disabled="true"]) {

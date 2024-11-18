@@ -9,11 +9,12 @@
     transition: .218s ease;
     border-width: 1px;
     border-style: solid;
+    --btn-bg: #{tokens.$action_auxiliary_backgroundColor};
     border-color: tokens.$action_auxiliary_borderColor;
     color: tokens.$action_auxiliary_foregroundColor;
-    background: tokens.$action_auxiliary_backgroundColor;
+    background: var(--btn-bg);
 
     &:not([disabled], [aria-disabled="true"]):hover {
-       filter: brightness(1.2);
+       background: color-mix(in oklch, var(--btn-bg), currentColor 10%);
     }
 }
