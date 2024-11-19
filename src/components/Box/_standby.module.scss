@@ -1,16 +1,14 @@
+@use '../tokens.module';
+
 @mixin standby {
     color: transparent;
     display: flex;
     flex: 1;
 
-    /* TODO: needs better construction using bg and fg colors */
-    --skeleton-bg: #ededed;
-    --skeleton-shine: white;
-
-    background-color: var(--skeleton-bg);
+    background-color: CanvasText;
     background-image: linear-gradient(100deg,
             transparent 40%,
-            color-mix(in oklch, var(--skeleton-shine), transparent 50%) 50%,
+            color-mix(in oklch, CanvasText, Canvas 20%) 50%,
             transparent 60%);
     background-size: 200% 100%;
     background-position-x: 120%;

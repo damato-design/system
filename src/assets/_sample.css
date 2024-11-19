@@ -9,8 +9,8 @@
 	--brand-surface_auxiliary_backgroundColor: color-mix(in oklch, color-mix(in oklch, Canvas, white 0%), white 0%);
 	--brand-surface_auxiliary_foregroundColor: color-mix(in oklch, CanvasText, black 0%);
 	--brand-surface_auxiliary_borderColor: color-mix(in oklch, GrayText, transparent 0%);
-	--brand-action_primary_backgroundColor: color-mix(in oklch, AccentColor, purple 100%);
-	--brand-action_primary_foregroundColor: color-mix(in oklch, AccentColorText, white 100%);
+	--brand-action_primary_backgroundColor: color-mix(in oklch, SelectedItem, purple 100%);
+	--brand-action_primary_foregroundColor: color-mix(in oklch, SelectedItemText, white 100%);
 	--brand-action_primary_borderColor: color-mix(in oklch, transparent, purple 100%);
 	--brand-action_secondary_backgroundColor: color-mix(in oklch, ButtonFace, transparent 100%);
 	--brand-action_secondary_foregroundColor: color-mix(in oklch, ButtonText, purple 100%);

@@ -6,9 +6,10 @@
     border-radius: 8px;
     overflow: clip;
     contain: layout;
+    --surface-bg: tokens.$surface_auxiliary_backgroundColor;
     border-color: tokens.$surface_auxiliary_borderColor;
     color: tokens.$surface_auxiliary_foregroundColor;
-    background: tokens.$surface_auxiliary_backgroundColor;
+    background: var(--surface-bg);
 
     &:where([data-priority="primary"]) {
         @include modal;

@@ -28,9 +28,9 @@ tokens:
   action:
     primary:
       backgroundColor:
-        $value: AccentColor
+        $value: SelectedItem
       foregroundColor:
-        $value: AccentColorText
+        $value: SelectedItemText
       borderColor:
         $value: transparent
     secondary:

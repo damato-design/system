@@ -8,8 +8,8 @@ $surface_secondary_borderColor: var(--symbolic-surface_secondary_borderColor, va
 $surface_auxiliary_backgroundColor: var(--symbolic-surface_auxiliary_backgroundColor, var(--brand-surface_auxiliary_backgroundColor, color-mix(in oklch, Canvas, white 0%)));
 $surface_auxiliary_foregroundColor: var(--symbolic-surface_auxiliary_foregroundColor, var(--brand-surface_auxiliary_foregroundColor, CanvasText));
 $surface_auxiliary_borderColor: var(--symbolic-surface_auxiliary_borderColor, var(--brand-surface_auxiliary_borderColor, GrayText));
-$action_primary_backgroundColor: var(--symbolic-action_primary_backgroundColor, var(--brand-action_primary_backgroundColor, AccentColor));
-$action_primary_foregroundColor: var(--symbolic-action_primary_foregroundColor, var(--brand-action_primary_foregroundColor, AccentColorText));
+$action_primary_backgroundColor: var(--symbolic-action_primary_backgroundColor, var(--brand-action_primary_backgroundColor, SelectedItem));
+$action_primary_foregroundColor: var(--symbolic-action_primary_foregroundColor, var(--brand-action_primary_foregroundColor, SelectedItemText));
 $action_primary_borderColor: var(--symbolic-action_primary_borderColor, var(--brand-action_primary_borderColor, transparent));
 $action_secondary_backgroundColor: var(--symbolic-action_secondary_backgroundColor, var(--brand-action_secondary_backgroundColor, ButtonFace));
 $action_secondary_foregroundColor: var(--symbolic-action_secondary_foregroundColor, var(--brand-action_secondary_foregroundColor, ButtonText));
