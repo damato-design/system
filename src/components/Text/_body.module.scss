@@ -1,0 +1,28 @@
+@use '../tokens.module';
+
+@mixin body {
+    --viewminrem: 20; /* 320px */
+	--viewmaxrem: 30; /* 480px */
+
+	--fontminrem: calc(
+        #{tokens.$text_secondary_minRem}
+        * pow(#{tokens.$text_secondary_scaleFactor}, var(--depth, 0))
+    );
+	--fontmaxrem: calc((var(--viewmaxrem) * var(--fontminrem)) / var(--viewminrem));
+	
+	--slope: calc(
+        (var(--fontmaxrem) - var(--fontminrem))
+        / (var(--viewmaxrem) - var(--viewminrem))
+    );
+
+    font-family: tokens.$text_secondary_fontFamily;
+    font-weight: tokens.$text_secondary_fontWeight;
+    line-height: tokens.$text_secondary_lineHeight;
+    font-size: calc(var(--fontminrem) * 1rem);
+    text-wrap: pretty;
+    font-feature-settings: "kern";
+    font-kerning: normal;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-variant-numeric: tabular-nums;
+}

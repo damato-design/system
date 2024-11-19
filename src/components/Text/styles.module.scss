@@ -1,40 +1,12 @@
+@use 'body.module' as *;
 @use '../tokens.module';
 
 .text {
-    --depth: 0; /* TODO */
-	
-	--viewminrem: 20; /* 320px */
-	--viewmaxrem: 30; /* 480px */
-
-    /* (2 * 1.125^0) = 2 */
-	--font1minrem: calc(
-        #{tokens.$text_primary_minRem}
-        * pow(#{tokens.$text_primary_scaleFactor}, var(--depth))
-    );
-	/* (30 * 2 / 20) = 3 */
-	--font1maxrem: calc((var(--viewmaxrem) * var(--font1minrem)) / var(--viewminrem));
-	
-	/* (1 / 10) = .1 */
-	--slope: calc(
-        (var(--font1maxrem) - var(--font1minrem))
-        / (var(--viewmaxrem) - var(--viewminrem))
-    );
-
-    /* default is secondary */
-    font-family: tokens.$text_secondary_fontFamily;
-    font-weight: tokens.$text_secondary_fontWeight;
-    font-size: calc(#{tokens.$text_secondary_minRem} * 1rem);
-    line-height: tokens.$text_secondary_lineHeight;
-    text-wrap: pretty;
-    font-feature-settings: "kern";
-    font-kerning: normal;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-variant-numeric: tabular-nums;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     border: 0;
+    @include body;
 
     &:not([data-standby="true"]):empty {
         display: none;
@@ -49,6 +21,10 @@
         font-weight: bolder;
     }
 
+    &:where(label) {
+        /* TODO: label is one step up at depth */
+    }
+
     &:where(label[for]) {
         cursor: pointer;
     }
@@ -57,16 +33,23 @@
         text-wrap: balance;
         font-family: tokens.$text_primary_fontFamily;
         font-weight: tokens.$text_primary_fontWeight;
+        --fontminrem: calc(
+            #{tokens.$text_primary_minRem}
+            * pow(#{tokens.$text_primary_scaleFactor}, var(--depth, 0))
+        );
         font-size: clamp(
-            var(--font1minrem) * 1rem,
+            var(--fontminrem) * 1rem,
             var(--slope) * 100vw,
-            var(--font1maxrem) * 1rem
+            var(--fontmaxrem) * 1rem
         );
         line-height: tokens.$text_primary_lineHeight;
     }
 
     &:where([data-priority="auxiliary"]) {
-        font-size: calc(#{tokens.$text_auxiliary_minRem} * 1rem);
+        --fontminrem: calc(
+            #{tokens.$text_auxiliary_minRem}
+            * pow(#{tokens.$text_auxiliary_scaleFactor}, var(--depth, 0))
+        );
         font-family: tokens.$text_auxiliary_fontFamily;
         font-weight: tokens.$text_auxiliary_fontWeight;
         line-height: tokens.$text_auxiliary_lineHeight;
