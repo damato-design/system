@@ -52,6 +52,14 @@
         /* display: none; */
         height: 0;
     }
+
+    > :first-child {
+        display: contents;
+    }
+
+    .innerZoomElementWrapper > div {
+        border: none !important;
+    }
 }
 
 pre, code, pre :not(button), code * {

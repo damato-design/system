@@ -41,7 +41,6 @@ export default function main({ tokens, alias, symbolic, lang }, systemTokens = {
     const message = `/** Generated file: generate-css.js */`
     return `${message}
 ${selector.join('')} {
-\tcolor-scheme: light dark;
 ${rules.join('\n')}
 }`
 }
