@@ -23,4 +23,16 @@
     direction: ltr;
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
+
+    &[data-priority="primary"] {
+
+    }
+
+    &[data-priority="secondary"] {
+
+    }
+
+    &[data-priority="auxiliary"] {
+
+    }
 }

@@ -33,10 +33,7 @@
         text-wrap: balance;
         font-family: tokens.$text_primary_fontFamily;
         font-weight: tokens.$text_primary_fontWeight;
-        --fontminrem: calc(
-            #{tokens.$text_primary_minRem}
-            * pow(#{tokens.$text_primary_scaleFactor}, var(--depth, 0))
-        );
+        --fontminrem: #{$primary-rem};
         font-size: clamp(
             var(--fontminrem) * 1rem,
             var(--slope) * 100vw,
@@ -46,10 +43,7 @@
     }
 
     &:where([data-priority="auxiliary"]) {
-        --fontminrem: calc(
-            #{tokens.$text_auxiliary_minRem}
-            * pow(#{tokens.$text_auxiliary_scaleFactor}, var(--depth, 0))
-        );
+        --fontminrem: #{$auxiliary-rem};
         font-family: tokens.$text_auxiliary_fontFamily;
         font-weight: tokens.$text_auxiliary_fontWeight;
         line-height: tokens.$text_auxiliary_lineHeight;
