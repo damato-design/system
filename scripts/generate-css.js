@@ -38,9 +38,10 @@ export default function main({ tokens, alias, symbolic, lang }, systemTokens = {
     const selector = [`[data-mode~="${alias}"]`];
     if (lang) selector.push(`:lang(${lang})`);
     const rules = getNames(tokens).map((name) => declaration(name, { tokens, symbolic }, systemTokens));
-    const message = `/** Generated file: npm run generate:css */`
+    const message = `/** Generated file: generate-css.js */`
     return `${message}
 ${selector.join('')} {
+\tcolor-scheme: light dark;
 ${rules.join('\n')}
 }`
 }

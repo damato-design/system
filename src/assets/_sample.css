@@ -1,5 +1,6 @@
 /** Generated file: npm run generate:css */
 [data-mode~="sample"] {
+	color-scheme: light dark;
 	--brand-surface_primary_backgroundColor: color-mix(in oklch, color-mix(in oklch, Canvas, white 10%), white 100%);
 	--brand-surface_primary_foregroundColor: color-mix(in oklch, CanvasText, black 100%);
 	--brand-surface_primary_borderColor: color-mix(in oklch, GrayText, transparent 100%);

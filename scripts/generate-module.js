@@ -9,10 +9,7 @@ import {
 
 function permutate(...arrays) {
     const recurse = (arrs, path = []) => {
-        if (arrs.length === 0) {
-            return [path.join('_')]
-        }
-
+        if (arrs.length === 0)  return [path.join('_')];
         const [first, ...rest] = arrs;
         return first.flatMap((item) => recurse(rest, [...path, item]));
     }
@@ -53,7 +50,7 @@ export default function main(systemTokens = {}) {
     const text = permutate(['text'], PRIORITY, PROPERTY_FONT);
     const space = permutate(['space'], PROPERTY_SPACE);
     
-    const message = `/* Generated file: npm run generate:module */`;
+    const message = `/* Generated file: generate-module.js */`;
     const tokens = [].concat(surface, action, control, text, space);
     return [message, variables(tokens, systemTokens), exports(tokens)].join('\n');
 }
