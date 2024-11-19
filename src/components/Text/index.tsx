@@ -23,6 +23,7 @@ export type TextProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
 
 export const text = proxy<HTMLTagsOnly, TextProps>('text', (TagName) => {
   return forwardRef<HTMLElement, TextProps>(({
+    className,
     priority,
     standby = true,
     screenreaderOnly,
@@ -30,7 +31,7 @@ export const text = proxy<HTMLTagsOnly, TextProps>('text', (TagName) => {
   }: TextProps, ref) => {
     const Text = element[TagName];
 
-    const classNames = clsx(css.text, { 
+    const classNames = clsx(css.text, className, { 
       [css.sronly]: screenreaderOnly
     });
 

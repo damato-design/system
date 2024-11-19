@@ -53,14 +53,7 @@ export const LockupProvider = (props: any) => {
 function getIcon(iconRef: string | undefined, subject: ReactElement) {
   if (!iconRef) return null;
   if (iconRef && !subject) return createElement(icon[iconRef]);
-  return cloneElement(subject as ReactElement, {
-    "aria-hidden": true,
-    style: {
-      display: 'inline-flex',
-      justifyContent: 'center',
-      alignItems: 'start'
-    },
-  }, createElement(icon[iconRef]));
+  return createElement(icon[iconRef], subject.props);
 }
 
 export type LockupProps = BoxProps & {

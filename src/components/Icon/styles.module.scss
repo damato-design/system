@@ -12,10 +12,9 @@
     font-family: 'Material Icons Outlined';
     font-weight: normal;
     font-style: normal;
-    scale: 1.25;
     line-height: 1lh;
-    width: 1lh;
     height: 1lh;
+    scale: 1.25;
     letter-spacing: normal;
     text-transform: none;
     white-space: nowrap;
@@ -23,16 +22,4 @@
     direction: ltr;
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
-
-    &[data-priority="primary"] {
-
-    }
-
-    &[data-priority="secondary"] {
-
-    }
-
-    &[data-priority="auxiliary"] {
-
-    }
 }
