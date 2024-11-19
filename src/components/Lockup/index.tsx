@@ -53,7 +53,9 @@ export const LockupProvider = (props: any) => {
 function getIcon(iconRef: string | undefined, subject: ReactElement) {
   if (!iconRef) return null;
   if (iconRef && !subject) return createElement(icon[iconRef]);
-  return createElement(icon[iconRef], subject.props);
+  const IconElement = icon[iconRef];
+  const { children, ...props } = Object.assign({ priority: 'secondary'}, subject.props);
+  return <IconElement { ...props } />;
 }
 
 export type LockupProps = BoxProps & {

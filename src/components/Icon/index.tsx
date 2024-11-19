@@ -3,11 +3,7 @@ import { text, TextProps } from '../Text';
 import { proxy } from '../Element/proxy';
 
 export const icon = proxy<string, TextProps>('icon', (reference) => {
-  return ({
-    standby = true,
-    priority,
-    ...props
-  }: TextProps) => {
+  return (props: TextProps) => {
     return (
       <text.i
         { ...props }
