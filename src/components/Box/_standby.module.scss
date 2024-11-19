@@ -5,11 +5,10 @@
     display: flex;
     flex: 1;
 
-    background-color: CanvasText;
     background-image: linear-gradient(100deg,
-            transparent 40%,
-            color-mix(in oklch, CanvasText, Canvas 20%) 50%,
-            transparent 60%);
+            color-mix(in oklch, GrayText, transparent 80%) 40%,
+            transparent 50%,
+            color-mix(in oklch, GrayText, transparent 80%) 60%);
     background-size: 200% 100%;
     background-position-x: 120%;
 
