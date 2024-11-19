@@ -27,7 +27,7 @@ function declaration(name, { tokens, symbolic }, systemTokens) {
 function getNames(obj, path = '') {
     return Object.entries(obj).reduce((names, [key, value]) => {
         const update = [path, key].filter(Boolean).join('_');
-        if (key === '$value') return path;
+        if (['$value', '$influence'].includes(key)) return path;
         return typeof value === 'object' && value !== null
             ? names.concat(getNames(value, update))
             : names.concat(update);

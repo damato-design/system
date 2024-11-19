@@ -5,24 +5,33 @@ tokens:
     primary:
       backgroundColor:
         $value: white
+        $influence: 0
       foregroundColor:
         $value: black
+        $influence: 0
       borderColor:
         $value: transparent
+        $influence: 0
     secondary:
       backgroundColor:
         $value: white
+        $influence: 0
       foregroundColor:
         $value: black
+        $influence: 0
       borderColor:
         $value: transparent
+        $influence: 0
     auxiliary:
       backgroundColor:
         $value: white
+        $influence: 0
       foregroundColor:
         $value: black
+        $influence: 0
       borderColor:
         $value: transparent
+        $influence: 0
   action:
     primary:
       backgroundColor:
@@ -48,10 +57,13 @@ tokens:
   control:
     backgroundColor:
       $value: white
+      $influence: 0
     foregroundColor:
       $value: black
+      $influence: 0
     borderColor:
       $value: grey
+      $influence: 0
   text:
     primary:
       fontFamily:
