@@ -95,7 +95,7 @@ export const Loading: Story = {
  */
 export const Form: Story = {
     args: {
-        subject: <text.label priority='primary'>Email</text.label>,
+        subject: <text.label>Email</text.label>,
         passiveMessage: 'Enter your email to validate',
         errorMessage: 'Sorry, not good enough',
         icon: 'email'

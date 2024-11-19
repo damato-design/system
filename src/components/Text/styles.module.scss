@@ -1,7 +1,7 @@
 @use '../tokens.module';
 
 .text {
-    --depth: 0;
+    --depth: 0; /* TODO */
 	
 	--viewminrem: 20; /* 320px */
 	--viewmaxrem: 30; /* 480px */
@@ -21,7 +21,10 @@
     );
 
     /* default is secondary */
-    font-size: 1.2rem;
+    font-family: tokens.$text_secondary_fontFamily;
+    font-weight: tokens.$text_secondary_fontWeight;
+    font-size: calc(#{tokens.$text_secondary_minRem} * 1rem);
+    line-height: tokens.$text_secondary_lineHeight;
     text-wrap: pretty;
     font-feature-settings: "kern";
     font-kerning: normal;
@@ -33,7 +36,7 @@
     padding: 0;
     border: 0;
 
-    &:where(:empty):not([data-standby="true"]) {
+    &:not([data-standby="true"]):empty {
         display: none;
     }
 
@@ -42,7 +45,7 @@
         word-break: break-word;
     }
 
-    &:where(strong) {
+    &:where(strong, label) {
         font-weight: bolder;
     }
 
@@ -51,21 +54,22 @@
     }
 
     &:where([data-priority="primary"]) {
-        /* text-wrap: balance; */
-        font-weight: bolder;
-        font-size: 1.2rem;
-        &:not(label) {
-            font-size: clamp(
-                var(--font1minrem) * 1rem,
-                var(--slope) * 100vw,
-                var(--font1maxrem) * 1rem
-            );
-            line-height: 1.1;
-        }
+        text-wrap: balance;
+        font-family: tokens.$text_primary_fontFamily;
+        font-weight: tokens.$text_primary_fontWeight;
+        font-size: clamp(
+            var(--font1minrem) * 1rem,
+            var(--slope) * 100vw,
+            var(--font1maxrem) * 1rem
+        );
+        line-height: tokens.$text_primary_lineHeight;
     }
 
     &:where([data-priority="auxiliary"]) {
-        font-size: 1rem;
+        font-size: calc(#{tokens.$text_auxiliary_minRem} * 1rem);
+        font-family: tokens.$text_auxiliary_fontFamily;
+        font-weight: tokens.$text_auxiliary_fontWeight;
+        line-height: tokens.$text_auxiliary_lineHeight;
     }
 
     & .text:not([data-priority]) {
