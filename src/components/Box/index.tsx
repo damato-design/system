@@ -116,7 +116,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       { ...props }
       ref={ ref }
       className={ classNames }
-      aria-busy={ standby }
+      aria-busy={ standby ? true : undefined }
       data-priority={ priority }
       style={ styles }/>;
   })

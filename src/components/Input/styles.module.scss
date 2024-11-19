@@ -2,9 +2,13 @@
 @use '../Box/button.module' as *;
 
 .input {
-    font: inherit;
+    font-family: tokens.$text_secondary_fontFamily;
+    font-weight: tokens.$text_secondary_fontWeight;
+    line-height: tokens.$text_secondary_lineHeight;
+    font-size: calc(#{tokens.$text_secondary_minRem} * 1rem);
     margin: 0;
     border: 0;
+    color: inherit;
     padding: var(--padding, 1rem);
     scroll-padding-block: var(--padding, 1rem);
     box-sizing: content-box;

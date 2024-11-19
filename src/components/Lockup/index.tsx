@@ -74,7 +74,7 @@ function SubjectComponent(props: { children: ReactNode }) {
   const ctx = useLockup();
   if (!props.children) return null;
   return (
-    <text.div
+    <box.div
       { ...props }
       id={ ctx.subject.id }
       standby={ false }/>
