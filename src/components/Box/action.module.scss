@@ -36,7 +36,7 @@
     }
 
     & > * {
-        pointer-events: none;
+        line-height: 1lh !important;
     }
 
     & > span {
@@ -45,7 +45,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        line-height: 1lh;
         font-weight: inherit;
     }
 

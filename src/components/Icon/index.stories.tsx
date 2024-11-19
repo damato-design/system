@@ -38,19 +38,20 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {}
 
 /**
- * The size of the icon is determined by the current font size of the parent element.
- * This ensures that icons are sized appropriately with accompanying text.
- */
+ * The size of the icon is determined by the given `priority`
+ * in a similar fashion to how you might configure the `text` primitive.
+ * This ensures that when the icon is adjacent to text, they will share
+ * the same metrics.
+ * 
 export const Size: Story = {
-    render: (args) => (
-        <span style={{ fontSize: '2em' }}>
-            <icon.search { ...args }/>
-        </span>
-    )
+    args: {
+        priority: 'primary'
+    }
 }
 
 /**
- * When the `icon` is found within a `standby={true}` element, it will display a loading state.
+ * When the `icon` is found within a `standby={true}` element,
+ * it will display a loading state.
  */
 export const Loading: Story = {
     render: (args) => (
