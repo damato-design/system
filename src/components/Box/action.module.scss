@@ -39,16 +39,17 @@
         pointer-events: none;
     }
 
-    & > strong {
+    & > span {
         padding-inline: var(--padding, 1rem);
         margin-inline: calc(var(--padding, 1rem) / -2);
         display: flex;
         align-items: center;
         justify-content: center;
         line-height: 1lh;
+        font-weight: inherit;
     }
 
-    & > strong + i {
+    & > span + i {
         margin-inline-start: auto;
     }
 }

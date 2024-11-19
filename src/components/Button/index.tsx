@@ -84,7 +84,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
             width: '1lh',
             height: '1lh',
             lineHeight: '1lh'
-        } : null;
+        } : {};
 
     return (
         <Element
@@ -94,7 +94,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
             ref={ref}
             purpose='action'>
             {iconRef ? createElement(icon[iconRef]) : null}
-            {children ? <text.strong style={ styles }>{children}</text.strong> : null}
+            {children ? <text.span style={ styles }>{children}</text.span> : null}
             {getAccessory(behavior)}
         </Element>
     )

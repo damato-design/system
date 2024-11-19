@@ -1,10 +1,10 @@
 @use '../tokens.module';
 @use '../Box/button.module' as *;
+@use '../Text/body.module' as *;
 
 .input {
     margin: 0;
     border: 0;
-    font: inherit;
     color: inherit;
     padding: var(--padding, 1rem);
     scroll-padding-block: var(--padding, 1rem);
@@ -13,6 +13,7 @@
     min-width: 1ch;
     flex: 1;
     outline-offset: -4px;
+    @include body;
 
     &:not(textarea) {
         line-height: 1lh;
@@ -35,10 +36,8 @@
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        font: inherit;
         padding: var(--padding, 1rem);
         margin-inline-end: 1ch;
-        font-weight: bolder;
         @include button;
     }
 
