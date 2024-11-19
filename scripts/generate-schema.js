@@ -1,42 +1,9 @@
-import fs from 'fs';
-import path from 'path';
-
 import {
     PRIORITY,
     PROPERTY_COLOR,
     PROPERTY_FONT,
     PROPERTY_SPACE
 } from './properties.js';
-
-const SCHEMA_JSON_PATH = path.join(process.cwd(), 'src', 'modes', '_schema.json');
-
-const schema = {
-    $schema: 'http://json-schema.org/draft-07/schema#',
-    type: 'object',
-    required: ['alias','tokens'],
-    properties: {
-        alias: {
-            type: 'string'
-        },
-        symbolic: {
-            type: 'boolean'
-        },
-        lang: {
-            type: 'string'
-        },
-        tokens: {
-            type: 'object',
-            properties: {
-                ...permutate(['surface'], PRIORITY, PROPERTY_COLOR),
-                ...permutate(['action'], PRIORITY, PROPERTY_COLOR),
-                ...permutate(['control'], PROPERTY_COLOR),
-                ...permutate(['text'], PRIORITY, PROPERTY_FONT),
-                ...permutate(['space'], PROPERTY_SPACE),
-            }
-            
-        }
-    }
-}
 
 function final() {
     return {
@@ -74,8 +41,35 @@ function permutate(...arrays) {
     }
 
     recurse(host, arrays);
-
     return host;
 }
 
-fs.writeFileSync(SCHEMA_JSON_PATH, JSON.stringify(schema, null, 2), 'utf-8');
+export default function main() {
+    return {
+        $schema: 'http://json-schema.org/draft-07/schema#',
+        type: 'object',
+        required: ['alias','tokens'],
+        properties: {
+            alias: {
+                type: 'string'
+            },
+            symbolic: {
+                type: 'boolean'
+            },
+            lang: {
+                type: 'string'
+            },
+            tokens: {
+                type: 'object',
+                properties: {
+                    ...permutate(['surface'], PRIORITY, PROPERTY_COLOR),
+                    ...permutate(['action'], PRIORITY, PROPERTY_COLOR),
+                    ...permutate(['control'], PROPERTY_COLOR),
+                    ...permutate(['text'], PRIORITY, PROPERTY_FONT),
+                    ...permutate(['space'], PROPERTY_SPACE),
+                }
+                
+            }
+        }
+    }
+}

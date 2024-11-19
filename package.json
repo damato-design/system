@@ -20,12 +20,9 @@
     "prepublishOnly": "npm run build",
     "test": "vitest",
     "storybook:test": "npx vitest --project=storybook",
-    "generate:all":"npm run generate:schema && npm run generate:module && npm run generate:css",
-    "generate:css": "node ./scripts/generate-css.js",
-    "generate:module": "node ./scripts/generate-module.js",
-    "generate:schema": "node ./scripts/generate-schema.js",
-    "generate:template": "node ./scripts/generate-template.js",
-    "chromatic": "npx chromatic --project-token=chpt_1ac7335dd9a0584"
+    "chromatic": "npx chromatic --project-token=chpt_1ac7335dd9a0584",
+    "write:files": "node ./scripts/write-files.js",
+    "write:template": "node ./scripts/write-template.js"
   },
   "dependencies": {
     "clsx": "^2.1.1",

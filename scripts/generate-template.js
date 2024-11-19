@@ -1,12 +1,4 @@
-import fs from 'fs';
-import path from 'path';
-import yaml from 'js-yaml';
-
-const SCHEMA_JSON_PATH = path.join(process.cwd(), 'src', 'modes', '_schema.json');
-const NEWMODE_YAML_PATH = path.join(process.cwd(), 'src', 'modes', 'newmode.yml');
-const schema = JSON.parse(fs.readFileSync(SCHEMA_JSON_PATH, 'utf-8'));
-
-function template() {
+export default function main(schema) {
     const host = {};
     const recurse = (target, properties) => {
         if (!properties) return;
@@ -20,8 +12,5 @@ function template() {
         });
     }
     recurse(host, schema.properties);
-    const message = `# yaml-language-server: $schema=./_schema.json`;
-    return [message, yaml.dump(host)].join('\n').replaceAll(/\'!!null\'/g, '#value');
+    return host;
 }
-
-fs.writeFileSync(NEWMODE_YAML_PATH, template(), 'utf-8');

@@ -1,7 +1,3 @@
-import fs from 'fs';
-import path from 'path';
-import yaml from 'js-yaml';
-
 import { 
     PRIORITY,
     PROPERTY_COLOR,
@@ -10,10 +6,6 @@ import {
     prefixType,
     toCSSVar,
 } from './properties.js';
-
-const SYSTEM_YAML_PATH = path.join(process.cwd(), 'src', 'modes', '_system.yml');
-const TOKENS_SCSS_PATH = path.join(process.cwd(), 'src', 'components', '_tokens.module.scss');
-const _system = yaml.load(fs.readFileSync(SYSTEM_YAML_PATH, 'utf8'));
 
 function permutate(...arrays) {
     const recurse = (arrs, path = []) => {
@@ -29,14 +21,14 @@ function permutate(...arrays) {
 
 // $action_primary_backgroundColor: var(--symbolic, var(--brand, _system));
 function variable(token) {
-    const { $value } = token.split('_').reduce((acc, key) => acc[key], _system.tokens);
+    const { $value } = token.split('_').reduce((acc, key) => acc[key], this);
     const brand = toCSSVar(prefixType(token, 'brand'), $value);
     const symbolic = toCSSVar(prefixType(token, 'symbolic'), brand);
     return `$${token}: ${symbolic};`;
 }
 
-function variables(arr) {
-    return arr.map(variable).join('\n');
+function variables(arr, systemTokens) {
+    return arr.map(variable, systemTokens).join('\n');
 }
 
 // #{'action_primary_backgroundColor'}: $action_primary_backgroundColor;
@@ -54,7 +46,7 @@ ${ arr.map((token) => `\t#{'${token}'}: $${token};`).join('\n') }
  * }
  */
 
-function content() {
+export default function main(systemTokens = {}) {
     const surface = permutate(['surface'], PRIORITY, PROPERTY_COLOR);
     const action = permutate(['action'], PRIORITY, PROPERTY_COLOR);
     const control = permutate(['control'], PROPERTY_COLOR);
@@ -63,8 +55,5 @@ function content() {
     
     const message = `/* Generated file: npm run generate:module */`;
     const tokens = [].concat(surface, action, control, text, space);
-    return [message, variables(tokens), exports(tokens)].join('\n');
-
+    return [message, variables(tokens, systemTokens), exports(tokens)].join('\n');
 }
-
-fs.writeFileSync(TOKENS_SCSS_PATH, content(), 'utf-8');
