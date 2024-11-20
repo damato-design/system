@@ -52,13 +52,23 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
     const { anchor: flyoutProps } = useFlyout();
     const { anchor: listboxProps } = useListbox();
 
+    const styles = square ?
+        {
+            margin: 0,
+            padding: 0,
+            width: '1lh',
+            height: '1lh',
+            lineHeight: '1lh'
+        } : {};
+
     const config = Object.assign({}, props, {
         "aria-labelledby": props['aria-labelledby'],
         "aria-label": behavior === 'dismiss' ? 'Close' : props['aria-label'],
         placeChildren: 'center',
         type,
         role,
-        padding: true
+        gap: true,
+        style: styles
     });
 
     const ariaLabelledby = [props['aria-labelledby']];
@@ -77,15 +87,6 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
         `);
     }
 
-    const styles = square ?
-        {
-            margin: 0,
-            padding: 0,
-            width: '1lh',
-            height: '1lh',
-            lineHeight: '1lh'
-        } : {};
-
     return (
         <Element
             { ...config }
@@ -94,7 +95,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
             ref={ref}
             purpose='action'>
             {iconRef ? createElement(icon[iconRef]) : null}
-            {children ? <text.span style={ styles }>{children}</text.span> : null}
+            {children}
             {getAccessory(behavior)}
         </Element>
     )

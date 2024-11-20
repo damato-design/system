@@ -17,7 +17,7 @@
     @include body;
 
     &:not(textarea) {
-        line-height: 1lh;
+        height: .5lh;
     }
 
     &:where([type="checkbox"], [type="radio"]) {

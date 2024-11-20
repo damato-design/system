@@ -1,8 +1,7 @@
 @use '../tokens.module';
+@use '../Text/body.module' as *;
 
 @mixin button {
-    font: unset;
-    font-weight: bolder;
     cursor: pointer;
     border-radius: 4px;
     text-decoration: none;
@@ -10,10 +9,13 @@
     transition: .218s ease;
     border-width: 1px;
     border-style: solid;
+    padding: calc(var(--padding, 1rem) / 2) var(--padding, 1rem);
     --btn-bg: #{tokens.$action_auxiliary_backgroundColor};
     border-color: tokens.$action_auxiliary_borderColor;
     color: tokens.$action_auxiliary_foregroundColor;
     background: var(--btn-bg);
+    @include body;
+    font-weight: bolder;
 
     &:not([disabled], [aria-disabled="true"]):hover {
        background: color-mix(in oklch, var(--btn-bg), currentColor 10%);
