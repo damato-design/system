@@ -13,9 +13,9 @@
     background-position-x: 120%;
 
     /* Line rendering */
-    min-height: calc(3lh + 2ex);
+    min-height: calc((2 * var(--gap, .5rem)) + 3lh);
     mask: linear-gradient(#000 0 1lh,
-            transparent 1lh calc(1lh + 1ex)) 0 0/100% calc(1lh + 1ex);
+            transparent 1lh calc(1lh + var(--gap, .5rem))) 0 0/100% calc(1lh + var(--gap, .5rem));
 
     &:where(i[role="presentation"]) {
         mask: none;
