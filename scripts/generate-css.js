@@ -5,7 +5,7 @@ function colorMix(value, base) {
         $value: 'transparent',
         $influence: 100
     }, value);
-    return `color-mix(in oklab, oklab(from ${base} L 0 0), oklab(from ${$value} 50% a b) ${$influence}%)`;
+    // return `color-mix(in oklab, oklab(from ${base} L 0 0), oklab(from ${$value} 50% a b) ${$influence}%)`;
     return `color-mix(in oklch, ${base}, ${$value} ${$influence}%)`;
 }
 
