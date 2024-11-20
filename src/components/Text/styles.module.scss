@@ -21,10 +21,6 @@
         font-weight: bolder;
     }
 
-    &:where(label) {
-        /* --bump: 1; */
-    }
-
     &:where(label[for]) {
         cursor: pointer;
     }

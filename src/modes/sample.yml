@@ -84,7 +84,7 @@ tokens:
       lineHeight:
         $value: 1.5
       minRem:
-        $value: 1.2
+        $value: 1.3
       scaleFactor:
         $value: 1.125
     auxiliary:
@@ -95,7 +95,7 @@ tokens:
       lineHeight:
         $value: 1.5
       minRem:
-        $value: 1
+        $value: .8
       scaleFactor:
         $value: 1.125
   space:

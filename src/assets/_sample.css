@@ -29,12 +29,12 @@
 	--brand-text_secondary_fontFamily: "Plus Jakarta Sans", sans-serif;
 	--brand-text_secondary_fontWeight: 400;
 	--brand-text_secondary_lineHeight: 1.5;
-	--brand-text_secondary_minRem: 1.2;
+	--brand-text_secondary_minRem: 1.3;
 	--brand-text_secondary_scaleFactor: 1.125;
 	--brand-text_auxiliary_fontFamily: "Plus Jakarta Sans", sans-serif;
 	--brand-text_auxiliary_fontWeight: 400;
 	--brand-text_auxiliary_lineHeight: 1.5;
-	--brand-text_auxiliary_minRem: 1;
+	--brand-text_auxiliary_minRem: 0.8;
 	--brand-text_auxiliary_scaleFactor: 1.125;
 	--brand-space_minDimension: .5rem;
 	--brand-space_scaleFactor: 1.168;

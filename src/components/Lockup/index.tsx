@@ -53,10 +53,8 @@ function getIcon(iconRef: string | undefined, subject: ReactElement<TextProps>) 
   if (!iconRef) return null;
   if (iconRef && !subject) return createElement(icon[iconRef]);
   const IconElement = icon[iconRef];
-  const { displayName } = subject.type as unknown as { displayName: string };
   const { children, ...props } = Object.assign({
     priority: 'secondary',
-    // style: { '--bump': displayName === 'text.label' ? 1 : 0 }
   }, subject.props);
   return <IconElement { ...props } />;
 }
