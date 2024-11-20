@@ -22,7 +22,7 @@
     }
 
     &:where(label) {
-        /* TODO: label is one step up at depth */
+        /* --bump: 1; */
     }
 
     &:where(label[for]) {

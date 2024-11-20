@@ -98,7 +98,7 @@ export const Form: Story = {
         subject: <text.label>Email</text.label>,
         passiveMessage: 'Enter your email to validate',
         errorMessage: 'Sorry, not good enough',
-        icon: 'email'
+        icon: 'contact_mail'
     },
     render: (args) => {
         const [value, setValue] = useState('hello@example');
