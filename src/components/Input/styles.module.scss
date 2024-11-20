@@ -6,7 +6,7 @@
     margin: 0;
     border: 0;
     color: inherit;
-    padding: var(--padding, 1rem);
+    padding: calc(var(--padding, 1rem) / 2) var(--padding, 1rem);
     scroll-padding-block: var(--padding, 1rem);
     box-sizing: content-box;
     background: transparent;
