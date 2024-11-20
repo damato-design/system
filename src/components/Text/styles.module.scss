@@ -49,7 +49,7 @@
         line-height: tokens.$text_auxiliary_lineHeight;
     }
 
-    & .text:not([data-priority]) {
+    & > .text:not([data-priority]) {
         font: inherit;
     }
 }

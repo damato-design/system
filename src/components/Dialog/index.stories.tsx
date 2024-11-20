@@ -24,7 +24,7 @@ type Story = StoryObj<typeof meta>
  */
 export const Default: Story = {
     args: {
-        children: 'Something you might want to know.'
+        children: <text.p>Something you might want to know.</text.p>
     },
 }
 
@@ -36,13 +36,15 @@ export const Emphasis: Story = {
     args: {
         emphasis: 'warning',
         subject: <text.h2 priority='primary'>Watch out!</text.h2>,
-        children: `
-            If you tell someone to watch out,
-            you are warning them to be careful,
-            because something unpleasant might
-            happen to them or they might get
-            into difficulties.
-        `
+        children: (
+            <text.p>
+                If you tell someone to watch out,
+                you are warning them to be careful,
+                because something unpleasant might
+                happen to them or they might get
+                into difficulties.
+            </text.p>
+        )
     },
 }
 

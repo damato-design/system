@@ -42,7 +42,7 @@ export const Default: Story = {}
  * in a similar fashion to how you might configure the `text` primitive.
  * This ensures that when the icon is adjacent to text, they will share
  * the same metrics.
- * 
+ */
 export const Size: Story = {
     args: {
         priority: 'primary'

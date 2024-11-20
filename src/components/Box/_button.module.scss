@@ -1,6 +1,7 @@
 @use '../tokens.module';
 
 @mixin button {
+    font: unset;
     font-weight: bolder;
     cursor: pointer;
     border-radius: 4px;

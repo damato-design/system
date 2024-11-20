@@ -85,7 +85,7 @@ export const ScreenreaderOnly: Story = {
 /**
  * When `text` components are wrapped in a `box` with `standby={true}`,
  * the components will display a skeleton loader.
- * The components displaying as `priority='secondary
+ * The components displaying as `priority='secondary'`
  * will render a minimum of 3 content lines, other priorities render
  * a single line at a percentage width of the container.
  * 

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { lockup, LockupProvider, useLockup } from '.';
+import { lockup } from '.';
 import { text } from '../Text';
 import { field } from '../Field';
 import { input } from '../Input';
@@ -25,7 +25,7 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {
     args: {
         subject: <text.h2 priority='primary'>Profound Story</text.h2>,
-        children: 'Once upon a time, there was a great protagonist.'
+        children: <text.p>Once upon a time, there was a great protagonist.</text.p>
     },
 }
 
@@ -38,8 +38,8 @@ export const Default: Story = {
 export const Icon: Story = {
     args: {
         icon: 'info',
-        children: 'Hello World!',
-        subject: <text.h2 priority='primary'>Title</text.h2>
+        subject: <text.h2 priority='primary'>Title</text.h2>,
+        children: <text.p>Once upon a time, there was a great protagonist.</text.p>
     },
 }
 
@@ -51,13 +51,13 @@ export const Icon: Story = {
  */
 export const Dismissable: Story = {
     args: {
-        children: 'Hello World!',
         subject: (
             <text.h2 priority='primary'>
                 <Close onClick={ ()=> console.log('Close!') }/>
                 Maybe you would like this message to be closed?
             </text.h2>
-        )
+        ),
+        children: <text.p>Once upon a time, there was a great protagonist.</text.p>
     },
 }
 
@@ -69,7 +69,7 @@ export const Dismissable: Story = {
 export const Minimal: Story = {
     args: {
         icon: 'info',
-        children: 'Hello World!'
+        children: <text.p>Once upon a time, there was a great protagonist.</text.p>
     },
 }
 

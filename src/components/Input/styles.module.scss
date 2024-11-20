@@ -13,6 +13,7 @@
     min-width: 1ch;
     flex: 1;
     outline-offset: -4px;
+    accent-color: tokens.$action_primary_backgroundColor;
     @include body;
 
     &:not(textarea) {
@@ -23,7 +24,6 @@
         cursor: pointer;
         aspect-ratio: 1;
         height: 1lh;
-        accent-color: tokens.$action_primary_backgroundColor;
         outline-offset: 2px;
 
         &:not(:checked) {
