@@ -67,6 +67,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
         placeChildren: 'center',
         type,
         role,
+        padding: true,
         gap: true,
         style: styles
     });

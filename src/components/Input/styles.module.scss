@@ -16,10 +16,6 @@
     accent-color: tokens.$action_primary_backgroundColor;
     @include body;
 
-    &:not(textarea) {
-        height: .5lh;
-    }
-
     &:where([type="checkbox"], [type="radio"]) {
         cursor: pointer;
         aspect-ratio: 1;
