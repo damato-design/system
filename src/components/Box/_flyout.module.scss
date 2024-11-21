@@ -1,6 +1,7 @@
 @use '../tokens.module';
 
 @mixin flyout {
+    backdrop-filter: brightness(1.25);
     background: tokens.$surface_secondary_backgroundColor;
     border-color: tokens.$surface_secondary_borderColor;
     color: tokens.$surface_secondary_foregroundColor;

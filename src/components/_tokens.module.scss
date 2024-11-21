@@ -1,11 +1,11 @@
 /* Generated file: generate-module.js */
-$surface_primary_backgroundColor: var(--symbolic-surface_primary_backgroundColor, var(--brand-surface_primary_backgroundColor, color-mix(in oklch, Canvas, white 10%)));
+$surface_primary_backgroundColor: var(--symbolic-surface_primary_backgroundColor, var(--brand-surface_primary_backgroundColor, oklch(from Canvas calc(l + .04) c h)));
 $surface_primary_foregroundColor: var(--symbolic-surface_primary_foregroundColor, var(--brand-surface_primary_foregroundColor, CanvasText));
 $surface_primary_borderColor: var(--symbolic-surface_primary_borderColor, var(--brand-surface_primary_borderColor, GrayText));
-$surface_secondary_backgroundColor: var(--symbolic-surface_secondary_backgroundColor, var(--brand-surface_secondary_backgroundColor, color-mix(in oklch, Canvas, white 5%)));
+$surface_secondary_backgroundColor: var(--symbolic-surface_secondary_backgroundColor, var(--brand-surface_secondary_backgroundColor, oklch(from Canvas calc(l + .02) c h)));
 $surface_secondary_foregroundColor: var(--symbolic-surface_secondary_foregroundColor, var(--brand-surface_secondary_foregroundColor, CanvasText));
 $surface_secondary_borderColor: var(--symbolic-surface_secondary_borderColor, var(--brand-surface_secondary_borderColor, GrayText));
-$surface_auxiliary_backgroundColor: var(--symbolic-surface_auxiliary_backgroundColor, var(--brand-surface_auxiliary_backgroundColor, color-mix(in oklch, Canvas, white 0%)));
+$surface_auxiliary_backgroundColor: var(--symbolic-surface_auxiliary_backgroundColor, var(--brand-surface_auxiliary_backgroundColor, Canvas));
 $surface_auxiliary_foregroundColor: var(--symbolic-surface_auxiliary_foregroundColor, var(--brand-surface_auxiliary_foregroundColor, CanvasText));
 $surface_auxiliary_borderColor: var(--symbolic-surface_auxiliary_borderColor, var(--brand-surface_auxiliary_borderColor, GrayText));
 $action_primary_backgroundColor: var(--symbolic-action_primary_backgroundColor, var(--brand-action_primary_backgroundColor, SelectedItem));

@@ -5,21 +5,21 @@ tokens:
   surface:
     primary:
       backgroundColor:
-        $value: color-mix(in oklch, Canvas, white 10%)
+        $value: Canvas
       foregroundColor:
         $value: CanvasText
       borderColor:
         $value: GrayText
     secondary:
       backgroundColor:
-        $value: color-mix(in oklch, Canvas, white 5%)
+        $value: Canvas
       foregroundColor:
         $value: CanvasText
       borderColor:
         $value: GrayText
     auxiliary:
       backgroundColor:
-        $value: color-mix(in oklch, Canvas, white 0%)
+        $value: Canvas
       foregroundColor:
         $value: CanvasText
       borderColor:

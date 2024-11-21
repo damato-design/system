@@ -1,6 +1,7 @@
 @use '../tokens.module';
 
 @mixin modal {
+    backdrop-filter: brightness(1.5);
     background: tokens.$surface_primary_backgroundColor;
     border-color: tokens.$surface_primary_borderColor;
     color: tokens.$surface_primary_foregroundColor;

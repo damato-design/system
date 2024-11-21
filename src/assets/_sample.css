@@ -1,12 +1,12 @@
 /** Generated file: generate-css.js */
 [data-mode~="sample"] {
-	--brand-surface_primary_backgroundColor: color-mix(in oklch, oklch(from color-mix(in oklch, Canvas, white 10%) l c none), oklch(from white none c h) 0%);
+	--brand-surface_primary_backgroundColor: color-mix(in oklch, oklch(from oklch(from Canvas calc(l + .04) c h) l c none), oklch(from white none c h) 0%);
 	--brand-surface_primary_foregroundColor: color-mix(in oklch, oklch(from CanvasText l c none), oklch(from black none c h) 0%);
 	--brand-surface_primary_borderColor: color-mix(in oklch, oklch(from GrayText l c none), oklch(from transparent none c h) 0%);
-	--brand-surface_secondary_backgroundColor: color-mix(in oklch, oklch(from color-mix(in oklch, Canvas, white 5%) l c none), oklch(from white none c h) 0%);
+	--brand-surface_secondary_backgroundColor: color-mix(in oklch, oklch(from oklch(from Canvas calc(l + .02) c h) l c none), oklch(from white none c h) 0%);
 	--brand-surface_secondary_foregroundColor: color-mix(in oklch, oklch(from CanvasText l c none), oklch(from black none c h) 0%);
 	--brand-surface_secondary_borderColor: color-mix(in oklch, oklch(from GrayText l c none), oklch(from transparent none c h) 0%);
-	--brand-surface_auxiliary_backgroundColor: color-mix(in oklch, oklch(from color-mix(in oklch, Canvas, white 0%) l c none), oklch(from white none c h) 0%);
+	--brand-surface_auxiliary_backgroundColor: color-mix(in oklch, oklch(from Canvas l c none), oklch(from white none c h) 0%);
 	--brand-surface_auxiliary_foregroundColor: color-mix(in oklch, oklch(from CanvasText l c none), oklch(from black none c h) 0%);
 	--brand-surface_auxiliary_borderColor: color-mix(in oklch, oklch(from GrayText l c none), oklch(from transparent none c h) 0%);
 	--brand-action_primary_backgroundColor: color-mix(in oklch, oklch(from SelectedItem l c none), oklch(from purple none c h) 100%);
