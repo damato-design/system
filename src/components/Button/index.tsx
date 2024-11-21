@@ -1,6 +1,5 @@
 import { createElement, forwardRef } from 'react';
 import { box, BoxProps } from '../Box';
-import { text } from '../Text';
 import { icon } from '../Icon';
 import { IDREF } from '../Localize';
 import { useFlyout } from '../Flyout';
@@ -33,11 +32,11 @@ export type ButtonProps = (React.ButtonHTMLAttributes<HTMLButtonElement>
          * A string reference to an `<icon/>` element.
          */
         icon?: string,
-        /**
-         * Forces a square size for the children (ie., label) when provided.
-         */
-        square?: boolean,
     };
+
+function iconOnly({ icon, children, behavior }: ButtonProps): boolean {
+    return Boolean(icon && !(children || behavior));
+}
 
 export const Button = forwardRef<HTMLElement, ButtonProps>(({
     behavior,
@@ -52,15 +51,6 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
     const { anchor: flyoutProps } = useFlyout();
     const { anchor: listboxProps } = useListbox();
 
-    const styles = square ?
-        {
-            margin: 0,
-            padding: 0,
-            width: '1lh',
-            height: '1lh',
-            lineHeight: '1lh'
-        } : {};
-
     const config = Object.assign({}, props, {
         "aria-labelledby": props['aria-labelledby'],
         "aria-label": behavior === 'dismiss' ? 'Close' : props['aria-label'],
@@ -68,7 +58,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
         type,
         role,
         gap: true,
-        style: styles
+        square: iconOnly({ icon: iconRef, children, behavior }) || square
     });
 
     const ariaLabelledby = [props['aria-labelledby']];

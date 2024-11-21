@@ -47,6 +47,10 @@ export type BoxProps = ElementProps & AlignmentConfig & {
    * Circular box.
    */
   round?: boolean,
+  /** 
+   * Forces the container into a square shape
+   */
+  square?: boolean,
   /**
    * Applies loading treatment to elements within this container.
    */
@@ -76,6 +80,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
     priority,
     purpose,
     round,
+    square,
     stack,
     standby,
     stretch,
@@ -95,6 +100,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
     const styles: ModernCSSProperties = {
       ...alignment,
       anchorName: anchorName,
+      aspectRatio: square ? '1' : undefined,
       overflow: clip ? 'clip' : undefined,
       display: stretch ? 'flex' : 'inline-flex',
       flexGrow: stretch ? 1 : 0,

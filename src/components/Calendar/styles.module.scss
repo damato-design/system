@@ -4,6 +4,10 @@
     margin: calc(var(--gap, .5rem) / -2);
 }
 
+.th > [class] {
+    font-weight: bolder;
+}
+
 .td {
     padding: calc(var(--gap, .5rem) / 2);
 

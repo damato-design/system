@@ -39,7 +39,7 @@ const KEY_NAVIGATION = {
 
 function Th({ narrow, long }: any) {
     return (
-        <th role='columnheader'>
+        <th role='columnheader' className={ css.th }>
             <text.span aria-hidden='true'>{ narrow }</text.span>
             <text.span screenreaderOnly>{ long }</text.span>
         </th>
