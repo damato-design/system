@@ -36,7 +36,7 @@ export type ButtonProps = (React.ButtonHTMLAttributes<HTMLButtonElement>
 
 function iconOnly({ icon, children, behavior }: ButtonProps): boolean {
     if (children) return false;
-    return Boolean((icon && !behavior) || (!icon && behavior));
+    return !Boolean(icon && behavior);
 }
 
 export const Button = forwardRef<HTMLElement, ButtonProps>(({

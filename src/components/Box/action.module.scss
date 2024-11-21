@@ -8,6 +8,7 @@
         padding: calc(var(--padding, 1rem) / 2);
         box-sizing: content-box;
         width: 1lh;
+        height: 1lh;
     }
 
     &:where([aria-current]) {
