@@ -35,7 +35,10 @@ export type ButtonProps = (React.ButtonHTMLAttributes<HTMLButtonElement>
     };
 
 function iconOnly({ icon, children, behavior }: ButtonProps): boolean {
-    return Boolean(icon && !(children || behavior));
+    if (children) return false;
+    if (icon && !behavior) return false;
+    if (!icon && behavior) return false;
+    return true;
 }
 
 export const Button = forwardRef<HTMLElement, ButtonProps>(({
@@ -58,7 +61,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
         type,
         role,
         gap: true,
-        square: iconOnly({ icon: iconRef, children, behavior }) || square
+        square: square || iconOnly({ icon: iconRef, children, behavior })
     });
 
     const ariaLabelledby = [props['aria-labelledby']];
