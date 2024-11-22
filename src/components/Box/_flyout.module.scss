@@ -1,7 +1,7 @@
 @use '../tokens.module';
 
 @mixin flyout {
-    --surface-bg: color-mix(in oklch, #{tokens.$surface_secondary_backgroundColor}, white %2);
+    --surface-bg: color-mix(in oklch, #{tokens.$surface_secondary_backgroundColor}, white 2%);
     background: var(--surface-bg);
     border-color: tokens.$surface_secondary_borderColor;
     color: tokens.$surface_secondary_foregroundColor;
