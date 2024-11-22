@@ -20,8 +20,8 @@ function permutate(...arrays) {
 function variable(token) {
     const { $value } = token.split('_').reduce((acc, key) => acc[key], this);
     const brand = toCSSVar(prefixType(token, 'brand'), $value);
-    const symbolic = toCSSVar(prefixType(token, 'symbolic'), brand);
-    return `$${token}: ${symbolic};`;
+    // const symbolic = toCSSVar(prefixType(token, 'symbolic'), brand);
+    return `$${token}: ${brand};`;
 }
 
 function variables(arr, systemTokens) {

@@ -17,10 +17,10 @@ function declaration(name, { tokens, symbolic }, systemTokens) {
     if (name.endsWith('Color')) {
         const system = name.split('_').reduce((acc, key) => acc[key], systemTokens);
         decl[1] = colorMix(value, system.$value);
-        if (symbolic) {
-            decl[1] = colorMix(value, decl[0]);
-            decl[0] = toCustomIdent(prefixType(name, 'symbolic'));
-        }
+        // if (symbolic) {
+        //     decl[1] = colorMix(value, decl[0]);
+        //     decl[0] = toCustomIdent(prefixType(name, 'symbolic'));
+        // }
     }
     return `\t${decl.join(': ')};`;
 }
