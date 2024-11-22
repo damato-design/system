@@ -49,3 +49,16 @@ export const Range: Story = {
         return <track.range { ...args } value={ val } onChange={ onChange }/>
     } 
 }
+
+const datalist = Array.from({ length: 11 }, (_, idx) => {
+    return { value: idx * 10, label: `${idx * 10}` }
+});
+
+export const Marks: Story = {
+    args: { value: 30, datalist },
+    render: ({ value, ...args }) => {
+        const [val, setValue] = useState(value);
+        const onChange = useCallback((ev: any) => setValue(ev.target.valueAsNumber), []);
+        return <track.range { ...args } value={ val } onChange={ onChange }/>
+    } 
+}

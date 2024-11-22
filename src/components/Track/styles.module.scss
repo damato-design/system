@@ -6,8 +6,9 @@
     border-radius: 100vw;
     height: 1lh;
     display: flex;
-    width: -webkit-fill-available;
+    max-width: calc(100%  - (2lh - 2px));
     min-width: 10em;
+    width: 100%;
     border-width: 1px;
     border-style: solid;
     border-color: tokens.$control_borderColor;
@@ -81,6 +82,30 @@
                 outline-offset: 4px;
             }
         }
+    }
+}
+
+.datalist {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: var(--gap, .5rem);
+    place-items: start stretch;
+    width: 100%;
+
+    option {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    option:before {
+        content: '';
+        height: .25lh;
+        width: 2px;
+        background: currentColor;
     }
 }
 
