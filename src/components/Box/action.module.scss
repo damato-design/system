@@ -26,13 +26,13 @@
     }
 
     &:where([data-priority="primary"]) {
-        --btn-bg: #{tokens.$action_primary_backgroundColor};
+        --action-bg: #{tokens.$action_primary_backgroundColor};
         border-color: tokens.$action_primary_borderColor;
         color: tokens.$action_primary_foregroundColor;
     }
 
     &:where([data-priority="secondary"]) {
-        --btn-bg: #{tokens.$action_secondary_backgroundColor};
+        --action-bg: #{tokens.$action_secondary_backgroundColor};
         border-color: tokens.$action_secondary_borderColor;
         color: tokens.$action_secondary_foregroundColor;
     }

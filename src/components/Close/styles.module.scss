@@ -4,7 +4,7 @@
     position: absolute;
     inset-inline-end: calc(var(--padding, 1rem) / 2);
     inset-block-start: calc(var(--padding, 1rem) / 2);
-    --btn-bg: #{tokens.$surface_auxiliary_backgroundColor};
+    --action-bg: var(--surface-bg, #{tokens.$surface_auxiliary_backgroundColor});
 }
 
 .float {

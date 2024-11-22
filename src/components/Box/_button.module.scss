@@ -10,14 +10,14 @@
     border-width: 1px;
     border-style: solid;
     padding: calc(var(--padding, 1rem) / 2) var(--padding, 1rem);
-    --btn-bg: #{tokens.$action_auxiliary_backgroundColor};
+    --action-bg: #{tokens.$action_auxiliary_backgroundColor};
     border-color: tokens.$action_auxiliary_borderColor;
     color: tokens.$action_auxiliary_foregroundColor;
-    background: var(--btn-bg);
+    background: var(--action-bg);
     @include body;
     font-weight: bolder;
 
     &:not([disabled], [aria-disabled="true"]):hover {
-       background: color-mix(in oklch, var(--btn-bg), currentColor 10%);
+       background: color-mix(in oklch, var(--action-bg), currentColor 10%);
     }
 }
