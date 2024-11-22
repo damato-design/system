@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useState, useCallback } from 'react';
 import css from './styles.module.scss';
 import { element, ElementProps, restrictProps } from '../Element';
 
@@ -53,20 +53,38 @@ export const Media = forwardRef<HTMLElement, MediaProps>(({
   ...props
 }: MediaProps, ref) => {
 
+  const [complete, setComplete] = useState(false);
+  const onComplete = useCallback((ev: any) => {
+    ev.target.tagName !== 'PICTURE' && setComplete(true);
+  }, []);
+
   const sources = [''].concat(src).filter(Boolean);
 
   const [tagName, ...rest] = new Set(sources.map(getElement));
   if (!tagName) return null;
   if (rest.length) console.warn('Mixed sources found, all sources must be the same type: ', rest);
+  
   const Media = element[tagName];
   const config = Object.assign({}, props, {
     controls: tagName !== 'picture' ? true : null
   });
+  const fallback = (<img 
+    src={ sources[0] }
+    onLoad={ onComplete }
+    onError={ onComplete }
+  />);
 
   return (
-    <Media { ...restrictProps(config) } ref={ ref } className={ css.media } data-standby={ standby }>
+    <Media
+      { ...restrictProps(config) }
+      ref={ ref }
+      onLoadedData={ onComplete }
+      onError={ onComplete }
+      className={ css.media }
+      data-complete={ complete }
+      data-standby={ standby }>
       { sources.map((src) => <source {...{ [tagName === 'picture' ? 'srcSet' : 'src']: src }} key={ src }/>) }
-      { tagName === 'picture' ? <img src={ sources[0] }/> : null }
+      { tagName === 'picture' ? fallback : null }
     </Media>
   );
 })
