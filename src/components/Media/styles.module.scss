@@ -1,3 +1,5 @@
+@use '../Box/standby.module' as *;
+
 .media {
     max-width: 100%;
     display: flex;
@@ -5,6 +7,11 @@
     margin: 0;
     padding: 0;
     border: 0;
+
+    &[data-complete="false"]:not([data-standby="false"]) {
+        @include standby;
+    }
+
     & > :not(source) {
         display: block;
         max-width: 100%;
