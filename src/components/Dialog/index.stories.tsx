@@ -77,7 +77,7 @@ export const Modal: Story = {
         children: [
             <text.p key='description'>
                 Modals are the crutch of the inarticulate designer and developer.
-                Remember to always ask, "Why does this have to be a modal?"
+                Remember to always ask, "Why does this have to be a modal?" 
                 <text.a href="https://modalzmodalzmodalz.com/">
                     modalzmodalzmodalz.com
                 </text.a>
