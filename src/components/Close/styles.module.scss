@@ -1,8 +1,10 @@
+@use '../tokens.module';
+
 .close button {
     position: absolute;
-    inset-inline-end: .5rem;
-    inset-block-start: .5rem;
-    background: color-mix(in oklch, var(--btn-bg), currentColor 5%);
+    inset-inline-end: calc(var(--padding, 1rem) / 2);
+    inset-block-start: calc(var(--padding, 1rem) / 2);
+    --btn-bg: #{tokens.$surface_auxiliary_backgroundColor};
 }
 
 .float {
