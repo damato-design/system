@@ -570,9 +570,9 @@
                         "string"
                       ]
                     },
-                    "$influence": {
+                    "$fallback": {
                       "type": [
-                        "number"
+                        "string"
                       ]
                     }
                   }
@@ -589,11 +589,6 @@
                         "number",
                         "string"
                       ]
-                    },
-                    "$influence": {
-                      "type": [
-                        "number"
-                      ]
                     }
                   }
                 },
@@ -608,11 +603,6 @@
                       "type": [
                         "number",
                         "string"
-                      ]
-                    },
-                    "$influence": {
-                      "type": [
-                        "number"
                       ]
                     }
                   }
@@ -629,11 +619,6 @@
                         "number",
                         "string"
                       ]
-                    },
-                    "$influence": {
-                      "type": [
-                        "number"
-                      ]
                     }
                   }
                 },
@@ -648,11 +633,6 @@
                       "type": [
                         "number",
                         "string"
-                      ]
-                    },
-                    "$influence": {
-                      "type": [
-                        "number"
                       ]
                     }
                   }
@@ -683,9 +663,9 @@
                         "string"
                       ]
                     },
-                    "$influence": {
+                    "$fallback": {
                       "type": [
-                        "number"
+                        "string"
                       ]
                     }
                   }
@@ -702,11 +682,6 @@
                         "number",
                         "string"
                       ]
-                    },
-                    "$influence": {
-                      "type": [
-                        "number"
-                      ]
                     }
                   }
                 },
@@ -721,11 +696,6 @@
                       "type": [
                         "number",
                         "string"
-                      ]
-                    },
-                    "$influence": {
-                      "type": [
-                        "number"
                       ]
                     }
                   }
@@ -742,11 +712,6 @@
                         "number",
                         "string"
                       ]
-                    },
-                    "$influence": {
-                      "type": [
-                        "number"
-                      ]
                     }
                   }
                 },
@@ -761,11 +726,6 @@
                       "type": [
                         "number",
                         "string"
-                      ]
-                    },
-                    "$influence": {
-                      "type": [
-                        "number"
                       ]
                     }
                   }
@@ -796,9 +756,9 @@
                         "string"
                       ]
                     },
-                    "$influence": {
+                    "$fallback": {
                       "type": [
-                        "number"
+                        "string"
                       ]
                     }
                   }
@@ -815,11 +775,6 @@
                         "number",
                         "string"
                       ]
-                    },
-                    "$influence": {
-                      "type": [
-                        "number"
-                      ]
                     }
                   }
                 },
@@ -834,11 +789,6 @@
                       "type": [
                         "number",
                         "string"
-                      ]
-                    },
-                    "$influence": {
-                      "type": [
-                        "number"
                       ]
                     }
                   }
@@ -855,11 +805,6 @@
                         "number",
                         "string"
                       ]
-                    },
-                    "$influence": {
-                      "type": [
-                        "number"
-                      ]
                     }
                   }
                 },
@@ -874,11 +819,6 @@
                       "type": [
                         "number",
                         "string"
-                      ]
-                    },
-                    "$influence": {
-                      "type": [
-                        "number"
                       ]
                     }
                   }
@@ -907,11 +847,6 @@
                     "number",
                     "string"
                   ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
-                  ]
                 }
               }
             },
@@ -926,11 +861,6 @@
                   "type": [
                     "number",
                     "string"
-                  ]
-                },
-                "$influence": {
-                  "type": [
-                    "number"
                   ]
                 }
               }

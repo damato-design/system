@@ -67,7 +67,8 @@ tokens:
   text:
     primary:
       fontFamily:
-        $value: '"Plus Jakarta Sans", sans-serif'
+        $value: Plus Jakarta Sans
+        $fallback: sans-serif
       fontWeight:
         $value: 700
       lineHeight:
@@ -78,7 +79,8 @@ tokens:
         $value: 1.125
     secondary:
       fontFamily:
-        $value: '"Plus Jakarta Sans", sans-serif'
+        $value: Plus Jakarta Sans
+        $fallback: sans-serif
       fontWeight:
         $value: 400
       lineHeight:
@@ -89,7 +91,8 @@ tokens:
         $value: 1.125
     auxiliary:
       fontFamily:
-        $value: '"Plus Jakarta Sans", sans-serif'
+        $value: Plus Jakarta Sans
+        $fallback: sans-serif
       fontWeight:
         $value: 400
       lineHeight:

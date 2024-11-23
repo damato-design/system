@@ -1,3 +1,4 @@
+import { type } from 'os';
 import {
     PRIORITY,
     PROPERTY_COLOR,
@@ -5,20 +6,27 @@ import {
     PROPERTY_SPACE
 } from './properties.js';
 
-function final() {
-    return {
+function final(property) {
+    const base = {
         type: 'object',
         additionalProperties: false,
         required: ['$value'],
         properties: {
             $value: {
                 type: ['number', 'string']
-            },
-            $influence: {
-                type: ['number']
             }
         }
     }
+
+    if (property.includes('Color')) {
+        base.properties.$influence = { type: ['number'] }
+    }
+
+    if (property.includes('fontFamily')) {
+        base.properties.$fallback = { type: ['string'] }
+    }
+
+    return base;
 }
 
 function permutate(...arrays) {
@@ -27,7 +35,7 @@ function permutate(...arrays) {
     const recurse = (acc, remaining) => {
         const [next, ...rest] = remaining;
         next.forEach((key) => {
-            acc[key] = final();
+            acc[key] = final(key);
             if (rest.length) {
                 acc[key].type = 'object';
                 acc[key].additionalProperties = false;

@@ -1,4 +1,6 @@
 /** Generated file: generate-css.js */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans%3Awght%40400%3B700&display=swap');
+
 [data-mode~="sample"] {
 	--brand-surface_primary_backgroundColor: color-mix(in oklch, oklch(from Canvas l c none), oklch(from white none c h) 0%);
 	--brand-surface_primary_foregroundColor: color-mix(in oklch, oklch(from CanvasText l c none), oklch(from black none c h) 0%);
@@ -21,17 +23,17 @@
 	--brand-control_backgroundColor: color-mix(in oklch, oklch(from Field l c none), oklch(from white none c h) 0%);
 	--brand-control_foregroundColor: color-mix(in oklch, oklch(from FieldText l c none), oklch(from black none c h) 0%);
 	--brand-control_borderColor: color-mix(in oklch, oklch(from GrayText l c none), oklch(from grey none c h) 0%);
-	--brand-text_primary_fontFamily: "Plus Jakarta Sans", sans-serif;
+	--brand-text_primary_fontFamily: Plus Jakarta Sans;
 	--brand-text_primary_fontWeight: 700;
 	--brand-text_primary_lineHeight: 1.1;
 	--brand-text_primary_minRem: 2;
 	--brand-text_primary_scaleFactor: 1.125;
-	--brand-text_secondary_fontFamily: "Plus Jakarta Sans", sans-serif;
+	--brand-text_secondary_fontFamily: Plus Jakarta Sans;
 	--brand-text_secondary_fontWeight: 400;
 	--brand-text_secondary_lineHeight: 1.5;
 	--brand-text_secondary_minRem: 1.3;
 	--brand-text_secondary_scaleFactor: 1.125;
-	--brand-text_auxiliary_fontFamily: "Plus Jakarta Sans", sans-serif;
+	--brand-text_auxiliary_fontFamily: Plus Jakarta Sans;
 	--brand-text_auxiliary_fontWeight: 400;
 	--brand-text_auxiliary_lineHeight: 1.5;
 	--brand-text_auxiliary_minRem: 0.8;
