@@ -14,12 +14,12 @@ export type TrackProps = (React.ProgressHTMLAttributes<HTMLProgressElement>
   & {
     stretch?: boolean,
     orientation?: 'horizontal' | 'vertical',
-    datalist?: DatalistOption[],
+    items?: DatalistOption[],
   };
 
 export const track = proxy<'progress' | 'meter' | 'range', TrackProps>('track', (trackType) => {
   return forwardRef<HTMLElement, TrackProps>(({
-    datalist,
+    items,
     orientation = 'horizontal',
     stretch = true,
     value,
@@ -33,25 +33,28 @@ export const track = proxy<'progress' | 'meter' | 'range', TrackProps>('track', 
       'aria-orientation': orientation,
       className: css.track,
       ref,
-      style: { '--fill': fill },
+      style: {
+        '--fill': fill,
+        '--length': items?.length,
+      },
       value,
-      list: datalist ? datalistId : null
+      list: items ? datalistId : null
     } as TrackProps);
 
     const track = trackType === 'range'
       ? createElement(element.input, { type: trackType, ...config } as React.HTMLAttributes<HTMLInputElement>)
       : createElement(element[trackType], config);
 
-    const ticks = Array.isArray(datalist) ? (
+    const datalist = Array.isArray(items) ? (
       <datalist className={ css.datalist } id={ datalistId }>
-        { datalist.map((item, idx) => <text.option {...item} key={ idx }/>) }
+        { items.map((item, idx) => <text.option {...item} key={ idx }/>) }
       </datalist>
     ) : null;
 
     return (
-      <box.div stack gap stretch={ stretch || Boolean(ticks) } placeChildren='center'>
+      <box.div stack gap stretch={ stretch || Boolean(datalist) } placeChildren='center'>
         { track }
-        { ticks }
+        { datalist }
       </box.div>
     )
   })

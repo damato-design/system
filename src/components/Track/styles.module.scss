@@ -2,11 +2,13 @@
 @use '../Box/flyout.module' as *;
 
 .track {
+    --has-items: calc(var(--length, 0) / var(--length, 1));
     appearance: none;
     border-radius: 100vw;
     height: 1lh;
     display: flex;
-    max-width: calc(100%  - (2lh - 2px));
+    box-sizing: content-box;
+    max-width: calc(100% - (100% * var(--has-items) / var(--length, 1)) + (var(--has-items) * 1lh));
     min-width: 10em;
     width: 100%;
     border-width: 1px;
@@ -64,6 +66,10 @@
 
     &:where(input[type="range"]) {
         outline: 0;
+        &::-webkit-slider-container {
+            min-block-size: auto;
+        }
+
         &::-webkit-slider-thumb {
             appearance: none;
             height: 1lh;
@@ -89,7 +95,6 @@
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: 1fr;
-    gap: var(--gap, .5rem);
     place-items: start stretch;
     width: 100%;
 

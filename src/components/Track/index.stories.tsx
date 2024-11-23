@@ -50,12 +50,25 @@ export const Range: Story = {
     } 
 }
 
-const datalist = Array.from({ length: 11 }, (_, idx) => {
+const items = Array.from({ length: 11 }, (_, idx) => {
     return { value: idx * 10, label: `${idx * 10}` }
 });
 
+/**
+ * You can provide an `items` array of objects that represent
+ * `<option/>` element attributes to display as tick marks below
+ * the component. Note that in smaller screen sizes showing many tick
+ * marks will be inappropriate as markings will visually collide.
+ * 
+ * When supplying `items`, the track will be shorter than without.
+ * This is to provide enough room for the labels while center aligning
+ * with the appropriate area of the track.
+ * 
+ * This example includes the `step` configuration so the thumb and
+ * value are locked to increments of `10` to illustrate the marks clearly.
+ */
 export const Marks: Story = {
-    args: { value: 30, datalist },
+    args: { value: 30, items, step: 10 },
     render: ({ value, ...args }) => {
         const [val, setValue] = useState(value);
         const onChange = useCallback((ev: any) => setValue(ev.target.valueAsNumber), []);
