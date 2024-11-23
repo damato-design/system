@@ -50,8 +50,8 @@ export const Range: Story = {
     } 
 }
 
-const items = Array.from({ length: 11 }, (_, idx) => {
-    return { value: idx * 10, label: `${idx * 10}` }
+const items = Array.from({ length: 6 }, (_, idx) => {
+    return { value: idx * 20, label: `${idx * 20}` }
 });
 
 /**
@@ -65,10 +65,10 @@ const items = Array.from({ length: 11 }, (_, idx) => {
  * with the appropriate area of the track.
  * 
  * This example includes the `step` configuration so the thumb and
- * value are locked to increments of `10` to illustrate the marks clearly.
+ * value are locked to increments of `20` to illustrate the marks clearly.
  */
 export const Marks: Story = {
-    args: { value: 30, items, step: 10 },
+    args: { value: 40, items, step: 20 },
     render: ({ value, ...args }) => {
         const [val, setValue] = useState(value);
         const onChange = useCallback((ev: any) => setValue(ev.target.valueAsNumber), []);
