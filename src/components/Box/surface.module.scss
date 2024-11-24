@@ -2,6 +2,12 @@
 @use 'modal.module' as *;
 @use 'flyout.module' as *;
 
+:global(body) {
+    color: tokens.$surface_auxiliary_foregroundColor;
+    --surface-bg: #{tokens.$surface_auxiliary_backgroundColor};
+    background: var(--surface-bg);
+}
+
 .surface {
     border-radius: 8px;
     overflow: clip;

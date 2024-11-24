@@ -16,7 +16,8 @@ export default function Github() {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '.5em',
-                textDecoration: 'underline'
+                textDecoration: 'underline',
+                fontSize: '1rem'
             }}>
             <Icon/>
             View source on github.com
