@@ -2,15 +2,15 @@
 
 $primary-rem: calc(
     #{tokens.$text_primary_minRem}
-    * pow(#{tokens.$text_primary_scaleFactor}, var(--depth, 0))
+    * pow(#{tokens.$text_primary_scaleFactor}, var(--level, 0))
 );
 $secondary-rem: calc(
     #{tokens.$text_secondary_minRem}
-    * pow(#{tokens.$text_secondary_scaleFactor}, var(--depth, 0))
+    * pow(#{tokens.$text_secondary_scaleFactor}, var(--level, 0))
 );
 $auxiliary-rem:  calc(
     #{tokens.$text_auxiliary_minRem}
-    * pow(#{tokens.$text_auxiliary_scaleFactor}, var(--depth, 0))
+    * pow(#{tokens.$text_auxiliary_scaleFactor}, var(--level, 0))
 );
 
 @mixin body {

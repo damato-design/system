@@ -21,15 +21,31 @@ class ModeManager {
         this.update(preload);
     }
 
+    #denser(_, index, arr) {
+        const name = 'system:denser';
+        const level = index + 1;
+        const selector = Array
+            .from({ length: level }, () => `[data-mode="${name}"]`)
+            .join(' ');
+        return `${selector} { --level: ${arr.length - level};  }`;
+    }
+
     #listen(sizes) {
         const name = '__MODE_LISTENER__';
+        const maxLevel = sizes - 1;
         const css = `
-            [data-mode]{
+            :root {
+                --level: ${ maxLevel };
+            }
+        
+            [data-mode] {
                 visibility: hidden;
                 animation: ${name} .0001s linear forwards;
             }
     
             @keyframes ${name} { to { visibility: visible } }
+
+            ${Array.from({ length: maxLevel }).map(this.#denser, this).join('\n')}
         `;
     
         const $style = document.createElement('style');
@@ -61,4 +77,4 @@ class ModeManager {
 }
 
 const $script = document.currentScript;
-const manager = new ModeManager($script.dataset.preload, $script.dataset.size);
+const manager = new ModeManager($script.dataset.preload, $script.dataset.sizes);
