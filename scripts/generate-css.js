@@ -14,8 +14,8 @@ function getGroup(name) {
 }
 
 function familyKey([fontName, fontWeights]) {
-    const weight = [...fontWeights.keys()].sort().join(';');
-    return [fontName, `wght@${weight}`].join(':')
+    const weight = [...fontWeights.keys()].filter(Boolean).sort().join(';');
+    return [fontName, `wght@${weight}`].join(':');
 }
 
 function fontImports(names, { tokens }) {
