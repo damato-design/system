@@ -1,4 +1,5 @@
 @use '../tokens.module';
+@use './space.module' as space;
 
 .control {
     border-radius: 4px;
@@ -15,7 +16,7 @@
     }
 
     > i[role="presentation"] {
-        padding-inline: var(--padding, 1rem);
+        padding-inline: space.$padding;
         line-height: 1lh !important;
     }
 

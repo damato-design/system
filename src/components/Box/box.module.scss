@@ -1,5 +1,6 @@
 @use 'details.module' as *;
 @use 'standby.module' as *;
+@use './space.module' as space;
 
 .box {
     min-width: 0;
@@ -14,11 +15,11 @@
     }
 
     &.padding {
-        padding: var(--padding, 1rem);
+        padding: space.$padding
     }
 
     &.gap {
-        gap: var(--gap, .5rem);
+        gap: space.$gap;
     }
 
     &:where(details) {

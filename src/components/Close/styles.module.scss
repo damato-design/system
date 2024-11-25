@@ -1,15 +1,16 @@
 @use '../tokens.module';
+@use '../Box/space.module' as space;
 
 .close button {
     position: absolute;
-    inset-inline-end: calc(var(--padding, 1rem) / 2);
-    inset-block-start: calc(var(--padding, 1rem) / 2);
+    inset-inline-end: space.$gap;
+    inset-block-start: space.$gap;
     --action-bg: var(--surface-bg, #{tokens.$surface_auxiliary_backgroundColor});
 }
 
 .float {
     float: inline-end;
     aspect-ratio: 1;
-    padding-inline-start: var(--padding, 1rem);
-    padding-block-end: var(--padding, 1rem);
+    padding-inline-start: space.$padding;
+    padding-block-end: space.$padding;
 }

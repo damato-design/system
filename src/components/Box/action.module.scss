@@ -1,11 +1,12 @@
 @use '../tokens.module';
 @use 'button.module' as *;
+@use './space.module' as space;
 
 .action {
     @include button;
 
     &:where([style*="aspect-ratio: 1"]) {
-        padding: calc(var(--padding, 1rem) / 2);
+        padding: space.$gap;
         box-sizing: content-box;
         width: 1lh;
         height: 1lh;

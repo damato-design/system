@@ -1,0 +1,4 @@
+@use '../tokens.module';
+
+$gap: calc(#{tokens.$space_minDimension} * pow(#{tokens.$space_scaleFactor}, var(--level, 0)));
+$padding: calc(#{tokens.$space_minDimension} * pow(#{tokens.$space_scaleFactor}, var(--level, 0) + 1));

@@ -1,4 +1,5 @@
 @use '../tokens.module';
+@use './space.module' as space;
 
 @mixin standby {
     color: transparent;
@@ -13,9 +14,9 @@
     background-position-x: 120%;
 
     /* Line rendering */
-    min-height: calc((2 * var(--gap, .5rem)) + 3lh);
+    min-height: calc((2 * #{space.$gap}) + 3lh);
     mask: linear-gradient(#000 0 1lh,
-            transparent 1lh calc(1lh + var(--gap, .5rem))) 0 0/100% calc(1lh + var(--gap, .5rem));
+            transparent 1lh calc(1lh + #{space.$gap})) 0 0/100% calc(1lh + #{space.$gap});
 
     &:where(i[role="presentation"]) {
         mask: none;

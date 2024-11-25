@@ -1,13 +1,14 @@
 @use '../tokens.module';
 @use '../Box/button.module' as *;
 @use '../Text/body.module' as *;
+@use '../Box/space.module' as space;
 
 .input {
     margin: 0;
     border: 0;
     color: inherit;
-    padding: calc(var(--padding, 1rem) / 2) var(--padding, 1rem);
-    scroll-padding-block: var(--padding, 1rem);
+    padding: space.$gap space.$padding;
+    scroll-padding-block: space.$padding;
     box-sizing: content-box;
     background: transparent;
     min-width: 1ch;
@@ -32,7 +33,7 @@
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        padding: var(--padding, 1rem);
+        padding: space.$padding;
         margin-inline-end: 1ch;
         @include button;
     }

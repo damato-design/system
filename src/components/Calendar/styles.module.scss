@@ -1,7 +1,9 @@
+@use '../Box/space.module' as space;
+
 .table {
     text-align: center;
     border-collapse: collapse;
-    margin: calc(var(--gap, .5rem) / -2);
+    margin: calc(#{space.$gap} / -2);
 }
 
 .th > [class] {
@@ -9,7 +11,7 @@
 }
 
 .td {
-    padding: calc(var(--gap, .5rem) / 2);
+    padding: calc(#{space.$gap} / 2);
 
     &:empty {
         visibility: hidden;

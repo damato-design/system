@@ -1,5 +1,6 @@
 @use '../tokens.module';
 @use '../Text/body.module' as *;
+@use './space.module' as space;
 
 @mixin button {
     cursor: pointer;
@@ -9,7 +10,7 @@
     transition: .218s ease;
     border-width: 1px;
     border-style: solid;
-    padding: calc(var(--padding, 1rem) / 2) var(--padding, 1rem);
+    padding: space.$gap space.$padding;
     --action-bg: #{tokens.$action_auxiliary_backgroundColor};
     border-color: tokens.$action_auxiliary_borderColor;
     color: tokens.$action_auxiliary_foregroundColor;
