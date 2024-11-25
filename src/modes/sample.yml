@@ -105,4 +105,4 @@ tokens:
     minDimension:
       $value: .5rem
     scaleFactor:
-      $value: 1.168 
+      $value: 1.618 
