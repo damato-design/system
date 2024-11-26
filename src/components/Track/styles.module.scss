@@ -1,5 +1,6 @@
 @use '../tokens.module';
 @use '../Box/flyout.module' as *;
+@use '../Text/body.module' as *;
 
 .track {
     --has-items: calc(var(--length, 0) / var(--length, 1));
@@ -15,6 +16,7 @@
     border-style: solid;
     border-color: tokens.$control_borderColor;
     background: tokens.$control_backgroundColor;
+    @include body;
 
     /* indeterminate */
     &:not([value]) {

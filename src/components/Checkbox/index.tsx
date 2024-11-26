@@ -23,7 +23,7 @@ export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(({
     });
 
     return (
-        <box.div stack={ false } gap padding placeChildren='center'>
+        <box.div stack={ false } gap placeChildren='center'>
             <field.div stretch={ false } round={ exclusive } clip={ false }>
                 { exclusive
                     ? <input.radio { ...config }/>

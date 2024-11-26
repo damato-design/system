@@ -40,12 +40,15 @@ export const RadioButton: Story = {
 
 /**
  * This demonstrates the alignment between form elements.
+ * In this case we explicitly set `placeChildren='center'` to center
+ * the control vertically. The height of the control should match the
+ * line-height of sibling content.
  */
 export const Alignment: Story = {
     args: { name: 'alignment' },
     render: (args) => {
         return (
-            <box.div gap placeChildren='top'>
+            <box.div gap placeChildren='center'>
                 <Checkbox { ...args }/>
                 <field.div>
                     <input.text name='alignment' placeholder='Ready'/>
