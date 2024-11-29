@@ -56,6 +56,31 @@ export const Secondary: Story = {
 }
 
 /**
+ * Sizes for this and other components in the system are handled by flagging
+ * any `box` or `box`-like scope as `denser`. This will reduce the size of spacing
+ * typography for the component in the area where it was set. Notice the nesting of
+ * `<box.div/>` elements in this example.
+ * 
+ * For more information about this technique, see the [Density docs](/docs/foundations-density--docs).
+ */
+export const Sizes: Story = {
+    args: {
+        children: 'Denser and…',
+        priority: 'primary'
+    },
+    render: (args) => {
+        return (
+            <box.div denser gap placeChildren='center'>
+                <Button {...args} />
+                <box.div denser gap placeChildren='center'>
+                    <Button {...args} />
+                </box.div>
+            </box.div>
+        )
+    }
+}
+
+/**
  * Providing an icon reference string to the `icon` prop will render an icon before the children. **Do not place `icon` primitives in `children`**. For information about possible values, see the [`icon` primitive](/docs/primitives-icon--docs).
  * 
  * > #### Why are `icon` primitives in `children` discouraged?

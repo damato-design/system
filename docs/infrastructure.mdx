@@ -57,10 +57,4 @@ The `data-preload` attribute is a space-separated list of mode aliases that shou
 >
 > Yes, the best case scenario is that the Mode Manager is initialized server-side to create the assets needed before the page is loaded. However, since the examples are running as Storybook instances, only client-side rendering is available.
 
-The result of the manager will create several resources. The `data-sizes` will create CSS selectors that will help inform the size of elements based on depth. This will start at the `:root` and then include additional modes to indicate the level. These are accessible in the component architecture by using the boolean `denser` in a `box` or `box`-like component. This will automatically set the scope to be denser within that area.
-
-```jsx
-function MyDenserBox() {
-    return <box.div denser/>
-}
-```
+The result of the manager will create several resources. 

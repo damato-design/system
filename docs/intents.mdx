@@ -93,10 +93,6 @@ The **space** category is unique since is meant to convey the intention of relat
 - `space.minDimension` describes the smallest amount of space that will exist within the experience.
 - `space.scaleFactor` describes the rate in which the spacing scale will increase.
 
-The **density** category has one intent but it affects **text** and **space** category scales.
-
-- `density.maxDepth` describes the maximum depth for elements to appear within an experience.
-
 The resulting amount of space is further determined by a formula using the depth of the current scope. For more about this technique, see the [Density docs](/docs/foundations-density--docs).
 
 ### Curating values
@@ -121,7 +117,7 @@ The text and space categories compute sizing scales for their respective purpose
 size = min * pow(scale, level)
 ```
 
-Where the `level` is determined by the depth. For more on this value, see the [Density docs](/docs/foundations-density--docs).
+Where the `level` is determined by the number of sizes. For more on this value, see the [Density docs](/docs/foundations-density--docs).
 
 The `minDimension` expects a value with a unit such as `8px` or `.5rem` to use as the base for further scale calculations. The minimum is used to ensure that the resulting value is never smaller than expected.
 

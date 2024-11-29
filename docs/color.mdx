@@ -46,14 +46,14 @@ body {
 
 #### Brand
 
-Next, we will introduce the branding to the color using `color-mix()`. The tokens below are named to demonstrate the expected values for this area more clearly:
+Next, we will introduce the branding to the color using `color-mix()`. The tokens below are generically named in the example to demonstrate the expected values for this area more clearly:
 
 ```css
-body {
-    background-color: color-mix(
+:root {
+    --bg: color-mix(
         in oklch,
-        oklch(from Canvas l 0 0),
-        var(--brand-page-bg-value) var(--brand-page-bg-influence)
+        oklch(from Canvas l c none),
+        oklch(from var(--brand-bg) none c h) var(--brand-influence, 100%)
     );
 }
 ```
@@ -62,15 +62,15 @@ The `color-mix()` function takes three arguments.
 
 The first is the color space where we use `oklch` to maintain the perceived luminance of the color as we mix. This is to standardize the contrast of the colors for accessibility.
 
-The second argument is returning the perceived lightness for the current `Canvas` and setting the amount of color and hue angle to `0`, effectively removing the color. This is the amount of gray we'll use to inform the lightness of final branded color.
+The second argument is returning the perceived lightness for the current `Canvas` and setting the hue to `none`, effectively omitting the color. This is the amount of gray we'll use to inform the lightness of final branded color.
 
-The third is the expected page background color provided by the brand and the amount of influence as a percentage that this color is meant to have at this location. Setting the influence to `100%` would cause this color to take over anything provided by the earlier `Canvas` information.
+The third is the expected page background color provided by the brand and the amount of influence as a percentage that this color is meant to have at this location. Setting the influence to `100%` would cause this color to take over anything provided by the earlier `Canvas` value.
 
-For a property like background color, we most likely do not expect a large amount of influence to be present. In other areas like buttons, we might expect the influence to be higher.
+For a property like background color, we most likely **do not** expect a large amount of influence to be present. In other areas like buttons, we might expect the influence to be higher.
 
 > #### Why doesn't the browser devtools recognize this statement?
 >
-> As of the time of this writing, only Safari supports relative color syntax for keywords like `Canvas` or `currentColor`. However, [other browsers are expecting to release this feature soon](https://caniuse.com/css-relative-colors).
+> As of the time of this writing, the relative color syntax for keywords like `Canvas` or `currentColor` is [very new and not well supported](https://caniuse.com/css-relative-colors).
 
 #### Symbolic
 
@@ -80,29 +80,31 @@ Traditionally, we might support this by including additional tokens for a red co
 
 Furthemore, that red color is culturally specific. In other words, the color red might not mean "danger" to the person it is presented. In Eastern cultures, the color red means "prosperity", which could be considered far from dangerous depending on how it is used. This means that the color being provided here may need to change based on the user's culture to provide an accurate expression.
 
-To do this, we introduce a final mix:
+To do this, we update the variable within this mode:
 
 ```css
-body {
+:root {
     --bg: color-mix(
         in oklch,
-        oklch(from Canvas l 0 0 / alpha),
-        var(--brand-page-bg-value) var(--brand-page-bg-influence)
+        oklch(from Canvas l c none),
+        oklch(from var(--brand-bg) none c h) var(--brand-influence, 100%)
     );
-    background-color: var(--bg);
 }
 
-[mode="critical"]:lang(en-us) {
-    --brand-page-bg-value: red;
-    --brand-page-bg-influence: 90%;
-    background-color: color-mix(
+[mode="system:critical"]:lang(en-us) {
+    --bg: color-mix(
         in oklch,
-        var(--bg),
-        var(--brand-page-bg-value) var(--brand-page-bg-influence)
+        oklch(from Canvas l c none),
+        oklch(from var(--symbolic-bg) none c h) var(--symbolic-influence, 100%)
     );
 }
 ```
-The first declaration is identical to what we completed in the previous section, only now setting to a reusable CSS custom property.
+The major difference is that modes marked with symbolic color are appended to the page, while normal modes are prepended. This is so symbolic colors are effectively overrides to the brand where appropriate. We set this in a mode by adding the flag in the `.yml` file. The following example also demonstrates including a locale for the mode.
+
+```yml
+symbolic: true
+lang: en-US
+```
 
 Using the mode metadata to construct a `:lang()` CSS selector, we provide the appropriate color updated to the scoped mode. We also expect the influence of this value to be much higher due to the expression this attempts to convey.
 

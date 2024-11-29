@@ -15,7 +15,7 @@ export type ElementProps = Props & {
   /**
    * The `mode` is a way to expressively enhance the scope in which it is applied.
    */
-  mode?: string,
+  mode?: string | string[],
 }
 
 export const element = proxy<HTMLTagsOnly, ElementProps>('element', (TagName) => {
@@ -24,7 +24,8 @@ export const element = proxy<HTMLTagsOnly, ElementProps>('element', (TagName) =>
     mode,
     ...rest
   }: ElementProps, ref) => {
-
-    return createElement(TagName, { ...rest, ref, className, 'data-mode': mode });
+    const normalizedMode = Array.isArray(mode) ? mode : [mode];
+    const modes = normalizedMode.filter(Boolean).join(' ');
+    return createElement(TagName, { ...rest, ref, className, 'data-mode': modes });
   })
 });

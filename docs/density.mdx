@@ -1,4 +1,5 @@
-import { Meta } from '@storybook/blocks';
+import { Meta, Canvas } from '@storybook/blocks';
+import { Primary, Sizes } from '../src/components/Button/index.stories';
 
 <Meta title="Foundations/Density" />
 
@@ -12,7 +13,6 @@ There are a few tokens that help describe the concept of density.
 
 - `space.minDimension` describes the minimum amount of space that will exist in the experience. It is recommended to use a pixel amount over a relative unit for this value.
 - `space.scaleFactor` describes the rate in which the space values increase over steps.
-- `density.maxDepth` describes maximum levels of depth expected to appear within any composition. More of this below.
 
 > #### Why are pixels recommended for `minDimension`?
 >
@@ -20,35 +20,54 @@ There are a few tokens that help describe the concept of density.
 >
 > When we use an absolute unit like pixels as the value, the font scaling setting does not affect the space between elements, so compositions are less large than they would be if the value was related to font size. The more compact composition maintains a similar navigation experience than if everything was to grow to the font size causing more overflows and scrolling to be required.
 
-### Depth
+### Sizes
 
-The concept of **depth** relates to how deep a concept exists within an interface. As an example, a hero banner would be considered at a higher level of depth than a headline within a card. If you can consider the card as a smaller version of a page, it would be like a page is scaled down to exist as a card. This amount of scaling is a level of depth, something like a [Russian nested doll](https://en.wikipedia.org/wiki/Matryoshka_doll).
+The amount of sizes that can exist on any page is declared at the page, specifically when the Mode Manager is initialized. For more about the Mode Manager, see the [Infrastructure docs](/docs/foundations-infrastructure--docs). This is a unique direction in comparison to many other systems; where sizes are configured on a per-component basis. In this system, _anything_ can be affected by the given `sizes` expected on the page. Importantly `sizes` is **not a token** to be set in a mode, it is declared at each page. Here is an example of the `<Button/>` component where `sizes` was set to `3`.
+
+<Canvas of={ Primary }/>
+
+> #### Why are these components so big?
+>
+> The stories found for most of the components here are displayed with no change in density. This means they are displayed at their largest size. In order to reduce the size of any component, it must exist in a container where `denser` was applied or the `mode="system:denser"`.
+
+In order to curate when a change of size should occur, a designer should consider **depth** as it relates to how deep a concept exists within an interface. As an example, a hero banner would be considered at a higher level of depth than a headline within a card. If you can consider the card as a smaller version of a page, it would be like a page is scaled down to exist as a card. This amount of scaling is a level of depth, something like a [Russian nested doll](https://en.wikipedia.org/wiki/Matryoshka_doll). Here is an example using `<Button/>` with the nested approach.
+
+<Canvas of={ Sizes }/>
 
 Another way to think about this is relative distances. If you consider distance in terms of being near or away, the way we describe a distance will change based on context. If our scope of measuring distance is at the planet level, cities would be considered close together relative to planets. Changing our scope to a single city would change our perspective for cities being very far away.
 
-In this approach, each change in depth is a change in scope executed using a special mode called `depthchange` (rendered simply as `↯` below for brevity). Each time this mode is introduced, the level of depth decreases one step toward `0`. The following is a simplified example of the resulting CSS when `density.maxDepth: 3`:
+In this approach, each change in depth is a change in scope executed using a special mode called `system:denser`. Each time this mode is introduced, the level of depth decreases one step toward `0`. The following is a simplified example of the resulting CSS when `sizes` is set to `3`:
 
 ```css
 :root {
-    --density-maxDepth: 3;
-    --level: calc(var(--density-maxDepth - 0)); /* 3 */
+    --level: 3;
 }
 
-[mode~="↯"] {
-    --level: calc(var(--density-maxDepth - 1)); /* 2 */
+[mode~="system:denser"] {
+    --level: 2;
 }
 
-[mode~="↯"] [mode~="↯"]{
-     --level: calc(var(--density-maxDepth - 2)); /* 1 */
+[mode~="system:denser"] [mode~="system:denser"]{
+     --level: 1;
 }
 
-[mode~="↯"] [mode~="↯"] [mode~="↯"] {
-     --level: calc(var(--density-maxDepth - 3)); /* 0 */
+[mode~="system:denser"] [mode~="system:denser"] [mode~="system:denser"] {
+     --level: 0;
 }
 
 ```
 
 The generated repeating selectors are used to indicate how deep the elements appear within the composition. The number of selectors for each declaration is used in the calculation to indicate the depth and compute the level.
+
+These are accessible in the component architecture by using the boolean `denser` in a `box` or `box`-like component. This will automatically set the scope to be denser within that area.
+
+```jsx
+function MoreDenseBox() {
+    return <box.div denser/>
+}
+```
+
+Remember that a more dense box does not mean the box is larger. It means the elements within are smaller and more tightly packed.
 
 ### Generating the Scale
 
@@ -62,16 +81,16 @@ For more about how this affects typography, see the [Typography docs](/docs/foun
 
 ### Gap & Padding
 
-The system uses only `gap` and `padding` as CSS properties wired into the `box` primitive. These are `boolean` and not configurable further past introducing the `depthchange` mode.
+The system uses only `gap` and `padding` as CSS properties wired into the `box` primitive. These are `boolean` and not configurable further past introducing the `denser` flag.
 
 The **gap** value at `level: 0` equals the value provided by `minDimension`. The **padding** value is the next step above (ie., `0 + 1 = 1`) in the spacing scale. See example below for calculations using CSS custom property abbreviations:
 
 ```css
-.box-with-space {
+.box-with-minimum-space {
     --level: 0;
     gap: calc(var(--min) * pow(var(--scale), var(--level)));
     padding: calc(var(--min) * pow(var(--scale), var(--level) + 1));
 }
 ```
 
-The amount of space will increase at each level higher in depth, with a maximum level equal to the given `density.maxDepth` value. Adjusting the distance between steps is done by increasing the `space.scaleFactor`.
+The amount of space will increase at each level higher in depth, with a maximum level equal to the given `sizes` value. Adjusting the distance between steps is done by increasing the `space.scaleFactor`.
