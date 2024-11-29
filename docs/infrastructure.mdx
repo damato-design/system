@@ -1,0 +1,66 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Foundations/Infrastructure" />
+
+# Infrastructure
+
+In order for the system to work seamlessly, there are several features in place.
+
+### Mode Schema
+
+You can create a new mode by running the following command:
+
+```sh
+npm run write:template
+```
+
+This will create a new mode named `newmode.yml` within the `src/modes` directory. Rename the file however you like that aligns to your organizational preference. Note that the best naming conventions explain the purpose of using something over the hinting at the values within.
+
+Each generated `.yml` file will be prefilled with the token structure expected to fully cover an experience. This will also include metadata. The basic top-level setup for this file is as follows:
+
+```yml
+alias: my-mode # The key to activate the the mode. `<box.div mode="my-mode"/>`
+symbolic: # A boolean that identifies the colors within are meant to be "symbolic". See Color docs for more information.
+lang: # A string that represents the language where these values should be applied. (eg., en-US) Leaving this blank will apply the mode in all locales.
+tokens: # The token structure which requires curated values.
+```
+
+Importantly, **the file does not need to be completed as provided**. The recommended organization is to have separate modes for color, typography, and spacing. This is because color is more often experimented with than other styles.
+
+> #### Do I need to create separate files for light and dark mode?
+>
+> No, the system handles light and dark mode by mixing the system color with your given brand color with some amount of influence. You could force your provided color in place by setting `$influence` to `100` for any color token. This will ensure that your given color is the one used. For more information about this approach, see the [Color docs](/docs/foundations-color--docs).
+
+The schema will also help the curation process with intellisense within your code editor.
+
+After a new mode is completed, run the following command to create the required assets to start using the new mode:
+
+```sh
+npm run write:files
+```
+
+This creates the associated `.css` file and updates the inventory of available modes for the Mode Manager to reference in the page lifecycle.
+
+### Mode Manager
+
+There is a script running on each page to help manage the modes applied. The script is initialized in the following manner:
+
+```html
+<script src="mode-manager.js" data-sizes="3" data-preload="my-mode"></script>
+```
+
+The `data-sizes` attribute determines the amount of sizes that this page is meant to display. For more information about this see the [Density docs](/docs/foundations-density--docs).
+
+The `data-preload` attribute is a space-separated list of mode aliases that should be loaded as soon as possible. This is to set the known modes that the page should present in its first load. The manager will also load modes as they appear within the HTML during the page lifecycle.
+
+> #### Wouldn't this be better rendering server-side?
+>
+> Yes, the best case scenario is that the Mode Manager is initialized server-side to create the assets needed before the page is loaded. However, since the examples are running as Storybook instances, only client-side rendering is available.
+
+The result of the manager will create several resources. The `data-sizes` will create CSS selectors that will help inform the size of elements based on depth. This will start at the `:root` and then include additional modes to indicate the level. These are accessible in the component architecture by using the boolean `denser` in a `box` or `box`-like component. This will automatically set the scope to be denser within that area.
+
+```jsx
+function MyDenserBox() {
+    return <box.div denser/>
+}
+```

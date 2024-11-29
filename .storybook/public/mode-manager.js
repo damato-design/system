@@ -21,19 +21,21 @@ class ModeManager {
     }
 
     #coverage(inventory, preload) {
-        const coverage = this.#split(preload).reduce((coverage, mode) => {
-            if (!(mode in inventory)) return coverage;
-            const entry = inventory[mode];
-            if (entry.color === 100) coverage.color = true;
-            if (entry.typography === 100) coverage.typography = true;
-            if (entry.space === 100) coverage.space = true;
-            return coverage;
+        const completed = this.#split(preload).reduce((results, mode) => {
+            if (!(mode in inventory)) return results;
+            inventory[mode].forEach((entry) => {
+                const { coverage } = entry;
+                if (coverage.color === 100) results.color = true;
+                if (coverage.typography === 100) results.typography = true;
+                if (coverage.space === 100) results.space = true;
+            });
+            return results;
         }, {
             color: false,
             typography: false,
             space: false,
         });
-        Object.entries(coverage).forEach(([category, bool]) => {
+        Object.entries(completed).forEach(([category, bool]) => {
             if (!bool) console.warn(`Preloaded modes do not have 100% coverage for ${category}`);
         });
     }

@@ -4,10 +4,6 @@ import { Meta } from '@storybook/blocks';
 
 # Color
 
-> #### Is this approach implemented yet?
->
-> Not yet. There's a great deal of work that needs to be completed to support the token ecosystem. The following describes the expectations of the system and is subject to change.
-
 ### Tokens
 
 The `surface`, `action`, and `control` categories will include the following properties:
@@ -22,13 +18,13 @@ The value applied is a combination of the color and the amount of influence that
 action:
     primary:
         backgroundColor:
-            value: purple
-            influence: 80%
+            $value: purple
+            $influence: 80%
 ```
 
 ### Mixing
 
-Colors are eventually presented in the interface through a mixing system of 3 tiers.
+Colors are eventually presented in the interface through a mixing system.
 
 - **User preference** which informs the base layer of perceived lightness for accessible contrast.
 - **Brand** which informs the customized presentation to identify branding needs.
