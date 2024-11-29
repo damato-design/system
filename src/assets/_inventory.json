@@ -1,0 +1,12 @@
+{
+  "sample": [
+    {
+      "href": "_sample.css",
+      "coverage": {
+        "color": 100,
+        "typography": 100,
+        "space": 100
+      }
+    }
+  ]
+}

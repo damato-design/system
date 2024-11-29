@@ -10,14 +10,37 @@ class ModeManager {
     }
 
     #queue(modes) {
-        modes.split(/\s+/).forEach((mode) => {
+        this.#split(modes).forEach((mode) => {
             if (this.#modes[mode]) return;
             this.#modes[mode] = false;
         }, this);
     }
 
+    #split(str) {
+        return str.split(/\s+/);
+    }
+
+    #coverage(inventory, preload) {
+        const coverage = this.#split(preload).reduce((coverage, mode) => {
+            if (!(mode in inventory)) return coverage;
+            const entry = inventory[mode];
+            if (entry.color === 100) coverage.color = true;
+            if (entry.typography === 100) coverage.typography = true;
+            if (entry.space === 100) coverage.space = true;
+            return coverage;
+        }, {
+            color: false,
+            typography: false,
+            space: false,
+        });
+        Object.entries(coverage).forEach(([category, bool]) => {
+            if (!bool) console.warn(`Preloaded modes do not have 100% coverage for ${category}`);
+        });
+    }
+
     #load(inventory, preload) {
         this.#inventory = inventory;
+        this.#coverage(inventory, preload);
         this.update(preload);
     }
 
@@ -65,10 +88,10 @@ class ModeManager {
             if (this.#modes[mode]) return;
             this.#modes[mode] = true;
             if (!(mode in this.#inventory)) return console.info(`Mode does not exist in inventory: ${mode}`);
-            this.#inventory[mode].forEach((file) => {
+            this.#inventory[mode].forEach((entry) => {
                 const $link = document.createElement('link');
                 $link.rel = 'stylesheet';
-                $link.href = file;
+                $link.href = entry.href;
                 document.head.appendChild($link);
             });
         }, this);
