@@ -42,7 +42,6 @@ const preview: Preview = {
         order: ['Welcome', 'Foundations', 'Patterns', 'Primitives', 'Components']
       }
     },
-    viewMode: 'docs',
     toolbar: { disable: true },
     controls: {
       matchers: {

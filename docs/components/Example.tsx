@@ -4,10 +4,11 @@ import React, { useEffect, useState } from 'react';
 import css from './example.module.css'; 
 
 export default function Example({ stories }) {
-    const { displayName } = stories.default.component;
-    const [group, component] = stories.default.title.toLowerCase().split('/');
-
     const [href, setHref] = useState('');
+    const name = stories.default.component?.displayName || stories.default.component.__docgenInfo?.displayName;
+    const { title } = stories.default;
+    if (!title || !name) return console.error(stories.default.component);
+    const [group, component] = title.toLowerCase().split('/');
     const { tags } = stories.default;
     const isDraft = tags && tags.includes('draft');
 
@@ -28,7 +29,7 @@ export default function Example({ stories }) {
                     <Story of={ stories.Default } meta={ stories } inline={ true } />
                 </figure>
             </div>
-            <div className={ css.title } data-draft={ isDraft }>{ displayName.split('.')[0] }</div>
+            <div className={ css.title } data-draft={ isDraft }>{ name.split('.')[0] }</div>
         </a>
     );
 }

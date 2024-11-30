@@ -2,6 +2,12 @@ import type { StorybookConfig } from "@storybook/react-vite";
 
 const config: StorybookConfig = {
   get stories() {
+    if (process.env.SB_COMPS) {
+      return [
+        "../src/compositions/**/*.stories.@(js|jsx|mjs|ts|tsx)"
+      ]
+    }
+
     return [
       "../docs/**/*.mdx",
       "../src/components/**/*.stories.@(js|jsx|mjs|ts|tsx)"
@@ -9,8 +15,30 @@ const config: StorybookConfig = {
   },
 
   get staticDirs() {
-    return ['./public', '../src/assets']
+    const dirs = ['./public', '../src/assets'];
+
+    if (!process.env.SB_COMPS) {
+      dirs.push('../_static-compositions');
+    }
+
+    return dirs;
   },
+  
+  get refs() {
+    return undefined;
+    if (process.env.SB_COMPS) return undefined;
+    return {
+      'compositions': {
+        title: 'Compositions',
+        url: 'compositions'
+      }
+    }
+  },
+
+  env: (config) => ({
+    ...config,
+    PREVIEW_DOCS: String(!process.env.SB_COMPS),
+  }),
 
   addons: [
     "@storybook/addon-links",
