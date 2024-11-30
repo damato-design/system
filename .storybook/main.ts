@@ -10,7 +10,7 @@ const config: StorybookConfig = {
 
     return [
       "../docs/**/*.mdx",
-      "../src/components/**/*.stories.@(js|jsx|mjs|ts|tsx)"
+      "../src/components/**/*.stories.@(js|jsx|mjs|ts|tsx|md|mdx)"
     ]
   },
 

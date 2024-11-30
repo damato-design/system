@@ -28,4 +28,3 @@ _site
 *storybook.log
 
 src/modes/newmode.yml
-_static-compositions
