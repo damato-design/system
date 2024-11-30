@@ -28,7 +28,7 @@ The amount of sizes that can exist on any page is declared at the page, specific
 
 > #### Why are these components so big?
 >
-> The stories found for most of the components here are displayed with no change in density. This means they are displayed at their largest size. In order to reduce the size of any component, it must exist in a container where `denser` was applied or the `mode="system:denser"`.
+> The examples found for most of the components here are displayed with no change in density. This means they are displayed at their largest size. In order to reduce the size of any component, it must exist in a container where `denser` was applied or the `mode="system:denser"`.
 
 In order to curate when a change of size should occur, a designer should consider **depth** as it relates to how deep a concept exists within an interface. As an example, a hero banner would be considered at a higher level of depth than a headline within a card. If you can consider the card as a smaller version of a page, it would be like a page is scaled down to exist as a card. This amount of scaling is a level of depth, something like a [Russian nested doll](https://en.wikipedia.org/wiki/Matryoshka_doll). Here is an example using `<Button/>` with the nested approach.
 
@@ -40,18 +40,14 @@ In this approach, each change in depth is a change in scope executed using a spe
 
 ```css
 :root {
-    --level: 3;
-}
-
-[mode~="system:denser"] {
     --level: 2;
 }
 
-[mode~="system:denser"] [mode~="system:denser"]{
-     --level: 1;
+[mode~="system:denser"] {
+    --level: 1;
 }
 
-[mode~="system:denser"] [mode~="system:denser"] [mode~="system:denser"] {
+[mode~="system:denser"] [mode~="system:denser"]{
      --level: 0;
 }
 
@@ -71,7 +67,7 @@ Remember that a more dense box does not mean the box is larger. It means the ele
 
 ### Generating the Scale
 
-The resulting `level` will affect scale based calculations for `space` and `text` using the following forumla:
+The provided value for `--level` will affect scale based calculations for `space` and `text` using the following forumla:
 
 ```
 size = min * pow(scale, level)

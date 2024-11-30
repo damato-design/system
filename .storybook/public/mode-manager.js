@@ -1,12 +1,20 @@
 class ModeManager {
+    #sizes;
     #modes = {};
     #inventory;
+    #MODE_LISTENER = '__MODE_LISTENER__';
 
     constructor(preload = '', sizes = 1) {
-        this.#listen(Number(sizes));
+        this.#sizes = Number(sizes);
         fetch('/_inventory.json')
             .then((res) => res.json())
             .then((data) => this.#load(data, preload));
+        this.listen();
+        this.style();
+    }
+
+    get #isClient() {
+        return typeof document !== 'undefined';
     }
 
     #queue(modes) {
@@ -43,7 +51,7 @@ class ModeManager {
     #load(inventory, preload) {
         this.#inventory = inventory;
         this.#coverage(inventory, preload);
-        this.update(preload);
+        return this.update(preload);
     }
 
     #denser(_, index, arr) {
@@ -55,9 +63,9 @@ class ModeManager {
         return `${selector} { --level: ${arr.length - level};  }`;
     }
 
-    #listen(sizes) {
-        const name = '__MODE_LISTENER__';
-        const maxLevel = sizes - 1;
+    style() {
+        const name = this.#MODE_LISTENER;
+        const maxLevel = this.#sizes - 1;
         const css = `
             :root {
                 --level: ${ maxLevel };
@@ -72,31 +80,47 @@ class ModeManager {
 
             ${Array.from({ length: maxLevel }).map(this.#denser, this).join('\n')}
         `;
-    
+        if (!this.#isClient) return css;
         const $style = document.createElement('style');
         $style.innerHTML = css;
         document.head.appendChild($style);
-        document.documentElement.addEventListener('animationend', (ev) => {
-            if (ev.animationName !== name) return;
-            this.update(ev.target.dataset.mode);
-        });
     }
 
     update(modes) {
         if (!this.#inventory) return;
         if (modes) this.#queue(modes);
+        const linkAttrs = this.#linkAttrs();
+        if (!this.#isClient) return linkAttrs.toString();
+        linkAttrs.forEach(({ rel, href }) => {
+            const $link = document.createElement('link');
+            $link.rel = rel;
+            $link.href = href;
+            document.head.appendChild($link);
+        });
+    }
 
-        Object.keys((this.#modes)).forEach((mode) => {
+    listen() {
+        if (!this.#isClient) return;
+        document.documentElement.addEventListener('animationend', (ev) => {
+            if (ev.animationName !== this.#MODE_LISTENER) return;
+            this.update(ev.target.dataset.mode);
+        });
+    }
+
+    #linkAttrs() {
+        const attrs = Object.keys((this.#modes)).flatMap((mode) => {
             if (this.#modes[mode]) return;
             this.#modes[mode] = true;
             if (!(mode in this.#inventory)) return console.info(`Mode does not exist in inventory: ${mode}`);
-            this.#inventory[mode].forEach((entry) => {
-                const $link = document.createElement('link');
-                $link.rel = 'stylesheet';
-                $link.href = entry.href;
-                document.head.appendChild($link);
-            });
-        }, this);
+            return this.#inventory[mode].map((entry) => ({
+                href: entry.href,
+                rel: 'stylesheet'
+            }));
+        }, this).filter(Boolean);
+        attrs.toString = function () {
+            return this.map(({ href, rel }) => `<link rel="${rel}" href="${href}"/>`).join('\n');
+        }
+        return attrs;
     }
 
 }
