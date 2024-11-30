@@ -35,6 +35,22 @@ const page = () => (
   </>
 );
 
+const docs = {
+  page,
+  toc: true,
+  theme,
+  canvas: {
+    sourceState: 'shown'
+  },
+  source: {
+    excludeDecorators: true,
+  },
+  story: {
+    inline: false,
+    iframeHeight: 400,
+  }
+};
+
 const preview: Preview = {
   parameters: {
     options: {
@@ -49,21 +65,7 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
-    docs: {
-      page,
-      toc: true,
-      theme,
-      canvas: {
-        sourceState: 'shown'
-      },
-      source: {
-        excludeDecorators: true,
-      },
-      story: {
-        inline: false,
-        iframeHeight: 400,
-      },
-    }
+    docs
   },
   tags: ['autodocs']
 };

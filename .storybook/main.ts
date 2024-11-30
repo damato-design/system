@@ -23,6 +23,10 @@ const config: StorybookConfig = {
 
     return dirs;
   },
+
+  get docs() {
+    return { docsMode: !process.env.SB_COMPS }
+  },
   
   get refs() {
     return undefined;

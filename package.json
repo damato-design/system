@@ -12,8 +12,8 @@
   "scripts": {
     "build": "npm run storybook:build",
     "vite:build": "tsc -b && vite build",
-    "storybook": "storybook dev -p 6006 --docs",
-    "storybook:build": "storybook build --docs",
+    "storybook": "storybook dev -p 6006",
+    "storybook:build": "storybook build",
     "storybook:comps":"SB_COMPS=true storybook dev -p 7007",
     "build-storybook": "npm run storybook:build",
     "build-compositions":"SB_COMPS=true storybook build -o ./_static-compositions/compositions",

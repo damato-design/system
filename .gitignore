@@ -11,6 +11,7 @@ node_modules
 dist
 dist-ssr
 storybook-static
+_static-compositions
 _site
 *.local
 
