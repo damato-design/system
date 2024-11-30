@@ -30,6 +30,10 @@ export type BoxProps = ElementProps & AlignmentConfig & {
    */
   gap?: boolean;
   /**
+   * Display box using CSS Grid
+   */
+  grid?: boolean;
+  /**
    * Helps layout a group of buttons
    */
   infill?: boolean,
@@ -77,6 +81,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
     denser,
     distribute,
     gap,
+    grid,
     mode,
     infill,
     placeChildren,
@@ -103,12 +108,14 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       stack
     });
 
+    const display = grid ? 'grid' : 'flex';
+
     const styles: ModernCSSProperties = {
       ...alignment,
       anchorName: anchorName,
       aspectRatio: square ? '1' : undefined,
       overflow: clip ? 'clip' : undefined,
-      display: stretch ? 'flex' : 'inline-flex',
+      display: stretch ? display : `inline-${display}`,
       flexGrow: stretch ? 1 : 0,
       flexDirection: stack ? 'column' : 'row',
       flexWrap: wrap || infill ? 'wrap' : 'nowrap',
@@ -119,6 +126,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       [boxClass.round]: round,
       [boxClass.padding]: padding,
       [boxClass.gap]: gap || infill,
+      [boxClass.grid]: grid,
       [surfaceClass.surface]: purpose === 'surface',
       [actionClass.action]: purpose === 'action',
       [controlClass.control]: purpose === 'control'

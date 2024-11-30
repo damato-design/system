@@ -12,9 +12,10 @@
   "scripts": {
     "build": "npm run storybook:build",
     "vite:build": "tsc -b && vite build",
-    "storybook": "storybook dev -p 6006",
-    "storybook:build": "storybook build",
+    "storybook": "storybook dev -p 6006 --docs",
+    "storybook:build": "storybook build --docs",
     "build-storybook": "npm run storybook:build",
+    "build-compositions":"storybook build -o ./_compositions",
     "dev": "npm run storybook",
     "start": "npm run storybook",
     "prepublishOnly": "npm run build",

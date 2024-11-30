@@ -1,7 +1,16 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 
 const config: StorybookConfig = {
-  stories: ["../docs/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
+  get stories() {
+    return [
+      "../docs/**/*.mdx",
+      "../src/components/**/*.stories.@(js|jsx|mjs|ts|tsx)"
+    ]
+  },
+
+  get staticDirs() {
+    return ['./public', '../src/assets']
+  },
 
   addons: [
     "@storybook/addon-links",
@@ -14,33 +23,13 @@ const config: StorybookConfig = {
     disableTelemetry: true,
   },
 
-  framework: {
-    name: "@storybook/react-vite",
-    options: {
-      builder: {
-        fsCache: false
-      }
-    },
-  },
-
-  docs: {
-    docsMode: true
-  },
-
-  typescript: {
-    reactDocgen: "react-docgen-typescript",
-    reactDocgenTypescriptOptions: {
-      shouldExtractLiteralValuesFromEnum: true,
-      propFilter: (prop) => prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
-    }
-  },
+  framework: "@storybook/react-vite",
 
   managerHead: (head) => {
     if (process.env.NODE_ENV === 'development') return head;
     return `${head}
     <link rel="prefetch" as="image" href="https://analytics.damato.design/api/track?domain=system.damato.design" />`;
   },
-
-  staticDirs: ['./public', '../src/assets'],
 };
+
 export default config;
