@@ -5,6 +5,7 @@ import { ProductDetailsPage as PDP } from '.';
 const meta = {
     title: 'Compositions/Product Details Page',
     component: PDP,
+    tags: ['dev', '!autodocs']
 } satisfies Meta<typeof PDP>
 
 export default meta

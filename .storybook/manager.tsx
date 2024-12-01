@@ -4,6 +4,8 @@ import theme from './theme';
 
 addons.setConfig({
     showToolbar: false,
+    showPanel: false,
+    bottomPanelHeight: 0,
     sidebar: {
         renderLabel: (item) => {
             if ('tags' in item && item.tags.includes('draft')) {

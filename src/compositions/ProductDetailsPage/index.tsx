@@ -1,3 +1,3 @@
 export const ProductDetailsPage = () => {
-    return 'hello world'
+    return 'TODO: create product details page'
 }

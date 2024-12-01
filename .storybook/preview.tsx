@@ -54,20 +54,15 @@ const docs = {
 const preview: Preview = {
   parameters: {
     options: {
+      showPanel: false,
       storySort: {
         order: ['Welcome', 'Foundations', 'Patterns', 'Primitives', 'Components']
       }
     },
     toolbar: { disable: true },
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i,
-      },
-    },
     docs
   },
-  tags: ['autodocs']
+  tags: ['autodocs', '!dev']
 };
 
 export default preview;

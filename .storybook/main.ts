@@ -1,48 +1,12 @@
 import type { StorybookConfig } from "@storybook/react-vite";
 
 const config: StorybookConfig = {
-  get stories() {
-    if (process.env.SB_COMPS) {
-      return [
-        "../src/compositions/**/*.stories.@(js|jsx|mjs|ts|tsx)"
-      ]
-    }
+  stories: [
+    "../docs/**/*.mdx",
+    "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
+  ],
 
-    return [
-      "../docs/**/*.mdx",
-      "../src/components/**/*.stories.@(js|jsx|mjs|ts|tsx|md|mdx)"
-    ]
-  },
-
-  get staticDirs() {
-    const dirs = ['./public', '../src/assets'];
-
-    if (!process.env.SB_COMPS) {
-      dirs.push('../_static-compositions');
-    }
-
-    return dirs;
-  },
-
-  get docs() {
-    return { docsMode: !process.env.SB_COMPS }
-  },
-  
-  get refs() {
-    return undefined;
-    if (process.env.SB_COMPS) return undefined;
-    return {
-      'compositions': {
-        title: 'Compositions',
-        url: 'compositions'
-      }
-    }
-  },
-
-  env: (config) => ({
-    ...config,
-    PREVIEW_DOCS: String(!process.env.SB_COMPS),
-  }),
+  staticDirs: ['./public', '../src/assets'],
 
   addons: [
     "@storybook/addon-links",
