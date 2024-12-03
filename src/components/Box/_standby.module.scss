@@ -49,6 +49,7 @@
 
     @media (prefers-reduced-motion: no-preference) {
         background-position-x: 180%;
+        visibility: visible;
         animation: 2s loading ease-in-out infinite;
     }
 
