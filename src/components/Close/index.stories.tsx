@@ -20,7 +20,12 @@ type Story = StoryObj<typeof meta>
 
 /**
  * By itself, the `<Close/>` button is not useful
- * without additional placement and context.
+ * without additional placement and context. It is
+ * visually presented as a `<Button behavior='dismiss'/>`
+ * but given a special internal placement configuration due
+ * to the unique behavior of this treatment. It is rendered
+ * at the inline-end, block-start (ie., LTR top-right) corner
+ * of the surface it is placed within.
  */
 export const Default: Story = {
     args: {
@@ -33,6 +38,11 @@ export const Default: Story = {
  * `<Close/>` button within the first-most element that positions the text.
  * This will allow the content to wrap around the button so it does not
  * interfere with readability or interactivity.
+ * 
+ * In this example, the `<Close/>` button is placed as a child within
+ * the `<text.h2/>` element. This allows the text of the headline to wrap
+ * around the button. This ensures that the text and button do not visually
+ * conflict with each other at any size.
  */
 export const ContentUse: Story = {
     args: {},
@@ -41,7 +51,7 @@ export const ContentUse: Story = {
             <box.div stack gap purpose='surface' padding>
                 <text.h2 priority='primary'>
                     <Close { ...args }/>
-                    Pok pok raw swag food trucks next level man bun palo santo as a bird on it green juice drink yeah
+                    Pok raw swags it to food truck next level brain rot bun palo santo as a bird on it green juice drink yeah
                 </text.h2>
                 <text.p>
                     Schlitz hot chicken fam keytar,
