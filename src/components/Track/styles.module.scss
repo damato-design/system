@@ -29,6 +29,7 @@
         );
         background-size: 1.5em 1.5em;
         background-position: 1.5em 0;
+        visibility: visible;
         animation: indeterminate 1s linear infinite paused;
 
         @media (prefers-reduced-motion: no-preference) {
