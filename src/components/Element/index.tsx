@@ -26,6 +26,11 @@ export const element = proxy<HTMLTagsOnly, ElementProps>('element', (TagName) =>
   }: ElementProps, ref) => {
     const normalizedMode = Array.isArray(mode) ? mode : [mode];
     const modes = normalizedMode.filter(Boolean).join(' ');
-    return createElement(TagName, { ...rest, ref, className, 'data-mode': modes });
+    const props = { ...rest, ref, className } as any;
+    if (modes) {
+      props['data-mode'] = modes;
+    }
+
+    return createElement(TagName, props);
   })
 });
