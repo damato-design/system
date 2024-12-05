@@ -101,7 +101,7 @@ const preview: Preview = {
     options: {
       showPanel: false,
       storySort: {
-        order: ['Welcome', 'Foundations', 'Patterns', 'Primitives', 'Components']
+        order: ['Welcome', 'Foundations', 'Patterns', 'Primitives', 'Components', 'Compositions']
       }
     },
     toolbar: { disable: true },

@@ -5,6 +5,7 @@ import { PageHeader } from './page-header';
 import { ProductHeader } from './product-header';
 import { ProductOptions } from './product-options';
 import { ProductCards } from './product-cards';
+import { PageFooter } from './page-footer';
 
 const relatedProducts = [{
     id: 1,
@@ -57,6 +58,7 @@ export const ProductDetailsPage = () => {
                     <ProductCards products={ relatedProducts }/>
                 </box.div>
             </box.main>
+            <PageFooter>Logo</PageFooter>
         </box.div>
     )
 }
