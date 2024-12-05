@@ -6,6 +6,10 @@
     color: tokens.$surface_auxiliary_foregroundColor;
     --surface-bg: #{tokens.$surface_auxiliary_backgroundColor};
     background: var(--surface-bg);
+
+    & :where(*) {
+        color: tokens.$surface_auxiliary_foregroundColor;
+    }
 }
 
 .surface {
@@ -16,6 +20,10 @@
     color: tokens.$surface_auxiliary_foregroundColor;
     --surface-bg: #{tokens.$surface_auxiliary_backgroundColor};
     background: var(--surface-bg);
+
+    & :where(*) {
+        color: tokens.$surface_auxiliary_foregroundColor;
+    }
 
     &:where([data-priority="primary"]) {
         @include modal;

@@ -5,7 +5,7 @@ import { Media, MediaProps } from '../Media';
 import { lockup, LockupProps } from '../Lockup';
 import { restrictProps } from '../Element';
 
-type CardProps = BoxProps
+export type CardProps = BoxProps
     & MediaProps 
     & LockupProps;
 

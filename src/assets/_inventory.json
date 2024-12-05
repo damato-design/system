@@ -8,5 +8,16 @@
         "space": 100
       }
     }
+  ],
+  "system:critical": [
+    {
+      "href": "_system-critical.css",
+      "symbolic": true,
+      "coverage": {
+        "color": 100,
+        "typography": 0,
+        "space": 0
+      }
+    }
   ]
 }

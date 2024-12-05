@@ -111,7 +111,7 @@ export const lockup = proxy<HTMLTagsOnly, LockupProps>('lockup', (TagName) => {
   }: LockupProps, ref) => {
 
     const Element = box[TagName];
-
+    const isCritical = errorMessage ? 'system:critical' : undefined;
 
     return (
       <LockupProvider>
@@ -120,7 +120,7 @@ export const lockup = proxy<HTMLTagsOnly, LockupProps>('lockup', (TagName) => {
           <box.div stack gap stretch>
             <SubjectComponent>{ subject }</SubjectComponent>
             <PassiveComponent>{ passiveMessage }</PassiveComponent>
-            <box.div stack gap stretch>
+            <box.div stack gap stretch mode={ isCritical }>
                 <ErrorComponent>{ errorMessage }</ErrorComponent>
                 { children }
             </box.div>

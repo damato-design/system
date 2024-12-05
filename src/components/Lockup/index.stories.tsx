@@ -92,6 +92,9 @@ export const Loading: Story = {
  * The component can also be used for form field composition.
  * The `passiveMessage` can be used to include helpful context about the field.
  * The `errorMessage` will politely announce its content when it is provided.
+ * 
+ * When the `errorMessage` is provided, a section of the component is given the
+ * `system:critical` mode to emphasize this component should be addressed.
  */
 export const Form: Story = {
     args: {

@@ -7,4 +7,8 @@
     color: tokens.$surface_primary_foregroundColor;
     box-shadow: 0 14px 20px -4px
         color-mix(in oklch, Canvas, oklch(0 0 0 / .2) 80%);
+
+    & :where(*) {
+        color: tokens.$surface_primary_foregroundColor;
+    }
 }

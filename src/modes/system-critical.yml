@@ -1,0 +1,67 @@
+# yaml-language-server: $schema=./_schema.json
+alias: system:critical
+symbolic: true
+tokens:
+  surface:
+    primary:
+      backgroundColor:
+        $value: white
+        $influence: 0
+      foregroundColor:
+        $value: red
+      borderColor:
+        $value: red
+    secondary:
+      backgroundColor:
+        $value: white
+        $influence: 0
+      foregroundColor:
+        $value: red
+      borderColor:
+        $value: red
+    auxiliary:
+      backgroundColor:
+        $value: white
+        $influence: 0
+      foregroundColor:
+        $value: red
+      borderColor:
+        $value: red
+  action:
+    primary:
+      backgroundColor:
+        $value: red
+        $influence: 80
+      foregroundColor:
+        $value: white
+        $influence: 80
+      borderColor:
+        $value: red
+        $influence: 80
+    secondary:
+      backgroundColor:
+        $value: transparent
+      foregroundColor:
+        $value: red
+        $influence: 60
+      borderColor:
+        $value: red
+        $influence: 60
+    auxiliary:
+      backgroundColor:
+        $value: transparent
+      foregroundColor:
+        $value: red
+        $influence: 40
+      borderColor:
+        $value: transparent
+  control:
+    backgroundColor:
+      $value: red
+      $influence: 20
+    foregroundColor:
+      $value: red
+      $influence: 80
+    borderColor:
+      $value: red
+      $influence: 80

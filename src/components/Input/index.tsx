@@ -2,7 +2,7 @@ import { HTMLInputTypeAttribute, forwardRef } from 'react';
 import { Globals } from 'csstype';
 import css from './styles.module.scss';
 import { proxy } from '../Element/proxy';
-import { element, ElementProps, restrictProps } from '../Element';
+import { element, ElementProps } from '../Element';
 import { useListbox } from '../Listbox';
 import { useLockup } from '../Lockup';
 
@@ -39,7 +39,7 @@ export const input = proxy<HTMLInputTypeAttribute | 'textarea', InputProps>('inp
     }
 
     return <Element
-      {...Object.assign({ type }, restrictProps(props))}
+      {...Object.assign({ type }, props)}
       { ...listboxProps }
       { ...lockupProps }
       ref={ref}
