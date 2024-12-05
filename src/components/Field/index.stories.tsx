@@ -7,6 +7,7 @@ import { box } from '../Box';
 import { input } from '../Input';
 import { icon } from '../Icon';
 import { Button } from '../Button';
+import { text } from '../Text';
 
 /**
  * The `field` primitive helps compose user input fields.
@@ -52,7 +53,7 @@ export const Icon: Story = {
         return (
             <field.div { ...args }>
                 <icon.phone/>
-                <hr/>
+                <text.hr/>
                 <input.tel name='telephone' placeholder='(212) 867-5309'/>
             </field.div>
         )
