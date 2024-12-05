@@ -18,7 +18,7 @@ function ProductCard({
     ...props
 }: Product) {
     return (
-        <card.li { ...props } purpose='surface' padding placeChildren='start'>
+        <card.li { ...props } purpose='surface' padding>
             <text.p>${ price }</text.p>
             <Button priority='secondary' href={ `products/${id}` }>Details</Button>
         </card.li>
@@ -27,7 +27,7 @@ function ProductCard({
 
 export const ProductCards = ({ products }: ProductCardsProps) => {
     return (
-        <box.ul grid denser>
+        <box.ul grid gap denser>
             { products.map((product: Product) => <ProductCard {...product} key={ product.id } />) }
         </box.ul>
     )

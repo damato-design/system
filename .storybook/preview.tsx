@@ -5,6 +5,7 @@ import Github from '../docs/components/Github';
 import theme from './theme';
 
 import './preview.css';
+import { cursorTo } from 'readline';
 
 function capitalize(str: string, locale = navigator.language) {
   return str.replace(/^\p{CWU}/u, (char: string) => char.toLocaleUpperCase(locale));
@@ -51,7 +52,51 @@ const docs = {
   }
 };
 
+function Input({ value, onChange }) {
+  const id = React.useId();
+  const val = isNaN(value) ? 2 : value;
+  const style = {
+    display: 'flex',
+    gap: '1em',
+    fontSize: '1rem',
+    alignContent: 'center',
+    opacity: '.5',
+    marginBlockEnd: '1em'
+  }
+  return (
+    <div style={ style }>
+      <label htmlFor={ id }>Density Level</label>
+      <input
+      id={ id }
+      type='range'
+      min={0}
+      max={2}
+      value={val}
+      onChange={ onChange }/>
+      <output htmlFor={ id }>{ val }</output>
+    </div>
+  )
+}
+
+function LevelChange(Story, { parameters }) {
+  const [level, setLevel] = React.useState(parameters.densityLevel);
+  const onChange = React.useCallback(({ target }: any) => {
+    setLevel(Number(target.value))
+  }, [level]);
+  const style = { '--level': level } as React.CSSProperties;
+  const noControl = typeof parameters.densityLevel === 'boolean' && !parameters.densityLevel;
+  const input = noControl ? null : <Input value={ level } onChange={ onChange } />;
+
+  return (
+    <div style={ style }>
+      { input }
+      <Story/>
+    </div>
+  )
+}
+
 const preview: Preview = {
+  decorators: [LevelChange],
   parameters: {
     options: {
       showPanel: false,

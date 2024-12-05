@@ -63,6 +63,7 @@ export const Modal: Story = {
                 iframeHeight: 760,
             },
         },
+        densityLevel: false
     },
     args: {
         disrupt: true,

@@ -10,17 +10,17 @@ const relatedProducts = [{
     id: 1,
     subject: <text.h2 priority='primary'>Shirt</text.h2>,
     price: 15.99,
-    src: '#'
+    src: 'https://loremflickr.com/1280/720'
 }, {
     id: 2,
     subject: <text.h2 priority='primary'>Pants</text.h2>,
     price: 24.99,
-    src: '#'
+    src: 'https://loremflickr.com/1280/720'
 }, {
     id: 3,
     subject: <text.h2 priority='primary'>Jacket</text.h2>,
     price: 37.99,
-    src: '#'
+    src: 'https://loremflickr.com/1280/720'
 }]
 
 export const ProductDetailsPage = () => {
@@ -38,7 +38,7 @@ export const ProductDetailsPage = () => {
             <PageHeader>Logo</PageHeader>
             <box.main stack stretch padding gap>
                 <ProductHeader>{ productTitle }</ProductHeader>
-                <box.div stretch wrap>
+                <box.div stretch gap>
                     <card.div
                         stretch
                         src={ productImage }

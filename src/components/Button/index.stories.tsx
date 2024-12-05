@@ -64,6 +64,9 @@ export const Secondary: Story = {
  * For more information about this technique, see the [Density docs](/docs/foundations-density--docs).
  */
 export const Sizes: Story = {
+    parameters: {
+        densityLevel: false,
+    },
     args: {
         children: 'Denser and…',
         priority: 'primary'
