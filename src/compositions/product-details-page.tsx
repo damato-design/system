@@ -8,28 +8,33 @@ import { ProductCards } from './product-cards';
 
 const relatedProducts = [{
     id: 1,
-    subject: <text.h2 priority='primary'>Shirt</text.h2>,
+    subject: <text.h2 priority='primary'>Gaming Console</text.h2>,
     price: 15.99,
-    src: 'https://loremflickr.com/1280/720'
+    src: 'https://prd.place/400?id=8'
 }, {
     id: 2,
-    subject: <text.h2 priority='primary'>Pants</text.h2>,
+    subject: <text.h2 priority='primary'>Fragrance Spray</text.h2>,
     price: 24.99,
-    src: 'https://loremflickr.com/1280/720'
+    src: 'https://prd.place/400?id=23'
 }, {
     id: 3,
-    subject: <text.h2 priority='primary'>Jacket</text.h2>,
+    subject: <text.h2 priority='primary'>Vintage Radio</text.h2>,
     price: 37.99,
-    src: 'https://loremflickr.com/1280/720'
+    src: 'https://prd.place/400?id=38'
 }]
 
 export const ProductDetailsPage = () => {
-    const productTitle = <text.h2 priority='primary'>Socks</text.h2>;
-    const productImage = 'https://loremflickr.com/1280/720';
+    const productTitle = <text.h2 priority='primary'>Microphone</text.h2>;
+    const productImage = 'https://prd.place/400?id=12';
     const productTag = 'New Item!';
     const productDescription = (
         <text.p>
-            You are going to love this product!
+            Discover the perfect blend of functionality and style
+            with this versatile product. Designed with durability
+            and ease of use in mind, it adapts seamlessly to your daily
+            needs while maintaining a sleek and modern look.
+            Whether for home, work, or travel, it’s the ideal solution
+            for enhancing convenience and elevating your experience.
         </text.p>
     );
 
@@ -38,7 +43,7 @@ export const ProductDetailsPage = () => {
             <PageHeader>Logo</PageHeader>
             <box.main stack stretch padding gap>
                 <ProductHeader>{ productTitle }</ProductHeader>
-                <box.div stretch gap>
+                <box.div stretch gap placeChildren='top'>
                     <card.div
                         stretch
                         src={ productImage }
@@ -47,7 +52,10 @@ export const ProductDetailsPage = () => {
                     </card.div>
                     <ProductOptions/>
                 </box.div>
-                <ProductCards products={ relatedProducts }/>
+                <box.div denser stack gap>
+                    <text.h2 priority='primary'>Related Products</text.h2>
+                    <ProductCards products={ relatedProducts }/>
+                </box.div>
             </box.main>
         </box.div>
     )

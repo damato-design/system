@@ -68,6 +68,10 @@ export type BoxProps = ElementProps & AlignmentConfig & {
    */
   stretch?: boolean;
   /**
+   * If set, makes the component shrink based on surroundings.
+   */
+  shrink?: boolean;
+  /**
    * If set, allows children to wrap to a new line.
    */
   wrap?: boolean;
@@ -95,6 +99,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
     stack,
     standby,
     stretch,
+    shrink = true,
     wrap,
     ...props
   }: BoxProps, ref) => {
@@ -119,6 +124,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       flexGrow: stretch ? 1 : 0,
       flexDirection: stack ? 'column' : 'row',
       flexWrap: wrap || infill ? 'wrap' : 'nowrap',
+      flexShrink: Number(shrink),
       maxWidth: infill ? 'max-content' : undefined
     };
 
