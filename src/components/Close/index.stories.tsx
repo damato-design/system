@@ -28,6 +28,14 @@ type Story = StoryObj<typeof meta>
  * of the surface it is placed within.
  */
 export const Default: Story = {
+    parameters: {
+        docs: {
+            story: {
+                inline: false,
+                iframeHeight: 260,
+            },
+        },
+    },
     args: {
         float: false
     }
