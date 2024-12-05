@@ -10,7 +10,7 @@
 
 .float {
     float: inline-end;
-    aspect-ratio: 1;
-    padding-inline-start: space.$padding;
-    padding-block-end: space.$padding;
+    padding-inline-start: space.$gap;
+    width: 1lh;
+    height: 1lh;
 }

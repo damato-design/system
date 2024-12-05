@@ -1,4 +1,4 @@
-import { forwardRef, useCallback } from 'react';
+import { forwardRef } from 'react';
 import clsx from 'clsx';
 import css from './styles.module.scss';
 import { Button, ButtonProps } from '../Button';
@@ -13,13 +13,8 @@ export const Close = forwardRef<HTMLElement, CloseProps>(({
     ...props
 }: CloseProps, ref) => {
 
-    const resize = useCallback(($elem: HTMLDivElement) => {
-        const { firstElementChild } = $elem;
-        $elem.style.width = firstElementChild!.clientWidth + 'px';
-    }, []);
-
     return (
-        <div className={ clsx(css.close, { [css.float]: float }) } ref={ resize }>
+        <div className={ clsx(css.close, { [css.float]: float }) }>
             <Button { ...restrictProps(props) } ref={ ref } behavior='dismiss' />
         </div>
     )

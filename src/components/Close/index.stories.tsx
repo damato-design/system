@@ -59,7 +59,7 @@ export const ContentUse: Story = {
             <box.div stack gap purpose='surface' padding>
                 <text.h2 priority='primary'>
                     <Close { ...args }/>
-                    Pok raw swags it to food truck next level brain rot bun palo santo as a bird on it green juice drink yeah
+                    Pok raw swags it to food truck in a level con brain rot in bun palo at dela santo
                 </text.h2>
                 <text.p>
                     Schlitz hot chicken fam keytar,
