@@ -22,10 +22,6 @@ export type BoxProps = ElementProps & AlignmentConfig & {
    */
   clip?: boolean,
   /**
-   * Applies the `mode="system:denser"` to the component
-   */
-  denser?: boolean,
-  /**
    * Add a standardized gap between the children.
    */
   gap?: boolean;
@@ -82,11 +78,9 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
   return forwardRef<HTMLElement, BoxProps>(({
     anchorName,
     clip,
-    denser,
     distribute,
     gap,
     grid,
-    mode,
     infill,
     placeChildren,
     logical = true,
@@ -138,16 +132,12 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       [controlClass.control]: purpose === 'control'
     });
 
-    const modes = Array.isArray(mode) ? mode : [mode];
-    if (denser) modes.push('system:denser');
-
     return <Box
       { ...props }
       ref={ ref }
       className={ classNames }
       aria-busy={ standby ? true : undefined }
       data-priority={ priority }
-      mode={ modes.filter(Boolean) as string[] }
       style={ styles }/>;
   })
 });

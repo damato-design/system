@@ -1,13 +1,15 @@
 import { forwardRef } from 'react';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { box, BoxProps } from '../Box';
-import { Media, MediaProps } from '../Media';
+import { Media } from '../Media';
 import { lockup, LockupProps } from '../Lockup';
 import { restrictProps } from '../Element';
 
 export type CardProps = BoxProps
-    & MediaProps 
-    & LockupProps;
+    & LockupProps
+    & {
+        src?: string
+    };
 
 export const card = proxy<HTMLTagsOnly, CardProps>('card', (TagName) => {
     return forwardRef<HTMLElement, CardProps>(({
@@ -41,7 +43,7 @@ export const card = proxy<HTMLTagsOnly, CardProps>('card', (TagName) => {
                 gap
                 stack={ stack }
                 ref={ ref }>
-                <Media src={ src }/>
+                { src ? <Media src={ src }/> : null }
                 { subject || children ? content : null }
             </Element>
         )

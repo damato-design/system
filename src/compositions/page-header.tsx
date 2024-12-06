@@ -14,7 +14,7 @@ export const PageHeader = ({ children }: HeaderProps) => {
     };
 
     return (
-        <box.header distribute='between' padding gap>
+        <box.header distribute='between' padding gap denser>
             { children }
             <box.ul gap>
                 { Object.entries(links).map(([label, url]) => (
