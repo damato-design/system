@@ -1,12 +1,8 @@
-import { ReactNode } from 'react';
 import { box } from '../components/Box';
 import { text } from '../components/Text';
+import { BrandSwitcher } from './brand-switcher';
 
-type HeaderProps = {
-    children: ReactNode
-}
-
-export const PageHeader = ({ children }: HeaderProps) => {
+export const PageHeader = () => {
     const links = {
         Home: '#',
         Shop: '#',
@@ -14,8 +10,8 @@ export const PageHeader = ({ children }: HeaderProps) => {
     };
 
     return (
-        <box.header distribute='between' padding gap denser>
-            { children }
+        <box.header distribute='between' padding gap denser placeChildren='center'>
+            <BrandSwitcher/>
             <box.ul gap>
                 { Object.entries(links).map(([label, url]) => (
                     <box.li>
