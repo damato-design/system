@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, forwardRef, CSSProperties } from "react";
+import { useState, useRef, forwardRef, CSSProperties, useCallback, useEffect } from "react";
 import { flyout, FlyoutProvider, useFlyout } from "../components/Flyout";
 import { listbox, ListboxProvider, useListbox, ItemsProps } from "../components/Listbox";
 import { box } from '../components/Box';
@@ -8,6 +8,8 @@ const BRANDS = [
     'BestBuy',
     'HomeDepot'
 ]
+
+const BRAND_KEY = 'brand';
 
 type LogoProps = {
     src: string,
@@ -35,32 +37,39 @@ const Logo = forwardRef<HTMLImageElement, LogoProps>((props: LogoProps, ref: any
     )
 });
 
+function updateModes(mode: string) {
+    const $modes: NodeListOf<HTMLElement> = document.querySelectorAll('[data-mode]');
+    if (!$modes) return null;
+    $modes.forEach(($mode: HTMLElement) => {
+        $mode.dataset.mode = $mode.dataset.mode!
+            .replace(/[^:]+:base/g, `${mode}:base`)
+            .replace(/[^:]+:brand/g, `${mode}:brand`)
+    });
+}
+
 export const BrandSwitcher = () => {
     const items = BRANDS.map((brand) => ({
         id: brand.toLowerCase(),
         children: brand
     })) as ItemsProps;
 
-    // TODO: Save/read local storage
-
-    const [active, setActive] = useState(items[0].id);
+    const ls = window.localStorage.getItem(BRAND_KEY);
+    const [active, setActive] = useState(ls || items[0].id);
     const [focus, setFocus] = useState(false);
     const [show, setShow] = useState(false);
     const anchorRef = useRef(null);
 
-    const logo = `${active}-logo.png`;
+    const onChange = useCallback((id: string) => {
+        setActive(id);
+        window.localStorage.setItem(BRAND_KEY, id);
+        updateModes(id);
+    }, []);
 
-    useEffect(() => {
-        const baseMode = `${active}:base`;
-        const brandMode = `${active}:brand`;
-
-        // TODO: Query select all modes, change to these.
-        console.log(baseMode, brandMode);
-    }, [active]);
+    useEffect(() => { updateModes(active) }, []);
 
     const anchor = (
         <Logo
-            src={logo}
+            src={`${active}-logo.png`}
             ref={ anchorRef }
             onFocus={ () => setFocus(true) }
             onBlur={ () => setFocus(false) }
@@ -81,7 +90,7 @@ export const BrandSwitcher = () => {
                     items={ items }
                     visualFocus={ focus }
                     activeDescendant={ active }
-                    onActiveDescendantChange={ setActive } />
+                    onActiveDescendantChange={ onChange } />
             </box.div>
         </flyout.div>
     );
