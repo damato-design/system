@@ -41,8 +41,9 @@ export const ProductDetailsPage = () => {
     return (
         <Page>
             <ProductHeader>{ productTitle }</ProductHeader>
-            <box.div stretch gap placeChildren='top'>
+            <box.div stretch gap placeChildren='top' grid distribute='between'>
                 <card.div
+                    span={ 2 }
                     stretch
                     src={ productImage }
                     passiveMessage={ productTag }>

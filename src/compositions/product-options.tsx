@@ -37,7 +37,13 @@ export const ProductOptions = () => {
     }, [size]);
 
     return (
-        <box.form action='' stack padding gap shrink={ false } purpose='surface'>
+        <box.form 
+            action=''
+            stack
+            padding
+            gap
+            stretch
+            purpose='surface'>
             <lockup.fieldset subject={ <text.label>Select size</text.label> }>
                 <box.div gap stack>
                     { Object.entries(sizes).map(([label, value]) => (

@@ -74,7 +74,7 @@ tokens:
       lineHeight:
         $value: 1.1
       minRem:
-        $value: 2
+        $value: 1.5
       scaleFactor:
         $value: 1.125
     secondary:
@@ -86,7 +86,7 @@ tokens:
       lineHeight:
         $value: 1.5
       minRem:
-        $value: 1.3
+        $value: 1
       scaleFactor:
         $value: 1.125
     auxiliary:
@@ -105,4 +105,4 @@ tokens:
     minDimension:
       $value: .5rem
     scaleFactor:
-      $value: 1.618 
+      $value: 1.4

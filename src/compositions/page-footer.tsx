@@ -48,18 +48,24 @@ const aboutUs = [
 ];
 
 type LinkGroupProps = {
+    title: string,
     links: string[]
 }
 
-function LinkGroup({ links }: LinkGroupProps) {
+function LinkGroup({ links, title }: LinkGroupProps) {
     return (
-        <box.ul gap stack>
-            { links.map((label) => (
-                <box.li>
-                    <text.a href='#' priority='auxiliary'>{ label }</text.a>
-                </box.li>
-            )) }
-        </box.ul>
+        <box.div stack gap stretch>
+            <text.h4 priority='primary'>
+                { title }
+            </text.h4>
+            <box.ul gap stack>
+                { links.map((label) => (
+                    <box.li>
+                        <text.a href='#' priority='auxiliary'>{ label }</text.a>
+                    </box.li>
+                )) }
+            </box.ul>
+        </box.div>
     );
 }
 
@@ -92,23 +98,25 @@ function NewsletterSignup() {
 
 export const PageFooter = () => {
     return (
-        <box.footer distribute='between'
+        <box.footer
             padding
             gap
             denser
             stack
-            placeChildren='top'>
-            <box.div gap>
-                <LinkGroup links={ customerService }/>
-                <LinkGroup links={ resources }/>
-                <LinkGroup links={ aboutUs }/>
+            stretch>
+            <box.div grid stretch padding gap distribute='between' placeChildren='top'>
+                <LinkGroup links={ customerService } title='Customer Service'/>
+                <LinkGroup links={ resources } title='Resources'/>
+                <LinkGroup links={ aboutUs } title='About Us'/>
                 <NewsletterSignup/>
             </box.div>
-            <text.p denser priority='auxiliary'>
-                In-store pricing may vary. Prices and offers are subject to change.
-                © 2024 Company. All rights reserved. COMPANY, the COMPANY logo,
-                the tag design are trademarks of Company and its affiliated companies.
-            </text.p>
+            <box.div placeChildren='center'>
+                <text.p denser priority='auxiliary'>
+                    In-store pricing may vary. Prices and offers are subject to change.
+                    © 2024 Company. All rights reserved. COMPANY, the COMPANY logo,
+                    the tag design are trademarks of Company and its affiliated companies.
+                </text.p>
+            </box.div>
         </box.footer>
     );
 }

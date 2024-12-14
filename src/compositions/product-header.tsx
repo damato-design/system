@@ -18,7 +18,7 @@ export const ProductHeader = ({ children }: ProductHeaderProps) => {
     const [favorite, setFavorite] = useState(false);
     const heart = favorite ? 'favorite' : 'favorite_border';
     return (
-        <box.div gap>
+        <box.div gap wrap>
             { children }
             <box.div placeSelf='end' gap denser>
                 <Button icon={ heart } onClick={ () => setFavorite(!favorite) }>Favorite</Button>

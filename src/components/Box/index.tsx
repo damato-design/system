@@ -68,6 +68,10 @@ export type BoxProps = ElementProps & AlignmentConfig & {
    */
   shrink?: boolean;
   /**
+   * Number of columns to span for grid children
+   */
+  span?: number;
+  /**
    * If set, allows children to wrap to a new line.
    */
   wrap?: boolean;
@@ -89,6 +93,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
     priority,
     purpose,
     round,
+    span,
     square,
     stack,
     standby,
@@ -119,7 +124,8 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       flexDirection: stack ? 'column' : 'row',
       flexWrap: wrap || infill ? 'wrap' : 'nowrap',
       flexShrink: Number(!!shrink),
-      maxWidth: infill ? 'max-content' : undefined
+      maxWidth: infill ? 'max-content' : undefined,
+      gridColumn: typeof span === 'number' ? `span ${span}` : undefined
     };
 
     const classNames = clsx(boxClass.box, { 
