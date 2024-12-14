@@ -115,10 +115,10 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       aspectRatio: square ? '1' : undefined,
       overflow: clip ? 'clip' : undefined,
       display: stretch ? display : `inline-${display}`,
-      flexGrow: Number(stretch),
+      flexGrow: Number(!!stretch),
       flexDirection: stack ? 'column' : 'row',
       flexWrap: wrap || infill ? 'wrap' : 'nowrap',
-      flexShrink: Number(shrink),
+      flexShrink: Number(!!shrink),
       maxWidth: infill ? 'max-content' : undefined
     };
 

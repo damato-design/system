@@ -99,10 +99,10 @@ To do this, we update the variable within this mode:
     );
 }
 ```
-The major difference is that modes marked with symbolic color are appended to the page, while normal modes are prepended. This is so symbolic colors are effectively overrides to the brand where appropriate. We set this in a mode by adding the flag in the `.yml` file. The following example also demonstrates including a locale for the mode.
+The major difference is that modes marked with symbolic color are appended to the page, while normal modes are prepended. This is so symbolic colors are effectively overrides to the brand where appropriate. We set this in a mode by omitting a `brand` in the `.yml` file which indicates that this is curation is meant to exist across brands. The following example also demonstrates including a locale for the mode.
 
 ```yml
-symbolic: true
+brand: my-brand
 lang: en-US
 ```
 

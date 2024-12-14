@@ -19,11 +19,17 @@ This will create a new mode named `newmode.yml` within the `src/modes` directory
 Each generated `.yml` file will be prefilled with the token structure expected to fully cover an experience. This will also include metadata. The basic top-level setup for this file is as follows:
 
 ```yml
-alias: my-mode # The key to activate the the mode. `<box.div mode="my-mode"/>`
-symbolic: # A boolean that identifies the colors within are meant to be "symbolic". See Color docs for more information.
+mode: # The key to activate the the mode. `<box.div mode="my-mode"/>`
+brand: # A string that groups this within a single brand. If not set, this is considered "symbolic". See Color docs for more information.
 lang: # A string that represents the language where these values should be applied. (eg., en-US) Leaving this blank will apply the mode in all locales.
 tokens: # The token structure which requires curated values.
 ```
+
+> #### How should `mode` be named?
+>
+> The `mode` key is important as it is meant to describe the use of this collection of values **across all brands**. This is not necessarily a unique identifier and could be shared across files that have a similar purpose. For example, you could create a mode that is meant to express the concept of premium (`mode: premium`). Then we could use that concept across pages, where each brand could have its own curated "premium" experience. For brands that don't have a concept of premium, the page would be styled in their default curation.
+>
+> **The mode shouldn't attempt to describe the visual style of the region.** It should be named to a purpose or intention for this new mode. The values within the mode will convey the presentation of that purpose.
 
 Importantly, **the file does not need to be completed as provided**. The recommended organization is to have separate modes for color, typography, and spacing. This is because color is more often experimented with than other styles.
 
@@ -31,7 +37,7 @@ Importantly, **the file does not need to be completed as provided**. The recomme
 >
 > No, the system handles light and dark mode by mixing the system color with your given brand color with some amount of influence. You could force your provided color in place by setting `$influence` to `100` for any color token. This will ensure that your given color is the one used. For more information about this approach, see the [Color docs](/docs/foundations-color--docs).
 
-The schema will also help the curation process with intellisense within your code editor.
+The schema should also help the curation process with intellisense within your code editor by using a YAML server extension.
 
 After a new mode is completed, run the following command to create the required assets to start using the new mode:
 
@@ -46,12 +52,14 @@ This creates the associated `.css` file and updates the inventory of available m
 There is a script running on each page to help manage the modes applied. The script is initialized in the following manner:
 
 ```html
-<script src="mode-manager.js" data-sizes="3" data-preload="my-mode"></script>
+<script src="mode-manager.js" data-sizes="3" data-brand="dshouse" data-preload="my-mode"></script>
 ```
 
 The `data-sizes` attribute determines the amount of sizes that this page is meant to display. For more information about this see the [Density docs](/docs/foundations-density--docs).
 
-The `data-preload` attribute is a space-separated list of mode aliases that should be loaded as soon as possible. This is to set the known modes that the page should present in its first load. The manager will also load modes as they appear within the HTML during the page lifecycle.
+The `data-brand` attribute determines what modes to include in the page by space-separated brands. Without setting this value, the page would be presented as unbranded, using system and symbolic colors. Multiple brands can be loaded. Brands omitted from this list will not be lazy loaded.
+
+The `data-preload` attribute is a space-separated list of mode indentifiers that should be loaded as soon as possible. This is to set the known modes that the page should present in its first load. The manager will also load modes as they appear within the HTML during the page lifecycle.
 
 > #### Wouldn't this be better rendering server-side?
 >

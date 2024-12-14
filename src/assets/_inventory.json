@@ -1,23 +1,20 @@
-{
-  "sample": [
-    {
-      "href": "_sample.css",
-      "coverage": {
-        "color": 100,
-        "typography": 100,
-        "space": 100
-      }
+[
+  {
+    "href": "_sample.css",
+    "mode": "sample",
+    "coverage": {
+      "color": 100,
+      "typography": 100,
+      "space": 100
     }
-  ],
-  "system:critical": [
-    {
-      "href": "_system-critical.css",
-      "symbolic": true,
-      "coverage": {
-        "color": 100,
-        "typography": 0,
-        "space": 0
-      }
+  },
+  {
+    "href": "_system-critical.css",
+    "mode": "system:critical",
+    "coverage": {
+      "color": 100,
+      "typography": 0,
+      "space": 0
     }
-  ]
-}
+  }
+]

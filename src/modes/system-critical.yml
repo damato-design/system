@@ -1,6 +1,5 @@
 # yaml-language-server: $schema=./_schema.json
-alias: system:critical
-symbolic: true
+mode: system:critical
 tokens:
   surface:
     primary:

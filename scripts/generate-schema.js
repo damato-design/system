@@ -56,13 +56,13 @@ export default function main() {
     return {
         $schema: 'http://json-schema.org/draft-07/schema#',
         type: 'object',
-        required: ['alias','tokens'],
+        required: ['mode', 'tokens'],
         properties: {
-            alias: {
+            mode: {
                 type: 'string'
             },
-            symbolic: {
-                type: 'boolean'
+            brand: {
+                type: 'string'
             },
             lang: {
                 type: 'string'

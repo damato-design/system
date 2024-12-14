@@ -6,7 +6,6 @@ function colorMix(value, base) {
         $influence: 100
     }, value);
     return `color-mix(in oklch, oklch(from ${base} l c none), oklch(from ${$value} none c h) ${$influence}%)`;
-    return `color-mix(in oklch, ${base}, ${$value} ${$influence}%)`;
 }
 
 function getGroup(name) {
@@ -62,16 +61,18 @@ function getNames(obj, path = '') {
     }, []);
 }
 
-export default function main({ tokens, alias, lang }, systemTokens = {}) {
-    const selector = [`[data-mode~="${alias}"]`];
+export default function main({ tokens, mode, lang }, systemTokens = {}) {
+    const selector = [`[data-mode~="${mode}"]`];
     if (lang) selector.push(`:lang(${lang})`);
     const names = getNames(tokens);
-    const imports = fontImports(names, { tokens });
+    const fonts = fontImports(names, { tokens });
     const rules = names.map((name) => declaration(name, { tokens }, systemTokens));
     const message = `/** Generated file: generate-css.js */`
     return `${message}
-${imports}\n
-${selector.join('')} {
-${rules.join('\n')}
+${fonts}\n
+@scope {
+    ${selector.join('')} {
+        ${rules.join('\n')}
+    }
 }`
 }

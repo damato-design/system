@@ -1,8 +1,9 @@
 /** Generated file: generate-css.js */
 @import url('https://fonts.googleapis.com/css2?display=swap');
 
-[data-mode~="system:critical"] {
-	--brand-surface_primary_backgroundColor: color-mix(in oklch, oklch(from Canvas l c none), oklch(from white none c h) 0%);
+@scope {
+    [data-mode~="system:critical"] {
+        	--brand-surface_primary_backgroundColor: color-mix(in oklch, oklch(from Canvas l c none), oklch(from white none c h) 0%);
 	--brand-surface_primary_foregroundColor: color-mix(in oklch, oklch(from CanvasText l c none), oklch(from red none c h) 100%);
 	--brand-surface_primary_borderColor: color-mix(in oklch, oklch(from GrayText l c none), oklch(from red none c h) 100%);
 	--brand-surface_secondary_backgroundColor: color-mix(in oklch, oklch(from Canvas l c none), oklch(from white none c h) 0%);
@@ -23,4 +24,5 @@
 	--brand-control_backgroundColor: color-mix(in oklch, oklch(from Field l c none), oklch(from red none c h) 20%);
 	--brand-control_foregroundColor: color-mix(in oklch, oklch(from FieldText l c none), oklch(from red none c h) 80%);
 	--brand-control_borderColor: color-mix(in oklch, oklch(from GrayText l c none), oklch(from red none c h) 80%);
+    }
 }

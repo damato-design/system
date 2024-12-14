@@ -36,25 +36,20 @@ function createCSSFileName(file) {
     return `_${name}.css`;
 }
 
-function processFile(acc, file) {
+function processFile(file) {
     const fullPath = path.join(MODE_PATH, file);
     const yamlContents = yaml.load(fs.readFileSync(fullPath, 'utf8'));
-    const alias = yamlContents.alias;
-    if (!alias) throw new Error(`Alias is missing for ${file}`);
+    if (!yamlContents.mode) throw new Error(`Mode is missing for ${file}`);
     const fileName = createCSSFileName(file);
     fs.writeFileSync(path.join(MODE_CSS_PATH, fileName), createCSS(yamlContents, _system.tokens), 'utf8');
-    const entry = createEntry(fileName, yamlContents);
-    if (!acc[alias]) acc[alias] = [];
-    acc[alias] = entry.symbolic
-        ? acc[alias].concat(entry)
-        : [entry].concat(acc[alias]);
-    return acc;
+    return createEntry(fileName, yamlContents);
 }
 
 function createEntry(fileName, data) {
     return {
         href: fileName,
-        symbolic: data.symbolic,
+        brand: data.brand,
+        mode: data.mode,
         lang: data.lang,
         coverage: getCoverage(data.tokens)
     }
@@ -103,7 +98,7 @@ function getTotals(names) {
 
 function main() {
     const allYamlFiles = fs.readdirSync(MODE_PATH);
-    const inventory = allYamlFiles.filter(qualifyingYaml).reduce(processFile, {});
+    const inventory = allYamlFiles.filter(qualifyingYaml).map(processFile);
     fs.writeFileSync(INVENTORY_JSON_PATH, JSON.stringify(inventory, null, 2), 'utf8');
 }
 

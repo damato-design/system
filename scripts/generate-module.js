@@ -16,11 +16,10 @@ function permutate(...arrays) {
     return recurse(arrays);
 }
 
-// $action_primary_backgroundColor: var(--symbolic, var(--brand, _system));
+// $action_primary_backgroundColor: var(--brand, _system);
 function variable(token) {
     const { $value } = token.split('_').reduce((acc, key) => acc[key], this);
     const brand = toCSSVar(prefixType(token, 'brand'), $value);
-    // const symbolic = toCSSVar(prefixType(token, 'symbolic'), brand);
     return `$${token}: ${brand};`;
 }
 
@@ -37,7 +36,7 @@ ${ arr.map((token) => `\t#{'${token}'}: $${token};`).join('\n') }
 
 /**
  * _tokens.module.scss
- * $action_primary_backgroundColor: var(--symbolic, var(--brand, _system));
+ * $action_primary_backgroundColor: var(--brand, _system);
  * :export {
  *  #{'action_primary_backgroundColor'}: $action_primary_backgroundColor;
  * }
