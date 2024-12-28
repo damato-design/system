@@ -37,14 +37,15 @@ const Logo = forwardRef<HTMLImageElement, LogoProps>((props: LogoProps, ref: any
     )
 });
 
-function updateModes(mode: string) {
-    const $modes: NodeListOf<HTMLElement> = document.querySelectorAll('[data-mode]');
-    if (!$modes) return null;
-    $modes.forEach(($mode: HTMLElement) => {
-        $mode.dataset.mode = $mode.dataset.mode!
-            .replace(/[^:]+:base/g, `${mode}:base`)
-            .replace(/[^:]+:brand/g, `${mode}:brand`)
-    });
+type ManagerScript = HTMLScriptElement & {
+    refresh: () => void
+}
+
+function updateBrand(brand: string) {
+    const $script = document.querySelector('script[data-brand]') as ManagerScript;
+    if (!$script) return;
+    $script.dataset.brand = brand;
+    $script?.refresh();
 }
 
 export const BrandSwitcher = () => {
@@ -62,10 +63,10 @@ export const BrandSwitcher = () => {
     const onChange = useCallback((id: string) => {
         setActive(id);
         window.localStorage.setItem(BRAND_KEY, id);
-        updateModes(id);
+        updateBrand(id);
     }, []);
 
-    useEffect(() => { updateModes(active) }, []);
+    useEffect(() => { updateBrand(active) }, []);
 
     const anchor = (
         <Logo

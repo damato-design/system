@@ -1,0 +1,118 @@
+# yaml-language-server: $schema=./_schema.json
+mode: base
+brand: homedepot
+tokens:
+  surface:
+    primary:
+      backgroundColor:
+        $value: white
+        $influence: 0
+      foregroundColor:
+        $value: black
+        $influence: 0
+      borderColor:
+        $value: transparent
+        $influence: 0
+    secondary:
+      backgroundColor:
+        $value: white
+        $influence: 0
+      foregroundColor:
+        $value: black
+        $influence: 0
+      borderColor:
+        $value: transparent
+        $influence: 0
+    auxiliary:
+      backgroundColor:
+        $value: white
+        $influence: 0
+      foregroundColor:
+        $value: black
+        $influence: 0
+      borderColor:
+        $value: transparent
+        $influence: 0
+  action:
+    primary:
+      backgroundColor:
+        $value: rgb(229 109 43)
+        $influence: 50
+      foregroundColor:
+        $value: white
+        $influence: 50
+      borderColor:
+        $value: rgb(229 109 43)
+        $influence: 50
+    secondary:
+      backgroundColor:
+        $value: transparent
+        $influence: 50
+      foregroundColor:
+        $value: rgb(229 109 43)
+        $influence: 50
+      borderColor:
+        $value: rgb(229 109 43)
+        $influence: 50
+    auxiliary:
+      backgroundColor:
+        $value: transparent
+        $influence: 50
+      foregroundColor:
+        $value: rgb(229 109 43)
+        $influence: 50
+      borderColor:
+        $value: transparent
+        $influence: 50
+  control:
+    backgroundColor:
+      $value: white
+      $influence: 0
+    foregroundColor:
+      $value: black
+      $influence: 0
+    borderColor:
+      $value: grey
+      $influence: 0
+  text:
+    primary:
+      fontFamily:
+        $value: Arimo
+        $fallback: sans-serif
+      fontWeight:
+        $value: 700
+      lineHeight:
+        $value: 1.1
+      minRem:
+        $value: 1.5
+      scaleFactor:
+        $value: 1.125
+    secondary:
+      fontFamily:
+        $value: Arimo
+        $fallback: sans-serif
+      fontWeight:
+        $value: 400
+      lineHeight:
+        $value: 1.5
+      minRem:
+        $value: 1
+      scaleFactor:
+        $value: 1.125
+    auxiliary:
+      fontFamily:
+        $value: Arimo
+        $fallback: sans-serif
+      fontWeight:
+        $value: 400
+      lineHeight:
+        $value: 1.5
+      minRem:
+        $value: .8
+      scaleFactor:
+        $value: 1.125
+  space:
+    minDimension:
+      $value: .5rem
+    scaleFactor:
+      $value: 1.4

@@ -9,6 +9,9 @@ class ModeManager {
             globalThis[this.#secret] = this;
         }
         this.#target = $target;
+        if (this.#target) {
+            this.#target.refresh = this.refresh.bind(this);
+        }
         this.#clientRoot();
     }
 
@@ -151,10 +154,14 @@ class ModeManager {
         return resources;
     }
 
+    refresh() {
+        this.#clientReady();
+    }
+
     #clientScope($target, config) {
         if (!$target) return;
         const scopeHTML = this.scope(config);
-        $target.insertAdjacentHTML('afterend', scopeHTML);
+        $target.parentElement.insertAdjacentHTML('beforeend', scopeHTML);
     }
 
     #clientReady() {

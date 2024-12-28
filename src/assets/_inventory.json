@@ -1,5 +1,25 @@
 [
   {
+    "href": "_bestbuy-base.css",
+    "brand": "bestbuy",
+    "mode": "base",
+    "coverage": {
+      "color": 100,
+      "typography": 100,
+      "space": 100
+    }
+  },
+  {
+    "href": "_homedepot-base.css",
+    "brand": "homedepot",
+    "mode": "base",
+    "coverage": {
+      "color": 100,
+      "typography": 100,
+      "space": 100
+    }
+  },
+  {
     "href": "_sample.css",
     "mode": "sample",
     "coverage": {
@@ -15,6 +35,16 @@
       "color": 100,
       "typography": 0,
       "space": 0
+    }
+  },
+  {
+    "href": "_target-base.css",
+    "brand": "target",
+    "mode": "base",
+    "coverage": {
+      "color": 100,
+      "typography": 100,
+      "space": 100
     }
   }
 ]

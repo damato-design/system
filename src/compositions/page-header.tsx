@@ -14,7 +14,7 @@ export const PageHeader = () => {
             <BrandSwitcher/>
             <box.ul gap>
                 { Object.entries(links).map(([label, url]) => (
-                    <box.li>
+                    <box.li key={label}>
                         <text.a href={ url }>{ label }</text.a>
                     </box.li>
                 )) }
