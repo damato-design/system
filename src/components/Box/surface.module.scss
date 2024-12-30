@@ -21,7 +21,7 @@
     --surface-bg: #{tokens.$surface_auxiliary_backgroundColor};
     background: var(--surface-bg);
     border-style: solid;
-    border-width: 1px;
+    // border-width: 1px;
 
     & :where(*) {
         color: tokens.$surface_auxiliary_foregroundColor;
