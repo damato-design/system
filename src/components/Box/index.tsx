@@ -77,7 +77,6 @@ export type BoxProps = ElementProps & AlignmentConfig & {
   wrap?: boolean;
 };
 
-
 export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
   return forwardRef<HTMLElement, BoxProps>(({
     anchorName,
@@ -120,6 +119,8 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       aspectRatio: square ? '1' : undefined,
       overflow: clip ? 'clip' : undefined,
       display: stretch ? display : `inline-${display}`,
+      borderRadius: round === false ? 0 : undefined,
+      border: round === false ? 0 : undefined,
       flexGrow: Number(!!stretch),
       flexDirection: stack ? 'column' : 'row',
       flexWrap: wrap || infill ? 'wrap' : 'nowrap',
@@ -128,7 +129,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       gridColumn: typeof span === 'number' ? `span ${span}` : undefined
     };
 
-    const classNames = clsx(boxClass.box, { 
+    const classNames = clsx(boxClass.box, {
       [boxClass.round]: round,
       [boxClass.padding]: padding,
       [boxClass.gap]: gap || infill,

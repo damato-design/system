@@ -9,7 +9,7 @@ const MODEL_SRC = 'https://images.unsplash.com/photo-1462804993656-fac4ff489837?
 export const CalloutBanner = () => {
     const subject = <text.h2 priority='primary'>New deal every day!</text.h2>
     return (
-        <box.div mode='callout' placeChildren='center' purpose='surface' >
+        <box.div mode='callout' placeChildren='center' purpose='surface'>
             <Media src={ MODEL_SRC }/>
             <lockup.div subject={ subject } padding placeChildren='center'>
                 <text.p>

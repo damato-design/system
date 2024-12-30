@@ -3,8 +3,8 @@
 @use './space.module' as space;
 
 @mixin button {
-    cursor: pointer;
     border-radius: 4px;
+    cursor: pointer;
     text-decoration: none;
     flex: 1 1 auto;
     transition: .218s ease;

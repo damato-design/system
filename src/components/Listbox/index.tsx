@@ -137,6 +137,7 @@ export const listbox = proxy<HTMLTagsOnly, ListboxProps>('listbox', (TagName) =>
                     <Button
                         {...item}
                         stretch
+                        round={ false }
                         key={item.id}
                         icon={getIcon(behavior, item.id === active) || item.icon}
                         aria-selected={item.id === active}

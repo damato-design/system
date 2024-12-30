@@ -12,7 +12,8 @@ const meta = {
     component: Placeholder,
     tags: ['dev', '!autodocs', 'draft'],
     parameters: {
-        densityLevel: false
+        densityLevel: false,
+        layout: 'fullscreen',
     }
 } satisfies Meta<typeof Placeholder>
 
