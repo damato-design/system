@@ -10,11 +10,16 @@
     margin: 0;
     padding: 0;
     border: 0;
+    max-width: 60ch;
 
     @include body;
 
     &:not([data-standby="true"]):empty {
         display: none;
+    }
+
+    &:where(hr) {
+        border: revert;
     }
 
     &:where(a), a {

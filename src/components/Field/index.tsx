@@ -8,6 +8,7 @@ export type FieldProps = BoxProps & {};
 
 export const field = proxy<HTMLTagsOnly, FieldProps>('field', (TagName) => {
     return forwardRef<HTMLElement, FieldProps>(({
+        placeChildren = 'start',
         ...props
     }: FieldProps, ref) => {
 
@@ -18,6 +19,7 @@ export const field = proxy<HTMLTagsOnly, FieldProps>('field', (TagName) => {
             <Element
                 { ...restrictProps(props) }
                 { ...anchor }
+                placeChildren={ placeChildren }
                 ref={ ref }
                 purpose='control'/>
         )

@@ -4,14 +4,15 @@ import { PageFooter } from './page-footer';
 import { ReactNode } from 'react';
 
 type PageProps = {
-    children: ReactNode
+    children: ReactNode,
+    stack?: boolean,
 }
 
-export const Page = ({ children }: PageProps) => {
+export const Page = ({ children, stack = true }: PageProps) => {
     return (
         <box.div stack stretch mode='default:base'>
             <PageHeader/>
-            <box.main stack stretch padding gap>
+            <box.main stack={ stack } stretch padding gap>
                 { children }
             </box.main>
             <PageFooter/>

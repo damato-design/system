@@ -1,24 +1,17 @@
 import { box } from '../components/Box';
-import { text } from '../components/Text';
 import { BrandSwitcher } from './brand-switcher';
+import { SiteSearch } from './site-search';
+import { Button } from '../components/Button';
+import { SiteMenu } from './site-menu';
 
 export const PageHeader = () => {
-    const links = {
-        Home: '#',
-        Shop: '#',
-        Cart: '#'
-    };
-
     return (
         <box.header distribute='between' padding gap denser placeChildren='center'>
             <BrandSwitcher/>
-            <box.ul gap>
-                { Object.entries(links).map(([label, url]) => (
-                    <box.li key={label}>
-                        <text.a href={ url }>{ label }</text.a>
-                    </box.li>
-                )) }
-            </box.ul>
+            <SiteMenu/>
+            <SiteSearch/>
+            <Button icon='account_circle'>Sign In</Button>
+            <Button icon='shopping_cart' aria-label='cart' />
         </box.header>
     );
 }

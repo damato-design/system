@@ -7,14 +7,17 @@ const productTiers = [{
     id: 1,
     subject: <text.h3 priority='primary'>Basic</text.h3>,
     price: 15.99,
+    cta: 'Choose plan'
 }, {
     id: 2,
     subject: <text.h3 priority='primary'>Pro</text.h3>,
     price: 24.99,
+    cta: 'Choose plan'
 }, {
     id: 3,
     subject: <text.h3 priority='primary'>Enterprise</text.h3>,
     price: 37.99,
+    cta: 'Choose plan'
 }]
 
 export const PricingPage = () => {

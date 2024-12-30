@@ -42,7 +42,7 @@ export const ProductOptions = () => {
             stack
             padding
             gap
-            stretch
+            shrink={ false }
             purpose='surface'>
             <lockup.fieldset subject={ <text.label>Select size</text.label> }>
                 <box.div gap stack>

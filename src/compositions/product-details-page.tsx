@@ -10,17 +10,20 @@ const relatedProducts = [{
     id: 1,
     subject: <text.h3 priority='primary'>Gaming Console</text.h3>,
     price: 15.99,
-    src: 'https://prd.place/400?id=8'
+    src: 'https://prd.place/400?id=8',
+    cta: 'View Details'
 }, {
     id: 2,
     subject: <text.h3 priority='primary'>Fragrance Spray</text.h3>,
     price: 24.99,
-    src: 'https://prd.place/400?id=23'
+    src: 'https://prd.place/400?id=23',
+    cta: 'View Details'
 }, {
     id: 3,
     subject: <text.h3 priority='primary'>Vintage Radio</text.h3>,
     price: 37.99,
-    src: 'https://prd.place/400?id=38'
+    src: 'https://prd.place/400?id=38',
+    cta: 'View Details'
 }]
 
 export const ProductDetailsPage = () => {
@@ -41,7 +44,7 @@ export const ProductDetailsPage = () => {
     return (
         <Page>
             <ProductHeader>{ productTitle }</ProductHeader>
-            <box.div stretch gap placeChildren='top' grid distribute='between'>
+            <box.div stretch gap placeChildren='top' wrap distribute='between'>
                 <card.div
                     span={ 2 }
                     stretch

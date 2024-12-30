@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { ProductDetailsPage } from './product-details-page';
 import { ProductListingPage } from './product-listing-page';
 import { PricingPage } from './pricing-page';
+import { CheckoutPage } from './checkout-page';
 
 const Placeholder = () => null;
 
@@ -28,4 +29,8 @@ export const ProductListing: Story = {
 
 export const Pricing: Story = {
     render: PricingPage
+}
+
+export const Checkout: Story = {
+    render: CheckoutPage
 }

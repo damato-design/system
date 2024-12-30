@@ -8,12 +8,14 @@ import { restrictProps } from '../Element';
 type CheckboxProps = InputProps & {
     exclusive?: boolean,
     label?: string,
+    priority?: 'primary' | 'auxiliary' 
 };
 
 export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(({
     exclusive,
     label,
     name,
+    priority,
     ...props
 }, ref) => {
 
@@ -24,14 +26,18 @@ export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(({
 
     return (
         <box.div stack={ false } gap placeChildren='start'>
-            <field.div stretch={ false } round={ exclusive } clip={ false }>
+            <field.div
+                clip={ false }
+                stretch={ false }
+                shrink={ false }
+                round={ exclusive }>
                 { exclusive
                     ? <input.radio { ...config }/>
                     : <input.checkbox { ...config }/>
                 }
             </field.div>
             { label
-                ? <text.label { ...{ htmlFor: id, children: label } }/>
+                ? <text.label { ...{ htmlFor: id, children: label, priority } }/>
                 : null
             }
         </box.div>
