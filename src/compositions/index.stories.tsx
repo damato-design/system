@@ -19,12 +19,13 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const ProductDetails: Story = {
-    render: ProductDetailsPage
-}
 
 export const ProductListing: Story = {
     render: ProductListingPage
+}
+
+export const ProductDetails: Story = {
+    render: ProductDetailsPage
 }
 
 export const Pricing: Story = {

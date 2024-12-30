@@ -1,79 +1,58 @@
 # yaml-language-server: $schema=./_schema.json
-mode: base
-brand: homedepot
+mode: callout
+brand: target
 tokens:
   surface:
     primary:
       backgroundColor:
-        $value: white
-        $influence: 0
+        $value: oklch(0.53 0.22 29.23)
       foregroundColor:
-        $value: black
-        $influence: 0
+        $value: white
       borderColor:
-        $value: transparent
-        $influence: 0
+        $value: oklch(0.53 0.22 29.23)
     secondary:
       backgroundColor:
-        $value: white
-        $influence: 0
+        $value: oklch(0.53 0.22 29.23)
       foregroundColor:
-        $value: black
-        $influence: 0
+        $value: white
       borderColor:
-        $value: transparent
-        $influence: 0
+        $value: oklch(0.53 0.22 29.23)
     auxiliary:
       backgroundColor:
-        $value: white
-        $influence: 0
+        $value: oklch(0.53 0.22 29.23)
       foregroundColor:
-        $value: black
-        $influence: 0
+        $value: white
       borderColor:
-        $value: transparent
-        $influence: 0
+        $value: oklch(0.53 0.22 29.23)
   action:
     primary:
       backgroundColor:
-        $value: oklch(0.68 0.2 43.25)
-        $influence: 50
+        $value: black
       foregroundColor:
         $value: white
-        $influence: 50
       borderColor:
-        $value: oklch(0.68 0.2 43.25)
-        $influence: 50
+        $value: black
     secondary:
       backgroundColor:
         $value: transparent
-        $influence: 50
       foregroundColor:
-        $value: oklch(0.68 0.2 43.25)
-        $influence: 50
+        $value: white
       borderColor:
-        $value: oklch(0.68 0.2 43.25)
-        $influence: 50
+        $value: white
     auxiliary:
       backgroundColor:
         $value: transparent
-        $influence: 50
       foregroundColor:
-        $value: oklch(0.68 0.2 43.25)
-        $influence: 50
+        $value: white
       borderColor:
         $value: transparent
-        $influence: 50
   control:
     backgroundColor:
       $value: white
-      $influence: 0
     foregroundColor:
       $value: black
-      $influence: 0
     borderColor:
-      $value: grey
-      $influence: 0
+      $value: white
   text:
     primary:
       fontFamily:

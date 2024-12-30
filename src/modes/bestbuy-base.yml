@@ -36,30 +36,30 @@ tokens:
   action:
     primary:
       backgroundColor:
-        $value: rgb(0 70 190)
+        $value: oklch(0.29 0.15 263.16)
         $influence: 50
       foregroundColor:
         $value: white
         $influence: 50
       borderColor:
-        $value: rgb(0 70 190)
+        $value: oklch(0.29 0.15 263.16)
         $influence: 50
     secondary:
       backgroundColor:
         $value: transparent
         $influence: 50
       foregroundColor:
-        $value: rgb(0 70 190)
+        $value: oklch(0.29 0.15 263.16)
         $influence: 50
       borderColor:
-        $value: rgb(0 70 190)
+        $value: oklch(0.29 0.15 263.16)
         $influence: 50
     auxiliary:
       backgroundColor:
         $value: transparent
         $influence: 50
       foregroundColor:
-        $value: rgb(0 70 190)
+        $value: oklch(0.29 0.15 263.16)
         $influence: 50
       borderColor:
         $value: transparent

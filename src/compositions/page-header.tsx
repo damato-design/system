@@ -6,7 +6,7 @@ import { SiteMenu } from './site-menu';
 
 export const PageHeader = () => {
     return (
-        <box.header distribute='between' padding gap denser placeChildren='center'>
+        <box.header mode='callout' purpose='surface' distribute='between' padding gap denser placeChildren='center'>
             <BrandSwitcher/>
             <SiteMenu/>
             <SiteSearch/>

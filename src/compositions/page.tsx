@@ -10,7 +10,7 @@ type PageProps = {
 
 export const Page = ({ children, stack = true }: PageProps) => {
     return (
-        <box.div stack stretch mode='default:base'>
+        <box.div stack stretch mode='base'>
             <PageHeader/>
             <box.main stack={ stack } stretch padding gap>
                 { children }

@@ -1,11 +1,18 @@
 import { prefixType, toCustomIdent } from './properties.js';
 
 function colorMix(value, base) {
+    const lightness = typeof value?.$influence === 'number'
+        ? 'none'
+        : 'l';
     const { $value, $influence } = Object.assign({
         $value: 'transparent',
         $influence: 100
     }, value);
-    return `color-mix(in oklch, oklch(from ${base} l c none), oklch(from ${$value} none c h) ${$influence}%)`;
+    return `color-mix(
+        in oklch,
+        oklch(from ${base} l c none),
+        oklch(from ${$value} ${lightness} c h) ${$influence}%
+    )`;
 }
 
 function getGroup(name) {

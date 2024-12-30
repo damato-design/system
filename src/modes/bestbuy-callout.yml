@@ -1,69 +1,51 @@
 # yaml-language-server: $schema=./_schema.json
-mode: base
-brand: homedepot
+mode: callout
+brand: bestbuy
 tokens:
   surface:
     primary:
       backgroundColor:
-        $value: white
-        $influence: 0
+        $value: oklch(0.29 0.15 263.16)
       foregroundColor:
-        $value: black
-        $influence: 0
+        $value: white
       borderColor:
-        $value: transparent
-        $influence: 0
+        $value: oklch(0.29 0.15 263.16)
     secondary:
       backgroundColor:
-        $value: white
-        $influence: 0
+        $value: oklch(0.29 0.15 263.16)
       foregroundColor:
-        $value: black
-        $influence: 0
+        $value: white
       borderColor:
-        $value: transparent
-        $influence: 0
+        $value: oklch(0.29 0.15 263.16)
     auxiliary:
       backgroundColor:
-        $value: white
-        $influence: 0
+        $value: oklch(0.29 0.15 263.16)
       foregroundColor:
-        $value: black
-        $influence: 0
+        $value: white
       borderColor:
-        $value: transparent
-        $influence: 0
+        $value: oklch(0.29 0.15 263.16)
   action:
     primary:
       backgroundColor:
-        $value: oklch(0.68 0.2 43.25)
-        $influence: 50
+        $value: oklch(0.9 0.19 99.06)
       foregroundColor:
-        $value: white
-        $influence: 50
+        $value: black
       borderColor:
-        $value: oklch(0.68 0.2 43.25)
-        $influence: 50
+        $value: oklch(0.9 0.19 99.06)
     secondary:
       backgroundColor:
         $value: transparent
-        $influence: 50
       foregroundColor:
-        $value: oklch(0.68 0.2 43.25)
-        $influence: 50
+        $value: oklch(0.9 0.19 99.06)
       borderColor:
-        $value: oklch(0.68 0.2 43.25)
-        $influence: 50
+        $value: oklch(0.9 0.19 99.06)
     auxiliary:
       backgroundColor:
         $value: transparent
-        $influence: 50
       foregroundColor:
-        $value: oklch(0.68 0.2 43.25)
-        $influence: 50
+        $value: oklch(0.9 0.19 99.06)
       borderColor:
         $value: transparent
-        $influence: 50
   control:
     backgroundColor:
       $value: white

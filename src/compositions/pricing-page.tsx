@@ -17,7 +17,8 @@ const productTiers = [{
     id: 3,
     subject: <text.h3 priority='primary'>Enterprise</text.h3>,
     price: 37.99,
-    cta: 'Choose plan'
+    cta: 'Choose plan',
+    mode: 'callout'
 }]
 
 export const PricingPage = () => {

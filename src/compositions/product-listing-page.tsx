@@ -2,6 +2,7 @@ import { box } from '../components/Box';
 import { text } from '../components/Text';
 import { Page } from './page';
 import { ProductCards } from './product-cards';
+import { CalloutBanner } from './callout-banner';
 
 const relatedProducts = [{
     id: 1,
@@ -26,7 +27,7 @@ const relatedProducts = [{
 export const ProductListingPage = () => {
     return (
         <Page>
-            TODO: Hero cta
+            <CalloutBanner/>
             <box.div denser stack gap>
                 <text.h2 priority='primary'>Products</text.h2>
                 <ProductCards products={ relatedProducts }/>

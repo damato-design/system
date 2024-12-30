@@ -1,69 +1,51 @@
 # yaml-language-server: $schema=./_schema.json
-mode: base
+mode: callout
 brand: homedepot
 tokens:
   surface:
     primary:
       backgroundColor:
-        $value: white
-        $influence: 0
+        $value: oklch(0.68 0.2 43.25)
       foregroundColor:
         $value: black
-        $influence: 0
       borderColor:
-        $value: transparent
-        $influence: 0
+        $value: oklch(0.68 0.2 43.25)
     secondary:
       backgroundColor:
-        $value: white
-        $influence: 0
+        $value: oklch(0.68 0.2 43.25)
       foregroundColor:
         $value: black
-        $influence: 0
       borderColor:
-        $value: transparent
-        $influence: 0
+        $value: oklch(0.68 0.2 43.25)
     auxiliary:
       backgroundColor:
-        $value: white
-        $influence: 0
+        $value: oklch(0.68 0.2 43.25)
       foregroundColor:
         $value: black
-        $influence: 0
       borderColor:
-        $value: transparent
-        $influence: 0
+        $value: oklch(0.68 0.2 43.25)
   action:
     primary:
       backgroundColor:
-        $value: oklch(0.68 0.2 43.25)
-        $influence: 50
+        $value: black
       foregroundColor:
         $value: white
-        $influence: 50
       borderColor:
-        $value: oklch(0.68 0.2 43.25)
-        $influence: 50
+        $value: black
     secondary:
       backgroundColor:
         $value: transparent
-        $influence: 50
       foregroundColor:
-        $value: oklch(0.68 0.2 43.25)
-        $influence: 50
+        $value: black
       borderColor:
-        $value: oklch(0.68 0.2 43.25)
-        $influence: 50
+        $value: black
     auxiliary:
       backgroundColor:
         $value: transparent
-        $influence: 50
       foregroundColor:
-        $value: oklch(0.68 0.2 43.25)
-        $influence: 50
+        $value: black
       borderColor:
         $value: transparent
-        $influence: 50
   control:
     backgroundColor:
       $value: white
