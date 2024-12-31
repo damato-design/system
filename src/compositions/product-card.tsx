@@ -13,10 +13,11 @@ export const ProductCard = ({
     price,
     cta,
     children,
+    maxWidth = '200px',
     ...props
 }: Product) => {
     return (
-        <card.li { ...props } purpose='surface' padding>
+        <card.li { ...props } maxWidth={ maxWidth } purpose='surface' padding>
             <text.p>${ price }</text.p>
             { children }
             <Button priority='secondary' href={ `products/${id}` }>{ cta }</Button>

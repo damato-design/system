@@ -54,7 +54,7 @@ type LinkGroupProps = {
 
 function LinkGroup({ links, title }: LinkGroupProps) {
     return (
-        <box.div stack gap stretch>
+        <box.div stack gap denser>
             <text.h4 priority='primary'>
                 { title }
             </text.h4>
@@ -79,6 +79,7 @@ function NewsletterSignup() {
 
     return (
         <card.form
+            stretch
             denser
             padding
             gap
@@ -99,23 +100,25 @@ function NewsletterSignup() {
 export const PageFooter = () => {
     return (
         <box.footer
-            padding
             gap
-            denser
             stack
             stretch>
-            <box.div grid stretch padding gap distribute='between' placeChildren='top'>
-                <LinkGroup links={ customerService } title='Customer Service'/>
-                <LinkGroup links={ resources } title='Resources'/>
-                <LinkGroup links={ aboutUs } title='About Us'/>
+            <box.div stretch padding gap wrap distribute='between' placeChildren='top'>
+                <box.div stretch gap wrap distribute='between' placeChildren='top'>
+                    <LinkGroup links={ customerService } title='Customer Service'/>
+                    <LinkGroup links={ resources } title='Resources'/>
+                    <LinkGroup links={ aboutUs } title='About Us'/>
+                </box.div>
+                <box.div padding />
                 <NewsletterSignup/>
             </box.div>
-            <box.div placeChildren='center'>
+            <box.div placeChildren='center' stack>
                 <text.p denser priority='auxiliary'>
                     In-store pricing may vary. Prices and offers are subject to change.
                     © 2024 Company. All rights reserved. COMPANY, the COMPANY logo,
                     the tag design are trademarks of Company and its affiliated companies.
                 </text.p>
+                <box.div padding />
             </box.div>
         </box.footer>
     );

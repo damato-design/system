@@ -28,10 +28,12 @@ export const ProductListingPage = () => {
     return (
         <Page>
             <CalloutBanner/>
+            <box.div padding />
             <box.div denser stack gap>
                 <text.h2 priority='primary'>Products</text.h2>
                 <ProductCards products={ relatedProducts }/>
             </box.div>
+            <box.div padding />
         </Page>
     )
 }
