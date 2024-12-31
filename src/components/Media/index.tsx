@@ -7,6 +7,7 @@ export type MediaProps = (React.ImgHTMLAttributes<HTMLImageElement>
   | React.VideoHTMLAttributes<HTMLVideoElement>) 
   & ElementProps
   & {
+    maxWidth?: string,
     src: string[] | string,
     /**
      * Avoids loading presentation when set to false
@@ -48,6 +49,7 @@ function getElement(src: string | undefined) {
 }
 
 export const Media = forwardRef<HTMLElement, MediaProps>(({
+  maxWidth,
   src,
   standby = true,
   ...props
@@ -77,6 +79,7 @@ export const Media = forwardRef<HTMLElement, MediaProps>(({
   return (
     <Media
       { ...restrictProps(config) }
+      style={{ maxWidth }}
       ref={ ref }
       onLoadedData={ onComplete }
       onError={ onComplete }

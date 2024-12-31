@@ -8,11 +8,13 @@ import { restrictProps } from '../Element';
 export type CardProps = BoxProps
     & LockupProps
     & {
+        maxWidth?: string,
         src?: string
     };
 
 export const card = proxy<HTMLTagsOnly, CardProps>('card', (TagName) => {
     return forwardRef<HTMLElement, CardProps>(({
+        maxWidth,
         stack = true,
         src,
         icon,
@@ -43,7 +45,7 @@ export const card = proxy<HTMLTagsOnly, CardProps>('card', (TagName) => {
                 gap
                 stack={ stack }
                 ref={ ref }>
-                { src ? <Media src={ src }/> : null }
+                { src ? <Media src={ src } maxWidth={ maxWidth }/> : null }
                 { subject || children ? content : null }
             </Element>
         )

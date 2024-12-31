@@ -5,9 +5,9 @@ type ProductCardsProps = {
     products: typeof ProductCard[]
 }
 
-export const ProductCards = ({ products }: ProductCardsProps) => {
+export const ProductCards = ({ products, ...props }: ProductCardsProps) => {
     return (
-        <box.ul grid gap>
+        <box.ul { ...props } grid gap>
             { products.map((product: any) => <ProductCard {...product} key={ product.id } />) }
         </box.ul>
     )

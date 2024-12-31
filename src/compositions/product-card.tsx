@@ -12,11 +12,13 @@ export const ProductCard = ({
     id,
     price,
     cta,
+    children,
     ...props
 }: Product) => {
     return (
         <card.li { ...props } purpose='surface' padding>
             <text.p>${ price }</text.p>
+            { children }
             <Button priority='secondary' href={ `products/${id}` }>{ cta }</Button>
         </card.li>
     )

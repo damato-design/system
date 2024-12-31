@@ -104,6 +104,7 @@ export const lockup = proxy<HTMLTagsOnly, LockupProps>('lockup', (TagName) => {
   return forwardRef<HTMLElement, LockupProps>(({
     icon: iconRef,
     children,
+    placeChildren,
     subject,
     passiveMessage,
     errorMessage,
@@ -115,12 +116,12 @@ export const lockup = proxy<HTMLTagsOnly, LockupProps>('lockup', (TagName) => {
 
     return (
       <LockupProvider>
-        <Element { ...restrictProps(props) } ref={ ref } gap>
+        <Element { ...restrictProps(props) } placeChildren={ placeChildren } ref={ ref } gap>
           { getIcon(iconRef, subject as ReactElement) }
           <box.div stack gap stretch>
             <SubjectComponent>{ subject }</SubjectComponent>
             <PassiveComponent>{ passiveMessage }</PassiveComponent>
-            <box.div stack gap stretch mode={ isCritical }>
+            <box.div stack gap stretch placeChildren={ placeChildren } mode={ isCritical }>
                 <ErrorComponent>{ errorMessage }</ErrorComponent>
                 { children }
             </box.div>

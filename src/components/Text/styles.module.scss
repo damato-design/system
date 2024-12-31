@@ -35,6 +35,10 @@
         cursor: pointer;
     }
 
+    &:where(ul) {
+        padding: revert;
+    }
+
     &:where([data-priority="primary"]) {
         text-wrap: balance;
         font-family: tokens.$text_primary_fontFamily;

@@ -34,7 +34,7 @@ export const CheckoutPage = () => {
             <box.div stack stretch>
                 <text.h2 priority='primary'>Checkout</text.h2>
                 <box.div stretch gap placeChildren='top-start' distribute='between'>
-                    <card.div { ...product } placeChildren='start'/>
+                    <card.div { ...product } maxWidth='120px' placeChildren='start'/>
                     <QuantitySelector label={ quantityLabel }/>
                     <CheckoutOptions/>
                 </box.div>
