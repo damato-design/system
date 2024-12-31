@@ -35,6 +35,7 @@ export const card = proxy<HTMLTagsOnly, CardProps>('card', (TagName) => {
                     passiveMessage,
                     errorMessage,
                 }}
+                placeSelf='bottom-start'
                 stack
                 gap/>
         )

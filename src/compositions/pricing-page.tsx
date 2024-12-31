@@ -56,7 +56,7 @@ export const PricingPage = () => {
         <Page>
              <box.div denser stack gap>
                 <text.h2 priority='primary'>Membership Tiers</text.h2>
-                <ProductCards placeChildren='top' grid={ 3 } products={ productTiers }/>
+                <ProductCards placeChildren='top' columns={ 3 } products={ productTiers }/>
             </box.div>
         </Page>
     )

@@ -29,7 +29,7 @@ type _BoxProps = ElementProps & AlignmentConfig & {
   /**
    * Display box using CSS Grid
    */
-  grid?: boolean | number;
+  columns?: boolean | number;
   /**
    * Helps layout a group of buttons
    */
@@ -89,7 +89,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       clip,
       distribute,
       gap,
-      grid,
+      columns,
       infill,
       placeChildren,
       logical = true,
@@ -116,7 +116,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       stack
     });
 
-    const display = Boolean(grid) ? 'grid' : 'flex';
+    const display = Boolean(columns) ? 'grid' : 'flex';
 
     const styles: ModernCSSProperties = {
       ...alignment,
@@ -134,9 +134,9 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       gridColumn: typeof span === 'number' ? `span ${span}` : undefined,
     };
 
-    if (grid) {
-      styles.gridTemplateColumns = typeof grid === 'number'
-        ? `repeat(${grid}, minmax(auto, 430px))`
+    if (columns) {
+      styles.gridTemplateColumns = typeof columns === 'number'
+        ? `repeat(${columns}, minmax(auto, 430px))`
         : `repeat(auto-fill, minmax(260px, 1fr))`
     }
 
