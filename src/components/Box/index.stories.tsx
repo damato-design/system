@@ -161,14 +161,21 @@ export const Priority: Story = {
 
 /**
  * To handle locally responsive needs in the style of a configurable
- * container query, use the `reflow` option. This takes an object where
- * each key is a pixel width as a number and a set of `box` props as a value.
+ * [container query](https://developer.mozilla.org/en-US/docs/Web/API/CSSContainerRule/containerQuery),
+ * use the `reflow` option. This takes an object where each key is
+ * a pixel width as a number and a set of `box` props as a value.
  * When the current box width is less than or equal to a number key provided,
  * the new props given are merged with the original props. This allows for the
  * configuration to be re-rendered with new options for smaller regions.
  * 
  * In the example below, when the region is resized to `600px` or below, the
  * `box` is updated to `stack`.
+ * 
+ * > #### Why not use breakpoints?
+ * >
+ * > A component should respond to changes that directly affect it, not respond
+ * > to changes that occur farther from its placement.
+ * > [Read more about this principle.](https://gridless.design)
  */
 export const Reflow: Story = {
     args: {

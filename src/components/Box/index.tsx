@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useMemo, useState } from 'react';
+import { forwardRef } from 'react';
 import clsx from 'clsx';
 import boxClass from './box.module.scss';
 import surfaceClass from './surface.module.scss';
@@ -7,6 +7,7 @@ import controlClass from './control.module.scss';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { element, ElementProps } from '../Element';
 import { alignmentStyle, AlignmentConfig } from './alignment';
+import { useReflow, ReflowProp } from './reflow';
 
 interface ModernCSSProperties extends React.CSSProperties {
   anchorName?: string;
@@ -77,50 +78,11 @@ type _BoxProps = ElementProps & AlignmentConfig & {
   wrap?: boolean;
 };
 
-export type BoxProps = _BoxProps & {
-  reflow?: Record<number, _BoxProps>
-}
-
-function thresholdMatches(thresholds: number[], width: number) {
-  return thresholds.reduce((acc: number[], threshold) => {
-    return width <= threshold ? acc.concat(threshold) : acc ;
-  }, []);
-}
+export type BoxProps = _BoxProps & ReflowProp<_BoxProps>;
 
 export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
-  return forwardRef<HTMLElement, BoxProps>(({
-    reflow = {},
-    ...originalProps
-  }: BoxProps, ref) => {
+  return forwardRef<HTMLElement, BoxProps>((originalProps: BoxProps, ref) => {
     const Box = element[TagName];
-    const [threshold, setThreshold] = useState(Infinity);
-    const reflowWidths = useMemo(() => Object.keys(reflow).map(Number) || [], [reflow]);
-
-    const resizeObserve = useCallback(($elem: HTMLElement) => {
-      if (!$elem) return;
-
-      if (typeof ref === "function") {
-        ref($elem);
-      } else if (ref) {
-        ref.current = $elem;
-      }
-
-      if (!reflowWidths.length) return;
-
-      const observer = new ResizeObserver(([entry]) => {
-        requestAnimationFrame(() => {
-          const matches = thresholdMatches(reflowWidths, entry.contentRect.width);
-          setThreshold(Math.min(...matches));
-        })
-      });
-      observer.observe($elem);
-      // TODO: Cleanup observer on dismount?
-    }, [reflowWidths]);
-
-    const reflowProps = useMemo(() => {
-      return thresholdMatches(reflowWidths, threshold)
-        .reduce((acc, key) => Object.assign(acc, reflow[key]), originalProps)
-    }, [reflowWidths, threshold]);
 
     const {
       anchorName,
@@ -144,7 +106,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       shrink = true,
       wrap,
       ...props
-    } = reflowProps;
+    } = useReflow<HTMLElement, BoxProps>(originalProps, ref);
 
     const alignment = alignmentStyle({
       distribute,
@@ -184,7 +146,6 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
 
     return <Box
       { ...props }
-      ref={ resizeObserve }
       className={ classNames }
       aria-busy={ standby ? true : undefined }
       data-priority={ priority }

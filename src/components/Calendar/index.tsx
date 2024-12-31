@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useState } from "react";
+import { forwardRef, useCallback, useState } from 'react';
 import css from './styles.module.scss';
 import {
     getDate,
@@ -10,7 +10,7 @@ import {
     getWeeks,
     getActiveDescendant
 } from './getters';
-import { Button } from "../Button";
+import { Button } from '../Button';
 import { text } from '../Text';
 
 type CalendarProps = {
@@ -21,7 +21,7 @@ type CalendarProps = {
 }
 
 function isLTR(ev: any) {
-    return (ev.target as HTMLElement).matches(":dir(ltr)");
+    return (ev.target as HTMLElement).matches(':dir(ltr)');
 }
 
 type KeyNavigation = {
@@ -52,8 +52,8 @@ function Header({ year, month }: any) {
     const offset = getOffset(day1);
     day1.setUTCDate(day1.getUTCDate() - offset);
 
-    const narrowFormatter = getFormatter({ weekday: "narrow" });
-    const longFormatter = getFormatter({ weekday: "long" });
+    const narrowFormatter = getFormatter({ weekday: 'narrow' });
+    const longFormatter = getFormatter({ weekday: 'long' });
 
     const cells = Array.from({ length: 7 }, () => {
         const values = {

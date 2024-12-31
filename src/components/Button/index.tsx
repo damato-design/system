@@ -53,8 +53,8 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
     const { anchor: listboxProps } = useListbox();
 
     const config = Object.assign({}, props, {
-        "aria-labelledby": props['aria-labelledby'],
-        "aria-label": behavior === 'dismiss' ? 'Close' : props['aria-label'],
+        'aria-labelledby': props['aria-labelledby'],
+        'aria-label': behavior === 'dismiss' ? 'Close' : props['aria-label'],
         placeChildren: 'center',
         type,
         role,
@@ -64,7 +64,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
 
     const ariaLabelledby = [props['aria-labelledby']];
     if (behavior === 'dismiss') ariaLabelledby.push(IDREF.close);
-    config["aria-labelledby"] = ariaLabelledby.filter(Boolean).join(' ') || undefined;
+    config['aria-labelledby'] = ariaLabelledby.filter(Boolean).join(' ') || undefined;
 
     if (['option', 'menuitem'].includes(role as string)) {
         config.placeChildren = 'start'

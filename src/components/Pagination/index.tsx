@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useState } from "react";
+import { forwardRef, useCallback } from 'react';
 import { Menu, MenuProps } from '../Menu';
 import { Button } from '../Button';
 import { box } from '../Box';
@@ -32,7 +32,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(({
     }, [index, items, cta]);
 
     return (
-        <box.nav ref={ ref } gap stretch infill={ infill } distribute="between">
+        <box.nav ref={ ref } gap stretch infill={ infill } distribute='between'>
             <Menu
                 { ...rest }
                 stretch={ infill }
@@ -40,7 +40,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(({
                 onActiveDescendantChange={ onActiveDescendantChange }
                 onConfirm={ onConfirm }
                 items={ items }/>
-            <box.div stretch={ infill } gap placeSelf="end">
+            <box.div stretch={ infill } gap placeSelf='end'>
                 <Button
                     icon='navigate_before'
                     disabled={ index === 0 }

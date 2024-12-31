@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Menu, ItemsProps } from "../components/Menu";
+import { useState } from 'react';
+import { Menu, ItemsProps } from '../components/Menu';
 
 const links = {
     Categories: '#',
