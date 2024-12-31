@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useCallback, useMemo, useState } from 'react';
 import clsx from 'clsx';
 import boxClass from './box.module.scss';
 import surfaceClass from './surface.module.scss';
@@ -12,7 +12,7 @@ interface ModernCSSProperties extends React.CSSProperties {
   anchorName?: string;
 }
 
-export type BoxProps = ElementProps & AlignmentConfig & {
+type _BoxProps = ElementProps & AlignmentConfig & {
   /**
    * Use to help with anchor positioning.
    */
@@ -77,31 +77,74 @@ export type BoxProps = ElementProps & AlignmentConfig & {
   wrap?: boolean;
 };
 
+export type BoxProps = _BoxProps & {
+  reflow?: Record<number, _BoxProps>
+}
+
+function thresholdMatches(thresholds: number[], width: number) {
+  return thresholds.reduce((acc: number[], threshold) => {
+    return width <= threshold ? acc.concat(threshold) : acc ;
+  }, []);
+}
+
 export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
   return forwardRef<HTMLElement, BoxProps>(({
-    anchorName,
-    clip,
-    distribute,
-    gap,
-    grid,
-    infill,
-    placeChildren,
-    logical = true,
-    placeSelf,
-    padding,
-    priority,
-    purpose,
-    round,
-    span,
-    square,
-    stack,
-    standby,
-    stretch,
-    shrink = true,
-    wrap,
-    ...props
+    reflow = {},
+    ...originalProps
   }: BoxProps, ref) => {
     const Box = element[TagName];
+    const [threshold, setThreshold] = useState(Infinity);
+    const reflowWidths = useMemo(() => Object.keys(reflow).map(Number) || [], [reflow]);
+
+    const resizeObserve = useCallback(($elem: HTMLElement) => {
+      if (!$elem) return;
+
+      if (typeof ref === "function") {
+        ref($elem);
+      } else if (ref) {
+        ref.current = $elem;
+      }
+
+      if (!reflowWidths.length) return;
+
+      const observer = new ResizeObserver(([entry]) => {
+        requestAnimationFrame(() => {
+          const matches = thresholdMatches(reflowWidths, entry.contentRect.width);
+          setThreshold(Math.min(...matches));
+        })
+      });
+      observer.observe($elem);
+      // TODO: Cleanup observer on dismount?
+    }, [reflowWidths]);
+
+    const reflowProps = useMemo(() => {
+      return thresholdMatches(reflowWidths, threshold)
+        .reduce((acc, key) => Object.assign(acc, reflow[key]), originalProps)
+    }, [reflowWidths, threshold]);
+
+    const {
+      anchorName,
+      clip,
+      distribute,
+      gap,
+      grid,
+      infill,
+      placeChildren,
+      logical = true,
+      placeSelf,
+      padding,
+      priority,
+      purpose,
+      round,
+      span,
+      square,
+      stack,
+      standby,
+      stretch,
+      shrink = true,
+      wrap,
+      ...props
+    } = reflowProps;
 
     const alignment = alignmentStyle({
       distribute,
@@ -141,7 +184,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
 
     return <Box
       { ...props }
-      ref={ ref }
+      ref={ resizeObserve }
       className={ classNames }
       aria-busy={ standby ? true : undefined }
       data-priority={ priority }

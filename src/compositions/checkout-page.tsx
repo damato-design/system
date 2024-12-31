@@ -33,11 +33,15 @@ export const CheckoutPage = () => {
         <Page stack={ false }>
             <box.div stack stretch>
                 <text.h2 priority='primary'>Checkout</text.h2>
-                <box.div stretch gap placeChildren='top-start' distribute='between'>
+                <box.div padding />
+                <box.div stretch gap placeChildren='top-start'>
                     <card.div { ...product } maxWidth='120px' placeChildren='start'/>
+                    <box.div padding />
                     <QuantitySelector label={ quantityLabel }/>
+                    <box.div padding />
                     <CheckoutOptions/>
                 </box.div>
+                <box.div padding />
                 <box.div denser stack gap>
                     <text.h2 priority='primary'>Saved Items</text.h2>
                     <ProductCards products={ savedProducts }/>

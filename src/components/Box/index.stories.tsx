@@ -158,3 +158,31 @@ export const Priority: Story = {
         children: 'Click here!'
     }
 }
+
+/**
+ * To handle locally responsive needs in the style of a configurable
+ * container query, use the `reflow` option. This takes an object where
+ * each key is a pixel width as a number and a set of `box` props as a value.
+ * When the current box width is less than or equal to a number key provided,
+ * the new props given are merged with the original props. This allows for the
+ * configuration to be re-rendered with new options for smaller regions.
+ * 
+ * In the example below, when the region is resized to `600px` or below, the
+ * `box` is updated to `stack`.
+ */
+export const Reflow: Story = {
+    args: {
+        stretch: true,
+        gap: true,
+        children: [
+            <text.span key={ 'first' }>first</text.span>,
+            <text.span key={ 'middle' }>middle</text.span>,
+            <text.span key={ 'last' }>last</text.span>
+        ],
+        reflow: {
+            600: {
+                stack: true
+            }
+        }
+    }
+}
