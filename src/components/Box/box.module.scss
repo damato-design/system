@@ -22,10 +22,6 @@
         gap: space.$gap;
     }
 
-    &.grid {
-        grid-template-columns: repeat(auto-fit, minmax(230px, max-content));
-    }
-
     &:where(details) {
         @include details;
     }

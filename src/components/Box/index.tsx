@@ -29,7 +29,7 @@ type _BoxProps = ElementProps & AlignmentConfig & {
   /**
    * Display box using CSS Grid
    */
-  grid?: boolean;
+  grid?: boolean | number;
   /**
    * Helps layout a group of buttons
    */
@@ -116,7 +116,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       stack
     });
 
-    const display = grid ? 'grid' : 'flex';
+    const display = Boolean(grid) ? 'grid' : 'flex';
 
     const styles: ModernCSSProperties = {
       ...alignment,
@@ -131,14 +131,19 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       flexWrap: wrap || infill ? 'wrap' : 'nowrap',
       flexShrink: Number(!!shrink),
       maxWidth: infill ? 'max-content' : undefined,
-      gridColumn: typeof span === 'number' ? `span ${span}` : undefined
+      gridColumn: typeof span === 'number' ? `span ${span}` : undefined,
     };
+
+    if (grid) {
+      styles.gridTemplateColumns = typeof grid === 'number'
+        ? `repeat(${grid}, minmax(auto, 430px))`
+        : `repeat(auto-fill, minmax(260px, 1fr))`
+    }
 
     const classNames = clsx(boxClass.box, {
       [boxClass.round]: round,
       [boxClass.padding]: padding,
       [boxClass.gap]: gap || infill,
-      [boxClass.grid]: grid,
       [surfaceClass.surface]: purpose === 'surface',
       [actionClass.action]: purpose === 'action',
       [controlClass.control]: purpose === 'control'

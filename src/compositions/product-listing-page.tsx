@@ -31,7 +31,7 @@ export const ProductListingPage = () => {
             <box.div padding />
             <box.div denser stack gap>
                 <text.h2 priority='primary'>Products</text.h2>
-                <ProductCards products={ relatedProducts }/>
+                <ProductCards products={ relatedProducts } grid/>
             </box.div>
             <box.div padding />
         </Page>
