@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, ReactNode } from 'react';
 import { Menu, ItemsProps } from '../components/Menu';
 
 const links = {
@@ -8,7 +8,7 @@ const links = {
     'Pickup & Delivery': '#'
 };
 
-export const SiteMenu = () => {
+export const SiteMenu = ({ label }: { label?: ReactNode }) => {
     const items = Object.entries(links).map(([label, url], i) => ({
         id: `link-${i}`,
         children: label,
@@ -22,6 +22,6 @@ export const SiteMenu = () => {
             icon='menu'
             items={ items }
             activeDescendant={ active }
-            onActiveDescendantChange={ setActive }>Menu</Menu>
+            onActiveDescendantChange={ setActive }>{ label }</Menu>
     )
 }
