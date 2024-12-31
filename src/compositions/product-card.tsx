@@ -20,7 +20,7 @@ export const ProductCard = ({
         <card.li { ...props } maxWidth={ maxWidth } purpose='surface' padding>
             <text.p>${ price }</text.p>
             { children }
-            <Button priority='secondary' placeSelf='bottom-start' href={ `products/${id}` }>{ cta }</Button>
+            <Button priority='secondary' placeSelf='bottom' href={ `products/${id}` }>{ cta }</Button>
         </card.li>
     )
 }

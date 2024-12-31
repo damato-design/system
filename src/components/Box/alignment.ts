@@ -89,9 +89,9 @@ function xSelf(placeSelf: Placement) {
         case 'end':
         case 'bottom-end':
             return { marginInlineStart: 'auto' };
-        case 'top':
+        case 'top-center':
         case 'center':
-        case 'bottom':
+        case 'bottom-center':
             return { marginInline: 'auto' };
         default:
             return {};
@@ -108,9 +108,9 @@ function ySelf(placeSelf: Placement) {
         case 'bottom':
         case 'bottom-end':
             return { marginBlockStart: 'auto' };
-        case 'start':
+        case 'start-center':
         case 'center':
-        case 'end':
+        case 'end-center':
             return { marginBlock: 'auto' };
         default:
             return {};
