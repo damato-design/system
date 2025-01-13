@@ -48,7 +48,7 @@ type ManagerScript = HTMLScriptElement & {
 }
 
 function updateBrand(brand: string) {
-    const $script = document.querySelector('script[data-brand]') as ManagerScript;
+    const $script = document.querySelector('script[data-sizes]') as ManagerScript;
     if (!$script) return;
     $script.dataset.brand = brand;
     $script?.refresh();
