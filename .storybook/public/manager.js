@@ -161,7 +161,6 @@ class ModeManager {
     #clientScope($target, config) {
         if (!$target) return;
         const scopeHTML = this.scope(config);
-        console.log({ config, scopeHTML });
         $target.parentElement.insertAdjacentHTML('beforeend', scopeHTML);
     }
 
