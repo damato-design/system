@@ -13,6 +13,10 @@
     align-items: center;
 }
 
+.window :global(.density-level-control) {
+    display: none !important;
+}
+
 .example {
     filter: grayscale(1);
     transform: scale(.5);

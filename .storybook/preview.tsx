@@ -64,7 +64,7 @@ function Input({ value, onChange }) {
     marginBlockEnd: '1em'
   }
   return (
-    <div style={ style }>
+    <div style={ style } className='density-level-control'>
       <label htmlFor={ id }>Density Level</label>
       <input
       id={ id }
