@@ -70,7 +70,7 @@ class ModeManager {
     }
 
     #links() {
-        return this.map((href) => {
+        return this.filter(Boolean).map((href) => {
             return `<link rel="stylesheet" href="${href}" />`
         }).join('\n');
     }
@@ -161,6 +161,7 @@ class ModeManager {
     #clientScope($target, config) {
         if (!$target) return;
         const scopeHTML = this.scope(config);
+        console.log({ config, scopeHTML });
         $target.parentElement.insertAdjacentHTML('beforeend', scopeHTML);
     }
 

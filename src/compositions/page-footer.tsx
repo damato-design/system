@@ -60,7 +60,7 @@ function LinkGroup({ links, title }: LinkGroupProps) {
             </text.h4>
             <box.ul gap stack>
                 { links.map((label) => (
-                    <box.li>
+                    <box.li key={ label }>
                         <text.a href='#' priority='auxiliary'>{ label }</text.a>
                     </box.li>
                 )) }

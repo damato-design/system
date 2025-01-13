@@ -41,7 +41,7 @@
   },
   {
     "href": "_sample.css",
-    "mode": "sample",
+    "mode": "base",
     "coverage": {
       "color": 100,
       "typography": 100,

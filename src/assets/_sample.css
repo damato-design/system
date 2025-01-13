@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans%3Awght%40400%3B700&display=swap');
 
 @scope {
-    [data-mode~="sample"] {
+    [data-mode~="base"] {
         	--brand-surface_primary_backgroundColor: color-mix(
         in oklch,
         oklch(from Canvas l c none),

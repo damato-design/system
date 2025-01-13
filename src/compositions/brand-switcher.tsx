@@ -18,17 +18,23 @@ type LogoProps = {
     onClick?: () => void
 }
 
-const Logo = forwardRef<HTMLImageElement, LogoProps>((props: LogoProps, ref: any) => {
+type Img = HTMLImageElement & {
+    anchorName?: string
+}
+
+const Logo = forwardRef<Img, LogoProps>((props: LogoProps, ref: any) => {
     const { anchor: flyoutProps } = useFlyout();
     const { anchor: listboxProps } = useListbox();
+    const { anchorName, ...flyoutRest } = flyoutProps;
     const style = {
-        anchorName: flyoutProps.anchorName,
+        anchorName,
         maxHeight: 80
     } as CSSProperties
+
     return (
         <img
             { ...props }
-            { ...flyoutProps }
+            { ...flyoutRest }
             { ...listboxProps }
             style={ style }
             ref={ ref }
