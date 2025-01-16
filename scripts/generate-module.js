@@ -29,7 +29,7 @@ function variables(arr, systemTokens) {
 
 // #{'action_primary_backgroundColor'}: $action_primary_backgroundColor;
 function exports(arr) {
-    return `:exports {
+    return `:export {
 ${ arr.map((token) => `\t#{'${token}'}: $${token};`).join('\n') }
 }`;
 }

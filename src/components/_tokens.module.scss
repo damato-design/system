@@ -37,7 +37,7 @@ $text_auxiliary_minRem: var(--brand-text_auxiliary_minRem, 1);
 $text_auxiliary_scaleFactor: var(--brand-text_auxiliary_scaleFactor, 1.125);
 $space_minDimension: var(--brand-space_minDimension, .5rem);
 $space_scaleFactor: var(--brand-space_scaleFactor, 1.618);
-:exports {
+:export {
 	#{'surface_primary_backgroundColor'}: $surface_primary_backgroundColor;
 	#{'surface_primary_foregroundColor'}: $surface_primary_foregroundColor;
 	#{'surface_primary_borderColor'}: $surface_primary_borderColor;
