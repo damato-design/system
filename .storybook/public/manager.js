@@ -131,17 +131,17 @@ class ModeManager {
     }
 
     scope({ brand, mode }) {
+
         // Returns <link/> tags for each mode as object
         const queue = this.#queue(brand, this.#split(mode));
 
         if (!this.ready) return [];
 
-        const resources = queue.reduce((acc, item, index) => {
-            if (item.endsWith('.css')) return acc;
-            const candidate = this.inventory.find((entry) => (
-                entry.mode === item
-                && (!entry.brand || entry.brand === brand)
-            ));
+        const resources = queue.reduce((acc, resource, index) => {
+            if (resource.endsWith('.css')) return acc;
+            const candidate = this.inventory.find((entry) => {
+                return entry.mode === resource && entry.brand === brand
+            });
             // If not found, set as undefined
             queue[index] = candidate?.href;
             return acc.concat(queue[index]);
@@ -169,8 +169,12 @@ class ModeManager {
         // Set links that have been preloaded
         const { brand } = this.#target.dataset;
         const hrefs = [...this.#target.parentElement.children]
+            // Only <link/> elements
             .filter(($sibling) => $sibling.tagName === 'LINK')
-            .map(($sibling) => $sibling.href);
+            // Get the href attribute
+            .map(($sibling) => $sibling.href)
+            // Get the file name
+            .map((href) => href.split('/').pop());
         this.#queue(brand, hrefs);
         this.#clientScope(this.#target, this.#target.dataset);
     }
