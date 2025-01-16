@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useId } from 'react';
+import { forwardRef } from 'react';
 import css from './styles.module.scss';
 import clsx from 'clsx';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';

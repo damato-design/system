@@ -30,7 +30,7 @@ function variables(arr, systemTokens) {
 // #{'action_primary_backgroundColor'}: $action_primary_backgroundColor;
 function exports(arr) {
     return `:export {
-${ arr.map((token) => `\t#{'${token}'}: $${token};`).join('\n') }
+${ arr.map((token) => `\t#{'$${token}'}: $${token};`).join('\n') }
 }`;
 }
 
