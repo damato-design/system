@@ -1,7 +1,18 @@
 @import 'material-icons/iconfont/material-icons.css';
 
-/* Adding more specificity so font-family is not overwritten */
+/* Adding more specificity so font styles are not overwritten */
 .icon:is(.icon) {
+    font-family: 'Material Icons Outlined';
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    text-transform: none;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+}
+
+.icon {
     display: inline-flex;
     flex-shrink: 0;
     min-width: 0;
@@ -10,15 +21,7 @@
     text-align: center;
     justify-content: center;
     pointer-events: none;
-    font-family: 'Material Icons Outlined';
-    font-weight: normal;
-    font-style: normal;
     scale: 1.25;
-    letter-spacing: normal;
-    text-transform: none;
-    white-space: nowrap;
-    word-wrap: normal;
-    direction: ltr;
     color: inherit;
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
