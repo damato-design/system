@@ -24,7 +24,7 @@ const config: StorybookConfig = {
   managerHead: (head) => {
     if (process.env.NODE_ENV === 'development') return head;
     return `${head}
-    <link rel="prefetch" as="image" href="https://analytics.damato.design/api/track?domain=system.damato.design" />`;
+    <script async defer src="https://scripts.withcabin.com/hello.js"></script>`;
   },
 };
 
