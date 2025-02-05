@@ -22,7 +22,7 @@ interface ModernCSSProperties extends React.CSSProperties {
 /**
  * Creates a `<input.type/>` component
  * 
- * @param {ButtonProps} props - Component configuration object
+ * @param {InputProps} props - Component configuration object
  * @returns {ReactElement} - A input component
  */
 export const input = proxy<HTMLInputTypeAttribute | 'textarea', InputProps>('input', (inputType) => {
