@@ -18,6 +18,9 @@
     @include body;
     font-weight: bolder;
 
+    /*
+     * The hover style adjusts the current background by mixing with the foreground by a small percentage. This assumes that the given background is a solid color; not a gradient.
+     */
     &:not([disabled], [aria-disabled="true"]):hover {
        background: color-mix(in oklch, var(--action-bg), currentColor 10%);
     }

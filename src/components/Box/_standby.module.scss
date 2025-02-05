@@ -2,6 +2,9 @@
 @use './space.module' as space;
 
 @mixin standby {
+    /*
+     * Color is set to transparent in case content is placed within accidentally.
+     */
     color: transparent;
     display: flex;
     flex: 1;
@@ -13,11 +16,16 @@
     background-size: 200% 100%;
     background-position-x: 120%;
 
-    /* Line rendering */
+    /*
+     * The following renders lines for the skeleton, the 3lh represents the height of each line (3 lines) and the integer 2 represents the space between those lines (2 spaces between three lines).
+     */
     min-height: calc((2 * #{space.$gap}) + 3lh);
     mask: linear-gradient(#000 0 1lh,
             transparent 1lh calc(1lh + #{space.$gap})) 0 0/100% calc(1lh + #{space.$gap});
 
+    /*
+     * The icons are presented as skeleton circles.
+     */
     &:where(i[role="presentation"]) {
         mask: none;
         max-width: 1lh;
@@ -25,6 +33,9 @@
         border-radius: 100vw;
     }
 
+    /*
+     * Media is forced into 16/9 aspect ratios. Any children are hidden.
+     */
     &:where(picture, video, audio) {
         mask: none;
         min-height: auto;
@@ -35,12 +46,18 @@
         }
     }
 
+    /*
+     * Headlines are rendered as a single line, at 80% of the parent's width.
+     */
     &:where([data-priority="primary"]) {
         mask: none;
         min-height: 1lh;
         max-width: 80%;
     }
 
+    /*
+     * Detail/captions are rendered as a single line, at 20% of the parent's width.
+     */
     &:where([data-priority="auxiliary"]) {
         mask: none;
         min-height: 1lh;
@@ -49,6 +66,9 @@
 
     @media (prefers-reduced-motion: no-preference) {
         background-position-x: 180%;
+        /*
+         * We explicitly set visibility here to counter act the node detection script which will conflict with this animation.
+         */
         visibility: visible;
         animation: 2s loading ease-in-out infinite;
     }

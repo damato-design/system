@@ -5,6 +5,7 @@
 .action {
     @include button;
 
+    /* Square buttons */
     &:where([style*="aspect-ratio: 1"]) {
         padding: space.$gap;
         box-sizing: content-box;
@@ -12,11 +13,13 @@
         height: 1lh;
     }
 
+    /* Represents when an item is signifigantly chosen by the system  */
     &:where([aria-current]) {
         text-decoration: underline;
         text-underline-offset: 2px;
     }
 
+    /* Represents a user selected item */
     &:where([aria-selected="true"]) {
         box-shadow: inset 0 -4px currentColor;
     }
@@ -26,18 +29,21 @@
         flex-grow: 0;
     }
 
+    /* Primary buttons */
     &:where([data-priority="primary"]) {
         --action-bg: #{tokens.$action_primary_backgroundColor};
         border-color: tokens.$action_primary_borderColor;
         color: tokens.$action_primary_foregroundColor;
     }
 
+    /* Secondary buttons */
     &:where([data-priority="secondary"]) {
         --action-bg: #{tokens.$action_secondary_backgroundColor};
         border-color: tokens.$action_secondary_borderColor;
         color: tokens.$action_secondary_foregroundColor;
     }
 
+    /* Disabled buttons */
     &:where([disabled], [aria-disabled="true"]) {
         cursor: not-allowed;
         opacity: .4;

@@ -3,12 +3,13 @@
 @use './space.module' as space;
 
 .box {
-    min-width: 0;
-    outline-offset: -4px;
     box-sizing: border-box;
+    min-width: 0;
     margin: 0;
     padding: 0;
     border: 0;
+    /* Sets the focus outline uniformly for interactive elements */
+    outline-offset: -4px;
 
     &.round {
         border-radius: 100vw;

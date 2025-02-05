@@ -1,4 +1,7 @@
 @use '../tokens.module';
 
+/*
+ * This file creates reusable spacing variables. For more information, see [/docs/foundations-density--docs]
+ */
 $gap: calc(#{tokens.$space_minDimension} * pow(#{tokens.$space_scaleFactor}, var(--level, 0)));
 $padding: calc(#{tokens.$space_minDimension} * pow(#{tokens.$space_scaleFactor}, var(--level, 0) + 1));

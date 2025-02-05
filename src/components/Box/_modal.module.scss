@@ -5,8 +5,11 @@
     background: var(--surface-bg);
     border-color: tokens.$surface_primary_borderColor;
     color: tokens.$surface_primary_foregroundColor;
+    /*
+     * Shadows are not meant to be curated by the brand. They are a translucent black mixed slightly with the current Canvas color.
+     */
     box-shadow: 0 14px 20px -4px
-        color-mix(in oklch, Canvas, oklch(0 0 0 / .2) 80%);
+        color-mix(in oklch, oklch(0 0 0 / .2), Canvas 20%);
 
     & :where(*) {
         color: tokens.$surface_primary_foregroundColor;

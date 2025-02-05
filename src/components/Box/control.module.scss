@@ -11,17 +11,20 @@
     color: tokens.$control_foregroundColor;
     background: tokens.$control_backgroundColor;
 
+    /* Native divider found within the frame */
     > hr {
         height: 1lh;
         width: 2px;
         background-color: currentColor;
     }
 
+    /* Icons found within the frame */
     > i[role="presentation"] {
         padding-inline: space.$padding;
         line-height: 1lh !important;
     }
 
+    /* Button borders found within the frame should not contribute to the overall size or shape */
     > button,
     > input[type="file"]::file-selector-button {
         border: 0;

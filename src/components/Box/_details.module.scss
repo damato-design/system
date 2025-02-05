@@ -1,4 +1,7 @@
 @mixin details {
+    /*
+     * Since `<box.details/>` will force a flex/grid appearance, we need to override that setting explicitly to allow the `<details/>` to display properly.
+     */
     display: block !important;
 
     summary {
