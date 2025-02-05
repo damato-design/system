@@ -9,6 +9,7 @@ import { element, ElementProps } from '../Element';
 import { alignmentStyle, AlignmentConfig } from './alignment';
 import { useReflow, ReflowProp } from './reflow';
 
+// React.CSSProperties does not include anchorName
 interface ModernCSSProperties extends React.CSSProperties {
   anchorName?: string;
 }
@@ -80,6 +81,12 @@ type _BoxProps = ElementProps & AlignmentConfig & {
 
 export type BoxProps = _BoxProps & ReflowProp<_BoxProps>;
 
+/**
+ * Creates a `<box.tagName/>` component
+ * 
+ * @param {BoxProps} props - Component configuration object
+ * @returns {ReactElement} - A box component
+ */
 export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
   return forwardRef<HTMLElement, BoxProps>((originalProps: BoxProps, ref) => {
     const Box = element[TagName];
