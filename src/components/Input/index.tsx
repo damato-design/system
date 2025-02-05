@@ -14,10 +14,17 @@ export type InputProps = (React.InputHTMLAttributes<HTMLInputElement>
     fieldSizing?: 'content' | 'flex'
   };
 
+// React.CSSProperties does not include fieldSizing
 interface ModernCSSProperties extends React.CSSProperties {
   fieldSizing?: 'content' | 'fixed' | Globals;
 }
 
+/**
+ * Creates a `<input.type/>` component
+ * 
+ * @param {ButtonProps} props - Component configuration object
+ * @returns {ReactElement} - A input component
+ */
 export const input = proxy<HTMLInputTypeAttribute | 'textarea', InputProps>('input', (inputType) => {
   return forwardRef<HTMLElement, InputProps>(({
     fieldSizing,

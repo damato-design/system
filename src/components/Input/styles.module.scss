@@ -18,6 +18,7 @@
     background-clip: text; /* stackoverflow.com/a/64166144 */
     @include body;
 
+    /* The difference between `<input.checkbox/>` and `<Checkbox/>` has to do with the provided label composition. If the checkbox is meant to exist without a standard label (ie., select all in table rows) the `<input.checkbox/>` may be more appropriate. */
     &:where([type="checkbox"], [type="radio"]) {
         cursor: pointer;
         aspect-ratio: 1;
@@ -30,6 +31,7 @@
         }
     }
 
+    /* Found as button within the native <input type="file"/> composition */
     &:where([type="file"])::file-selector-button {
         display: inline-flex;
         justify-content: center;
@@ -39,11 +41,13 @@
         @include button;
     }
 
+    /* Removes native up-down buttons */
     &::-webkit-inner-spin-button,
     &::-webkit-search-cancel-button {
         display: none;
     }
 
+    /* Removes autofill styled background */
     &::-webkit-autofill,
     &::-webkit-autofill:hover,
     &::-webkit-autofill:focus,
@@ -52,6 +56,7 @@
         caret-color: tokens.$control_foregroundColor;
     }
 
+    /* Removes native clear button */
     &::-ms-reveal,
     &::-ms-cancel {
         display: none;
