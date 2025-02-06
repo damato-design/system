@@ -12,6 +12,12 @@ export type CardProps = BoxProps
         src?: string
     };
 
+/**
+ * Creates a `<card.tagName/>` component
+ * 
+ * @param {CardProps} props - Component configuration object
+ * @returns {ReactElement} - A card component
+ */
 export const card = proxy<HTMLTagsOnly, CardProps>('card', (TagName) => {
     return forwardRef<HTMLElement, CardProps>(({
         maxWidth,

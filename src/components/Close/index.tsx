@@ -8,6 +8,12 @@ export type CloseProps = ButtonProps & {
     float?: boolean
 }
 
+/**
+ * Creates a `<Close/>` component
+ * 
+ * @param {CloseProps} props - Component configuration object
+ * @returns {ReactElement} - A close button component
+ */
 export const Close = forwardRef<HTMLElement, CloseProps>(({
     float = true,
     ...props

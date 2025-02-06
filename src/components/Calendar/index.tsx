@@ -20,6 +20,12 @@ type CalendarProps = {
     onActiveDescendantChange: (value: string) => void
 }
 
+/**
+ * Determines the writing mode based on matching :dir selector
+ * 
+ * @param {Event} ev - Event object
+ * @returns {Boolean} - Determines if the context is LTR
+ */
 function isLTR(ev: any) {
     return (ev.target as HTMLElement).matches(':dir(ltr)');
 }
@@ -37,6 +43,12 @@ const KEY_NAVIGATION = {
     PageDown: (ev, y, m, d) => ev.shiftKey ? getString(y + 1, m, d) : getString(y, m + 1, d),
 } as KeyNavigation
 
+/**
+ * Creates a `<Th/>` child component for calendar
+ * 
+ * @param {Object} props - Component configuration object
+ * @returns {ReactElement} - A child component
+ */
 function Th({ narrow, long }: any) {
     return (
         <th role='columnheader' className={ css.th }>
@@ -46,15 +58,24 @@ function Th({ narrow, long }: any) {
     )
 }
 
+/**
+ * Creates a `<Header/>` child component for calendar
+ * 
+ * @param {Object} props - Component configuration object
+ * @returns {ReactElement} - A child component
+ */
 function Header({ year, month }: any) {
 
+    // Determine the first day of the week based on locale
     const day1 = getDate(year, month - 1, 1);
     const offset = getOffset(day1);
     day1.setUTCDate(day1.getUTCDate() - offset);
 
+    // Create formatters
     const narrowFormatter = getFormatter({ weekday: 'narrow' });
     const longFormatter = getFormatter({ weekday: 'long' });
 
+    // Generate header row values
     const cells = Array.from({ length: 7 }, () => {
         const values = {
             narrow: narrowFormatter.format(day1),
@@ -75,6 +96,12 @@ function Header({ year, month }: any) {
     )
 }
 
+/**
+ * Creates a `<DateButton/>` child component for calendar
+ * 
+ * @param {Object} props - Component configuration object
+ * @returns {ReactElement} - A child component
+ */
 function DateButton({ 
     date,
     month,
@@ -91,11 +118,13 @@ function DateButton({
     const d = getDate(year, month, date);
     const isSelected = day === date;
 
+    // On date click, change selection and active descendent
     const onClick = useCallback(() => {
         typeof onActiveDescendantChange === 'function' && onActiveDescendantChange(value);
         typeof onConfirm === 'function' && onConfirm(value);
     }, [value, onConfirm, onActiveDescendantChange]);
 
+    // On date keydown, change active descendent
     const onKeyDown = useCallback((ev: any) => {
         if (!(ev.key in KEY_NAVIGATION)) return;
         ev.preventDefault();
@@ -103,6 +132,7 @@ function DateButton({
         typeof onActiveDescendantChange === 'function' && onActiveDescendantChange(update);
     }, [activeDescendant, onActiveDescendantChange, value]);
 
+    // If this is meant to be the active descendent, focus the button
     const onRef = useCallback(($btn: any) => {
         shouldFocus && activeDescendant === value && $btn?.focus();
     }, [activeDescendant, value]);
@@ -124,6 +154,12 @@ function DateButton({
     );
 }
 
+/**
+ * Creates a `<Row/>` child component for calendar
+ * 
+ * @param {Object} props - Component configuration object
+ * @returns {ReactElement} - A child component
+ */
 function Row({ week, ...rest }: any) {
     return (
         <tr role='row'>
@@ -139,6 +175,12 @@ function Row({ week, ...rest }: any) {
     )
 }
 
+/**
+ * Creates a `<Body/>` child component for calendar
+ * 
+ * @param {Object} props - Component configuration object
+ * @returns {ReactElement} - A child component
+ */
 function Body({ year, month, ...rest }: any) {
 
     const [shouldFocus, setShouldFocus] = useState(false);
@@ -161,6 +203,12 @@ function Body({ year, month, ...rest }: any) {
     )
 }
 
+/**
+ * Creates a `<Calendar/>` component
+ * 
+ * @param {CalendarProps} props - Component configuration object
+ * @returns {ReactElement} - A calendar component
+ */
 export const Calendar = forwardRef<HTMLTableElement, CalendarProps>(({
     value,
     onConfirm,
@@ -169,6 +217,7 @@ export const Calendar = forwardRef<HTMLTableElement, CalendarProps>(({
     ...rest
 }: CalendarProps, ref) => {
 
+    // Create a date if a complete one was not provided
     const d = new Date();
     const [year, month, day] = typeof value === 'string'
         ? value.split('-').map(Number)

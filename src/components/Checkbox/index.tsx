@@ -11,6 +11,12 @@ type CheckboxProps = InputProps & {
     priority?: 'primary' | 'auxiliary' 
 };
 
+/**
+ * Creates a `<Checkbox/>` component
+ * 
+ * @param {CheckboxProps} props - Component configuration object
+ * @returns {ReactElement} - A checkbox component
+ */
 export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(({
     exclusive,
     label,

@@ -11,6 +11,12 @@ type ComboBoxProps = Omit<InputProps & FieldProps & ListboxProps, 'visualFocus'>
     onConfirm?: (value: any) => void;
 }
 
+/**
+ * Creates a `<Comboxbox/>` component
+ * 
+ * @param {ComboBoxProps} props - Component configuration object
+ * @returns {ReactElement} - A combobox component
+ */
 export const Combobox = forwardRef<HTMLElement, ComboBoxProps>(({
     activeDescendant,
     onActiveDescendantChange,
@@ -24,10 +30,12 @@ export const Combobox = forwardRef<HTMLElement, ComboBoxProps>(({
 }: ComboBoxProps, ref) => {
     const [show, setShow] = useState(false);
 
+    // Determine the active descendent as item
     const item = useMemo(() => {
         return items.find((item) => item.id === activeDescendant);
     }, [items, activeDescendant]);
 
+    // Hide the flyout when confirming selection
     const _onConfirm = useCallback(() => {
         if (show && typeof onConfirm === 'function') onConfirm(item);
         setShow(!show);

@@ -7,6 +7,12 @@ type DisclosureProps = BoxProps & {
     name?: string
 };
 
+/**
+ * Creates a `<Disclosure/>` component
+ * 
+ * @param {DisclosureProps} props - Component configuration object
+ * @returns {ReactElement} - A disclosure component
+ */
 export const Disclosure = forwardRef<HTMLElement, DisclosureProps>(({
     name,
     subject,

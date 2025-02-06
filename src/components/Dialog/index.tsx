@@ -3,6 +3,12 @@ import { box } from '../Box';
 import { lockup, LockupProps } from '../Lockup';
 import { element, restrictProps } from '../Element';
 
+/**
+ * Determines the correct icon reference based on emphasis.
+ * 
+ * @param {String} emphasis - The kind of message
+ * @returns {String} - An icon reference
+ */
 function getIconRef(emphasis: string | undefined) {
     switch(emphasis) {
         case 'critical': 
@@ -24,6 +30,12 @@ type DialogProps = LockupProps
         onClose?: (ev: any) => void
     };
 
+/**
+ * Creates a `<Dialog/>` component
+ * 
+ * @param {DialogProps} props - Component configuration object
+ * @returns {ReactElement} - A dialog component
+ */
 export const Dialog = forwardRef<HTMLElement, DialogProps>(({
     emphasis,
     disrupt,
@@ -33,12 +45,14 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(({
 }: DialogProps, ref) => {
     
     const Element = disrupt ? box.dialog : box.div;
+    // This adds a small treatment to visually separate the lockup as a dialog
     const styles = { 
         background: 'currentColor',
         width: '8px',
         flexShrink: 0
     };
 
+    // Use client JS to trigger visibility of the <dialog/> on the top-layer
     const showModal = useCallback(($elem: HTMLDialogElement) => {
         if (!disrupt || !$elem) return;
         $elem.style?.setProperty('margin', 'auto');
@@ -47,6 +61,7 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(({
         () => document.body.removeAttribute('inert');
     }, [disrupt, onClose])
 
+    // on Esc, close the dialog
     const onKeyDown = useCallback((ev: any) => {
         if (!disrupt) return;
         if (ev.key === 'Escape') {
@@ -55,6 +70,7 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(({
         }
     }, [disrupt, onClose]);
 
+    // on pointerdown outside of the content area, close the dialog
     const onPointerDown = useCallback((ev: any) => {
         if (!disrupt) return;
         if (ev.target === ev.currentTarget) {
