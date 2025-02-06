@@ -6,6 +6,12 @@ import { useFlyout } from '../Flyout';
 
 export type FieldProps = BoxProps & {};
 
+/**
+ * Creates a `<field.tagName/>` component
+ * 
+ * @param {FieldProps} props - Component configuration object
+ * @returns {ReactElement} - A field component
+ */
 export const field = proxy<HTMLTagsOnly, FieldProps>('field', (TagName) => {
     return forwardRef<HTMLElement, FieldProps>(({
         placeChildren = 'start',
