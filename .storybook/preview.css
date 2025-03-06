@@ -63,7 +63,7 @@
 }
 
 pre, code, pre :not(button), code * {
-    font-family: Radon, monospace !important;
+    font-family: "Sometype Mono", monospace !important;
     white-space: pre-wrap !important;
     word-break: break-word;
 }
