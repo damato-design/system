@@ -3,7 +3,6 @@ import {
     PROPERTY_COLOR,
     PROPERTY_FONT,
     PROPERTY_SPACE,
-    prefixType,
     toCSSVar,
 } from './properties.js';
 
@@ -16,11 +15,10 @@ function permutate(...arrays) {
     return recurse(arrays);
 }
 
-// $action_primary_backgroundColor: var(--brand, _system);
+// $action_primary_backgroundColor: var(--token, _system);
 function variable(token) {
     const { $value } = token.split('_').reduce((acc, key) => acc[key], this);
-    const brand = toCSSVar(prefixType(token, 'brand'), $value);
-    return `$${token}: ${brand};`;
+    return `$${token}: ${toCSSVar(token, $value)};`;
 }
 
 function variables(arr, systemTokens) {

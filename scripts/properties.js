@@ -20,10 +20,6 @@ export const PROPERTY_SPACE = [
     'scaleFactor',
 ];
 
-export function prefixType(token, pre) {
-    return [pre, token].filter(Boolean).join('-');
-}
-
 export function toCustomIdent(token) {
     return `--${token}`;
 }

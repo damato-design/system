@@ -1,4 +1,4 @@
-import { prefixType, toCustomIdent } from './properties.js';
+import { toCustomIdent } from './properties.js';
 
 function colorMix(value, base) {
     const lightness = typeof value?.$influence === 'number'
@@ -46,7 +46,7 @@ function declaration(name, { tokens }, systemTokens) {
     // Get value within tokens
     const value = name.split('_').reduce((acc, key) => acc[key], tokens);
     // Assume we are going to use this as the result
-    const decl = [toCustomIdent(prefixType(name, 'brand')), value.$value];
+    const decl = [toCustomIdent(name), value.$value];
     if (name.endsWith('Color')) {
         const system = name.split('_').reduce((acc, key) => acc[key], systemTokens);
         decl[1] = colorMix(value, system.$value);
