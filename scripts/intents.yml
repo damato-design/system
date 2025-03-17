@@ -1,0 +1,46 @@
+# Non.interactive containers (9)
+- 'surface.primary.backgroundColor'
+- 'surface.primary.foregroundColor'
+- 'surface.primary.borderColor'
+- 'surface.secondary.backgroundColor'
+- 'surface.secondary.foregroundColor'
+- 'surface.secondary.borderColor'
+- 'surface.auxiliary.backgroundColor'
+- 'surface.auxiliary.foregroundColor'
+- 'surface.auxiliary.borderColor'
+
+# Buttons and links (9)
+- 'action.primary.backgroundColor'
+- 'action.primary.foregroundColor'
+- 'action.primary.borderColor'
+- 'action.secondary.backgroundColor'
+- 'action.secondary.foregroundColor'
+- 'action.secondary.borderColor'
+- 'action.auxiliary.backgroundColor'
+- 'action.auxiliary.foregroundColor'
+- 'action.auxiliary.borderColor'
+
+# Form controls (3)
+- 'control.backgroundColor'
+- 'control.foregroundColor'
+- 'control.borderColor'
+
+# Font metrics (12)
+- 'text.primary.fontFamily'
+- 'text.primary.fontWeight'
+- 'text.primary.lineHeight'
+- 'text.primary.minRem'
+- 'text.primary.scaleFactor'
+- 'text.secondary.fontFamily'
+- 'text.secondary.fontWeight'
+- 'text.secondary.lineHeight'
+- 'text.secondary.minRem'
+- 'text.secondary.scaleFactor'
+- 'text.auxiliary.fontFamily'
+- 'text.auxiliary.fontWeight'
+- 'text.auxiliary.lineHeight'
+- 'text.auxiliary.minRem'
+- 'text.auxiliary.scaleFactor'
+
+- 'space.minDimension'
+- 'space.scaleFactor'
