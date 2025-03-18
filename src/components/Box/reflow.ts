@@ -32,7 +32,7 @@ export function useReflow<R extends HTMLElement | null, P extends ReflowProp<P>>
     const reflowWidths = useMemo(() => Object.keys(reflow).map(Number), [reflow]);
 
     const callbackRef = useCallback(($elem: HTMLElement | null) => {
-        if (!$elem) return;
+        if (!$elem ||!reflowWidths.length) return;
 
         if (typeof ref === 'function') {
             ref($elem as R);
@@ -40,22 +40,16 @@ export function useReflow<R extends HTMLElement | null, P extends ReflowProp<P>>
             (ref as React.MutableRefObject<R>).current = $elem as R;
         }
 
-        if (!reflowWidths.length) return;
-
         const observer = new ResizeObserver(([entry]) => {
             requestAnimationFrame(() => {
                 const matches = thresholdMatches(reflowWidths, entry.contentRect.width);
                 setThreshold(Math.min(...matches));
             })
         });
+
         observer.observe($elem);
 
     }, [reflowWidths]);
 
-    const reflowProps = useMemo(() => {
-        return thresholdMatches(reflowWidths, threshold)
-        .reduce((acc, key) => Object.assign(acc, reflow[key]), props)
-    }, [reflowWidths, threshold]);
-
-    return { ref: callbackRef, ...reflowProps }
+    return { ...props, ...(reflow?.[threshold] || {}), ref: callbackRef }
 }
