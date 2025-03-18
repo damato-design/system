@@ -17,6 +17,7 @@
     },
     "tokens": {
       "type": "object",
+      "additionalProperties": false,
       "properties": {
         "$surface_primary_backgroundColor": {
           "type": "object",

@@ -23,8 +23,6 @@ const _system = yaml.load(fs.readFileSync(SYSTEM_YAML_PATH, 'utf-8'));
 const intents = yaml.load(fs.readFileSync(INTENTS_YAML_PATH, 'utf-8'));
 const _schema = createSchema(intents);
 
-
-
 // const schemaNames = getSchemaNames(_schema.properties.tokens.properties);
 // const schemaTotals = getTotals(schemaNames);
 

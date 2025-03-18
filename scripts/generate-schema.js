@@ -43,6 +43,7 @@ export default function main(intents) {
             },
             tokens: {
                 type: 'object',
+                additionalProperties: false,
                 properties: {
                     ...createTokens(intents),
                 }
