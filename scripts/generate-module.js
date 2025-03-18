@@ -3,12 +3,8 @@ function toCSSVar(token, fallback) {
 }
 
 // $action_primary_backgroundColor: var(--$token_name, _system);
-function variable(token) {
-    return `${token}: ${toCSSVar(token, this[token].$value)};`;
-}
-
 function variables(arr, systemTokens) {
-    return arr.map(variable, systemTokens).join('\n');
+    return arr.map((token) => `${token}: ${toCSSVar(token, systemTokens[token].$value)};`).join('\n');
 }
 
 // #{'$action_primary_backgroundColor'}: $action_primary_backgroundColor;
