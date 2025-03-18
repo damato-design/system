@@ -1,108 +1,123 @@
 # yaml-language-server: $schema=./_schema.json
 mode: base
 tokens:
-  surface:
-    primary:
-      backgroundColor:
-        $value: white
-        $influence: 0
-      foregroundColor:
-        $value: black
-        $influence: 0
-      borderColor:
-        $value: transparent
-        $influence: 0
-    secondary:
-      backgroundColor:
-        $value: white
-        $influence: 0
-      foregroundColor:
-        $value: black
-        $influence: 0
-      borderColor:
-        $value: transparent
-        $influence: 0
-    auxiliary:
-      backgroundColor:
-        $value: white
-        $influence: 0
-      foregroundColor:
-        $value: black
-        $influence: 0
-      borderColor:
-        $value: transparent
-        $influence: 0
-  action:
-    primary:
-      backgroundColor:
-        $value: purple
-      foregroundColor:
-        $value: white
-      borderColor:
-        $value: purple
-    secondary:
-      backgroundColor:
-        $value: transparent
-      foregroundColor:
-        $value: purple
-      borderColor:
-        $value: purple
-    auxiliary:
-      backgroundColor:
-        $value: transparent
-      foregroundColor:
-        $value: purple
-      borderColor:
-        $value: transparent
-  control:
-    backgroundColor:
-      $value: white
-      $influence: 0
-    foregroundColor:
-      $value: black
-      $influence: 0
-    borderColor:
-      $value: grey
-      $influence: 0
-  text:
-    primary:
-      fontFamily:
-        $value: Plus Jakarta Sans
-        $fallback: sans-serif
-      fontWeight:
-        $value: 700
-      lineHeight:
-        $value: 1.1
-      minRem:
-        $value: 1.5
-      scaleFactor:
-        $value: 1.125
-    secondary:
-      fontFamily:
-        $value: Plus Jakarta Sans
-        $fallback: sans-serif
-      fontWeight:
-        $value: 400
-      lineHeight:
-        $value: 1.5
-      minRem:
-        $value: 1
-      scaleFactor:
-        $value: 1.125
-    auxiliary:
-      fontFamily:
-        $value: Plus Jakarta Sans
-        $fallback: sans-serif
-      fontWeight:
-        $value: 400
-      lineHeight:
-        $value: 1.5
-      minRem:
-        $value: .8
-      scaleFactor:
-        $value: 1.125
-  space:
-    minDimension:
-      $value: .5rem
-    scaleFactor:
-      $value: 1.4
+#surface
+
+  $surface_primary_backgroundColor:
+    $value: white
+    $influence: 0
+  $surface_primary_foregroundColor:
+    $value: black
+    $influence: 0
+  $surface_primary_borderColor:
+    $value: transparent
+    $influence: 0
+
+  $surface_secondary_backgroundColor:
+    $value: white
+    $influence: 0
+  $surface_secondary_foregroundColor:
+    $value: black
+    $influence: 0
+  $surface_secondary_borderColor:
+    $value: transparent
+    $influence: 0
+  
+  $surface_auxiliary_backgroundColor:
+    $value: white
+    $influence: 0
+  $surface_auxiliary_foregroundColor:
+    $value: black
+    $influence: 0
+  $surface_auxiliary_borderColor:
+    $value: transparent
+    $influence: 0
+
+#action
+
+  $action_primary_backgroundColor:
+    $value: purple
+    $influence: 50
+  $action_primary_foregroundColor:
+    $value: white
+    $influence: 50
+  $action_primary_borderColor:
+    $value: purple
+    $influence: 50
+
+  $action_secondary_backgroundColor:
+    $value: transparent
+    $influence: 50
+  $action_secondary_foregroundColor:
+    $value: purple
+    $influence: 50
+  $action_secondary_borderColor:
+    $value: purple
+    $influence: 50
+  
+  $action_auxiliary_backgroundColor:
+    $value: transparent
+    $influence: 50
+  $action_auxiliary_foregroundColor:
+    $value: purple
+    $influence: 50
+  $action_auxiliary_borderColor:
+    $value: transparent
+    $influence: 50
+
+#control
+
+  $control_backgroundColor:
+    $value: white
+    $influence: 0
+  $control_foregroundColor:
+    $value: black
+    $influence: 0
+  $control_borderColor:
+    $value: grey
+    $influence: 0
+
+#text
+
+  $text_primary_fontFamily:
+    $value: Plus Jakarta Sans
+    $fallback: sans-serif
+  $text_primary_fontWeight:
+    $value: 700
+  $text_primary_lineHeight:
+    $value: 1.1
+  $text_primary_minRem:
+    $value: 1.5
+  $text_primary_scaleFactor:
+    $value: 1.125
+
+  $text_secondary_fontFamily:
+    $value: Plus Jakarta Sans
+    $fallback: sans-serif
+  $text_secondary_fontWeight:
+    $value: 400
+  $text_secondary_lineHeight:
+    $value: 1.5
+  $text_secondary_minRem:
+    $value: 1
+  $text_secondary_scaleFactor:
+    $value: 1.125
+
+  $text_auxiliary_fontFamily:
+    $value: Plus Jakarta Sans
+    $fallback: sans-serif
+  $text_auxiliary_fontWeight:
+    $value: 400
+  $text_auxiliary_lineHeight:
+    $value: 1.5
+  $text_auxiliary_minRem:
+    $value: .8
+  $text_auxiliary_scaleFactor:
+    $value: 1.125
+
+#space
+
+  $space_minDimension:
+    $value: .5rem
+  $space_scaleFactor:
+    $value: 1.4

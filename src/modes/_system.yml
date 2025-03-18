@@ -2,97 +2,99 @@
 
 tokens:
 
-  surface:
-    primary:
-      backgroundColor:
-        $value: Canvas
-      foregroundColor:
-        $value: CanvasText
-      borderColor:
-        $value: GrayText
-    secondary:
-      backgroundColor:
-        $value: Canvas
-      foregroundColor:
-        $value: CanvasText
-      borderColor:
-        $value: GrayText
-    auxiliary:
-      backgroundColor:
-        $value: Canvas
-      foregroundColor:
-        $value: CanvasText
-      borderColor:
-        $value: GrayText
+#surface
 
-  action:
-    primary:
-      backgroundColor:
-        $value: SelectedItem
-      foregroundColor:
-        $value: SelectedItemText
-      borderColor:
-        $value: transparent
-    secondary:
-      backgroundColor:
-        $value: ButtonFace
-      foregroundColor:
-        $value: ButtonText
-      borderColor:
-        $value: GrayText
-    auxiliary:
-      backgroundColor:
-        $value: transparent
-      foregroundColor:
-        $value: ActiveText
-      borderColor:
-        $value: transparent
+  $surface_primary_backgroundColor:
+    $value: Canvas
+  $surface_primary_foregroundColor:
+    $value: CanvasText
+  $surface_primary_borderColor:
+    $value: GrayText
 
-  control:
-    backgroundColor:
-      $value: Field
-    foregroundColor:
-      $value: FieldText
-    borderColor:
-      $value: GrayText
+  $surface_secondary_backgroundColor:
+    $value: Canvas
+  $surface_secondary_foregroundColor:
+    $value: CanvasText
+  $surface_secondary_borderColor:
+    $value: GrayText
+  
+  $surface_auxiliary_backgroundColor:
+    $value: Canvas
+  $surface_auxiliary_foregroundColor:
+    $value: CanvasText
+  $surface_auxiliary_borderColor:
+    $value: GrayText
 
-  text:
-    primary:
-      fontFamily:
-        $value: serif
-      fontWeight:
-        $value: 700
-      lineHeight:
-        $value: 1.1
-      minRem:
-        $value: 2
-      scaleFactor:
-        $value: 1.125
-    secondary:
-      fontFamily:
-        $value: sans-serif
-      fontWeight:
-        $value: 400
-      lineHeight:
-        $value: 1.4
-      minRem:
-        $value: 1.4
-      scaleFactor:
-        $value: 1.125
-    auxiliary:
-      fontFamily:
-        $value: sans-serif
-      fontWeight:
-        $value: 400
-      lineHeight:
-        $value: 1.4
-      minRem:
-        $value: 1
-      scaleFactor:
-        $value: 1.125
+#action
 
-  space:
-    minDimension:
-      $value: .5rem
-    scaleFactor:
-      $value: 1.618
+  $action_primary_backgroundColor:
+    $value: SelectedItem
+  $action_primary_foregroundColor:
+    $value: SelectedItemText
+  $action_primary_borderColor:
+    $value: transparent
+
+  $action_secondary_backgroundColor:
+    $value: ButtonFace
+  $action_secondary_foregroundColor:
+    $value: ButtonText
+  $action_secondary_borderColor:
+    $value: GrayText
+  
+  $action_auxiliary_backgroundColor:
+    $value: transparent
+  $action_auxiliary_foregroundColor:
+    $value: ActiveText
+  $action_auxiliary_borderColor:
+    $value: transparent
+
+#control
+
+  $control_backgroundColor:
+    $value: Field
+  $control_foregroundColor:
+    $value: FieldText
+  $control_borderColor:
+    $value: GrayText
+
+#text
+
+  $text_primary_fontFamily:
+    $value: serif
+  $text_primary_fontWeight:
+    $value: 700
+  $text_primary_lineHeight:
+    $value: 1.1
+  $text_primary_minRem:
+    $value: 2
+  $text_primary_scaleFactor:
+    $value: 1.125
+
+  $text_secondary_fontFamily:
+    $value: sans-serif
+  $text_secondary_fontWeight:
+    $value: 400
+  $text_secondary_lineHeight:
+    $value: 1.4
+  $text_secondary_minRem:
+    $value: 1.4
+  $text_secondary_scaleFactor:
+    $value: 1.125
+
+  $text_auxiliary_fontFamily:
+    $value: sans-serif
+  $text_auxiliary_fontWeight:
+    $value: 400
+  $text_auxiliary_lineHeight:
+    $value: 1.4
+  $text_auxiliary_minRem:
+    $value: 1
+  $text_auxiliary_scaleFactor:
+    $value: 1.125
+
+#space
+
+  $space_minDimension:
+    $value: .5rem
+  $space_scaleFactor:
+    $value: 1.618

@@ -3,127 +3,127 @@
 
 @scope {
     [data-mode~="base"] {
-        	--surface_primary_backgroundColor: color-mix(
+        	--🔒surface_primary_backgroundColor: color-mix(
         in oklch,
         oklch(from Canvas l c none),
         oklch(from white none c h) 0%
     );
-	--surface_primary_foregroundColor: color-mix(
+	--🔒surface_primary_foregroundColor: color-mix(
         in oklch,
         oklch(from CanvasText l c none),
         oklch(from black none c h) 0%
     );
-	--surface_primary_borderColor: color-mix(
+	--🔒surface_primary_borderColor: color-mix(
         in oklch,
         oklch(from GrayText l c none),
         oklch(from transparent none c h) 0%
     );
-	--surface_secondary_backgroundColor: color-mix(
+	--🔒surface_secondary_backgroundColor: color-mix(
         in oklch,
         oklch(from Canvas l c none),
         oklch(from white none c h) 0%
     );
-	--surface_secondary_foregroundColor: color-mix(
+	--🔒surface_secondary_foregroundColor: color-mix(
         in oklch,
         oklch(from CanvasText l c none),
         oklch(from black none c h) 0%
     );
-	--surface_secondary_borderColor: color-mix(
+	--🔒surface_secondary_borderColor: color-mix(
         in oklch,
         oklch(from GrayText l c none),
         oklch(from transparent none c h) 0%
     );
-	--surface_auxiliary_backgroundColor: color-mix(
+	--🔒surface_auxiliary_backgroundColor: color-mix(
         in oklch,
         oklch(from Canvas l c none),
         oklch(from white none c h) 0%
     );
-	--surface_auxiliary_foregroundColor: color-mix(
+	--🔒surface_auxiliary_foregroundColor: color-mix(
         in oklch,
         oklch(from CanvasText l c none),
         oklch(from black none c h) 0%
     );
-	--surface_auxiliary_borderColor: color-mix(
+	--🔒surface_auxiliary_borderColor: color-mix(
         in oklch,
         oklch(from GrayText l c none),
         oklch(from transparent none c h) 0%
     );
-	--action_primary_backgroundColor: color-mix(
+	--🔒action_primary_backgroundColor: color-mix(
         in oklch,
         oklch(from SelectedItem l c none),
         oklch(from oklch(0.53 0.22 29.23) none c h) 50%
     );
-	--action_primary_foregroundColor: color-mix(
+	--🔒action_primary_foregroundColor: color-mix(
         in oklch,
         oklch(from SelectedItemText l c none),
         oklch(from white none c h) 50%
     );
-	--action_primary_borderColor: color-mix(
+	--🔒action_primary_borderColor: color-mix(
         in oklch,
         oklch(from transparent l c none),
         oklch(from oklch(0.53 0.22 29.23) none c h) 50%
     );
-	--action_secondary_backgroundColor: color-mix(
+	--🔒action_secondary_backgroundColor: color-mix(
         in oklch,
         oklch(from ButtonFace l c none),
         oklch(from transparent none c h) 50%
     );
-	--action_secondary_foregroundColor: color-mix(
+	--🔒action_secondary_foregroundColor: color-mix(
         in oklch,
         oklch(from ButtonText l c none),
         oklch(from oklch(0.53 0.22 29.23) none c h) 50%
     );
-	--action_secondary_borderColor: color-mix(
+	--🔒action_secondary_borderColor: color-mix(
         in oklch,
         oklch(from GrayText l c none),
         oklch(from oklch(0.53 0.22 29.23) none c h) 50%
     );
-	--action_auxiliary_backgroundColor: color-mix(
+	--🔒action_auxiliary_backgroundColor: color-mix(
         in oklch,
         oklch(from transparent l c none),
         oklch(from transparent none c h) 50%
     );
-	--action_auxiliary_foregroundColor: color-mix(
+	--🔒action_auxiliary_foregroundColor: color-mix(
         in oklch,
         oklch(from ActiveText l c none),
         oklch(from oklch(0.53 0.22 29.23) none c h) 50%
     );
-	--action_auxiliary_borderColor: color-mix(
+	--🔒action_auxiliary_borderColor: color-mix(
         in oklch,
         oklch(from transparent l c none),
         oklch(from transparent none c h) 50%
     );
-	--control_backgroundColor: color-mix(
+	--🔒control_backgroundColor: color-mix(
         in oklch,
         oklch(from Field l c none),
         oklch(from white none c h) 0%
     );
-	--control_foregroundColor: color-mix(
+	--🔒control_foregroundColor: color-mix(
         in oklch,
         oklch(from FieldText l c none),
         oklch(from black none c h) 0%
     );
-	--control_borderColor: color-mix(
+	--🔒control_borderColor: color-mix(
         in oklch,
         oklch(from GrayText l c none),
         oklch(from grey none c h) 0%
     );
-	--text_primary_fontFamily: Arimo;
-	--text_primary_fontWeight: 700;
-	--text_primary_lineHeight: 1.1;
-	--text_primary_minRem: 1.5;
-	--text_primary_scaleFactor: 1.125;
-	--text_secondary_fontFamily: Arimo;
-	--text_secondary_fontWeight: 400;
-	--text_secondary_lineHeight: 1.5;
-	--text_secondary_minRem: 1;
-	--text_secondary_scaleFactor: 1.125;
-	--text_auxiliary_fontFamily: Arimo;
-	--text_auxiliary_fontWeight: 400;
-	--text_auxiliary_lineHeight: 1.5;
-	--text_auxiliary_minRem: 0.8;
-	--text_auxiliary_scaleFactor: 1.125;
-	--space_minDimension: .5rem;
-	--space_scaleFactor: 1.4;
+	--🔒text_primary_fontFamily: Arimo,sans-serif;
+	--🔒text_primary_fontWeight: 700;
+	--🔒text_primary_lineHeight: 1.1;
+	--🔒text_primary_minRem: 1.5;
+	--🔒text_primary_scaleFactor: 1.125;
+	--🔒text_secondary_fontFamily: Arimo,sans-serif;
+	--🔒text_secondary_fontWeight: 400;
+	--🔒text_secondary_lineHeight: 1.5;
+	--🔒text_secondary_minRem: 1;
+	--🔒text_secondary_scaleFactor: 1.125;
+	--🔒text_auxiliary_fontFamily: Arimo,sans-serif;
+	--🔒text_auxiliary_fontWeight: 400;
+	--🔒text_auxiliary_lineHeight: 1.5;
+	--🔒text_auxiliary_minRem: 0.8;
+	--🔒text_auxiliary_scaleFactor: 1.125;
+	--🔒space_minDimension: .5rem;
+	--🔒space_scaleFactor: 1.4;
     }
 }

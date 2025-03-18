@@ -6,6 +6,7 @@ import createModule from './generate-module.js';
 import createCSS from './generate-css.js';
 
 const MODE_PATH = path.join(process.cwd(), 'src', 'modes');
+const INTENTS_YAML_PATH = path.join(process.cwd(), 'scripts', 'intents.yml');
 const SCHEMA_JSON_PATH = path.join(MODE_PATH, '_schema.json');
 const SYSTEM_YAML_PATH = path.join(MODE_PATH, '_system.yml');
 const TOKENS_SCSS_PATH = path.join(process.cwd(), 'src', 'components', '_tokens.module.scss');
@@ -19,12 +20,16 @@ const COVERAGE_TYPES = {
 }
 
 const _system = yaml.load(fs.readFileSync(SYSTEM_YAML_PATH, 'utf-8'));
-const _schema = createSchema();
-const schemaNames = getSchemaNames(_schema.properties.tokens.properties);
-const schemaTotals = getTotals(schemaNames);
+const intents = yaml.load(fs.readFileSync(INTENTS_YAML_PATH, 'utf-8'));
+const _schema = createSchema(intents);
+
+
+
+// const schemaNames = getSchemaNames(_schema.properties.tokens.properties);
+// const schemaTotals = getTotals(schemaNames);
 
 fs.writeFileSync(SCHEMA_JSON_PATH, JSON.stringify(_schema, null, 2), 'utf-8');
-fs.writeFileSync(TOKENS_SCSS_PATH, createModule(_system.tokens), 'utf-8');
+fs.writeFileSync(TOKENS_SCSS_PATH, createModule(intents, _system.tokens), 'utf-8');
 
 function qualifyingYaml(file) {
     const { name, ext } = path.parse(file);
@@ -51,7 +56,7 @@ function createEntry(fileName, data) {
         brand: data.brand,
         mode: data.mode,
         lang: data.lang,
-        coverage: getCoverage(data.tokens)
+        // coverage: getCoverage(data.tokens)
     }
 }
 

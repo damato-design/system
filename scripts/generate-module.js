@@ -1,53 +1,35 @@
-import { 
-    PRIORITY,
-    PROPERTY_COLOR,
-    PROPERTY_FONT,
-    PROPERTY_SPACE,
-    toCSSVar,
-} from './properties.js';
-
-function permutate(...arrays) {
-    const recurse = (arrs, path = []) => {
-        if (arrs.length === 0)  return [path.join('_')];
-        const [first, ...rest] = arrs;
-        return first.flatMap((item) => recurse(rest, [...path, item]));
-    }
-    return recurse(arrays);
+function toCSSVar(token, fallback) {
+    return `var(${[token.replace('$', '--🔒'), fallback].filter(Boolean).join(', ')})`;
 }
 
-// $action_primary_backgroundColor: var(--token, _system);
+// $action_primary_backgroundColor: var(--$token_name, _system);
 function variable(token) {
-    const { $value } = token.split('_').reduce((acc, key) => acc[key], this);
-    return `$${token}: ${toCSSVar(token, $value)};`;
+    return `${token}: ${toCSSVar(token, this[token].$value)};`;
 }
 
 function variables(arr, systemTokens) {
     return arr.map(variable, systemTokens).join('\n');
 }
 
-// #{'action_primary_backgroundColor'}: $action_primary_backgroundColor;
+// #{'$action_primary_backgroundColor'}: $action_primary_backgroundColor;
 function exports(arr) {
     return `:export {
-${ arr.map((token) => `\t#{'$${token}'}: $${token};`).join('\n') }
+${ arr.map((token) => `\t#{'${token}'}: ${token};`).join('\n') }
 }`;
 }
 
 /**
  * _tokens.module.scss
- * $action_primary_backgroundColor: var(--brand, _system);
+ * $action_primary_backgroundColor: var(--$token_name, _system);
  * :export {
- *  #{'action_primary_backgroundColor'}: $action_primary_backgroundColor;
+ *  #{'$action_primary_backgroundColor'}: $action_primary_backgroundColor;
  * }
  */
 
-export default function main(systemTokens = {}) {
-    const surface = permutate(['surface'], PRIORITY, PROPERTY_COLOR);
-    const action = permutate(['action'], PRIORITY, PROPERTY_COLOR);
-    const control = permutate(['control'], PROPERTY_COLOR);
-    const text = permutate(['text'], PRIORITY, PROPERTY_FONT);
-    const space = permutate(['space'], PROPERTY_SPACE);
-    
-    const message = `/* Generated file: generate-module.js */`;
-    const tokens = [].concat(surface, action, control, text, space);
-    return [message, variables(tokens, systemTokens), exports(tokens)].join('\n');
+export default function main(intents, systemTokens = {}) {
+    return [
+        `/* Generated file: generate-module.js */`,
+        variables(intents, systemTokens),
+        exports(intents)
+    ].join('\n');
 }

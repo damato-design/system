@@ -1,66 +1,69 @@
 # yaml-language-server: $schema=./_schema.json
 mode: system:critical
 tokens:
-  surface:
-    primary:
-      backgroundColor:
-        $value: white
-        $influence: 0
-      foregroundColor:
-        $value: red
-      borderColor:
-        $value: red
-    secondary:
-      backgroundColor:
-        $value: white
-        $influence: 0
-      foregroundColor:
-        $value: red
-      borderColor:
-        $value: red
-    auxiliary:
-      backgroundColor:
-        $value: white
-        $influence: 0
-      foregroundColor:
-        $value: red
-      borderColor:
-        $value: red
-  action:
-    primary:
-      backgroundColor:
-        $value: red
-        $influence: 80
-      foregroundColor:
-        $value: white
-        $influence: 80
-      borderColor:
-        $value: red
-        $influence: 80
-    secondary:
-      backgroundColor:
-        $value: transparent
-      foregroundColor:
-        $value: red
-        $influence: 60
-      borderColor:
-        $value: red
-        $influence: 60
-    auxiliary:
-      backgroundColor:
-        $value: transparent
-      foregroundColor:
-        $value: red
-        $influence: 40
-      borderColor:
-        $value: transparent
-  control:
-    backgroundColor:
-      $value: red
-      $influence: 20
-    foregroundColor:
-      $value: red
-      $influence: 80
-    borderColor:
-      $value: red
-      $influence: 80
+#surface
+
+  $surface_primary_backgroundColor:
+    $value: white
+    $influence: 0
+  $surface_primary_foregroundColor:
+    $value: red
+  $surface_primary_borderColor:
+    $value: red
+
+  $surface_secondary_backgroundColor:
+    $value: white
+    $influence: 0
+  $surface_secondary_foregroundColor:
+    $value: red
+  $surface_secondary_borderColor:
+    $value: red
+  
+  $surface_auxiliary_backgroundColor:
+    $value: white
+    $influence: 0
+  $surface_auxiliary_foregroundColor:
+    $value: red
+  $surface_auxiliary_borderColor:
+    $value: red
+
+#action
+
+  $action_primary_backgroundColor:
+    $value: red
+    $influence: 80
+  $action_primary_foregroundColor:
+    $value: white
+    $influence: 80
+  $action_primary_borderColor:
+    $value: red
+    $influence: 80
+
+  $action_secondary_backgroundColor:
+    $value: transparent
+  $action_secondary_foregroundColor:
+    $value: red
+    $influence: 60
+  $action_secondary_borderColor:
+    $value: red
+    $influence: 60
+  
+  $action_auxiliary_backgroundColor:
+    $value: transparent
+  $action_auxiliary_foregroundColor:
+    $value: red
+    $influence: 40
+  $action_auxiliary_borderColor:
+    $value: transparent
+
+#control
+
+  $control_backgroundColor:
+    $value: red
+    $influence: 20
+  $control_foregroundColor:
+    $value: red
+    $influence: 80
+  $control_borderColor:
+    $value: red
+    $influence: 80
