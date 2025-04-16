@@ -1,16 +1,16 @@
-import { useCallback, useState, useMemo } from 'react';
+import { useCallback, useState, useMemo, useRef } from 'react';
 
 /**
  * Returns the matching thresholds for a given width.
  * 
  * @param {Array<Number>} thresholds - The possible "breakpoints" to check
  * @param {Number} width - The current width
- * @returns {Array<Number>} - The matching thresholds
+ * @returns {Number} - The matching thresholds
  */
-function thresholdMatches(thresholds: number[], width: number) {
-    return thresholds.reduce((acc: number[], threshold) => {
-      return width <= threshold ? acc.concat(threshold) : acc ;
-    }, []);
+function minThreshold(thresholds: number[], width: number) {
+    return thresholds.reduce((acc: number, threshold) => {
+      return width <= threshold ? Math.min(threshold) : acc ;
+    }, Infinity);
 }
 
 export type ReflowProp<P> = {
@@ -31,8 +31,9 @@ export function useReflow<R extends HTMLElement | null, P extends ReflowProp<P>>
     const [threshold, setThreshold] = useState(Infinity);
     const reflowWidths = useMemo(() => Object.keys(reflow).map(Number), [reflow]);
 
+    const ro = useRef<ResizeObserver | null>();
+
     const callbackRef = useCallback(($elem: HTMLElement | null) => {
-        if (!$elem ||!reflowWidths.length) return;
 
         if (typeof ref === 'function') {
             ref($elem as R);
@@ -40,16 +41,25 @@ export function useReflow<R extends HTMLElement | null, P extends ReflowProp<P>>
             (ref as React.MutableRefObject<R>).current = $elem as R;
         }
 
-        const observer = new ResizeObserver(([entry]) => {
-            requestAnimationFrame(() => {
-                const matches = thresholdMatches(reflowWidths, entry.contentRect.width);
-                setThreshold(Math.min(...matches));
-            })
-        });
+        if (!reflowWidths.length) return;
 
-        observer.observe($elem);
+        if (!ro.current) {
+            ro.current = new ResizeObserver(([entry]) => {
+                requestAnimationFrame(() => {
+                    setThreshold(minThreshold(reflowWidths, entry.contentRect.width));
+                })
+            });
+        }
 
-    }, [reflowWidths]);
+        if ($elem) {
+            ro.current.observe($elem);
+        } else if (typeof ro?.current?.disconnect === 'function') {
+            ro.current.disconnect();
+        }
 
-    return { ...props, ...(reflow?.[threshold] || {}), ref: callbackRef }
+    }, [ro, reflowWidths, ref]);
+
+    return useMemo(() => {
+        return { ...props, ...(reflow?.[threshold] || {}), ref: callbackRef }
+    }, [props, reflow, threshold, callbackRef]);
 }
