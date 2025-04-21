@@ -5,7 +5,6 @@ import Github from '../docs/components/Github';
 import theme from './theme';
 
 import './preview.css';
-import { cursorTo } from 'readline';
 
 function capitalize(str: string, locale = navigator.language) {
   return str.replace(/^\p{CWU}/u, (char: string) => char.toLocaleUpperCase(locale));
