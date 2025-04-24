@@ -1,9 +1,8 @@
 /** Generated file: generate-css.js */
 @import url('https://fonts.googleapis.com/css2?display=swap');
 
-@scope {
-    [data-mode~="system:critical"] {
-        	--🔒surface_primary_backgroundColor: color-mix(
+[data-mode~="system:critical"] {
+    	--🔒surface_primary_backgroundColor: color-mix(
         in oklch,
         oklch(from Canvas l c none),
         oklch(from white none c h) 0%
@@ -108,5 +107,4 @@
         oklch(from GrayText l c none),
         oklch(from red none c h) 80%
     );
-    }
 }

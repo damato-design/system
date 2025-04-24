@@ -41,16 +41,18 @@ function processFile(file) {
     const yamlContents = yaml.load(fs.readFileSync(fullPath, 'utf8'));
     if (!yamlContents.mode) throw new Error(`Mode is missing for ${file}`);
     const fileName = createCSSFileName(file);
-    fs.writeFileSync(path.join(MODE_CSS_PATH, fileName), createCSS(yamlContents, _system.tokens), 'utf8');
-    return createEntry(fileName, yamlContents);
+    const css = createCSS(yamlContents, _system.tokens);
+    fs.writeFileSync(path.join(MODE_CSS_PATH, fileName), css, 'utf8');
+    return createEntry(fileName, yamlContents, css);
 }
 
-function createEntry(fileName, data) {
+function createEntry(fileName, data, css) {
     return {
         href: fileName,
         brand: data.brand,
         mode: data.mode,
         lang: data.lang,
+        bytes: Buffer.byteLength(css, 'utf8'),
         coverage: getCoverage(data.tokens)
     }
 }

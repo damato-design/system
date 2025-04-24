@@ -3,6 +3,7 @@
     "href": "_bestbuy-base.css",
     "brand": "bestbuy",
     "mode": "base",
+    "bytes": 4171,
     "coverage": {
       "color": 100,
       "typography": 100,
@@ -13,6 +14,7 @@
     "href": "_bestbuy-callout.css",
     "brand": "bestbuy",
     "mode": "callout",
+    "bytes": 4227,
     "coverage": {
       "color": 100,
       "typography": 100,
@@ -23,6 +25,7 @@
     "href": "_homedepot-base.css",
     "brand": "homedepot",
     "mode": "base",
+    "bytes": 4161,
     "coverage": {
       "color": 100,
       "typography": 100,
@@ -33,6 +36,7 @@
     "href": "_homedepot-callout.css",
     "brand": "homedepot",
     "mode": "callout",
+    "bytes": 4135,
     "coverage": {
       "color": 100,
       "typography": 100,
@@ -42,6 +46,7 @@
   {
     "href": "_sample.css",
     "mode": "base",
+    "bytes": 4134,
     "coverage": {
       "color": 100,
       "typography": 100,
@@ -51,6 +56,7 @@
   {
     "href": "_system-critical.css",
     "mode": "system:critical",
+    "bytes": 3332,
     "coverage": {
       "color": 100,
       "typography": 0,
@@ -61,6 +67,7 @@
     "href": "_target-base.css",
     "brand": "target",
     "mode": "base",
+    "bytes": 4166,
     "coverage": {
       "color": 100,
       "typography": 100,
@@ -71,6 +78,7 @@
     "href": "_target-callout.css",
     "brand": "target",
     "mode": "callout",
+    "bytes": 4139,
     "coverage": {
       "color": 100,
       "typography": 100,

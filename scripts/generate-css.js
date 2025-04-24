@@ -63,9 +63,7 @@ export default function main({ tokens, mode, lang }, systemTokens = {}) {
     const message = `/** Generated file: generate-css.js */`
     return `${message}
 ${fonts}\n
-@scope {
-    ${selector.join('')} {
-        ${rules.join('\n')}
-    }
+${selector.join('')} {
+    ${rules.join('\n')}
 }`
 }

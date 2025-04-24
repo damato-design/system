@@ -10,6 +10,7 @@ const BRANDS = [
 ]
 
 const BRAND_KEY = 'brand';
+const channel = new BroadcastChannel('mode-channel');
 
 type LogoProps = {
     src: string,
@@ -43,15 +44,14 @@ const Logo = forwardRef<Img, LogoProps>((props: LogoProps, ref: any) => {
     )
 });
 
-type ManagerScript = HTMLScriptElement & {
-    refresh: () => void
-}
 
 function updateBrand(brand: string) {
-    const $script = document.querySelector('script[data-sizes]') as ManagerScript;
-    if (!$script) return;
-    $script.dataset.brand = brand;
-    $script?.refresh();
+    channel.postMessage({
+        type: 'MODE_REQUEST',
+        payload: {
+            brand
+        }
+    });
 }
 
 export const BrandSwitcher = () => {

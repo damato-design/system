@@ -1,9 +1,8 @@
 /** Generated file: generate-css.js */
 @import url('https://fonts.googleapis.com/css2?family=Arimo%3Awght%40400%3B700&display=swap');
 
-@scope {
-    [data-mode~="callout"] {
-        	--🔒surface_primary_backgroundColor: color-mix(
+[data-mode~="callout"] {
+    	--🔒surface_primary_backgroundColor: color-mix(
         in oklch,
         oklch(from Canvas l c none),
         oklch(from oklch(0.68 0.2 43.25) l c h) 100%
@@ -125,5 +124,4 @@
 	--🔒text_auxiliary_scaleFactor: 1.125;
 	--🔒space_minDimension: .5rem;
 	--🔒space_scaleFactor: 1.4;
-    }
 }

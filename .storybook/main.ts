@@ -1,4 +1,5 @@
 import type { StorybookConfig } from "@storybook/react-vite";
+import { modeManager } from  './mode-manager.js';
 
 const config: StorybookConfig = {
   stories: [
@@ -20,6 +21,20 @@ const config: StorybookConfig = {
   },
 
   framework: "@storybook/react-vite",
+
+  previewHead: (head) => {
+
+    const request = {
+      modes: ['base', 'callout', 'system:critical'],
+      sizes: 3,
+      // This should probably be optional
+      // It should otherwise read from data found within the page
+      // brand: 'homedepot',
+    };
+
+    return `${head}
+      ${modeManager(request)}`;
+  },
 
   managerHead: (head) => {
     if (process.env.NODE_ENV === 'development') return head;
