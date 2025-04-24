@@ -10,7 +10,12 @@ const BRANDS = [
 ]
 
 const BRAND_KEY = 'brand';
-const channel = new BroadcastChannel('mode-channel');
+let channel: BroadcastChannel;
+
+type Message = {
+    type: string;
+    payload?: object
+}
 
 type LogoProps = {
     src: string,
@@ -46,12 +51,23 @@ const Logo = forwardRef<Img, LogoProps>((props: LogoProps, ref: any) => {
 
 
 function updateBrand(brand: string) {
-    channel.postMessage({
-        type: 'MODE_REQUEST',
-        payload: {
-            brand
-        }
-    });
+    const message: Message = {
+        type: 'MODE_REQUEST'
+    };
+
+    if (!channel) {
+        channel = new BroadcastChannel('mode-channel');
+        message.payload = { brand };
+    }
+
+    if (window.localStorage.getItem(BRAND_KEY) !== brand) {
+        window.localStorage.setItem(BRAND_KEY, brand);
+        message.payload = { brand };
+    }
+
+    if (message.payload) {
+        channel.postMessage(message);
+    }
 }
 
 export const BrandSwitcher = () => {
@@ -66,13 +82,9 @@ export const BrandSwitcher = () => {
     const [show, setShow] = useState(false);
     const anchorRef = useRef(null);
 
-    const onChange = useCallback((id: string) => {
-        setActive(id);
-        window.localStorage.setItem(BRAND_KEY, id);
-        updateBrand(id);
-    }, []);
+    const onChange = useCallback((id: string) => setActive(id), []);
 
-    useEffect(() => { updateBrand(active) }, []);
+    useEffect(() => updateBrand(active), [active]);
 
     const anchor = (
         <Logo

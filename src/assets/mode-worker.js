@@ -7,9 +7,9 @@ fetch('/_inventory.json')
     .then((data) => { inventory = data })
     .then(processQueue);
 
-function processQueue(preload) {
+function processQueue() {
     if (!inventory.length) return;
-    const assets = filterAssets(preload);
+    const assets = filterAssets();
     if (!assets.length) return;
     channel.postMessage({
         type: 'MODE_RESPONSE',
@@ -17,26 +17,17 @@ function processQueue(preload) {
     });
 }
 
-function filterAssets(preload) {
+function filterAssets() {
     return inventory.filter((asset) =>
         // Any asset without a brand or a matching brand
         (!asset.brand || state?.brand === asset.brand)
         // If preloading or mode matches list in CSR
-        && ((preload && !state.csr.has(asset.mode)) || state.csr.has(asset.mode))
-    ).map((asset) => {
-        asset.rel = 'stylesheet';
-        return {
-            'data-lifecycle': 'csr',
-            href: asset.href,
-            rel: asset.rel
-        };
-    });
+        && state.csr.has(asset.mode)
+    ).map((asset) => asset.href);
 }
 
 function resetAssets(brand) {
     if (!brand) return;
-    if (inventory.length && brand !== state.brand)
-        inventory.forEach((asset) => delete asset.rel);
     state.brand = brand;
     channel.postMessage({
         type: 'MODE_RESPONSE',
@@ -50,7 +41,11 @@ channel.addEventListener('message', (event) => {
     if (type === 'MODE_REQUEST') {
         if (payload.mode) state.csr.add(...payload.mode);
         resetAssets(payload.brand);
-        processQueue(false);
+        processQueue();
+    }
+
+    if (type === 'PAGE_IDLE') {
+        processQueue();
     }
 });
 

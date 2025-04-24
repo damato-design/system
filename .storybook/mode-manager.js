@@ -16,8 +16,8 @@ function scriptContents({ brand, ssr }) {
 
             range.deleteContents();
 
-            payload.filter(({ href }) => !ssrHrefs.includes(href)).forEach((attrs) => {
-                range.insertNode(Object.assign(document.createElement('link'), attrs));
+            payload.filter((href) => !ssrHrefs.includes(href)).forEach((href) => {
+                range.insertNode(Object.assign(document.createElement('link'), { href, rel: 'stylesheet' }));
             });
         }
     });
@@ -33,6 +33,10 @@ function scriptContents({ brand, ssr }) {
             }
         });
     });
+
+    if (typeof window?.requestIdleCallback === 'function'
+        && navigator?.connection?.downlink >= 10)
+        requestIdleCallback(() => channel.postMessage({ type: 'PAGE_IDLE' }));
 }
 
 function styleContents(sizes) {
@@ -78,7 +82,7 @@ function checkCoverage(assets) {
 function hrefLookup({ modes, brand }) {
 
     const ssrAssets = inventory.filter((entry) =>
-        (entry.brand === brand)
+        (!entry.brand || entry.brand === brand)
         && modes.includes(entry.mode));
 
     checkCoverage(ssrAssets);
