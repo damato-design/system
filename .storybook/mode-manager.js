@@ -33,10 +33,6 @@ function scriptContents({ brand, ssr }) {
             }
         });
     });
-
-    if (typeof window?.requestIdleCallback === 'function'
-        && navigator?.connection?.downlink >= 10)
-        requestIdleCallback(() => channel.postMessage({ type: 'PAGE_IDLE' }));
 }
 
 function styleContents(sizes) {

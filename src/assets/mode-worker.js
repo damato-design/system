@@ -52,9 +52,5 @@ channel.addEventListener('message', (event) => {
         resetAssets(payload.brand);
         processQueue(false);
     }
-
-    if (type === 'PAGE_IDLE') {
-        processQueue(true);
-    }
 });
 
