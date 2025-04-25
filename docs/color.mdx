@@ -15,11 +15,10 @@ The `surface`, `action`, and `control` categories will include the following pro
 The value applied is a combination of the color and the amount of influence that color should have when being mixed with the system color. In the curation of these values, these are prepared in the following way:
 
 ```yml
-action:
-    primary:
-        backgroundColor:
-            $value: purple
-            $influence: 80
+tokens: 
+    $action_primary_backgroundColor:
+        $value: purple
+        $influence: 80
 ```
 
 ### Mixing
@@ -53,7 +52,7 @@ Next, we will introduce the branding to the color using `color-mix()`. The token
     --bg: color-mix(
         in oklch,
         oklch(from Canvas l c none),
-        oklch(from var(--brand-bg) none c h) var(--brand-influence, 100%)
+        oklch(from var(--value) none c h) var(--influence, 100%)
     );
 }
 ```
@@ -80,25 +79,17 @@ Traditionally, we might support this by including additional tokens for a red co
 
 Furthemore, that red color is culturally specific. In other words, the color red might not mean "danger" to the person it is presented. In Eastern cultures, the color red means "prosperity", which could be considered far from dangerous depending on how it is used. This means that the color being provided here may need to change based on the user's culture to provide an accurate expression.
 
-To do this, we update the variable within this mode:
-
 ```css
-:root {
-    --bg: color-mix(
-        in oklch,
-        oklch(from Canvas l c none),
-        oklch(from var(--brand-bg) none c h) var(--brand-influence, 100%)
-    );
-}
-
 [mode="system:critical"]:lang(en-US) {
     --bg: color-mix(
         in oklch,
         oklch(from Canvas l c none),
-        oklch(from var(--symbolic-bg) none c h) var(--symbolic-influence, 100%)
+        oklch(from var(--value) none c h) var(--influence, 100%)
     );
 }
 ```
+In this example, the value represented at `--value` provided by the mode could be `red` because the United States expects the color red to convey a critical state. Meanwhile the `--influence` is set to `100%` meaning that the color provided by `--value` is the dominant color and would show in full regardless of what is provided by `Canvas`.
+
 The major difference is that modes marked with symbolic color are appended to the page, while normal modes are prepended. This is so symbolic colors are effectively overrides to the brand where appropriate. We set this in a mode by omitting a `brand` in the `.yml` file which indicates that this is curation is meant to exist across brands. The following example also demonstrates including a locale for the mode.
 
 ```yml

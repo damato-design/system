@@ -98,7 +98,7 @@ export function modeManager(config = {}) {
         .filter(([_, val]) => Boolean(val))
         .map(([key, val]) => `${key}: '${val}'`)
         .join(',');
-    
+
     return [
         `<style>${styleContents(sizes)}</style>`,
         ...hrefs.map((href) => `<link href="${href}" rel="stylesheet" data-lifecycle="ssr">`),

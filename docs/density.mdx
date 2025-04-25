@@ -11,8 +11,8 @@ Everything below is contained within [the `box` primitive](/docs/primitives-box-
 
 There are a few tokens that help describe the concept of density.
 
-- `space.minDimension` describes the minimum amount of space that will exist in the experience. It is recommended to use a pixel amount over a relative unit for this value.
-- `space.scaleFactor` describes the rate in which the space values increase over steps.
+- `$space_minDimension` describes the minimum amount of space that will exist in the experience. It is recommended to use a pixel amount over a relative unit for this value.
+- `$space_scaleFactor` describes the rate in which the space values increase over steps.
 
 > #### Why are pixels recommended for `minDimension`?
 >
@@ -89,4 +89,4 @@ The **gap** value at `level: 0` equals the value provided by `minDimension`. The
 }
 ```
 
-The amount of space will increase at each level higher in depth, with a maximum level equal to the given `sizes` value. Adjusting the distance between steps is done by increasing the `space.scaleFactor`.
+The amount of space will increase at each level higher in depth, with a maximum level equal to the given `sizes` value. Adjusting the distance between steps is done by increasing the `$space_scaleFactor`.

@@ -49,20 +49,37 @@ This creates the associated `.css` file and updates the inventory of available m
 
 ### Mode Manager
 
-There is a script running on each page to help manage the modes applied. The script is initialized in the following manner:
+To make the system work there is a script that writes resources meant for the `<head/>` of the document. The resources are initialized in the following manner:
 
-```html
-<script src="manager.js" data-sizes="3" data-brand="dshouse" data-preload="my-mode"></script>
+```js
+import { modeManager } from  './mode-manager.js';
+
+modeManager({ /* options */ })
 ```
 
-The `data-sizes` attribute determines the amount of sizes that this page is meant to display. For more information about this see the [Density docs](/docs/foundations-density--docs).
+This should be called within the SSR process for the `<head/>` with the following options:
 
-The `data-brand` attribute determines what modes to include in the page by space-separated brands. Without setting this value, the page would be presented as unbranded, using system and symbolic colors. Multiple brands can be loaded. Brands omitted from this list will not be lazy loaded.
+The `sizes` option determines the amount of sizes that this page is meant to display. For more information about this see the [Density docs](/docs/foundations-density--docs).
 
-The `data-preload` attribute is a space-separated list of mode indentifiers that should be loaded as soon as possible. This is to set the known modes that the page should present in its first load. The manager will also load modes as they appear within the HTML during the page lifecycle.
+The `brand` option determines what brand to include in the page by Without setting this value, the page would be presented as unbranded, using system and symbolic colors. Only one brand can be loaded. Brands omitted from this list will not be lazy loaded.
 
-> #### Wouldn't this be better rendering server-side?
->
-> Yes, the best case scenario is that the Mode Manager is initialized server-side to create the assets needed before the page is loaded. However, since the examples are running as Storybook instances, only client-side rendering is available.
+> #### What if I want to support multiple brands?
+> To keep the complexity of the system to a minimum, the system only accepts a single brand. However, the brand can be updated within the lifecycle. This means while only one brand can be present on the page, which brand this is can be switched at any time.
 
-The result of the manager will create several resources. 
+The `modes` option is an array of mode indentifier strings that should be loaded as soon as possible. This is to set the known modes that the page should present in its first load. The manager will also load modes as they appear within the HTML during the page lifecycle.
+
+The result of the manager will create several resources.
+
+The manager will create a `<style/>` tag which serves two purposes:
+
+1. The CSS includes a node detection setup where as a node is introduced into the page, it triggers an imperceptable animation which is picked up by later scripts.
+2. When `sizes` is provided, additional CSS is written to support the given amount.
+
+The manager will create a `<script/>` tag which serves a few purposes:
+
+1. The script will set up a Web Worker and a BroadcastChannel to communicate with the worker. The worker does most of the lookup and filtering of resources on a separate thread than the page.
+2. The script handles adding and removing `<link/>` tags that represent the mode CSS depending on the earlier setup and what modes appear over the lifecycle.
+3. The script listens for the aforementioned animation to fire on the qualifying selectors. When this occurs, a message is sent to the worker to potentially add a resource to the page.
+4. Once the network is idle and the connect is reasonable, there's one last call to retrieve the remaining modes for the given brand since we can expect that they might appear within the experience eventually.
+
+If `modes` were provided, the script will also immediately write resources to the page. These will be `<link/>` tags similar to what will be written in later lifecycles. The difference is that the later script will not remove these. This means that if you set `brand` at the `modeManager`, this brand's resources will always be found on the page.

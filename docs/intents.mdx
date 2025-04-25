@@ -10,12 +10,31 @@ import { Meta } from '@storybook/blocks';
 >
 > This is a difficult question to answer however, there are a few quailites that we can consider.
 > - **Semantic tokens avoid scales.** This is the "smedium" problem. You should be able to add and remove truly semantic tokens because they have very few relations to each other.
-> - **Semantic tokens are easily placed.** Finding a token called `action.primary.backgroundColor` more clearly describes _where_ or _when_ the token is expected to be used. In contrast, the token `color.blue.500` does not convey any information about where or when it should be used.
+> - **Semantic tokens are easily placed.** Finding a token called `$action_primary_backgroundColor` more clearly describes _where_ or _when_ the token is expected to be used. In contrast, the token `color.blue.500` does not convey any information about where or when it should be used.
 > - **"Component Tokens" are often highly specific semantic tokens.** A component token is describing the characteristics of a specific component. The best case scenario is generalizing these into categories for more reuse; which is the fundamental strategy behind intents.
 
 ### Anatomy
 
-The construction of an intent commonly has three (3) parts: **purpose, priority, property**.
+The construction of an intent commonly has three (3) parts: **purpose, priority, property**. Each will start with a dollar-sign character (`$`) and be delimited by underscores (`_`).
+
+> #### Why use these characters?
+>
+> Both the `$` and `_` have been chosen for infrastructure purposes:
+> - The `$` indicates a variable to be used within the Sass ecosystem. This character is also valid to begin variables in the JavaScript ecosystem. This means it is valid in both.
+> - The `_` character allows the valid concatenation of the 3 parts that make up an intent. The dot (`.`) character is invalid in flavors of CSS while the hyphen (`-`) character is invalid when composing JavaScript variables.
+> This allows for a construction to be shared between Sass and JavaScript:
+> ```css
+> /* SCSS */
+> button.primary {
+>   color: tokens.$action_primary_foregroundColor;
+> }
+> ```
+>
+> ```jsx
+> /* JSX */
+> const style = { color: tokens.$action_primary_foregroundColor };
+> ```
+> The use of underscore characters also has the added benefit of keeping the file structure flat making processing of the intents easier to manage over a nested structure.
 
 #### Purpose
 
@@ -61,10 +80,10 @@ button.primary {
 
 #### Examples of intents
 
-- `text.primary.fontFamily` describes the font family for headlines.
-- `action.secondary.borderColor` describes the border color for secondary buttons.
-- `control.backgroundColor` describes the background color for input fields.
-- `surface.auxiliary.foregroundColor` describes the color of body copy and icons.
+- `$text_primary_fontFamily` describes the font family for headlines.
+- `$action_secondary_borderColor` describes the border color for secondary buttons.
+- `$control_backgroundColor` describes the background color for input fields.
+- `$surface_auxiliary_foregroundColor` describes the color of body copy and icons.
 
 ### Additional intents
 
@@ -76,7 +95,7 @@ The **figure** category has a purpose which describes regions of the same concep
 
 The tokens in this category have no meaning past segregated color. In other words, the first slice of a pie chart is too specific of a concept to have a token named for it. Instead, we provide a collection of tokens meant to cover this regions generally where they are identified using a scale. This is appropriate because the meaning of the color being used isn't attached to the region. The region doesn't have meaning past existing as a colored region next to other colored regions.
 
-An example of a figure color token is `figure.rank1.color`. While this does follow the general anatomy of the common intents, there are some slight differences.
+An example of a figure color token is `$figure_rank1_color`. While this does follow the general anatomy of the common intents, there are some slight differences.
 
 The priority is less about importance to the user, and more about how frequently we expect to see this color in the region. Imagine a color-by-number book where the colors are ranked in terms of expected frequency of use for the entire book. We then use that ranking to assign the numbers to the regions where we expect the color.
 
@@ -84,14 +103,14 @@ The property of color is used to ambiguate the use. For cases such as charts and
 
 > #### Is it appropriate for the same set of colors to be used for all these regions?
 >
-> Possibly not. The general idea is that there will be a set of branded colors that an organization will want to included in visual regions within the experience. In the event more fine-tuned decisions need to be made for these regions, component tokens could be introduced as `chart.rank1.color` and `avatar.rank1.color`.
+> Possibly not. The general idea is that there will be a set of branded colors that an organization will want to included in visual regions within the experience. In the event more fine-tuned decisions need to be made for these regions, component tokens could be introduced as `$chart_rank1_color` and `$avatar_rank1_color`.
 
 #### Space & Density
 
 The **space** category is unique since is meant to convey the intention of relationships using the void between objects, not affecting the objects themselves. This category has only two intents:
 
-- `space.minDimension` describes the smallest amount of space that will exist within the experience.
-- `space.scaleFactor` describes the rate in which the spacing scale will increase.
+- `$space_minDimension` describes the smallest amount of space that will exist within the experience.
+- `$space_scaleFactor` describes the rate in which the spacing scale will increase.
 
 The resulting amount of space is further determined by a formula using the depth of the current scope. For more about this technique, see the [Density docs](/docs/foundations-density--docs).
 
@@ -105,7 +124,7 @@ This section will mention parts of intents that are less immediately clear.
 
 The concept of `foregroundColor` is meant to cover **text and icons**. You can consider both of these collections of glyphs which align to having the same color between them. This is similar to setting `<svg fill="currentColor"/>` to inherit the text color in code. This is included in surface, action, and control categories.
 
-When curating the `foregroundColor` you should consider this decision along with the `backgroundColor` for the current intent. For example, the `action.primary.foregroundColor` **should always exist** on top of the `action.primary.backgroundColor`. As an incorrect example, the `ACTION.secondary.foregroundColor` **should not exist** on top of a `SURFACE.secondary.backgroundColor` as they are in separate categories of intents. This connection exists for accessibility; to ensure adequate contrast with each pairing.
+When curating the `foregroundColor` you should consider this decision along with the `backgroundColor` for the current intent. For example, the `$action_primary_foregroundColor` **should always exist** on top of the `$action_primary_backgroundColor`. As an incorrect example, the `$ACTION_secondary_foregroundColor` **should not exist** on top of a `$SURFACE_secondary_backgroundColor` as they are in separate categories of intents. This connection exists for accessibility; to ensure adequate contrast with each pairing.
 
 You should also consider the `borderColor` with this set as well, but is less critical from an accessibility standpoint. Best practice is to work on curating each set at a time; all `action.primary` colors, then all `action.secondary` colors and so on.
 

@@ -9,7 +9,7 @@ Everything explained below is contained within [the `text` primitive](/docs/prim
 
 ### Tokens
 
-All typographic tokens are underneath the `text` category in intents. Each token is subdivided by a priority (ie., `primary`, `secondary`, `auxiliary`). Example: `text.primary.fontWeight` describes a headline's font weight.
+All typographic tokens are underneath the `text` category in intents. Each token is subdivided by a priority (ie., `primary`, `secondary`, `auxiliary`). Example: `$text_primary_fontWeight` describes a headline's font weight.
 
 Priorities are linked to their use within the experience. `primary` is equal to the concept of headlines as they are expected to be the most important content to capture the user's interest before moving to lower priorty content. `secondary` describes most body content and `auxiliary` describes details you might find in help or error messaging and legal text.
 
@@ -70,4 +70,4 @@ The two thresholds are `320px` at a minimum representing the smallest device wid
 >
 > More research can be done to adjust this maximum as appropriate.
 
-This minimum and maximum dimensions are then used with the `text.primary.minSize` and `text.primary.scaleFactor` to determine the maximum primary font size, (ie., the headline font size when the viewport is `480px` or larger). Further calculations are completed to determine how the text scales between `320px` and `480px` in a smooth linear progression. More detail is found at the earlier post. In the implementation here, the `320px` and `480px` are translated in terms of unitless `rem` before finally being used in the `clamp()` CSS function and assigned appropriate units.
+This minimum and maximum dimensions are then used with the `$text_primary_minSize` and `$text_primary_scaleFactor` to determine the maximum primary font size, (ie., the headline font size when the viewport is `480px` or larger). Further calculations are completed to determine how the text scales between `320px` and `480px` in a smooth linear progression. More detail is found at the earlier post. In the implementation here, the `320px` and `480px` are translated in terms of unitless `rem` before finally being used in the `clamp()` CSS function and assigned appropriate units.
