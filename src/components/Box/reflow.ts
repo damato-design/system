@@ -13,6 +13,27 @@ function minThreshold(thresholds: number[], width: number) {
     }, Infinity);
 }
 
+/**
+ * Create a safe stringified version of an object to be used as a key.
+ * 
+ * @param {Object} obj - Object to be converted
+ * @returns {String} - Stringified version
+ */
+function safeStringify(obj: object): string {
+    const seen = new WeakSet();
+    return JSON.stringify(obj, function (_k, v) {
+        if (v === null) return null;
+        const t = typeof v;
+        if (t === 'string' || t === 'number' || t === 'boolean') return v;
+        if (Array.isArray(v)) return v;
+        if (t === 'object') {
+        if (seen.has(v)) return;
+            seen.add(v);
+            return Object.getPrototypeOf(v) === Object.prototype ? v : undefined;
+        }
+  });
+}
+
 export type ReflowProp<P> = {
     /** An object where the key is the pixel width threshold to apply the value as props. */
     reflow?: Record<number, P>
@@ -29,7 +50,7 @@ export type ReflowProp<P> = {
 export function useReflow<R extends HTMLElement | null, P extends ReflowProp<P>>(originalProps: P, ref: React.Ref<R>) {
     const { reflow = {}, ...props } = originalProps;
     const [threshold, setThreshold] = useState(Infinity);
-    const reflowWidths = useMemo(() => Object.keys(reflow).map(Number), [reflow]);
+    const reflowWidths = useMemo(() => Object.keys(reflow).map(Number).filter(Number.isFinite), [reflow]);
 
     const ro = useRef<ResizeObserver | null>();
 
@@ -43,23 +64,29 @@ export function useReflow<R extends HTMLElement | null, P extends ReflowProp<P>>
 
         if (!reflowWidths.length) return;
 
-        if (!ro.current) {
+        if ($elem && !ro.current) {
             ro.current = new ResizeObserver(([entry]) => {
                 requestAnimationFrame(() => {
                     setThreshold(minThreshold(reflowWidths, entry.contentRect.width));
                 })
             });
+            ro.current.observe($elem);
         }
 
-        if ($elem) {
-            ro.current.observe($elem);
-        } else if (typeof ro?.current?.disconnect === 'function') {
+        if (!$elem && typeof ro?.current?.disconnect === 'function') {
             ro.current.disconnect();
+            ro.current = null;
         }
 
     }, [ro, reflowWidths, ref]);
 
-    return useMemo(() => {
+    const mergedProps = useMemo(() => {
         return { ...props, ...(reflow?.[threshold] || {}), ref: callbackRef }
     }, [props, reflow, threshold, callbackRef]);
+    
+    const key = useMemo(() => {
+        return safeStringify(mergedProps);
+    }, [mergedProps]);
+
+    return { key, ...mergedProps };
 }
