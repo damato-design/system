@@ -1,6 +1,6 @@
 import { Story } from '@storybook/blocks';
 import { hrefTo } from '@storybook/addon-links';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import css from './example.module.css'; 
 
 export default function Example({ stories }) {
