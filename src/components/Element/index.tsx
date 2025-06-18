@@ -1,4 +1,4 @@
-import { forwardRef, createElement } from 'react';
+import { forwardRef, createElement, memo } from 'react';
 import { proxy, Props, HTMLTagsOnly } from './proxy';
 
 export function restrictProps({
@@ -23,7 +23,7 @@ export type ElementProps = Props & {
 }
 
 export const element = proxy<HTMLTagsOnly, ElementProps>('element', (TagName) => {
-  return forwardRef<HTMLElement, ElementProps>(({
+  const Component = forwardRef<HTMLElement, ElementProps>(({
     className,
     denser,
     mode,
@@ -38,5 +38,7 @@ export const element = proxy<HTMLTagsOnly, ElementProps>('element', (TagName) =>
     }
 
     return createElement(TagName, props);
-  })
+  });
+
+  return memo(Component) as typeof Component;
 });

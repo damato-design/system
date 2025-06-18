@@ -112,6 +112,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
       stretch,
       shrink = true,
       wrap,
+      key,
       ...props
     } = useReflow<HTMLElement, BoxProps>(originalProps, ref);
 
@@ -158,6 +159,7 @@ export const box = proxy<HTMLTagsOnly, BoxProps>('box', (TagName) => {
 
     return <Box
       { ...props }
+      key={ key }
       className={ classNames }
       aria-busy={ standby ? true : undefined }
       data-priority={ priority }

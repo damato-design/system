@@ -18,7 +18,7 @@ type Story = StoryObj<typeof meta>
 
 /**
  * Import the `IDREF` constant which holds a list of keys which require
- * translations. This should be place on every page in the experience
+ * translations. This should be placed on every page in the experience
  * so that elements that reference these labels can be properly translated
  * for assistive technologies.
  * 
@@ -62,18 +62,20 @@ export const Default: Story = {
 }
 
 /**
- * If you have a dictionary of translation that can match the lookup
+ * If you have a dictionary of translations that can match the lookup
  * provided by the `IDREF`, you can do the following to render all of
  * the translated content.
  * 
  * ```jsx
  * function Translate(lang, DICTIONARY) {
- *  <div lang={ lang }>
- *      { Object.keys(IDREF).map((key) => {
- *          const Localize = localize[key as IdRefKeys];
- *          return <Localize>{ DICTIONARY[key] }</Localize>
- *      }) }
- *  </div>
+ *      return (
+ *          <div lang={ lang }>
+ *              { Object.keys(IDREF).map((key) => {
+ *                  const Localize = localize[key as IdRefKeys];
+ *                  return <Localize>{ DICTIONARY[key] }</Localize>
+ *              }) }
+ *          </div>
+ *      )
  * }
  * ```
  * 

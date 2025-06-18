@@ -64,7 +64,7 @@ export const Stack: Story = {
 }
 
 /**
- * Alignment works with a slightly different mental modal from
+ * Alignment works with a slightly different mental model from
  * the traditional flexbox interface.
  * 
  * The `placeChildren` prop determines how the inner children

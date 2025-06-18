@@ -3,6 +3,9 @@ import { useCallback, useState } from 'react';
 
 import { track } from '.';
 
+import { box } from '../Box';
+import { text } from '../Text';
+
 /**
  * The `track` primitive helps present progress,
  * sometimes allowing user input to control the progress.
@@ -27,10 +30,20 @@ export const Default: Story = {
 /**
  * The meter type is meant to measure a fractional amount of countable items.
  * Example: amount of available disk space in kilobytes.
+ * 
+ * This also demonstrates the expected alignment if the elements are composed inline. The `track` is shown to be half the line-height of the text. The remaining space completes the line-height size.
+ * 
+ * This composition is _not_ advised because the output could be misunderstood to be a label. Instead, the label and output should appear above the track. This example is only presented to show the relationship between the track and text. Yes, this composition is used for the density slider to make it unobtrusive to the example.
  */
 export const Meter: Story = {
     args: { value: 50 },
-    render: (args) => <track.meter { ...args }/> 
+    render: (args) => (
+        <box.div gap>
+            <text.label>Battery</text.label>
+            <track.meter { ...args }/>
+            <text.output>50%</text.output>
+        </box.div>
+    ) 
 }
 
 /**
@@ -38,15 +51,26 @@ export const Meter: Story = {
  * This is completed by grabbing the elevated thumb and
  * dragging to an appropriate position within the track.
  * 
- * When preparing this experience fully, additional feedback signifiers
- * should be included to display the current value and thresholds.
+ * This example shows a proper composition of label and output. The thumb element is the size of the text line-height.
+ * 
+ * > #### Why can't I drag the thumb?
+ * >
+ * > This is an artifact of a complex React ecosystem. There is a full re-render occurring after the value updates. This isn't performant and needs to be revisited for improvement. The value can be updated by clicking the location where the thumb should move.
  */
 export const Range: Story = {
     args: { value: 30 },
     render: ({ value, ...args }) => {
         const [val, setValue] = useState(value);
         const onChange = useCallback((ev: any) => setValue(ev.target.valueAsNumber), []);
-        return <track.range { ...args } value={ val } onChange={ onChange }/>
+        return (
+            <box.fieldset stack stretch>
+                <box.div gap distribute='between'>
+                    <text.label>Battery</text.label>
+                    <text.output>{ val }%</text.output>
+                </box.div>
+                <track.range { ...args } value={ val } onChange={ onChange }/>
+            </box.fieldset>
+        )
     } 
 }
 

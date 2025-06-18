@@ -52,7 +52,7 @@ export const track = proxy<'progress' | 'meter' | 'range', TrackProps>('track', 
     ) : null;
 
     return (
-      <box.div stack gap stretch={ stretch || Boolean(datalist) } placeChildren='center'>
+      <box.div stack stretch={ stretch || Boolean(datalist) } placeChildren='center'>
         { track }
         { datalist }
       </box.div>

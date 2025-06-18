@@ -27,7 +27,7 @@ tokens: # The token structure which requires curated values.
 
 > #### How should `mode` be named?
 >
-> The `mode` key is important as it is meant to describe the use of this collection of values **across all brands**. This is not necessarily a unique identifier and could be shared across files that have a similar purpose. For example, you could create a mode that is meant to express the concept of premium (`mode: premium`). Then we could use that concept across pages, where each brand could have its own curated "premium" experience. For brands that don't have a concept of premium, the page would be styled in their default curation.
+> The `mode` key is important as it is meant to describe the use of this collection of values **across all brands**. This is not necessarily a unique identifier and could be shared across files that have a similar purpose. For example, you could create a mode that is meant to express the concept of premium (`mode: premium`). Then we could use that concept across pages, where each brand could have its own curated "premium" experience. For brands that don't have a concept of premium, the page would be styled in their default curation. Or more accurately, the next available mode found higher in the scope of hierarchy.
 >
 > **The mode shouldn't attempt to describe the visual style of the region.** It should be named to a purpose or intention for this new mode. The values within the mode will convey the presentation of that purpose.
 
@@ -35,7 +35,11 @@ Importantly, **the file does not need to be completed as provided**. The recomme
 
 > #### Do I need to create separate files for light and dark mode?
 >
-> No, the system handles light and dark mode by mixing the system color with your given brand color with some amount of influence. You could force your provided color in place by setting `$influence` to `100` for any color token. This will ensure that your given color is the one used. For more information about this approach, see the [Color docs](/docs/foundations-color--docs).
+> No, the system handles light and dark mode by mixing the system color with your given brand color with some amount of influence. The lightness or darkness is determined by the user's settings.
+>
+> You could force your provided color in place by setting `$influence` to `100` for any color token. This will ensure that your given color is the one used. This might be important for hyper-personalized settings where the user explicitly expects an appearance that is different from what the device normally provides. As an example, a user might prefer dark mode for most tasks, but specifically prefers light mode for reading articles.
+>
+> For more information about this approach, see the [Color docs](/docs/foundations-color--docs).
 
 The schema should also help the curation process with intellisense within your code editor by using a YAML server extension.
 
@@ -61,10 +65,12 @@ This should be called within the SSR process for the `<head/>` with the followin
 
 The `sizes` option determines the amount of sizes that this page is meant to display. For more information about this see the [Density docs](/docs/foundations-density--docs).
 
-The `brand` option determines what brand to include in the page by Without setting this value, the page would be presented as unbranded, using system and symbolic colors. Only one brand can be loaded. Brands omitted from this list will not be lazy loaded.
+The `brand` option determines what brand to include in the page. This filters the possible modes that are expected to load to only the brand set. Without setting this value, the page would be presented as unbranded, using system and symbolic colors. Only one brand can be loaded. Brands omitted from this list will not be lazy loaded.
 
-> #### What if I want to support multiple brands?
+> #### What if I want to support cobranding?
 > To keep the complexity of the system to a minimum, the system only accepts a single brand. However, the brand can be updated within the lifecycle. This means while only one brand can be present on the page, which brand this is can be switched at any time.
+>
+> To support cobranding, where the brands were expected would need to be defined similar to the way a mode is within the composition (eg., `data-brand="target"`).
 
 The `modes` option is an array of mode indentifier strings that should be loaded as soon as possible. This is to set the known modes that the page should present in its first load. The manager will also load modes as they appear within the HTML during the page lifecycle.
 

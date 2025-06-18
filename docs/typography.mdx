@@ -71,3 +71,12 @@ The two thresholds are `320px` at a minimum representing the smallest device wid
 > More research can be done to adjust this maximum as appropriate.
 
 This minimum and maximum dimensions are then used with the `$text_primary_minSize` and `$text_primary_scaleFactor` to determine the maximum primary font size, (ie., the headline font size when the viewport is `480px` or larger). Further calculations are completed to determine how the text scales between `320px` and `480px` in a smooth linear progression. More detail is found at the earlier post. In the implementation here, the `320px` and `480px` are translated in terms of unitless `rem` before finally being used in the `clamp()` CSS function and assigned appropriate units.
+
+> #### How do I render other text styles?
+>
+> You can render other styles of text by using their appropriate HTML elements.
+> - `<strong/>` can emphasize text by making it <strong>bolder</strong>.
+> - `<em/>` can emphasize text by making it <em>italic</em>.
+> - `<s/>` can emphasize text by adding a <s>strikethrough</s>.
+>
+> The `text` element can render any of these elements with the dot-notation syntax (eg., `<text.strong/>`).

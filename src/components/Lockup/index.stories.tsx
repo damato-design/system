@@ -95,6 +95,10 @@ export const Loading: Story = {
  * 
  * When the `errorMessage` is provided, a section of the component is given the
  * `system:critical` mode to emphasize this component should be addressed.
+ * 
+ * > #### Why are the messages above the input?
+ * >
+ * > Messages appear above the input due to the native browser hints that may appear below the input. These tend to cover messaging that appears below the input. Rendering these messages above the input help ensure they remain visible.
  */
 export const Form: Story = {
     args: {

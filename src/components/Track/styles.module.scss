@@ -6,7 +6,8 @@
     --has-items: calc(var(--length, 0) / var(--length, 1));
     appearance: none;
     border-radius: 100vw;
-    height: 1lh;
+    height: .5lh;
+    margin-block: .25lh;
     display: flex;
     box-sizing: content-box;
     max-width: calc(100% - (100% * var(--has-items) / var(--length, 1)) + (var(--has-items) * 1lh));
@@ -79,7 +80,6 @@
             aspect-ratio: 1;
             border-radius: 100vw;
             cursor: ew-resize;
-            transform: scale(1.5);
             border-width: 1px;
             border-style: solid;
             @include flyout;

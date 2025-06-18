@@ -76,7 +76,11 @@ button.primary {
 >
 > For the concept of `:disabled`, the component is presented at `opacity: .4` and `cursor: not-allowed`. For buttons, the concept of `:hover` is handled by mixing the given background and foreground colors by a small percentage to show feedback to the user, along with `cursor: pointer`.
 >
-> As mentioned earlier, the concept of `:invalid` is handled differently since it is considered of an expression that doesn't change the functionality of the page (ie., `:disabled`), nor is it trigged directly by the user (ie., `:hover`).
+> The concept of `:invalid` is handled differently since it is considered of an expression that doesn't change the functionality of the page (ie., `:disabled`), nor is it trigged directly by the user (ie., `:hover`). This is conveyed by using `data-mode="system:critical"` on the region in a critical state. Some components, such as the [`lockup`](docs/primitives-lockup--docs) will internally set this when other configurations are provided.
+>
+> The concept of `:selected` is potentially the most controversial in the system. The treatment in the system provides an accented colored bottom border for chosen items. This is demonstrated in the [`listbox`](/docs/primitives-listbox--docs) and related components. The reason for this choice is due to the challenge of reducing the number of intents while conveying a different state. Updating the background color for an interactive item to represent selection alone could indicate a new primary button treatment. The bottom border treatment was chosen for its uniqueness in the system.
+>
+> As part of the exercise in validating the decision behind the `:selected` treatment, it was identified that only `<Button priority='auxiliary'/>` will expect to be given the `:selected` treatment. No other button priority is meant to show selection. Most other components have clear visual changes for selection (eg., [`<Checkbox/>`](/docs/components-checkbox--docs)). An outlier is [`<Calendar/>`](/docs/components-calendar--docs) which cannot host additional accessories to represent selection. The `<Calendar/>` component uses `<Button/>` elements to create interactive cells.
 
 #### Examples of intents
 

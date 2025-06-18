@@ -33,6 +33,34 @@ type Story = StoryObj<typeof meta>
  * > This uses the new [CSS Anchor Positioning specification](https://www.w3.org/TR/css-anchor-position-1/)
  * which has not yet been launched in all browsers.
  * Please see the [browser compatability table at MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/anchor-name#browser_compatibility) for more information.
+ * 
+ * Here's the full code for the component below:
+ * 
+ * ```jsx
+ * function FlyoutExample(args) {
+ *      const [show, setShow] = useState(false);
+ *      const popover = (
+ *          <flyout.div
+ *              { ...args }
+ *              onClose={ () => setShow(false) }>
+ *              flyout is open!
+ *          </flyout.div>
+ *      )
+ *
+ *      return (
+ *          <FlyoutProvider>
+ *              <Button
+ *              priority='primary'
+ *              onClick={ () => setShow(!show) }>
+ *              anchor element
+ *              </Button>
+ *              { show ? popover : null }
+ *          </FlyoutProvider>
+ *      )
+ * }
+ * ```
+ * 
+ * The `<FlyoutProvider/>` provides context to the expected anchoring element and the contents of the flyout. If an interactive element (eg. `<Button/>`) is a direct child of the `<FlyoutProvider/>` it is considered the anchor for the flyout. In this way, there is an implicit connection between the anchor and flyout. In other words, the author does not need to explicitly connect the anchor to the flyout. It is inferred by the composition.
  */
 export const Default: Story = {
     args: {

@@ -38,6 +38,8 @@ export const Default: Story = {
  * You can set the priority of the `text` component to indicate
  * its importance in the composition. In this example, the `priority='primary'`
  * conveys the concept of a headline.
+ * 
+ * Note that the concept of priority is separate from the element chosen. This allows the author to choose the most appropriate semantic element while maintaining a visual consistency.
  */
 export const Priority: Story = {
     args: {
@@ -51,6 +53,10 @@ export const Priority: Story = {
  * When a child `text` component is included inside a parent `text`
  * component without a set `priority`, the child component will inherit
  * the parent's `priority` value.
+ * 
+ * > #### What are those weird brackets in the source code?
+ * >
+ * > Storybook renders whitespace with nested components in JSX as `{' '}`. The source code does not include this syntax and uses normal whitespace.
  */
 export const Inheritance: Story = {
     args: { 
@@ -66,7 +72,11 @@ export const Inheritance: Story = {
 /**
  * A `text` component can be configured to make its content invisible
  * and only accessible to screen reading technology by using the
- * `screenreaderOnly` callback.
+ * `screenreaderOnly` flag.
+ * 
+ * > #### Why isn't this a shared utility?
+ * >
+ * > After completing research on the most appropriate place to organize the concept of visually hidden, it was determined that the only content meant to be visually hidden is text. Therefore, it seemed best to add this as a feature of `text` instead of a rogue utility.
  */
 export const ScreenreaderOnly: Story = {
     parameters: {

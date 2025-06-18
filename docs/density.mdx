@@ -9,6 +9,8 @@ Everything below is contained within [the `box` primitive](/docs/primitives-box-
 
 ### Tokens
 
+Before reading this, see the [Intents docs](/docs/foundations-intents--docs).
+
 There are a few tokens that help describe the concept of density.
 
 - `$space_minDimension` describes the minimum amount of space that will exist in the experience. It is recommended to use a pixel amount over a relative unit for this value.
@@ -67,7 +69,7 @@ Remember that a more dense box does not mean the box is larger. It means the ele
 
 ### Generating the Scale
 
-The provided value for `--level` will affect scale based calculations for `space` and `text` using the following forumla:
+The provided value for `--level` seen in the earlier example code will affect scale based calculations for `space` and `text` using the following forumla:
 
 ```
 size = min * pow(scale, level)
