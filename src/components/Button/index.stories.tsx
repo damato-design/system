@@ -62,6 +62,11 @@ export const Secondary: Story = {
  * `<box.div/>` elements in this example.
  * 
  * For more information about this technique, see the [Density docs](/docs/foundations-density--docs).
+ * 
+ * > #### Where is the density control for this example?
+ * >
+ * > Because we are demonstrating the ability to nest regions of denser objects,
+ * > the control to affect this has been removed.
  */
 export const Sizes: Story = {
     parameters: {

@@ -9,6 +9,8 @@ import { text } from '../Text';
 /**
  * The `track` primitive helps present progress,
  * sometimes allowing user input to control the progress.
+ * 
+ * Note, this is the most incomplete component in the system and still under active development. As such, expect areas of exploration to exist.
  */
 const meta = {
     title: 'Primitives/track',
@@ -51,11 +53,16 @@ export const Meter: Story = {
  * This is completed by grabbing the elevated thumb and
  * dragging to an appropriate position within the track.
  * 
- * This example shows a proper composition of label and output. The thumb element is the size of the text line-height.
  * 
  * > #### Why can't I drag the thumb?
  * >
  * > This is an artifact of a complex React ecosystem. There is a full re-render occurring after the value updates. This isn't performant and needs to be revisited for improvement. The value can be updated by clicking the location where the thumb should move.
+ * 
+ * This example shows a proper composition of label and output. The thumb element is the size of the text line-height.
+ * 
+ * > #### Shouldn't this use the lockup?
+ * >
+ * > Yes, to keep consistency, the `lockup` component would be more appropriate to host labels and controls. However, due to the expected placement of the `<output/>` element, it is not currently supported in the composition.
  */
 export const Range: Story = {
     args: { value: 30 },

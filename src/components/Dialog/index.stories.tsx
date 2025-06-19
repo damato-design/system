@@ -54,6 +54,12 @@ export const Emphasis: Story = {
  * between the system and the user. As an alternative, we can create these dialogs
  * inline with the rest of the content. This example is for demonstrative purposes
  * by using the `disrupt` flag on the `<Dialog/>` meant to disrupt the user.
+ * 
+ * > #### Where is the density control for this example?
+ * >
+ * > Because this example uses the top-layer,
+ * > all included elements would be inaccessible behind the overlay,
+ * > including this control.
  */
 export const Modal: Story = {
     parameters: {

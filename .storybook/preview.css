@@ -24,6 +24,7 @@
     &.sbdocs-preview {
         resize: horizontal;
         overflow: auto;
+        z-index: 1;
     }
 
     &:is(a.sbdocs-a) {

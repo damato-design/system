@@ -1,4 +1,4 @@
-import { forwardRef, createElement, useId } from 'react';
+import { forwardRef, createElement, useId, useMemo } from 'react';
 import css from './styles.module.scss';
 import { proxy } from '../Element/proxy';
 import { element, ElementProps, restrictProps } from '../Element';
@@ -26,7 +26,6 @@ export const track = proxy<'progress' | 'meter' | 'range', TrackProps>('track', 
     ...props
   }: TrackProps, ref) => {
 
-    const fill = typeof value === 'number' ? `${value}%` : null;
     const datalistId = useId();
 
     const config = Object.assign({}, restrictProps(props), {
@@ -34,22 +33,26 @@ export const track = proxy<'progress' | 'meter' | 'range', TrackProps>('track', 
       className: css.track,
       ref,
       style: {
-        '--fill': fill,
+        '--fill': typeof value === 'number' ? `${value}%` : null,
         '--length': items?.length,
       },
       value,
       list: items ? datalistId : null
     } as TrackProps);
 
-    const track = trackType === 'range'
-      ? createElement(element.input, { type: trackType, ...config } as React.HTMLAttributes<HTMLInputElement>)
-      : createElement(element[trackType], config);
+    const track = useMemo(() => {
+      return trackType === 'range'
+        ? createElement(element.input, { type: trackType, ...config } as React.HTMLAttributes<HTMLInputElement>)
+        : createElement(element[trackType], config);
+    }, [trackType, config]);
 
-    const datalist = Array.isArray(items) ? (
-      <datalist className={ css.datalist } id={ datalistId }>
-        { items.map((item, idx) => <text.option {...item} key={ idx }/>) }
-      </datalist>
-    ) : null;
+    const datalist = useMemo(() => {
+      return Array.isArray(items) ? (
+        <datalist className={ css.datalist } id={ datalistId }>
+          { items.map((item, idx) => <text.option {...item} key={ idx }/>) }
+        </datalist>
+      ) : null
+    }, [items, datalistId, css.datalist]);
 
     return (
       <box.div stack stretch={ stretch || Boolean(datalist) } placeChildren='center'>
