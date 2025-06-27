@@ -30,13 +30,26 @@ type Story = StoryObj<typeof meta>
 /**
  * By default, the `field` expects at least an `input` primitive
  * to complete the experience of allowing the user to fill out a form.
+ * 
+ * > #### Where is the placeholder text for these examples?
+ * >
+ * > This system's `input` element does not accept the native `placeholder` attribute.
+ * > This is because the treatment is either inaccessible in contrast or
+ * > can be too easily mistaken as a non-interactive field.
+ * > Besides, how often have you seen a placeholder in a paper form?
+ * >
+ * > More information can be found at [this NN/g article](https://www.nngroup.com/articles/form-design-placeholders/).
+ * >
+ * > The expectation is for the field to be composed with [the `lockup` component](/docs/primitives-lockup--docs)
+ * > which will accept additional content to help provide more information about the field.
+ * > This includes the label, passive messaging, and error messaging.
  */
 export const Default: Story = {
     args: {},
     render: (args) => {
         return (
             <field.div { ...args }>
-                <input.text name='search' placeholder='Search for something'/>
+                <input.text name='search'/>
             </field.div>
         )
     }
@@ -54,7 +67,7 @@ export const Icon: Story = {
             <field.div { ...args }>
                 <icon.phone/>
                 <text.hr/>
-                <input.tel name='telephone' placeholder='(212) 867-5309'/>
+                <input.tel name='telephone' defaultValue='212-867-5309'/>
             </field.div>
         )
     }

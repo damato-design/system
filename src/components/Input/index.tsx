@@ -6,13 +6,13 @@ import { element, ElementProps } from '../Element';
 import { useListbox } from '../Listbox';
 import { useLockup } from '../Lockup';
 
-export type InputProps = (React.InputHTMLAttributes<HTMLInputElement>
-  | React.TextareaHTMLAttributes<HTMLTextAreaElement>)
-  & ElementProps
-  & {
-    name: string,
-    fieldSizing?: 'content' | 'flex'
-  };
+export type InputProps = (
+  | Omit<React.InputHTMLAttributes<HTMLInputElement>, 'placeholder'>
+  | Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'placeholder'>
+) & ElementProps & {
+  name: string;
+  fieldSizing?: 'content' | 'flex';
+};
 
 // React.CSSProperties does not include fieldSizing
 interface ModernCSSProperties extends React.CSSProperties {

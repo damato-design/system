@@ -98,7 +98,13 @@ export const Loading: Story = {
  * 
  * > #### Why are the messages above the input?
  * >
- * > Messages appear above the input due to the native browser hints that may appear below the input. These tend to cover messaging that appears below the input. Rendering these messages above the input help ensure they remain visible.
+ * > Messages appear above the input due to the native browser hints that may appear below the input.
+ * > These tend to cover messaging that appears below the input.
+ * > Rendering these messages above the input help ensure they remain visible.
+ * >
+ * > Another reason aligns to how we normally read instructions before executing the task.
+ * > First, the subject is read. Then the directions on how to complete the task.
+ * > Finally, the task is presented to complete.
  */
 export const Form: Story = {
     args: {
