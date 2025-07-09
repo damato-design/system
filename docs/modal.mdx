@@ -1,6 +1,7 @@
 import { Meta, Canvas } from '@storybook/blocks';
 import { Confirm, Login } from '../src/components/Lockup/index.stories';
 import { Wizard } from '../src/components/Pagination/index.stories';
+import { Modal, Default } from '../src/components/Dialog/index.stories';
 
 <Meta title="Components/Modal" />
 
@@ -10,7 +11,7 @@ Don't use a modal. There's often a better pattern.
 
 ### Before unload
 
-Instead of launching a modal to stop the user from leaving unsaved work, save the work as they make changes.
+Instead of launching a modal to stop the user from leaving unsaved work, save the work as they make changes. Don't stop them from doing what they want, even if that is leaving.
 
 ### Double confirmation
 
@@ -29,3 +30,15 @@ Instead of launching a modal when the user does something that requires a login,
 Instead of launching a modal when the user needs to pick-a-path, make the experience a totally new page. That'll keep the user's focus on the path instead of wondering what is behind the modal.
 
 <Canvas of={ Wizard }/>
+
+### Annoucements
+
+Hopefully, the announcement is _not_ an advertisement masquerading as an important message. For messages that are important to the user, put them in context. If it's a message unrelated to the page they are currently on. Use a notification pattern or better yet an inbox message that they can choose to manage their own way. For messages related to the current page, use an in-page dialog.
+
+<Canvas of={ Default }/>
+
+### Everything else
+
+If these didn't cover your use case and creativity for an alternative solution is lacking, then here's an example that uses the `Dialog` component to launch onto the `top-layer`. This keeps it as a separate context from the underlying page.
+
+<Canvas of={ Modal }/>
