@@ -1,4 +1,6 @@
-import { Meta } from '@storybook/blocks';
+import { Meta, Canvas } from '@storybook/blocks';
+import { Confirm, Login } from '../src/components/Lockup/index.stories';
+import { Wizard } from '../src/components/Pagination/index.stories';
 
 <Meta title="Components/Modal" />
 
@@ -6,6 +8,24 @@ import { Meta } from '@storybook/blocks';
 
 Don't use a modal. There's often a better pattern.
 
+### Before unload
+
+Instead of launching a modal to stop the user from leaving unsaved work, save the work as they make changes.
+
 ### Double confirmation
 
-Instead of launching a modal to double confirm a user's critical action, consider causing the user to type something in a field.
+Instead of launching a modal to double confirm a user's critical action, consider causing the user to type something in a field. This is better because it isn't disruptive to the user, doesn't require unique accessibility considerations, and is more deliberate than only pressing another big button.
+
+<Canvas of={ Confirm }/>
+
+### Authentication wall
+
+Instead of launching a modal when the user does something that requires a login, redirect them to the login page. Remember that tip above about saving progress? Keep that progress while they login and redirect them back to where they were now with authentication. You can even reassure them at the login page that all their progress has been saved.
+
+<Canvas of={ Login }/>
+
+### Wizards
+
+Instead of launching a modal when the user needs to pick-a-path, make the experience a totally new page. That'll keep the user's focus on the path instead of wondering what is behind the modal.
+
+<Canvas of={ Wizard }/>

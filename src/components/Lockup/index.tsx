@@ -62,8 +62,8 @@ function getIcon(iconRef: string | undefined, subject: ReactElement<TextProps>) 
 export type LockupProps = BoxProps & {
   icon?: string,
   subject?: ReactElement<TextProps>,
-  passiveMessage?: string,
-  errorMessage?: string,
+  passiveMessage?: ReactElement<TextProps> | string,
+  errorMessage?: ReactElement<TextProps> | string,
 };
 
 function SubjectComponent(props: { children: ReactNode }) {
