@@ -21,6 +21,12 @@ type Story = StoryObj<typeof meta>
 /**
  * All `input` primitives require a type of input to be referenced with
  * the dot-notation. This example demonstrates how to render the `password` type.
+ * 
+ * This type has a special `redact` flag that can be set to explicitly `false`
+ * which internally changes the type from `password` to `text`
+ * to show the characters within the input without needing to change
+ * the input type from the dot-notation.
+ * This feature is helpful to indicate this is always meant to be a password input.
  */
 export const Default: Story = {
     args: {

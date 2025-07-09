@@ -9,29 +9,8 @@ import { useCallback, useState, useMemo, useRef } from 'react';
  */
 function minThreshold(thresholds: number[], width: number) {
     return thresholds.reduce((acc: number, threshold) => {
-      return width <= threshold ? Math.min(threshold) : acc ;
+        return width <= threshold ? Math.min(acc, threshold) : acc;
     }, Infinity);
-}
-
-/**
- * Create a safe stringified version of an object to be used as a key.
- * 
- * @param {Object} obj - Object to be converted
- * @returns {String} - Stringified version
- */
-function safeStringify(obj: object): string {
-    const seen = new WeakSet();
-    return JSON.stringify(obj, function (_k, v) {
-        if (v === null) return null;
-        const t = typeof v;
-        if (t === 'string' || t === 'number' || t === 'boolean') return v;
-        if (Array.isArray(v)) return v;
-        if (t === 'object') {
-        if (seen.has(v)) return;
-            seen.add(v);
-            return Object.getPrototypeOf(v) === Object.prototype ? v : undefined;
-        }
-  });
 }
 
 export type ReflowProp<P> = {
@@ -51,6 +30,8 @@ export function useReflow<R extends HTMLElement | null, P extends ReflowProp<P>>
     const { reflow = {}, ...props } = originalProps;
     const [threshold, setThreshold] = useState(Infinity);
     const reflowWidths = useMemo(() => Object.keys(reflow).map(Number).filter(Number.isFinite), [reflow]);
+
+    const instanceId = useRef(crypto.randomUUID()).current;
 
     const ro = useRef<ResizeObserver | null>();
 
@@ -78,15 +59,12 @@ export function useReflow<R extends HTMLElement | null, P extends ReflowProp<P>>
             ro.current = null;
         }
 
-    }, [ro, reflowWidths, ref]);
+    }, [reflowWidths, ref]);
 
-    const mergedProps = useMemo(() => {
-        return { ...props, ...(reflow?.[threshold] || {}), ref: callbackRef }
-    }, [props, reflow, threshold, callbackRef]);
-    
-    const key = useMemo(() => {
-        return safeStringify(mergedProps);
-    }, [mergedProps]);
-
-    return { key, ...mergedProps };
+    return { 
+        ...props,
+        ...(reflow?.[threshold] || {}),
+        key: `reflow-${instanceId}-${threshold}`,
+        ref: callbackRef
+    };
 }

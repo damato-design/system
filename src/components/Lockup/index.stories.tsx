@@ -163,16 +163,6 @@ export const Confirm: Story = {
     }
 }
 
-function Toggle() {
-    const [show, setShow] = useState(false);
-
-    return (
-        <Button icon={ show ? 'visibility_off' : 'visibility' } onClick={() => setShow(!show)}>
-            { show ? 'Hide' : 'Show' }
-        </Button>
-    );
-}
-
 /**
  * This example stacks `lockup` components to create a login form.
  */
@@ -181,6 +171,7 @@ export const Login: Story = {
     render: (args) => {
         const [email, setEmail] = useState('');
         const [password, setPassword] = useState('');
+        const [show, setShow] = useState(false);
 
         const forgotPassword = (
             <text.a href="#" priority='auxiliary'>Forgot Password</text.a>
@@ -197,8 +188,14 @@ export const Login: Story = {
                 </lockup.fieldset>
                 <lockup.fieldset subject={ <text.label>Password</text.label> } passiveMessage={ forgotPassword }>
                     <field.div>
-                        <input.password name='password' value={ password } onChange={ ({ target }: any) => setPassword(target.value) }/>
-                        <Toggle/>
+                        <input.password
+                            name='password'
+                            value={ password }
+                            redact={ !show }
+                            onChange={ ({ target }: any) => setPassword(target.value) }/>
+                        <Button icon={ show ? 'visibility_off' : 'visibility' } onClick={() => setShow(!show)}>
+                            { show ? 'Hide' : 'Show' }
+                        </Button>
                     </field.div>
                 </lockup.fieldset>
                 <Button priority='primary'>Login</Button>
