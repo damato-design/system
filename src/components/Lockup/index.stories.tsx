@@ -6,6 +6,8 @@ import { field } from '../Field';
 import { input } from '../Input';
 import { useCallback, useState } from 'react';
 import { Close } from '../Close';
+import { Button } from '../Button';
+import { box } from '../Box';
 
 /**
  * The `lockup` primitive helps create standardized layouts of content.
@@ -125,6 +127,37 @@ export const Form: Story = {
                 <field.div>
                     <input.email name='email' value={ value } onChange={ onChange }/>
                 </field.div>
+            </lockup.fieldset>
+        )
+    }
+}
+
+/**
+ * This example shows an alternative to the double-confirmation pattern by preparing a input for the user to fill out before confirming a destructive action.
+ * 
+ * This also uses a `box` primitive to help align the input and button.
+ */
+export const Confirm: Story = {
+    args: {
+        subject: <text.label>Confirm delete</text.label>,
+        passiveMessage: 'Type the name of the item to delete. Beware, there is no going back!',
+        icon: 'warning'
+    },
+    render: (args) => {
+        const [value, setValue] = useState('');
+
+        const onChange = useCallback((ev: any) => {
+            setValue(ev.target.value);
+        }, []);
+
+        return (
+            <lockup.fieldset { ...args }>
+                <box.div gap>
+                    <field.div>
+                        <input.text name='text' value={ value } onChange={ onChange }/>
+                    </field.div>
+                    <Button data-mode="system:critical" priority='primary'>Delete</Button>
+                </box.div>
             </lockup.fieldset>
         )
     }

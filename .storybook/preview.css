@@ -47,8 +47,6 @@
 }
 
 .docs-story {
-    background: white;
-
     &:has(.sb-story > [style*="height: 0px"]) {
         /* display: none; */
         height: 0;

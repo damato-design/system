@@ -60,7 +60,8 @@ function Input({ value, onChange }) {
     fontSize: '1rem',
     alignContent: 'center',
     opacity: '.5',
-    marginBlockEnd: '1em'
+    marginBlockEnd: '1em',
+    accentColor: 'currentColor'
   }
   return (
     <div style={ style } className='density-level-control'>
@@ -100,7 +101,8 @@ const preview: Preview = {
     options: {
       showPanel: false,
       storySort: {
-        order: ['Welcome', 'Foundations', 'Patterns', 'Primitives', 'Components', 'Compositions']
+        method: 'alphabetical',
+        order: ['Welcome', 'Foundations', 'Patterns', 'Primitives', ['Overview'], 'Components', ['Overview'], 'Compositions']
       }
     },
     toolbar: { disable: true },

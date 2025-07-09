@@ -7,19 +7,6 @@
     background: var(--surface-bg);
     color: tokens.$surface_auxiliary_foregroundColor;
     border-color: tokens.$surface_auxiliary_borderColor;
-
-    & :where(*) {
-        color: tokens.$surface_auxiliary_foregroundColor;
-    }
-}
-
-/*
- * In a complete system, the application would use a `<box.body/>` element to indicate the surface and appropriate styles. However, since this system leverages Storybook to demonstrate the system, we do not have access to the body in a React context. We place these styles here as the alternative.
- *
- * Due to the mode manager scoping the styles, these are technically not applied unless attributes indicating a mode change were applied at the body.
- */
-:global(body:not(.sb-main-fullscreen)) {
-    @include surface;
 }
 
 .surface {
