@@ -1,0 +1,23 @@
+import { Meta, Canvas } from '@storybook/blocks';
+import { RadioButton, RadioGroup } from '../src/components/Checkbox/index.stories';
+
+<Meta title="Components/Radio" />
+
+# Radio Button
+
+### Default
+
+The radio button pattern is achieved by using the `<Checkbox/>` component with an `exclusive` flag set. This causes the internal configuration of the component to act like a `<input type="radio"/>`.
+
+The reason for having a single element handle both concepts is because the structure and general input of these components is very similar, only differing by presentation and exclusivity behavior. Using one component reduces maintenance of having two with very similar resources.
+
+The use of a single radio button is unexpected but is shown below for example purposes.
+
+<Canvas of={ RadioButton }/>
+
+### Group
+
+Putting several `<Checkbox exclusive/>` elements together inside of a `<lockup.fieldset/>` will create a single select form element.
+
+<Canvas of={ RadioGroup }/>
+
