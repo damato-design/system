@@ -34,6 +34,14 @@ export const Default: Story = {
 }
 
 /**
+ * Setting `checked` explicitly as `null` will set
+ * the component in an indeterminate state.
+ */
+export const Indeterminate: Story = {
+    args: { name: 'indeterminate', checked: null }
+}
+
+/**
  * When setting the `exclusive` flag, the component is presented as a radio button.
  * Then the component can only be unchecked by selecting another option with the same `name`.
  */

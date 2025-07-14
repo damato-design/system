@@ -1,4 +1,4 @@
-import { forwardRef, useId } from 'react';
+import { forwardRef, useId, useRef, useImperativeHandle, useEffect } from 'react';
 import { field } from '../Field';
 import { input, InputProps } from '../Input';
 import { box } from '../Box';
@@ -6,9 +6,10 @@ import { text } from '../Text';
 import { restrictProps } from '../Element';
 
 type CheckboxProps = InputProps & {
+    checked?: boolean | null,
     exclusive?: boolean,
     label?: string,
-    priority?: 'primary' | 'auxiliary' 
+    priority?: 'primary' | 'auxiliary'
 };
 
 /**
@@ -18,6 +19,7 @@ type CheckboxProps = InputProps & {
  * @returns {ReactElement} - A checkbox component
  */
 export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(({
+    checked = false,
     exclusive,
     label,
     name,
@@ -26,9 +28,17 @@ export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(({
 }, ref) => {
 
     const id = useId();
+    const localRef = useRef<HTMLInputElement>(null);
+    useImperativeHandle(ref, () => localRef.current!, []);
     const config = Object.assign({}, restrictProps(props), {
-        ref, id, name
+        ref: localRef, id, name
     });
+
+    useEffect(() => {
+      if (localRef.current) {
+        localRef.current.indeterminate = checked === null;
+      }
+    }, [checked]);
 
     return (
         <box.div stack={ false } gap placeChildren='start'>
