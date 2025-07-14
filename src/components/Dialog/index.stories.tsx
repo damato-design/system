@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react';
+import checklist from './checklist.md?raw';
 
 import { Dialog } from '.';
 
@@ -14,6 +15,9 @@ import { Close } from '../Close';
 const meta = {
     title: 'Components/Dialog',
     component: Dialog,
+    parameters: {
+        checklist
+    }
 } satisfies Meta<typeof Dialog>
 
 export default meta

@@ -1,0 +1,18 @@
+### Checklist
+
+* [ ] **User Interaction States** Ensure that all interactive parts have applicable states defined (hover, focus, down).
+* [ ] **Internal Component States** Ensure that all additional states are accounted for (critical, success, invalid, required).
+* [ ] **Theme Awareness** Ensure that all properties covered by intents are themable.
+* [ ] **Internationalization Guidelines** Works properly across various locales and includes guidelines for bi-directionality (RTL).
+* [ ] **Keyboard Interactions** Follows WCAG 2.0 standards for keyboard accessibility guidelines and includes a description of the keyboard interaction.
+* [ ] **Validation** Ensure that if a user input is expected that an example is shown with at least one validation pattern.
+* [ ] **Accessibility Attributes** Ensure all applicable roles and ARIA attributes are included.
+* [ ] **Cross-browser Compatibility** Ensure the solution has been checked against all major browsers for support.
+* [ ] **Unit-test coverage** Ensure at least 90% coverage is met for all component features.
+* [ ] **Example Coverage** Ensure examples are provided that showcase most if not all of the features provided by the component.
+* [ ] **Necessary Files & Configuration** Package has the necessary files and configuration to work within the library.
+* [ ] **Linting** Files have been linted using the standardarized configuration.
+* [ ] **JSDoc** All functions in the source have JSDoc content written outlining the function expectations.
+* [ ] **ReadMe** Ensure the documentation includes the installation and usage.
+* [ ] **Types** All components have types outlining the component's API.
+* [ ] **Visual Regression Testing** Different component states are recorded to prevent visual regressions.

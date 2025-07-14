@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { useCallback, useState } from 'react';
+import checklist from './checklist.md?raw';
 
 import { input } from '.';
 
@@ -13,6 +14,9 @@ import { input } from '.';
 const meta = {
     title: 'Primitives/input',
     component: input.text,
+    parameters: {
+        checklist
+    }
 } satisfies Meta<typeof input.text>
 
 export default meta

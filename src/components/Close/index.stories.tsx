@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import checklist from './checklist.md?raw';
 
 import { Close } from '.';
 import { box } from '../Box';
@@ -13,6 +14,9 @@ import { Media } from '../Media';
 const meta = {
     title: 'Primitives/Close',
     component: Close,
+    parameters: {
+        checklist
+    }
 } satisfies Meta<typeof Close>
 
 export default meta

@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react';
+import checklist from './checklist.md?raw';
 
 import { icon } from '.';
 import { box } from '../Box';
@@ -18,6 +19,9 @@ import { box } from '../Box';
 const meta = {
     title: 'Primitives/icon',
     component: icon.question_answer,
+    parameters: {
+        checklist
+    }
 } satisfies Meta<typeof icon.question_answer>
 
 export default meta

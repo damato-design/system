@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react';
+import checklist from './checklist.md?raw';
 
 import { Checkbox } from '.';
 
@@ -13,6 +14,9 @@ import { input } from '../Input';
 const meta = {
     title: 'Components/Checkbox',
     component: Checkbox,
+    parameters: {
+        checklist
+    }
 } satisfies Meta<typeof Checkbox>
 
 export default meta

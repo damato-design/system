@@ -11,6 +11,7 @@
     padding: 0;
     border: 0;
     max-width: 60ch;
+    overflow-wrap: break-word;
 
     @include body;
 
@@ -18,13 +19,12 @@
         display: none;
     }
 
-    &:where(hr) {
+    &:where(hr), :where(hr) {
         border: revert;
     }
 
-    &:where(a), a {
+    &:where(a), :where(a) {
         color: inherit;
-        word-break: break-word;
     }
 
     &:where(strong, label, th) {

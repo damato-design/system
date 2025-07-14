@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react';
+import checklist from './checklist.md?raw';
 
 import { flyout, FlyoutProvider } from '.';
 import { Button } from '../Button';
@@ -19,6 +20,7 @@ const meta = {
                 iframeHeight: 200,
             },
         },
+        checklist
     },
 } satisfies Meta<typeof flyout.div>
 

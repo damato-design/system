@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react';
+import checklist from './checklist.md?raw';
 
 import { Media } from '.';
 import { box } from '../Box';
@@ -16,6 +17,7 @@ const meta = {
                 iframeHeight: 460,
             },
         },
+        checklist
     },
 } satisfies Meta<typeof Media>
 

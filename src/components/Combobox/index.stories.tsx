@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
+import checklist from './checklist.md?raw';
 
 import { Combobox, ItemsProps } from '.';
 
@@ -17,6 +18,7 @@ const meta = {
                 iframeHeight: 360,
             },
         },
+        checklist
     },
 } satisfies Meta<typeof Combobox>
 

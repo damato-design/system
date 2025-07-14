@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react';
+import checklist from './checklist.md?raw';
 
 import { card } from '.';
 import { text } from '../Text';
@@ -19,6 +20,7 @@ const meta = {
                 iframeHeight: 760,
             },
         },
+        checklist
     },
 } satisfies Meta<typeof card.div>
 

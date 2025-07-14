@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react';
+import checklist from './checklist.md?raw';
 
 import { listbox, ListboxProvider } from '.';
 import { box } from '../Box';
@@ -25,6 +26,9 @@ import { flyout, FlyoutProvider } from '../Flyout';
 const meta = {
     title: 'Primitives/listbox',
     component: listbox.div,
+    parameters: {
+        checklist
+    }
 } satisfies Meta<typeof listbox.div>
 
 export default meta

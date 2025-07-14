@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react';
+import checklist from './checklist.md?raw';
 
 import { Disclosure } from '.';
 import { lockup } from '../Lockup';
@@ -18,6 +19,7 @@ const meta = {
                 iframeHeight: 360,
             },
         },
+        checklist
     },
 } satisfies Meta<typeof Disclosure>
 

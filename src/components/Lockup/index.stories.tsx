@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react';
+import checklist from './checklist.md?raw';
 
 import { lockup } from '.';
 import { text } from '../Text';
@@ -15,6 +16,9 @@ import { box } from '../Box';
 const meta = {
     title: 'Primitives/lockup',
     component: lockup.div,
+    parameters: {
+        checklist
+    }
 } satisfies Meta<typeof lockup.div>
 
 export default meta

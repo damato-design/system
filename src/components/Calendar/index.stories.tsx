@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react';
+import checklist from './checklist.md?raw';
 
 import { Calendar } from '.';
 import { Pagination, ItemsProps } from '../Pagination';
@@ -17,6 +18,9 @@ function getThisMonth() {
 const meta = {
     title: 'Components/Calendar',
     component: Calendar,
+    parameters: {
+        checklist
+    }
 } satisfies Meta<typeof Calendar>
 
 export default meta

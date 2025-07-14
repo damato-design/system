@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useCallback, useState } from 'react';
+import checklist from './checklist.md?raw';
 
 import { track } from '.';
 
@@ -15,6 +16,9 @@ import { text } from '../Text';
 const meta = {
     title: 'Primitives/track',
     component: track.progress,
+    parameters: {
+        checklist
+    }
 } satisfies Meta<typeof track.progress>
 
 export default meta

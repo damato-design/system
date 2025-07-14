@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Preview } from "@storybook/react";
-import { Title, Description, Stories, useOf } from '@storybook/addon-docs';
+import { Title, Description, Stories, Markdown, useOf } from '@storybook/addon-docs';
 import Github from '../docs/components/Github';
 import theme from './theme';
 
@@ -25,12 +25,23 @@ function Install(props) {
   )
 }
 
+function Checklist(props) {
+  const { of } = props;
+  const resolveOf = useOf(of || 'meta');
+  const { parameters } = resolveOf?.preparedMeta;
+  if (!parameters?.checklist) return null;
+  return (
+    <Markdown className='checklist'>{ parameters.checklist }</Markdown>
+  )
+}
+
 const page = () => (
   <>
     <Title/>
     <Install/>
     <Description/>
     <Stories/>
+    <Checklist/>
     <Github/>
   </>
 );
@@ -65,8 +76,14 @@ function Input({ value, onChange }) {
   }
   return (
     <div style={ style } className='density-level-control'>
-      <label htmlFor={ id }>Density Level</label>
+      <a
+        href='/?path=/docs/foundations-density--docs'
+        target="_top"
+        style={{ color: 'currentcolor' }}>
+          Density Level
+      </a>
       <input
+      aria-label="Density Level"
       id={ id }
       type='range'
       min={0}

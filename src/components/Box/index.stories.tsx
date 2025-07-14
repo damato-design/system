@@ -1,4 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react';
+import checklist from './checklist.md?raw';
 
 import { box } from '.';
 import { text } from '../Text';
@@ -13,6 +14,9 @@ import { text } from '../Text';
 const meta = {
     title: 'Primitives/box',
     component: box.div,
+    parameters: {
+        checklist
+    }
 } satisfies Meta<typeof box.div>
 
 export default meta
