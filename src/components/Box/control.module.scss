@@ -20,8 +20,7 @@
 
     /* Icons found within the frame */
     > i[role="presentation"] {
-        padding-inline: space.$padding;
-        line-height: 1lh !important;
+        margin-inline: space.$gap;
     }
 
     /* Button borders found within the frame should not contribute to the overall size or shape */
