@@ -41,7 +41,7 @@
         cursor: pointer;
     }
 
-    &[aria-checked="true"] {
+    &:where([aria-checked="true"]) {
         --fill: 100%;
     }
 

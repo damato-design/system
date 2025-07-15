@@ -1,61 +1,65 @@
-import { forwardRef, useId, useRef, useImperativeHandle, useEffect } from 'react';
+import {
+  forwardRef,
+  useId,
+  useRef,
+  useImperativeHandle,
+  useEffect
+} from 'react';
 import { field } from '../Field';
 import { input, InputProps } from '../Input';
 import { box } from '../Box';
 import { text } from '../Text';
-import { restrictProps } from '../Element';
 
 type CheckboxProps = InputProps & {
-    checked?: boolean | null,
-    exclusive?: boolean,
-    label?: string,
-    priority?: 'primary' | 'auxiliary'
+  checked?: boolean | null;
+  defaultChecked?: boolean | null;
+  exclusive?: boolean;
+  label?: string;
+  priority?: 'primary' | 'auxiliary';
 };
 
-/**
- * Creates a `<Checkbox/>` component
- * 
- * @param {CheckboxProps} props - Component configuration object
- * @returns {ReactElement} - A checkbox component
- */
-export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(({
-    checked = false,
+export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(function Checkbox({
     exclusive,
     label,
     name,
     priority,
     ...props
-}, ref) => {
+  }, ref) {
+  
+  const id = useId();
+  const localRef = useRef<HTMLInputElement>(null);
+  const checked = 'checked' in props ? props.checked : undefined;
+  const defaultChecked = 'defaultChecked' in props ? props.defaultChecked : undefined;
 
-    const id = useId();
-    const localRef = useRef<HTMLInputElement>(null);
-    useImperativeHandle(ref, () => localRef.current!, []);
-    const config = Object.assign({}, restrictProps(props), {
-        ref: localRef, id, name
-    });
+  useImperativeHandle(ref, () => localRef.current!, []);
 
-    useEffect(() => {
-      if (localRef.current) {
-        localRef.current.indeterminate = checked === null;
-      }
-    }, [checked]);
+  const [update] = [checked, defaultChecked].filter((c) => c !== undefined);
 
-    return (
-        <box.div stack={ false } gap placeChildren='start'>
-            <field.div
-                clip={ false }
-                stretch={ false }
-                shrink={ false }
-                round={ exclusive }>
-                { exclusive
-                    ? <input.radio { ...config }/>
-                    : <input.checkbox { ...config }/>
-                }
-            </field.div>
-            { label
-                ? <text.label { ...{ htmlFor: id, children: label, priority } }/>
-                : null
-            }
-        </box.div>
-    )
+  useEffect(() => {
+    if (localRef.current) {
+      localRef.current.indeterminate = update === null;
+    }
+  }, [update]);
+
+  const inputProps = {
+    ...props,
+    name,
+    id,
+    ref: localRef,
+  };
+
+  const Element = exclusive
+    ? input.radio
+    : input.checkbox;
+
+  return (
+    <box.div stack={false} gap placeChildren="start">
+      <field.div clip={false} stretch={false} shrink={false} round={exclusive}>
+        <Element {...inputProps}/>
+      </field.div>
+      {label ? (
+        <text.label {...{ htmlFor: id, children: label, priority }} />
+      ) : null}
+    </box.div>
+  );
 });

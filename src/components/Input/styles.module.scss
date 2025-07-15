@@ -18,6 +18,11 @@
     background-clip: text; /* stackoverflow.com/a/64166144 */
     @include body;
 
+    &.hidden {
+        scale: 0;
+        position: absolute;
+    }
+
     /* The difference between `<input.checkbox/>` and `<Checkbox/>` has to do with the provided label composition. If the checkbox is meant to exist without a standard label (ie., select all in table rows) the `<input.checkbox/>` may be more appropriate. */
     &:where([type="checkbox"], [type="radio"]) {
         cursor: pointer;

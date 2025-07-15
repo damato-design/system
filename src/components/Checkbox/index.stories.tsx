@@ -30,12 +30,21 @@ type Story = StoryObj<typeof meta>
  * The default configuration is a box that can be checked or unchecked.
  */
 export const Default: Story = {
-    args: { name: 'default' },
+    args: { name: 'default', defaultChecked: true },
 }
 
 /**
  * Setting `checked` explicitly as `null` will set
  * the component in an indeterminate state.
+ * 
+ * > #### Why isn't the state showing?
+ * >
+ * > Honestly, no idea. Since we're using the default checkbox and
+ * > setting `indeterminate = true` in a `useEffect` it _should_ work,
+ * > but doesn't. You can even verify by storing the DOM input as a variable
+ * > and read the `indeterminate` attribute from the node.
+ * >
+ * > This might need some custom displays instead of the default browser presentation.
  */
 export const Indeterminate: Story = {
     args: { name: 'indeterminate', checked: null }

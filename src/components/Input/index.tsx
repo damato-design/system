@@ -1,5 +1,6 @@
 import { HTMLInputTypeAttribute, forwardRef } from 'react';
 import { Globals } from 'csstype';
+import clsx from 'clsx';
 import css from './styles.module.scss';
 import { proxy } from '../Element/proxy';
 import { element, ElementProps } from '../Element';
@@ -11,6 +12,7 @@ export type InputProps = (
   | Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'placeholder'>
 ) & ElementProps & {
   name: string;
+  hidden?: boolean;
   fieldSizing?: 'content' | 'flex';
   redact?: Boolean;
 };
@@ -46,6 +48,7 @@ function updateType(type: string, { redact }: InputProps) {
 export const input = proxy<HTMLInputTypeAttribute | 'textarea', InputProps>('input', (inputType) => {
   return forwardRef<HTMLElement, InputProps>(({
     fieldSizing,
+    hidden,
     redact,
     className,
     style,
@@ -69,7 +72,7 @@ export const input = proxy<HTMLInputTypeAttribute | 'textarea', InputProps>('inp
       { ...listboxProps }
       { ...lockupProps }
       ref={ref}
-      className={css.input}
+      className={clsx(css.input, { [css.hidden]: hidden })}
       style={styles} />;
   })
 });
