@@ -11,8 +11,7 @@
     display: flex;
     box-sizing: content-box;
     max-width: calc(100% - (100% * var(--has-items) / var(--length, 1)) + (var(--has-items) * 1lh));
-    min-width: 10em;
-    width: 100%;
+    min-width: 2.5em;
     border-width: 1px;
     border-style: solid;
     border-color: tokens.$control_borderColor;
@@ -70,6 +69,7 @@
 
     &:where(input[type="range"]) {
         outline: 0;
+
         &::-webkit-slider-container {
             min-block-size: auto;
         }
@@ -79,11 +79,19 @@
             height: 1lh;
             aspect-ratio: 1;
             border-radius: 100vw;
-            cursor: ew-resize;
             border-width: 1px;
             border-style: solid;
             @include flyout;
         }
+
+        &:where([role="none"])::-webkit-slider-thumb {
+            cursor: pointer;
+        }
+
+        &:where(:not([role="none"]))::-webkit-slider-thumb {
+            cursor: ew-resize;
+        }
+
         &:focus-within {
             &::-webkit-slider-thumb {
                 outline: 5px auto Highlight;

@@ -15,28 +15,42 @@ export type TrackProps = (React.ProgressHTMLAttributes<HTMLProgressElement>
     stretch?: boolean,
     orientation?: 'horizontal' | 'vertical',
     items?: DatalistOption[],
+    min?: Number,
+    max?: Number,
   };
 
 export const track = proxy<'progress' | 'meter' | 'range', TrackProps>('track', (trackType) => {
   return forwardRef<HTMLElement, TrackProps>(({
     items,
+    role,
     orientation = 'horizontal',
     stretch = true,
+    defaultValue,
     value,
+    min = 0,
+    max = 100,
     ...props
   }: TrackProps, ref) => {
 
     const datalistId = useId();
+    const [val] = [defaultValue, value].filter(Number.isFinite);
 
     const config = Object.assign({}, restrictProps(props), {
       'aria-orientation': orientation,
       className: css.track,
       ref,
       style: {
-        '--fill': typeof value === 'number' ? `${value}%` : null,
+        '--fill': typeof val === 'number'
+          ? `${Number(val) * 100 / (Number(max) - Number(min))}%`
+          : null,
         '--length': items?.length,
+        width: stretch ? '100%' : 0
       },
+      role: role ? 'none' : null,
+      defaultValue,
       value,
+      min,
+      max,
       list: items ? datalistId : null
     } as TrackProps);
 
@@ -55,7 +69,11 @@ export const track = proxy<'progress' | 'meter' | 'range', TrackProps>('track', 
     }, [items, datalistId, css.datalist]);
 
     return (
-      <box.div stack stretch={ stretch || Boolean(datalist) } placeChildren='center'>
+      <box.div
+        role={ role }
+        stack
+        stretch={ stretch || Boolean(datalist) }
+        placeChildren='center'>
         { track }
         { datalist }
       </box.div>

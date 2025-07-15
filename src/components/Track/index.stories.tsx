@@ -44,7 +44,7 @@ export const Default: Story = {
 export const Meter: Story = {
     args: { value: 50 },
     render: (args) => (
-        <box.div gap>
+        <box.div gap stretch>
             <text.label>Battery</text.label>
             <track.meter { ...args }/>
             <text.output>50%</text.output>
