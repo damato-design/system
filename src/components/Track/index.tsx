@@ -22,7 +22,6 @@ export type TrackProps = (React.ProgressHTMLAttributes<HTMLProgressElement>
 export const track = proxy<'progress' | 'meter' | 'range', TrackProps>('track', (trackType) => {
   return forwardRef<HTMLElement, TrackProps>(({
     items,
-    role,
     orientation = 'horizontal',
     stretch = true,
     defaultValue,
@@ -46,7 +45,6 @@ export const track = proxy<'progress' | 'meter' | 'range', TrackProps>('track', 
         '--length': items?.length,
         width: stretch ? '100%' : 0
       },
-      role: role ? 'none' : null,
       defaultValue,
       value,
       min,
@@ -70,7 +68,6 @@ export const track = proxy<'progress' | 'meter' | 'range', TrackProps>('track', 
 
     return (
       <box.div
-        role={ role }
         stack
         stretch={ stretch || Boolean(datalist) }
         placeChildren='center'>
