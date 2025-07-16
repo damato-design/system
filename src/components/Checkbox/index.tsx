@@ -54,9 +54,7 @@ export const Checkbox = forwardRef<HTMLElement, CheckboxProps>(function Checkbox
 
   return (
     <box.div stack={false} gap placeChildren="start">
-      <field.div clip={false} stretch={false} shrink={false} round={exclusive}>
-        <Element {...inputProps}/>
-      </field.div>
+      <Element {...inputProps}/>
       {label ? (
         <text.label {...{ htmlFor: id, children: label, priority }} />
       ) : null}

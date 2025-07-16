@@ -29,11 +29,11 @@
         aspect-ratio: 1;
         height: 1lh;
         outline-offset: 2px;
-
-        &:not(:checked) {
-            appearance: none;
-            padding: 0;
-        }
+        padding: 0;
+        flex: 0 1 auto;
+        border-color: tokens.$control_borderColor;
+        color: tokens.$control_foregroundColor;
+        background: tokens.$control_backgroundColor;
     }
 
     /* Found as button within the native <input type="file"/> composition */
