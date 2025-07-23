@@ -12,12 +12,15 @@
     transition: .218s ease;
     border-width: 1px;
     border-style: solid;
-    padding: space.$gap space.$padding;
     --action-bg: #{tokens.$action_auxiliary_backgroundColor};
     border-color: tokens.$action_auxiliary_borderColor;
     color: tokens.$action_auxiliary_foregroundColor;
     background: var(--action-bg);
     font-weight: bolder;
+
+    > :is(i[role="presentation"]) {
+        color: currentColor;
+    }
 
     /*
      * The hover style adjusts the current background by mixing with the foreground by a small percentage. This assumes that the given background is a solid color; not a gradient.

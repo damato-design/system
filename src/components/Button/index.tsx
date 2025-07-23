@@ -1,5 +1,6 @@
-import { createElement, forwardRef, ReactElement, ReactNode } from 'react';
+import { createElement, forwardRef } from 'react';
 import { box, BoxProps } from '../Box';
+import { text } from '../Text';
 import { icon } from '../Icon';
 import { IDREF } from '../Localize';
 import { useFlyout } from '../Flyout';
@@ -79,7 +80,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
         placeChildren: 'center',
         type,
         role,
-        gap: true,
+        padding: true,
         square: square || iconOnly({ icon: iconRef, children, behavior })
     });
 
@@ -102,6 +103,8 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
         `);
     }
 
+    const spacer = children ? <text.pre> </text.pre> : null;
+
     return (
         <Element
             { ...config }
@@ -110,7 +113,9 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
             ref={ref}
             purpose='action'>
             {iconRef ? createElement(icon[iconRef]) : null}
+            { spacer }
             {children}
+            { spacer }
             {getAccessory(behavior)}
         </Element>
     )
