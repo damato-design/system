@@ -4,7 +4,7 @@ tokens:
 #surface
 
   $surface_primary_backgroundColor:
-    $value: white
+    $value: Canvas
     $influence: 0
   $surface_primary_foregroundColor:
     $value: red
@@ -12,7 +12,7 @@ tokens:
     $value: red
 
   $surface_secondary_backgroundColor:
-    $value: white
+    $value: Canvas
     $influence: 0
   $surface_secondary_foregroundColor:
     $value: red
@@ -20,10 +20,11 @@ tokens:
     $value: red
   
   $surface_auxiliary_backgroundColor:
-    $value: white
+    $value: Canvas
     $influence: 0
   $surface_auxiliary_foregroundColor:
     $value: red
+    $influence: 50
   $surface_auxiliary_borderColor:
     $value: red
 
@@ -33,7 +34,7 @@ tokens:
     $value: red
     $influence: 80
   $action_primary_foregroundColor:
-    $value: white
+    $value: Canvas
     $influence: 80
   $action_primary_borderColor:
     $value: red

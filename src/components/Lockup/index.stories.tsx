@@ -137,7 +137,7 @@ export const Form: Story = {
 }
 
 /**
- * This example shows an alternative to the double-confirmation pattern by preparing a input for the user to fill out before confirming a destructive action.
+ * This example shows an alternative to the double-confirmation pattern by preparing a input for the user to fill out before confirming a destructive action. We put `mode="system:critical"` on the component to indicate this is a critical message, causing the presentation of the content to indicate a higher severity.
  * 
  * This also uses a `box` primitive to help align the input and button.
  */
@@ -155,12 +155,12 @@ export const Confirm: Story = {
         }, []);
 
         return (
-            <lockup.fieldset { ...args }>
+            <lockup.fieldset { ...args } mode="system:critical">
                 <box.div gap>
                     <field.div>
                         <input.text name='text' value={ value } onChange={ onChange }/>
                     </field.div>
-                    <Button data-mode="system:critical" priority='primary'>Delete</Button>
+                    <Button priority='primary'>Delete</Button>
                 </box.div>
             </lockup.fieldset>
         )
@@ -183,8 +183,9 @@ export const Login: Story = {
 
         return (
             <box.form action='' stack gap { ...args }>
-                <text.h2 priority='primary'>Login</text.h2>
-                <text.p>Your progress is saved, we'll bring you right back!</text.p>
+                <lockup.div subject={ <text.h2 priority='primary'>Login</text.h2> }>
+                    <text.p>Your progress is saved, we'll bring you right back!</text.p>
+                </lockup.div>
                 <lockup.fieldset subject={ <text.label>Email</text.label> }>
                     <field.div>
                         <input.email name='email' value={ email } onChange={ ({ target }: any) => setEmail(target.value) }/>

@@ -35,7 +35,7 @@ type Story = StoryObj<typeof meta>
  */
 export const Default: Story = {
     args: {
-        src: 'https://loremflickr.com/1280/720',
+        src: '/wireframe-still.jpg',
         padding: true,
         purpose: 'surface'
     }
@@ -47,7 +47,7 @@ export const Default: Story = {
  */
 export const Full: Story = {
     args: {
-        src: 'https://loremflickr.com/1280/720',
+        src: '/wireframe-still.jpg',
         padding: true,
         purpose: 'surface',
         subject: (

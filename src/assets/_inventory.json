@@ -56,7 +56,7 @@
   {
     "href": "_system-critical.css",
     "mode": "system:critical",
-    "bytes": 3332,
+    "bytes": 3338,
     "coverage": {
       "color": 100,
       "typography": 0,

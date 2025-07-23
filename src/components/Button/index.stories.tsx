@@ -130,16 +130,6 @@ export const Dismiss: Story = {
 }
 
 /**
- * While the component does possess a treatment for the concept of `disabled`, it should be avoided for better user experience patterns that don't restrict the user by providing unavailable options. This example is for illustrative purpose only.
- */
-export const Disabled: Story = {
-    args: {
-        children: 'Please do not do this',
-        disabled: true
-    }
-}
-
-/**
  * This example demonstrates a matching alignment between label-only,
  * icon-only, and mixed content buttons. The `placeChildren='top'` on the container aligns all buttons to the top of the parent so any size differences would be immediately noticeable.
  */

@@ -100,7 +100,7 @@ export const MediaUse: Story = {
         return (
             <box.div stack purpose='surface' padding>
                 <Close { ...args }/>
-                <Media src='https://loremflickr.com/1280/720'/>
+                <Media src='/wireframe-still.jpg'/>
             </box.div>
         )
     }

@@ -5,7 +5,7 @@
     	--🔒surface_primary_backgroundColor: color-mix(
         in oklch,
         oklch(from Canvas l c none),
-        oklch(from white none c h) 0%
+        oklch(from Canvas none c h) 0%
     );
 	--🔒surface_primary_foregroundColor: color-mix(
         in oklch,
@@ -20,7 +20,7 @@
 	--🔒surface_secondary_backgroundColor: color-mix(
         in oklch,
         oklch(from Canvas l c none),
-        oklch(from white none c h) 0%
+        oklch(from Canvas none c h) 0%
     );
 	--🔒surface_secondary_foregroundColor: color-mix(
         in oklch,
@@ -35,12 +35,12 @@
 	--🔒surface_auxiliary_backgroundColor: color-mix(
         in oklch,
         oklch(from Canvas l c none),
-        oklch(from white none c h) 0%
+        oklch(from Canvas none c h) 0%
     );
 	--🔒surface_auxiliary_foregroundColor: color-mix(
         in oklch,
         oklch(from CanvasText l c none),
-        oklch(from red l c h) 100%
+        oklch(from red none c h) 50%
     );
 	--🔒surface_auxiliary_borderColor: color-mix(
         in oklch,
@@ -55,7 +55,7 @@
 	--🔒action_primary_foregroundColor: color-mix(
         in oklch,
         oklch(from SelectedItemText l c none),
-        oklch(from white none c h) 80%
+        oklch(from Canvas none c h) 80%
     );
 	--🔒action_primary_borderColor: color-mix(
         in oklch,
