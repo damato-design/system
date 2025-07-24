@@ -103,6 +103,7 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
         `);
     }
 
+    // Spacers are used to have icon space adjust with text.
     const spacer = children ? <text.pre> </text.pre> : null;
 
     return (

@@ -40,7 +40,7 @@
 	--🔒surface_auxiliary_foregroundColor: color-mix(
         in oklch,
         oklch(from CanvasText l c none),
-        oklch(from red none c h) 50%
+        oklch(from red none c h) 100%
     );
 	--🔒surface_auxiliary_borderColor: color-mix(
         in oklch,

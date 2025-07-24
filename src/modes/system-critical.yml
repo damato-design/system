@@ -24,7 +24,7 @@ tokens:
     $influence: 0
   $surface_auxiliary_foregroundColor:
     $value: red
-    $influence: 50
+    $influence: 100
   $surface_auxiliary_borderColor:
     $value: red
 
