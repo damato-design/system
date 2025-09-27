@@ -4,8 +4,8 @@ import checklist from './checklist.md?raw';
 
 import { track } from '.';
 
-import { box } from '../Box';
 import { text } from '../Text';
+import { lockup } from '../Lockup';
 
 /**
  * The `track` primitive helps present progress,
@@ -44,11 +44,13 @@ export const Default: Story = {
 export const Meter: Story = {
     args: { value: 50 },
     render: (args) => (
-        <box.div gap stretch>
-            <text.label>Battery</text.label>
+        <lockup.div
+            gap
+            stretch
+            subject={ <text.label>Battery</text.label> }
+            output={ <text.output>50%</text.output> }>
             <track.meter { ...args }/>
-            <text.output>50%</text.output>
-        </box.div>
+        </lockup.div>
     ) 
 }
 
@@ -57,16 +59,7 @@ export const Meter: Story = {
  * This is completed by grabbing the elevated thumb and
  * dragging to an appropriate position within the track.
  * 
- * 
- * > #### Why can't I drag the thumb?
- * >
- * > This is an artifact of a complex React ecosystem. There is a full re-render occurring after the value updates. This isn't performant and needs to be revisited for improvement. The value can be updated by clicking the location where the thumb should move.
- * 
  * This example shows a proper composition of label and output. The thumb element is the size of the text line-height.
- * 
- * > #### Shouldn't this use the lockup?
- * >
- * > Yes, to keep consistency, the `lockup` component would be more appropriate to host labels and controls. However, due to the expected placement of the `<output/>` element, it is not currently supported in the composition.
  */
 export const Range: Story = {
     args: { value: 30 },
@@ -74,13 +67,12 @@ export const Range: Story = {
         const [val, setValue] = useState(value);
         const onChange = useCallback((ev: any) => setValue(ev.target.valueAsNumber), []);
         return (
-            <box.fieldset stack stretch>
-                <box.div gap distribute='between'>
-                    <text.label>Battery</text.label>
-                    <text.output>{ val }%</text.output>
-                </box.div>
+            <lockup.fieldset
+                stretch
+                subject={ <text.label>Battery</text.label> }
+                output={ <text.output>{ val }%</text.output> }>
                 <track.range { ...args } value={ val } onChange={ onChange }/>
-            </box.fieldset>
+            </lockup.fieldset>
         )
     } 
 }

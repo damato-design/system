@@ -19,6 +19,7 @@ type LockupConfig = {
   subject: { id: string },
   passive: { id: string },
   error: { id: string},
+  output: { id: string }
   input: {
     'aria-labelledby': string,
     'aria-describedby': string,
@@ -34,14 +35,16 @@ export const LockupProvider = (props: any) => {
   const subjectId = useId();
   const passiveId = useId();
   const errorId = useId();
+  const outputId = useId();
 
   const value = {
     subject: { id: subjectId },
     passive: { id: passiveId },
     error: { id: errorId },
+    output: { id: outputId },
     input: {
       'aria-labelledby': subjectId,
-      'aria-describedby': [passiveId, errorId].join(' '),
+      'aria-describedby': [passiveId, errorId, outputId].join(' '),
     }
   }
 
@@ -71,6 +74,7 @@ function getSpacer(iconRef: string | undefined, subject: ReactElement<TextProps>
 export type LockupProps = BoxProps & {
   icon?: string,
   subject?: ReactElement<TextProps>,
+  output?: ReactElement<TextProps> | ReactNode,
   passiveMessage?: ReactElement<TextProps> | string,
   errorMessage?: ReactElement<TextProps> | string,
 };
@@ -81,8 +85,20 @@ function SubjectComponent(props: { children: ReactNode }) {
   return (
     <box.div
       { ...props }
+      stretch
       id={ ctx.subject.id }
       standby={ false }/>
+  )
+}
+
+function OutputComponent(props: { children: ReactNode }) {
+  const ctx = useLockup();
+  if (!props.children) return null;
+  return (
+    <text.span
+      { ...props }
+      aria-live='polite'
+      id={ ctx.output.id }/>
   )
 }
 
@@ -115,6 +131,7 @@ export const lockup = proxy<HTMLTagsOnly, LockupProps>('lockup', (TagName) => {
     children,
     placeChildren,
     subject,
+    output,
     passiveMessage,
     errorMessage,
     ...props
@@ -123,17 +140,25 @@ export const lockup = proxy<HTMLTagsOnly, LockupProps>('lockup', (TagName) => {
     const Element = box[TagName];
     const isCritical = errorMessage ? 'system:critical' : undefined;
 
+    const header = subject || output
+      ? (
+        <box.div gap stretch>
+          <SubjectComponent>{ subject }</SubjectComponent>
+          <OutputComponent>{ output }</OutputComponent>
+        </box.div>
+      ) : null;
+
     return (
       <LockupProvider>
         <Element { ...restrictProps(props) } placeChildren={ placeChildren } ref={ ref }>
           { getIcon(iconRef, subject as ReactElement) }
           { getSpacer(iconRef, subject as ReactElement) }
           <box.div stack gap stretch>
-            <SubjectComponent>{ subject }</SubjectComponent>
+            { header }
             <PassiveComponent>{ passiveMessage }</PassiveComponent>
             <box.div stack gap stretch placeChildren={ placeChildren } mode={ isCritical }>
-                <ErrorComponent>{ errorMessage }</ErrorComponent>
-                { children }
+              <ErrorComponent>{ errorMessage }</ErrorComponent>
+              { children }
             </box.div>
           </box.div>
         </Element>

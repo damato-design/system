@@ -9,6 +9,7 @@ import { useCallback, useState } from 'react';
 import { Close } from '../Close';
 import { Button } from '../Button';
 import { box } from '../Box';
+import { track } from '../Track';
 
 /**
  * The `lockup` primitive helps create standardized layouts of content.
@@ -92,6 +93,24 @@ export const Loading: Story = {
             <text.p/>
         </lockup.div>
     )
+}
+
+/**
+ * The example shows how to compose the `track` with the lockup, showing the output of the range on the far-end.
+ */
+export const Output: Story = {
+    args: {
+        subject: <text.label>Percent</text.label>,
+    },
+    render: (args) => {
+        const [val, setValue] = useState(30);
+        const onChange = useCallback((ev: any) => setValue(ev.target.valueAsNumber), []);
+        return (
+            <lockup.div {...args} stack stretch output={ <text.output>{ val }%</text.output> }>
+                <track.range value={ val } onChange={ onChange }/>
+            </lockup.div>
+        )
+    }
 }
 
 /**
