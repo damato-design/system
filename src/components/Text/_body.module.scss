@@ -36,4 +36,5 @@ $auxiliary-rem:  calc(
     -webkit-font-smoothing: antialiased;
     font-variant-numeric: tabular-nums;
     color: tokens.$surface_secondary_foregroundColor;
+    background: tokens.$surface_secondary_backgroundColor
 }
