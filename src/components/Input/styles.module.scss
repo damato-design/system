@@ -4,6 +4,8 @@
 @use '../Box/space.module' as space;
 
 .input {
+    @include body;
+
     margin: 0;
     border: 0;
     color: inherit;
@@ -16,7 +18,6 @@
     outline-offset: -4px;
     accent-color: tokens.$action_primary_backgroundColor;
     background-clip: text; /* stackoverflow.com/a/64166144 */
-    @include body;
 
     &.hidden {
         scale: 0;

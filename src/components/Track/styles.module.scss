@@ -3,6 +3,8 @@
 @use '../Text/body.module' as *;
 
 .track {
+    @include body;
+
     --has-items: calc(var(--length, 0) / var(--length, 1));
     appearance: none;
     border-radius: 100vw;
@@ -16,7 +18,6 @@
     border-style: solid;
     border-color: tokens.$control_borderColor;
     background: tokens.$control_backgroundColor;
-    @include body;
 
     /* indeterminate */
     &:not([value]) {
