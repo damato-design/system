@@ -3,6 +3,9 @@
 
 :global(body) {
     @include body;
+
+    background: tokens.$surface_auxiliary_backgroundColor;
+    color: tokens.$surface_auxiliary_foregroundColor;
 }
 
 .text {

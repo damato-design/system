@@ -17,6 +17,7 @@
     &:where([aria-current]) {
         text-decoration: underline;
         text-underline-offset: 2px;
+        text-decoration-color: currentColor;
     }
 
     /* Represents a user selected item */
