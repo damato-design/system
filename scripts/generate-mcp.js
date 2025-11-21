@@ -383,7 +383,7 @@ function generateMCP() {
         }
     }
 
-    const output = { resources };
+    const output = { resources: resources.filter(r => Object.keys(r).length > 0) };
 
     // Ensure src/assets directory exists
     const assetsDir = path.join(process.cwd(), 'src', 'assets', '.well-known', 'mcp');
