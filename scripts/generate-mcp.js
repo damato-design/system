@@ -198,7 +198,6 @@ function storybookSlug(title) {
         .replace(/(^-|-$)/g, "");        // trim hyphens
 }
 
-
 /**
  * Process a component directory
  */
@@ -275,7 +274,8 @@ function processComponent(project, componentDir, componentName, baseUrl) {
         uri,
         name: componentName,
         description: componentDescription || `${componentName} component`,
-        mimeType: 'text/typescript',
+        mimeType: 'text/markdown',
+        text: examples.map(({ description }) => description).join('\n\n'),
         _meta: {
             props,
             examples,
