@@ -276,6 +276,7 @@ function processComponent(project, componentDir, componentName, baseUrl) {
         description: componentDescription || `${componentName} component`,
         mimeType: 'text/markdown',
         text: examples.map(({ description }) => description).join('\n\n'),
+        type: 'resource_link',
         _meta: {
             props,
             examples,
@@ -309,6 +310,7 @@ function processDoc(docPath, docsRoot, baseUrl) {
         uri,
         name: title,
         text: content,
+        type: 'resource_link',
         mimeType: 'text/mdx',
         _meta: {
             category: 'documentation',
@@ -329,7 +331,8 @@ function serverCard(domain) {
             {
                 name: `${domain}-damato-mcp-resources`,
                 uri: `https://${domain}.damato.design/.well-known/mcp/resources.json`,
-                mimeType: "application/json"
+                mimeType: "application/json",
+                type: "resource_link"
             }
         ]
     }
