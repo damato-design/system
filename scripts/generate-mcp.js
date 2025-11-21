@@ -158,6 +158,47 @@ function extractStories(project, filePath) {
     return stories;
 }
 
+function getMetaObjectLiteral(defaultDecl) {
+    // Inline: export default { ... }
+    let obj = defaultDecl.getFirstDescendantByKind(SyntaxKind.ObjectLiteralExpression);
+    if (obj) return obj;
+
+    // Identifier: export default meta
+    const identifier = defaultDecl.getFirstDescendantByKind(SyntaxKind.Identifier);
+    if (!identifier) return undefined;
+
+    const varDecl = identifier.getDefinitionNodes()[0];
+    if (!varDecl) return undefined;
+
+    // initializer can be:
+    // - ObjectLiteralExpression
+    // - SatisfiesExpression → ObjectLiteralExpression
+    const init = varDecl.getInitializer();
+
+    if (!init) return undefined;
+
+    if (init.getKind() === SyntaxKind.ObjectLiteralExpression) {
+        return init;
+    }
+
+    if (init.getKind() === SyntaxKind.SatisfiesExpression) {
+        const inner = init.getFirstChildByKind(SyntaxKind.ObjectLiteralExpression);
+        if (inner) return inner;
+    }
+
+    return undefined;
+}
+
+
+function storybookSlug(title) {
+    return title
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")     // non-alphanum → hyphen
+        .replace(/(^-|-$)/g, "");        // trim hyphens
+}
+
+
 /**
  * Process a component directory
  */
@@ -214,8 +255,21 @@ function processComponent(project, componentDir, componentName, baseUrl) {
         : [];
 
     // Create Storybook URL
-    const storybookPath = componentName.toLowerCase();
-    const uri = `${baseUrl}/?path=/docs/${storybookPath}--docs`;
+    const storyFile = project.addSourceFileAtPathIfExists(storiesPath);
+    if (!storyFile) return {};
+
+    const exportAssignment = storyFile.getFirstDescendantByKind(SyntaxKind.ExportAssignment);
+    const expr = exportAssignment.getExpression();
+    const decl = expr.getSymbol()?.getDeclarations()?.[0];
+    const satisfiesExpr = decl.getFirstChildByKind(SyntaxKind.SatisfiesExpression);
+    const objLiteral = satisfiesExpr.getFirstChildByKind(SyntaxKind.ObjectLiteralExpression);
+
+    const metaTitle = objLiteral
+        .getProperty("title")
+        ?.getFirstDescendantByKind(SyntaxKind.StringLiteral)
+        ?.getLiteralText();
+
+    const uri = `${baseUrl}/?path=/docs/${storybookSlug(metaTitle)}--docs`;
 
     return {
         uri,
@@ -288,7 +342,7 @@ function generateMCP() {
     const baseUrl = 'https://system.damato.design';
     const project = new Project({
         tsConfigFilePath: path.join(process.cwd(), 'tsconfig.json'),
-        skipAddingFilesFromTsConfig: true,
+        skipAddingFilesFromTsConfig: false,
     });
 
     const resources = [];

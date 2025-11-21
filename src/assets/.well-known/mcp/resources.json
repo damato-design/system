@@ -118,7 +118,7 @@
       }
     },
     {
-      "uri": "https://system.damato.design/?path=/docs/box--docs",
+      "uri": "https://system.damato.design/?path=/docs/primitives-box--docs",
       "name": "Box",
       "description": "Box component",
       "mimeType": "text/typescript",
@@ -253,7 +253,7 @@
       }
     },
     {
-      "uri": "https://system.damato.design/?path=/docs/button--docs",
+      "uri": "https://system.damato.design/?path=/docs/components-button--docs",
       "name": "Button",
       "description": "Creates a `<Button/>` component",
       "mimeType": "text/typescript",
@@ -310,7 +310,7 @@
       }
     },
     {
-      "uri": "https://system.damato.design/?path=/docs/calendar--docs",
+      "uri": "https://system.damato.design/?path=/docs/components-calendar--docs",
       "name": "Calendar",
       "description": "Creates a `<Calendar/>` component",
       "mimeType": "text/typescript",
@@ -355,7 +355,7 @@
       }
     },
     {
-      "uri": "https://system.damato.design/?path=/docs/card--docs",
+      "uri": "https://system.damato.design/?path=/docs/components-card--docs",
       "name": "Card",
       "description": "Card component",
       "mimeType": "text/typescript",
@@ -388,7 +388,7 @@
       }
     },
     {
-      "uri": "https://system.damato.design/?path=/docs/checkbox--docs",
+      "uri": "https://system.damato.design/?path=/docs/components-checkbox--docs",
       "name": "Checkbox",
       "description": "Checkbox component",
       "mimeType": "text/typescript",
@@ -455,7 +455,7 @@
       }
     },
     {
-      "uri": "https://system.damato.design/?path=/docs/close--docs",
+      "uri": "https://system.damato.design/?path=/docs/primitives-close--docs",
       "name": "Close",
       "description": "Creates a `<Close/>` component",
       "mimeType": "text/typescript",
@@ -486,7 +486,7 @@
       }
     },
     {
-      "uri": "https://system.damato.design/?path=/docs/combobox--docs",
+      "uri": "https://system.damato.design/?path=/docs/components-combobox--docs",
       "name": "Combobox",
       "description": "Creates a `<Comboxbox/>` component",
       "mimeType": "text/typescript",
@@ -509,7 +509,7 @@
       }
     },
     {
-      "uri": "https://system.damato.design/?path=/docs/dialog--docs",
+      "uri": "https://system.damato.design/?path=/docs/components-dialog--docs",
       "name": "Dialog",
       "description": "Creates a `<Dialog/>` component",
       "mimeType": "text/typescript",
@@ -552,7 +552,7 @@
       }
     },
     {
-      "uri": "https://system.damato.design/?path=/docs/disclosure--docs",
+      "uri": "https://system.damato.design/?path=/docs/components-disclosure--docs",
       "name": "Disclosure",
       "description": "Creates a `<Disclosure/>` component",
       "mimeType": "text/typescript",
@@ -588,32 +588,9 @@
         "category": "component"
       }
     },
+    {},
     {
-      "uri": "https://system.damato.design/?path=/docs/element--docs",
-      "name": "Element",
-      "description": "Element component",
-      "mimeType": "text/typescript",
-      "_meta": {
-        "props": [
-          {
-            "name": "mode",
-            "type": "string | string[]",
-            "required": false,
-            "description": "The `mode` is a way to expressively enhance the scope in which it is applied."
-          },
-          {
-            "name": "denser",
-            "type": "boolean",
-            "required": false,
-            "description": "Applies the `mode=\"system:denser\"` to the component"
-          }
-        ],
-        "examples": [],
-        "category": "component"
-      }
-    },
-    {
-      "uri": "https://system.damato.design/?path=/docs/field--docs",
+      "uri": "https://system.damato.design/?path=/docs/primitives-field--docs",
       "name": "Field",
       "description": "Field component",
       "mimeType": "text/typescript",
@@ -641,7 +618,7 @@
       }
     },
     {
-      "uri": "https://system.damato.design/?path=/docs/flyout--docs",
+      "uri": "https://system.damato.design/?path=/docs/primitives-flyout--docs",
       "name": "Flyout",
       "description": "Flyout component",
       "mimeType": "text/typescript",
@@ -680,7 +657,7 @@
       }
     },
     {
-      "uri": "https://system.damato.design/?path=/docs/icon--docs",
+      "uri": "https://system.damato.design/?path=/docs/primitives-icon--docs",
       "name": "Icon",
       "description": "Icon component",
       "mimeType": "text/typescript",
@@ -704,7 +681,7 @@
       }
     },
     {
-      "uri": "https://system.damato.design/?path=/docs/input--docs",
+      "uri": "https://system.damato.design/?path=/docs/primitives-input--docs",
       "name": "Input",
       "description": "Input component",
       "mimeType": "text/typescript",
@@ -757,7 +734,7 @@
       }
     },
     {
-      "uri": "https://system.damato.design/?path=/docs/listbox--docs",
+      "uri": "https://system.damato.design/?path=/docs/primitives-listbox--docs",
       "name": "Listbox",
       "description": "Listbox component",
       "mimeType": "text/typescript",
@@ -838,7 +815,7 @@
       }
     },
     {
-      "uri": "https://system.damato.design/?path=/docs/localize--docs",
+      "uri": "https://system.damato.design/?path=/docs/primitives-localize--docs",
       "name": "Localize",
       "description": "Localize component",
       "mimeType": "text/typescript",
@@ -865,7 +842,7 @@
       }
     },
     {
-      "uri": "https://system.damato.design/?path=/docs/lockup--docs",
+      "uri": "https://system.damato.design/?path=/docs/primitives-lockup--docs",
       "name": "Lockup",
       "description": "Lockup component",
       "mimeType": "text/typescript",
@@ -944,7 +921,7 @@
       }
     },
     {
-      "uri": "https://system.damato.design/?path=/docs/media--docs",
+      "uri": "https://system.damato.design/?path=/docs/primitives-media--docs",
       "name": "Media",
       "description": "Media component",
       "mimeType": "text/typescript",
@@ -987,7 +964,7 @@
       }
     },
     {
-      "uri": "https://system.damato.design/?path=/docs/menu--docs",
+      "uri": "https://system.damato.design/?path=/docs/components-menu--docs",
       "name": "Menu",
       "description": "Menu component",
       "mimeType": "text/typescript",
@@ -1010,7 +987,7 @@
       }
     },
     {
-      "uri": "https://system.damato.design/?path=/docs/pagination--docs",
+      "uri": "https://system.damato.design/?path=/docs/components-pagination--docs",
       "name": "Pagination",
       "description": "Pagination component",
       "mimeType": "text/typescript",
@@ -1047,7 +1024,7 @@
       }
     },
     {
-      "uri": "https://system.damato.design/?path=/docs/text--docs",
+      "uri": "https://system.damato.design/?path=/docs/primitives-text--docs",
       "name": "Text",
       "description": "Text component",
       "mimeType": "text/typescript",
@@ -1098,7 +1075,7 @@
       }
     },
     {
-      "uri": "https://system.damato.design/?path=/docs/toggle--docs",
+      "uri": "https://system.damato.design/?path=/docs/components-toggle--docs",
       "name": "Toggle",
       "description": "Toggle component",
       "mimeType": "text/typescript",
@@ -1133,7 +1110,7 @@
       }
     },
     {
-      "uri": "https://system.damato.design/?path=/docs/track--docs",
+      "uri": "https://system.damato.design/?path=/docs/primitives-track--docs",
       "name": "Track",
       "description": "Track component",
       "mimeType": "text/typescript",
