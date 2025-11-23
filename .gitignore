@@ -29,3 +29,6 @@ _site
 *storybook.log
 
 src/modes/newmode.yml
+.storybook/public/llms.txt
+.storybook/public/primitives/*
+.storybook/public/components/*

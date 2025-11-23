@@ -23,7 +23,7 @@ function getIconRef(emphasis: string | undefined) {
 
 }
 
-type DialogProps = LockupProps
+export type DialogProps = LockupProps
     & {
         emphasis?: 'critical' | 'warning' | 'success',
         disrupt?: boolean,

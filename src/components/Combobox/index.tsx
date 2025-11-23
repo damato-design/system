@@ -7,7 +7,7 @@ import { flyout, FlyoutProvider } from '../Flyout';
 
 export type { ItemProps, ItemsProps } from '../Listbox';
 
-type ComboBoxProps = Omit<InputProps & FieldProps & ListboxProps, 'visualFocus'> & {
+export type ComboBoxProps = Omit<InputProps & FieldProps & ListboxProps, 'visualFocus'> & {
     onConfirm?: (value: any) => void;
 }
 

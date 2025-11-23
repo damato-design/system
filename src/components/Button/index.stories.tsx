@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import checklist from './checklist.md?raw';
 
-import { Button } from '.';
+import { Button, type ButtonProps } from '.';
 
 import { box } from '../Box';
 
@@ -19,7 +19,7 @@ const meta = {
     parameters: {
         checklist
     }
-} satisfies Meta<typeof Button>
+} satisfies Meta<ButtonProps>
 
 export default meta
 type Story = StoryObj<typeof meta>

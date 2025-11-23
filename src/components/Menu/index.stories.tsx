@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import checklist from './checklist.md?raw';
 
-import { Menu } from '.';
+import { Menu, type MenuProps } from '.';
 
 /**
  * The `<Menu/>` component is primarily composed
@@ -21,7 +21,7 @@ const meta = {
         },
         checklist
     },
-} satisfies Meta<typeof Menu>
+} satisfies Meta<MenuProps>
 
 export default meta
 type Story = StoryObj<typeof meta>

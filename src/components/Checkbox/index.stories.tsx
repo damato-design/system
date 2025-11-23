@@ -2,7 +2,7 @@ import { useState, useCallback, ChangeEvent } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import checklist from './checklist.md?raw';
 
-import { Checkbox } from '.';
+import { Checkbox, type CheckboxProps } from '.';
 
 import { box } from '../Box';
 import { text } from '../Text';
@@ -20,7 +20,7 @@ const meta = {
     parameters: {
         checklist
     }
-} satisfies Meta<typeof Checkbox>
+} satisfies Meta<CheckboxProps>
 
 export default meta
 type Story = StoryObj<typeof meta>

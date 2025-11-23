@@ -2,7 +2,7 @@ import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import checklist from './checklist.md?raw';
 
-import { field } from '.';
+import { field, type FieldProps } from '.';
 
 import { box } from '../Box';
 import { input } from '../Input';
@@ -26,7 +26,7 @@ const meta = {
     parameters: {
         checklist
     }
-} satisfies Meta<typeof field.div>
+} satisfies Meta<FieldProps>
 
 export default meta
 type Story = StoryObj<typeof meta>

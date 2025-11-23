@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import checklist from './checklist.md?raw';
 
-import { Pagination, ItemsProps, ItemProps } from '.';
+import { Pagination, ItemsProps, ItemProps, type PaginationProps } from '.';
 
 function makeItems(length: number, fn: (_: any, i: number) => ItemProps) {
     return Array.from({ length }, fn) as ItemsProps;
@@ -30,7 +30,7 @@ const meta = {
         },
         checklist
     },
-} satisfies Meta<typeof Pagination>
+} satisfies Meta<PaginationProps>
 
 export default meta
 type Story = StoryObj<typeof meta>

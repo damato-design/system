@@ -20,7 +20,7 @@ export type TrackProps = (React.ProgressHTMLAttributes<HTMLProgressElement>
   };
 
 export const track = proxy<'progress' | 'meter' | 'range', TrackProps>('track', (trackType) => {
-  return forwardRef<HTMLElement, TrackProps>(({
+  return forwardRef<HTMLProgressElement | HTMLMeterElement | HTMLInputElement, TrackProps>(({
     items,
     orientation = 'horizontal',
     stretch = true,

@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Preview } from "@storybook/react";
-import { Title, Description, Stories, Markdown, useOf } from '@storybook/addon-docs';
+import { Title, Description, Controls, Stories, Markdown, useOf } from '@storybook/addon-docs';
 import Github from '../docs/components/Github';
 import theme from './theme';
 
@@ -40,6 +40,7 @@ const page = () => (
     <Title/>
     <Install/>
     <Description/>
+    {/* <Controls/> */}
     <Stories/>
     <Checklist/>
     <Github/>

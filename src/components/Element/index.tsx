@@ -22,8 +22,10 @@ export type ElementProps = Props & {
   denser?: boolean,
 }
 
-export const element = proxy<HTMLTagsOnly, ElementProps>('element', (TagName) => {
-  const Component = forwardRef<HTMLElement, ElementProps>(({
+export const element = proxy<HTMLTagsOnly, ElementProps>('element', <TagName extends HTMLTagsOnly>(TagName: TagName) => {
+  type ElementForTag = JSX.IntrinsicElements[TagName] extends React.DetailedHTMLProps<any, infer E> ? E : HTMLElement;
+
+  const Component = forwardRef<ElementForTag, ElementProps>(({ 
     className,
     denser,
     mode,

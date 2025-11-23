@@ -5,12 +5,11 @@ import {
   useImperativeHandle,
   useEffect
 } from 'react';
-import { field } from '../Field';
 import { input, InputProps } from '../Input';
 import { box } from '../Box';
 import { text } from '../Text';
 
-type CheckboxProps = InputProps & {
+export type CheckboxProps = InputProps & {
   checked?: boolean | null;
   defaultChecked?: boolean | null;
   exclusive?: boolean;

@@ -10,7 +10,7 @@
   "module": "./dist/main.js",
   "types": "./dist/main.d.ts",
   "scripts": {
-    "build": "npm run generate:mcp && npm run storybook:build",
+    "build": "npm run generate:llms && npm run storybook:build",
     "vite:build": "tsc -b && vite build",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
@@ -24,11 +24,12 @@
     "write:files": "node ./scripts/write-files.js",
     "write:checklist": "node ./scripts/write-checklist.js",
     "write:template": "node ./scripts/write-template.js",
-    "generate:mcp": "node ./scripts/generate-mcp.js"
+    "generate:llms": "node ./scripts/generate-llms.js"
   },
   "dependencies": {
     "clsx": "^2.1.1",
     "material-icons": "^1.13.12",
+    "mdast-builder": "^1.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "ts-morph": "^27.0.2"

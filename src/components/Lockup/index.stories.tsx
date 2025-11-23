@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import checklist from './checklist.md?raw';
 
-import { lockup } from '.';
+import { lockup, type LockupProps } from '.';
 import { text } from '../Text';
 import { field } from '../Field';
 import { input } from '../Input';
@@ -20,7 +20,7 @@ const meta = {
     parameters: {
         checklist
     }
-} satisfies Meta<typeof lockup.div>
+} satisfies Meta<LockupProps>
 
 export default meta
 type Story = StoryObj<typeof meta>

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import checklist from './checklist.md?raw';
 
-import { Toggle } from '.';
+import { Toggle, type ToggleProps } from '.';
 
 /**
  * The `<Toggle/>` component is a control that immediately causes a boolean change in an experience. This differs from the `<Checkbox/>` which must be confirmed _after_ making the change.
@@ -12,7 +12,7 @@ const meta = {
     parameters: {
         checklist
     }
-} satisfies Meta<typeof Toggle>
+} satisfies Meta<ToggleProps>
 
 export default meta
 type Story = StoryObj<typeof meta>

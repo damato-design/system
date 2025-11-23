@@ -13,7 +13,7 @@ import {
 import { Button } from '../Button';
 import { text } from '../Text';
 
-type CalendarProps = {
+export type CalendarProps = {
     value?: string,
     onConfirm?: (value: string) => void,
     activeDescendant?: string,

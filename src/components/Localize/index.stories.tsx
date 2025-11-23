@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import checklist from './checklist.md?raw';
 
-import { localize, IDREF, IdRefKeys } from '.';
+import { localize, IDREF, IdRefKeys, type LocalizeProps } from '.';
 
 import { Button } from '../Button';
 
@@ -15,7 +15,7 @@ const meta = {
     parameters: {
         checklist
     }
-} satisfies Meta<typeof localize.close>
+} satisfies Meta<LocalizeProps>
 
 export default meta
 type Story = StoryObj<typeof meta>

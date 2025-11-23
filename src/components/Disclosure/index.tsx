@@ -2,7 +2,7 @@ import { forwardRef, ReactNode } from 'react';
 import { box, BoxProps } from '../Box';
 import { icon } from '../Icon';
 
-type DisclosureProps = BoxProps & {
+export type DisclosureProps = BoxProps & {
     subject: ReactNode,
     name?: string
 };

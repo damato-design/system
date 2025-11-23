@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import checklist from './checklist.md?raw';
 
-import { Combobox, ItemsProps } from '.';
+import { Combobox, ItemsProps, type ComboBoxProps } from '.';
 
 /**
  * The `<Combobox/>` component connects several parts of the system together
@@ -20,7 +20,7 @@ const meta = {
         },
         checklist
     },
-} satisfies Meta<typeof Combobox>
+} satisfies Meta<ComboBoxProps>
 
 export default meta
 type Story = StoryObj<typeof meta>

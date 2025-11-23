@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import checklist from './checklist.md?raw';
 
-import { Disclosure } from '.';
+import { Disclosure, type DisclosureProps } from '.';
 import { lockup } from '../Lockup';
 import { text } from '../Text';
 
@@ -21,7 +21,7 @@ const meta = {
         },
         checklist
     },
-} satisfies Meta<typeof Disclosure>
+} satisfies Meta<DisclosureProps>
 
 export default meta
 type Story = StoryObj<typeof meta>

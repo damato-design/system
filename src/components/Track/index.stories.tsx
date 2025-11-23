@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useCallback, useState } from 'react';
 import checklist from './checklist.md?raw';
 
-import { track } from '.';
+import { track, type TrackProps } from '.';
 
 import { text } from '../Text';
 import { lockup } from '../Lockup';
@@ -19,7 +19,7 @@ const meta = {
     parameters: {
         checklist
     }
-} satisfies Meta<typeof track.progress>
+} satisfies Meta<TrackProps>
 
 export default meta
 type Story = StoryObj<typeof meta>

@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import checklist from './checklist.md?raw';
 
-import { Calendar } from '.';
+import { Calendar, type CalendarProps } from '.';
 import { Pagination, ItemsProps } from '../Pagination';
 import { box } from '../Box';
 
@@ -21,7 +21,7 @@ const meta = {
     parameters: {
         checklist
     }
-} satisfies Meta<typeof Calendar>
+} satisfies Meta<CalendarProps>
 
 export default meta
 type Story = StoryObj<typeof meta>

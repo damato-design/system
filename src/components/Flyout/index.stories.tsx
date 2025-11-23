@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import checklist from './checklist.md?raw';
 
-import { flyout, FlyoutProvider } from '.';
+import { flyout, FlyoutProvider, type FlyoutProps } from '.';
 import { Button } from '../Button';
 import { box } from '../Box';
 
@@ -22,7 +22,7 @@ const meta = {
         },
         checklist
     },
-} satisfies Meta<typeof flyout.div>
+} satisfies Meta<FlyoutProps>
 
 export default meta
 type Story = StoryObj<typeof meta>

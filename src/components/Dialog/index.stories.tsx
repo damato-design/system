@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import checklist from './checklist.md?raw';
 
-import { Dialog } from '.';
+import { Dialog, type DialogProps } from '.';
 
 import { text } from '../Text';
 import { box } from '../Box';
@@ -18,7 +18,7 @@ const meta = {
     parameters: {
         checklist
     }
-} satisfies Meta<typeof Dialog>
+} satisfies Meta<DialogProps>
 
 export default meta
 type Story = StoryObj<typeof meta>

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import checklist from './checklist.md?raw';
 
-import { Media } from '.';
+import { Media, type MediaProps } from '.';
 import { box } from '../Box';
 
 /**
@@ -19,7 +19,7 @@ const meta = {
         },
         checklist
     },
-} satisfies Meta<typeof Media>
+} satisfies Meta<MediaProps>
 
 export default meta
 type Story = StoryObj<typeof meta>
