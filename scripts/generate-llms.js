@@ -9,15 +9,17 @@
  * Usage: node generate-llms-txt.js
  * 
  * Dependencies:
- * npm install ts-morph mdast-builder mdast-util-to-markdown
+ * npm install ts-morph mdast-builder mdast-util-to-markdown mdast-util-gfm-table mdast-util-gfm
  */
 
 import { Project, SyntaxKind, Node, TypeFormatFlags } from 'ts-morph';
 import fs from 'fs';
 import path from 'path';
-import { heading, text, paragraph, list, listItem, code, blockquote, link, root } from 'mdast-builder';
-import { toMarkdown } from 'mdast-util-to-markdown';
 import { fileURLToPath } from 'url';
+import { root, heading, paragraph, text, code, blockquote, link, list, listItem, html } from 'mdast-builder';
+import { toMarkdown } from 'mdast-util-to-markdown';
+import { gfmTableToMarkdown } from 'mdast-util-gfm-table';
+import { gfmToMarkdown } from 'mdast-util-gfm';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -48,7 +50,7 @@ class LLMSGenerator {
     }
     
     const storyFiles = this.findStoryFiles(componentsDir);
-    console.log(`📚 Found ${storyFiles.length} story files`);
+    console.log(`📚 Found ${storyFiles.length} story files\n`);
 
     for (const storyFile of storyFiles) {
       await this.processStoryFile(storyFile);
@@ -75,7 +77,10 @@ class LLMSGenerator {
       
       if (entry.isDirectory() && !entry.name.startsWith('.') && entry.name !== 'node_modules') {
         this.findStoryFiles(fullPath, files);
-      } else if (entry.isFile() && entry.name.match(/\.stories\.tsx?$/)) {
+        continue;
+      }
+      
+      if (entry.isFile() && entry.name.match(/\.stories\.tsx?$/)) {
         files.push(fullPath);
       }
     }
@@ -87,34 +92,34 @@ class LLMSGenerator {
    * Process a single story file
    */
   async processStoryFile(filePath) {
-    console.log(`\n📖 Processing: ${filePath}`);
+    const fileName = path.basename(filePath);
+    console.log(`📖 ${fileName}`);
     
     const sourceFile = this.project.addSourceFileAtPath(filePath);
     
     const metaTitle = this.extractMetaTitle(sourceFile);
     if (!metaTitle) {
-      console.warn(`⚠️  No meta.title found in ${filePath}`);
+      console.warn(`   ⚠️  No meta.title found`);
       return;
     }
 
     const [category, componentName] = this.parseMetaTitle(metaTitle);
-    console.log(`   Component: ${componentName} (${category})`);
 
     const componentPath = this.findComponentFile(filePath);
     if (!componentPath) {
-      console.warn(`⚠️  Could not find component file for ${componentName}`);
+      console.warn(`   ⚠️  No index.tsx found`);
       return;
     }
 
+    const propsTypeName = this.extractPropsTypeFromMeta(sourceFile);
     const componentSourceFile = this.project.addSourceFileAtPath(componentPath);
     
-    // Extract JSDoc from the story file meta (not component)
     const storyJsDoc = this.extractStoryJsDoc(sourceFile);
-    
-    // Extract props from the component's exported type
-    const props = this.extractProps(componentSourceFile, componentName);
+    const props = this.extractProps(componentSourceFile, componentName, propsTypeName);
     const stories = this.extractStories(sourceFile, componentName);
     const componentJsDoc = this.extractComponentJsDoc(componentSourceFile, componentName);
+
+    console.log(`   ✓ ${props.length} props, ${stories.length} stories`);
 
     this.components.set(componentName.toLowerCase(), {
       name: componentName,
@@ -124,15 +129,30 @@ class LLMSGenerator {
       props,
       stories,
       jsDoc: componentJsDoc,
-      storyJsDoc // JSDoc from the story file
+      storyJsDoc
     });
   }
 
   /**
-   * Extract meta.title from the story file using ts-morph
+   * Extract the props type name from meta satisfies expression
+   */
+  extractPropsTypeFromMeta(sourceFile) {
+    const metaVar = sourceFile.getVariableDeclaration('meta');
+    if (!metaVar) return null;
+
+    const initializer = metaVar.getInitializer();
+    if (!initializer) return null;
+    if (initializer.getKind() !== SyntaxKind.SatisfiesExpression) return null;
+
+    const typeText = initializer.getType().getText();
+    const match = typeText.match(/Meta<(.+?)>/);
+    return match ? match[1].trim() : null;
+  }
+
+  /**
+   * Extract meta.title from the story file
    */
   extractMetaTitle(sourceFile) {
-    // Look for 'meta' variable first (most common)
     const metaVar = sourceFile.getVariableDeclaration('meta');
     if (metaVar) {
       const initializer = metaVar.getInitializer();
@@ -142,23 +162,24 @@ class LLMSGenerator {
       }
     }
 
-    // Look for default export
     const defaultExport = sourceFile.getDefaultExportSymbol();
-    if (defaultExport) {
-      const declarations = defaultExport.getDeclarations();
-      for (const decl of declarations) {
-        if (decl.getKind() === SyntaxKind.VariableDeclaration) {
-          const initializer = decl.getInitializer();
-          if (initializer) {
-            const title = this.getTitleFromObject(initializer);
-            if (title) return title;
-          }
-        } else if (decl.getKind() === SyntaxKind.ExportAssignment) {
-          const expression = decl.getExpression();
-          if (expression) {
-            const title = this.getTitleFromObject(expression);
-            if (title) return title;
-          }
+    if (!defaultExport) return null;
+
+    const declarations = defaultExport.getDeclarations();
+    for (const decl of declarations) {
+      if (decl.getKind() === SyntaxKind.VariableDeclaration) {
+        const initializer = decl.getInitializer();
+        if (initializer) {
+          const title = this.getTitleFromObject(initializer);
+          if (title) return title;
+        }
+      }
+      
+      if (decl.getKind() === SyntaxKind.ExportAssignment) {
+        const expression = decl.getExpression();
+        if (expression) {
+          const title = this.getTitleFromObject(expression);
+          if (title) return title;
         }
       }
     }
@@ -172,36 +193,33 @@ class LLMSGenerator {
   getTitleFromObject(node) {
     if (node.getKind() === SyntaxKind.ObjectLiteralExpression) {
       const titleProp = node.getProperty('title');
-      if (titleProp && titleProp.getKind() === SyntaxKind.PropertyAssignment) {
-        const value = titleProp.getInitializer();
-        if (value && value.getKind() === SyntaxKind.StringLiteral) {
-          return value.getLiteralText();
-        }
-      }
+      if (!titleProp) return null;
+      if (titleProp.getKind() !== SyntaxKind.PropertyAssignment) return null;
+
+      const value = titleProp.getInitializer();
+      if (!value) return null;
+      if (value.getKind() !== SyntaxKind.StringLiteral) return null;
+
+      return value.getLiteralText();
     }
     
-    // Handle `as const` or `satisfies` expressions
     if (node.getKind() === SyntaxKind.AsExpression || 
         node.getKind() === SyntaxKind.SatisfiesExpression) {
-      const expression = node.getExpression();
-      if (expression) {
-        return this.getTitleFromObject(expression);
-      }
+      return this.getTitleFromObject(node.getExpression());
     }
 
-    // Handle identifier references
     if (node.getKind() === SyntaxKind.Identifier) {
       const symbol = node.getSymbol();
-      if (symbol) {
-        const declarations = symbol.getDeclarations();
-        for (const decl of declarations) {
-          if (decl.getKind() === SyntaxKind.VariableDeclaration) {
-            const initializer = decl.getInitializer();
-            if (initializer) {
-              return this.getTitleFromObject(initializer);
-            }
-          }
-        }
+      if (!symbol) return null;
+
+      const declarations = symbol.getDeclarations();
+      for (const decl of declarations) {
+        if (decl.getKind() !== SyntaxKind.VariableDeclaration) continue;
+
+        const initializer = decl.getInitializer();
+        if (!initializer) continue;
+
+        return this.getTitleFromObject(initializer);
       }
     }
 
@@ -236,138 +254,128 @@ class LLMSGenerator {
   }
 
   /**
-   * Extract props from component using ts-morph
+   * Extract props from component
    */
-  extractProps(sourceFile, componentName) {
+  extractProps(sourceFile, componentName, propsTypeName = null) {
     const props = [];
-    const propsTypeName = `${componentName}Props`;
-
-    console.log(`   Looking for type: ${propsTypeName}`);
-
-    // Try to find the type alias (most common pattern)
-    const propsType = sourceFile.getTypeAlias(propsTypeName);
+    const typeName = propsTypeName || `${componentName}Props`;
+    const propsType = sourceFile.getTypeAlias(typeName) || sourceFile.getInterface(typeName);
     
-    if (propsType) {
-      console.log(`   Found type alias: ${propsTypeName}`);
-      this.extractPropsFromTypeAlias(propsType, props);
-      console.log(`   Extracted ${props.length} props from type alias`);
-      return props;
-    }
+    if (!propsType) return props;
 
-    // Fallback to interface
-    const propsInterface = sourceFile.getInterface(propsTypeName);
-    if (propsInterface) {
-      console.log(`   Found interface: ${propsTypeName}`);
-      this.extractPropsFromInterface(propsInterface, props);
-      console.log(`   Extracted ${props.length} props from interface`);
+    if (Node.isTypeAliasDeclaration(propsType)) {
+      this.extractPropsFromTypeAlias(propsType, props);
     } else {
-      console.log(`   ⚠️  No ${propsTypeName} type or interface found`);
+      this.extractPropsFromInterface(propsType, props);
     }
 
     return props;
   }
 
   /**
-   * Extract props from a type alias (handles union types and intersections)
+   * Extract props from a type alias
    */
   extractPropsFromTypeAlias(typeAlias, props) {
     const typeNode = typeAlias.getTypeNode();
-    
     if (!typeNode) return;
 
-    // Handle intersection types (A & B & C)
     if (Node.isIntersectionTypeNode(typeNode)) {
-      const types = typeNode.getTypeNodes();
-      
-      for (const type of types) {
-        this.extractPropsFromTypeNode(type, props);
-      }
-    } 
-    // Handle union types (A | B)
-    else if (Node.isUnionTypeNode(typeNode)) {
-      const types = typeNode.getTypeNodes();
-      
-      // For union types, extract from all branches
-      for (const type of types) {
-        this.extractPropsFromTypeNode(type, props);
-      }
+      typeNode.getTypeNodes().forEach(type => this.extractPropsFromTypeNode(type, props));
+      return;
     }
-    // Handle direct type reference
-    else {
-      this.extractPropsFromTypeNode(typeNode, props);
+    
+    if (Node.isUnionTypeNode(typeNode)) {
+      typeNode.getTypeNodes().forEach(type => this.extractPropsFromTypeNode(type, props));
+      return;
     }
+    
+    this.extractPropsFromTypeNode(typeNode, props);
   }
 
   /**
    * Extract props from a type node
    */
   extractPropsFromTypeNode(typeNode, props) {
-    // Handle type references (e.g., BoxProps, ButtonHTMLAttributes)
     if (Node.isTypeReference(typeNode)) {
-      const typeName = typeNode.getTypeName().getText();
-      
-      // Skip HTML attributes and common React types to avoid clutter
-      if (this.shouldSkipType(typeName)) {
-        return;
-      }
-
-      // Try to resolve the type
-      const type = typeNode.getType();
-      this.extractPropsFromType(type, props);
+      this.extractPropsFromTypeReference(typeNode, props);
+      return;
     }
-    // Handle object literal types
-    else if (Node.isTypeLiteral(typeNode)) {
-      const members = typeNode.getMembers();
-      
-      for (const member of members) {
+    
+    if (Node.isTypeLiteral(typeNode)) {
+      typeNode.getMembers().forEach(member => {
         if (Node.isPropertySignature(member)) {
           this.extractPropFromPropertySignature(member, props);
         }
-      }
+      });
+      return;
+    }
+    
+    if (Node.isIntersectionTypeNode(typeNode)) {
+      typeNode.getTypeNodes().forEach(type => this.extractPropsFromTypeNode(type, props));
     }
   }
 
   /**
-   * Determine if a type should be skipped (React/HTML types)
+   * Extract props from a type reference
+   */
+  extractPropsFromTypeReference(typeNode, props) {
+    const typeName = typeNode.getTypeName().getText();
+    
+    if (this.shouldSkipType(typeName)) return;
+
+    const symbol = typeNode.getTypeName().getSymbol();
+    if (!symbol) return;
+
+    symbol.getDeclarations().forEach(decl => {
+      if (Node.isTypeAliasDeclaration(decl)) {
+        const aliasTypeNode = decl.getTypeNode();
+        if (aliasTypeNode) {
+          this.extractPropsFromTypeNode(aliasTypeNode, props);
+        }
+        return;
+      }
+      
+      if (Node.isInterfaceDeclaration(decl)) {
+        decl.getProperties().forEach(prop => {
+          this.extractPropFromPropertySignature(prop, props);
+        });
+        return;
+      }
+      
+      if (Node.isImportSpecifier(decl)) {
+        const aliasedSymbol = symbol.getAliasedSymbol();
+        if (!aliasedSymbol) return;
+
+        aliasedSymbol.getDeclarations().forEach(aliasedDecl => {
+          if (Node.isTypeAliasDeclaration(aliasedDecl)) {
+            const aliasTypeNode = aliasedDecl.getTypeNode();
+            if (aliasTypeNode) {
+              this.extractPropsFromTypeNode(aliasTypeNode, props);
+            }
+            return;
+          }
+          
+          if (Node.isInterfaceDeclaration(aliasedDecl)) {
+            aliasedDecl.getProperties().forEach(prop => {
+              this.extractPropFromPropertySignature(prop, props);
+            });
+          }
+        });
+      }
+    });
+  }
+
+  /**
+   * Determine if a type should be skipped
    */
   shouldSkipType(typeName) {
     const skipTypes = [
-      'ButtonHTMLAttributes',
-      'AnchorHTMLAttributes',
-      'HTMLAttributes',
-      'DOMAttributes',
-      'AriaAttributes',
-      'InputHTMLAttributes',
-      'TextareaHTMLAttributes',
-      'SelectHTMLAttributes',
-      'FormHTMLAttributes'
+      'ButtonHTMLAttributes', 'AnchorHTMLAttributes', 'HTMLAttributes', 'DOMAttributes',
+      'AriaAttributes', 'InputHTMLAttributes', 'TextareaHTMLAttributes',
+      'SelectHTMLAttributes', 'FormHTMLAttributes', 'ImgHTMLAttributes',
+      'LabelHTMLAttributes', 'OptionHTMLAttributes'
     ];
-    
-    return skipTypes.some(skip => typeName.includes(skip));
-  }
-
-  /**
-   * Extract props from a resolved Type
-   */
-  extractPropsFromType(type, props) {
-    const properties = type.getProperties();
-
-    for (const prop of properties) {
-      const name = prop.getName();
-      
-      // Skip if we already have this prop
-      if (props.some(p => p.name === name)) continue;
-
-      const declarations = prop.getDeclarations();
-      
-      if (declarations.length > 0) {
-        const decl = declarations[0];
-        
-        if (Node.isPropertySignature(decl)) {
-          this.extractPropFromPropertySignature(decl, props);
-        }
-      }
-    }
+    return skipTypes.includes(typeName);
   }
 
   /**
@@ -375,28 +383,13 @@ class LLMSGenerator {
    */
   extractPropFromPropertySignature(member, props) {
     const propName = member.getName();
-    
-    // Skip if already exists
     if (props.some(p => p.name === propName)) return;
 
     const propType = member.getType();
     const typeText = propType.getText(undefined, TypeFormatFlags.UseAliasDefinedOutsideCurrentScope);
     const required = !member.hasQuestionToken();
     
-    // Extract JSDoc
-    let description = undefined;
-    
-    try {
-      if (typeof member.getJsDocs === 'function') {
-        const jsDocs = member.getJsDocs();
-        if (jsDocs && jsDocs.length > 0) {
-          const comment = jsDocs[0].getComment();
-          description = typeof comment === 'string' ? comment : undefined;
-        }
-      }
-    } catch (error) {
-      // Continue without description if JSDoc extraction fails
-    }
+    const description = this.extractJsDoc(member);
 
     props.push({
       name: propName,
@@ -407,32 +400,33 @@ class LLMSGenerator {
   }
 
   /**
-   * Extract props from an interface declaration
+   * Extract props from an interface
    */
   extractPropsFromInterface(interfaceDecl, props) {
-    for (const prop of interfaceDecl.getProperties()) {
+    interfaceDecl.getProperties().forEach(prop => {
       this.extractPropFromPropertySignature(prop, props);
-    }
+    });
 
-    // Handle extended interfaces
     interfaceDecl.getExtends().forEach(ext => {
       const extType = ext.getExpression().getType();
-      this.extractPropsFromType(extType, props);
+      extType.getProperties().forEach(prop => {
+        const declarations = prop.getDeclarations();
+        if (declarations.length === 0) return;
+        if (!Node.isPropertySignature(declarations[0])) return;
+
+        this.extractPropFromPropertySignature(declarations[0], props);
+      });
     });
   }
 
   /**
-   * Simplify type text for better readability
+   * Simplify type text for readability
    */
   simplifyType(typeText) {
-    // Remove import() statements
     typeText = typeText.replace(/import\([^)]+\)\./g, '');
-    
-    // Simplify React types
     typeText = typeText.replace(/React\.ReactNode/g, 'ReactNode');
     typeText = typeText.replace(/React\.ReactElement/g, 'ReactElement');
     
-    // Truncate very long union types
     if (typeText.length > 150) {
       const unionParts = typeText.split('|');
       if (unionParts.length > 3) {
@@ -444,76 +438,113 @@ class LLMSGenerator {
   }
 
   /**
-   * Extract stories from the story file and convert to JSX examples
+   * Extract stories from the story file
    */
   extractStories(sourceFile, componentName) {
     const stories = [];
-    const variables = sourceFile.getVariableDeclarations();
+    const statements = sourceFile.getStatements();
     
-    for (const variable of variables) {
-      const name = variable.getName();
-      
-      // Skip meta and default exports
-      if (name === 'meta' || name === 'default') continue;
-      
-      // Look for Story type or exported variables
-      const type = variable.getType().getText();
-      if (!type.includes('Story') && !variable.isExported()) continue;
+    for (const statement of statements) {
+      if (!Node.isVariableStatement(statement)) continue;
+      if (!statement.isExported()) continue;
 
-      const initializer = variable.getInitializer();
-      if (!initializer) continue;
-
-      // Extract JSDoc from the variable declaration
-      let jsDoc = undefined;
+      const declarations = statement.getDeclarations();
       
-      try {
-        if (typeof variable.getJsDocs === 'function') {
-          const jsDocs = variable.getJsDocs();
-          if (jsDocs && jsDocs.length > 0) {
-            const comment = jsDocs[0].getComment();
-            jsDoc = typeof comment === 'string' ? comment : undefined;
-          }
-        }
-      } catch (error) {
-        // If getJsDocs fails, just continue without JSDoc
-        console.warn(`   ⚠️  Could not extract JSDoc for story: ${name}`);
+      for (const decl of declarations) {
+        const name = decl.getName();
+        if (name === 'meta' || name === 'default') continue;
+        
+        const type = decl.getType().getText();
+        if (!type.includes('Story')) continue;
+
+        const initializer = decl.getInitializer();
+        if (!initializer) continue;
+
+        const jsDoc = this.extractJsDoc(statement);
+        const jsxCode = this.convertStoryToJSX(initializer, componentName);
+
+        stories.push({ name, code: jsxCode, jsDoc });
       }
-
-      // Convert story object to JSX
-      const jsxCode = this.convertStoryToJSX(initializer, componentName);
-
-      stories.push({
-        name,
-        code: jsxCode,
-        jsDoc
-      });
     }
 
     return stories;
   }
 
   /**
+   * Extract JSDoc from a node
+   */
+  extractJsDoc(node) {
+    if (!node) return undefined;
+
+    try {
+      if (typeof node.getJsDocs !== 'function') return undefined;
+
+      const jsDocs = node.getJsDocs();
+      if (!jsDocs || jsDocs.length === 0) return undefined;
+
+      const comment = jsDocs[0].getComment();
+      
+      if (typeof comment === 'string') return comment;
+      
+      if (Array.isArray(comment)) {
+        return comment.map(part => {
+          if (typeof part === 'string') return part;
+          if (part && typeof part.text === 'string') return part.text;
+          return '';
+        }).join('');
+      }
+    } catch (error) {
+      return undefined;
+    }
+    
+    return undefined;
+  }
+
+  /**
+   * Extract JSDoc from component
+   */
+  extractComponentJsDoc(sourceFile, componentName) {
+    const functionDecl = sourceFile.getFunction(componentName);
+    const variableDecl = sourceFile.getVariableDeclaration(componentName);
+    return this.extractJsDoc(functionDecl || variableDecl);
+  }
+
+  /**
+   * Extract JSDoc from story file meta
+   */
+  extractStoryJsDoc(sourceFile) {
+    const statements = sourceFile.getStatements();
+    
+    for (const statement of statements) {
+      if (!Node.isVariableStatement(statement)) continue;
+
+      const declarations = statement.getDeclarations();
+      for (const decl of declarations) {
+        if (decl.getName() === 'meta') {
+          return this.extractJsDoc(statement);
+        }
+      }
+    }
+    
+    return undefined;
+  }
+
+  /**
    * Convert a Storybook story object to JSX code
    */
   convertStoryToJSX(initializer, componentName) {
-    const kind = initializer.getKind();
-    
-    // Handle object literal story format
-    if (kind === SyntaxKind.ObjectLiteralExpression) {
-      const argsProp = initializer.getProperty('args');
-      const renderProp = initializer.getProperty('render');
+    if (initializer.getKind() !== SyntaxKind.ObjectLiteralExpression) {
+      return `<${componentName} />`;
+    }
 
-      // If there's a custom render function, use its JSX
-      if (renderProp && renderProp.getKind() === SyntaxKind.PropertyAssignment) {
-        const renderFunc = renderProp.getInitializer();
-        return this.extractJSXFromRender(renderFunc);
-      }
+    const renderProp = initializer.getProperty('render');
+    if (renderProp && renderProp.getKind() === SyntaxKind.PropertyAssignment) {
+      return this.extractJSXFromRender(renderProp.getInitializer());
+    }
 
-      // Otherwise, construct JSX from args
-      if (argsProp && argsProp.getKind() === SyntaxKind.PropertyAssignment) {
-        const argsObj = argsProp.getInitializer();
-        return this.constructJSXFromArgs(componentName, argsObj);
-      }
+    const argsProp = initializer.getProperty('args');
+    if (argsProp && argsProp.getKind() === SyntaxKind.PropertyAssignment) {
+      return this.constructJSXFromArgs(componentName, argsProp.getInitializer());
     }
 
     return `<${componentName} />`;
@@ -525,28 +556,20 @@ class LLMSGenerator {
   extractJSXFromRender(renderFunc) {
     if (!renderFunc) return '';
 
-    // Get the function body
     const body = renderFunc.getBody();
     if (!body) return '';
 
-    // If it's a block, find the return statement
     if (Node.isBlock(body)) {
-      const returnStatement = body.getStatements().find(stmt => 
-        Node.isReturnStatement(stmt)
-      );
-      
-      if (returnStatement) {
-        const expression = returnStatement.getExpression();
-        if (expression) {
-          return this.formatJSX(expression.getText());
-        }
-      }
-    } else {
-      // Arrow function with direct return
-      return this.formatJSX(body.getText());
+      const returnStatement = body.getStatements().find(stmt => Node.isReturnStatement(stmt));
+      if (!returnStatement) return '';
+
+      const expression = returnStatement.getExpression();
+      if (!expression) return '';
+
+      return this.formatJSX(expression.getText());
     }
 
-    return '';
+    return this.formatJSX(body.getText());
   }
 
   /**
@@ -566,7 +589,6 @@ class LLMSGenerator {
 
       const propName = prop.getName();
       const initializer = prop.getInitializer();
-      
       if (!initializer) continue;
 
       if (propName === 'children') {
@@ -604,7 +626,6 @@ class LLMSGenerator {
       return initializer.getLiteralText();
     }
 
-    // For complex expressions, return the text
     return initializer.getText();
   }
 
@@ -612,81 +633,21 @@ class LLMSGenerator {
    * Format a prop for JSX output
    */
   formatProp(propName, value, kind) {
-    // Boolean true - shorthand
-    if (value === 'true') {
-      return propName;
-    }
-
-    // String literal
-    if (kind === SyntaxKind.StringLiteral) {
-      return `${propName}="${value}"`;
-    }
-
-    // Everything else in curly braces
+    if (value === 'true') return propName;
+    if (kind === SyntaxKind.StringLiteral) return `${propName}="${value}"`;
     return `${propName}={${value}}`;
   }
 
   /**
-   * Format JSX code for better readability
+   * Format JSX code
    */
   formatJSX(code) {
-    // Basic formatting - remove extra whitespace
     return code
       .split('\n')
       .map(line => line.trim())
       .filter(line => line.length > 0)
       .join('\n')
       .trim();
-  }
-
-  /**
-   * Extract JSDoc from component
-   */
-  extractComponentJsDoc(sourceFile, componentName) {
-    // Try to find the component - could be a function or const with forwardRef
-    const functionDecl = sourceFile.getFunction(componentName);
-    const variableDecl = sourceFile.getVariableDeclaration(componentName);
-
-    const decl = functionDecl || variableDecl;
-    if (!decl) return undefined;
-
-    try {
-      if (typeof decl.getJsDocs === 'function') {
-        const jsDocs = decl.getJsDocs();
-        if (jsDocs && jsDocs.length > 0) {
-          const comment = jsDocs[0].getComment();
-          return typeof comment === 'string' ? comment : undefined;
-        }
-      }
-    } catch (error) {
-      // Return undefined if JSDoc extraction fails
-      return undefined;
-    }
-
-    return undefined;
-  }
-
-  /**
-   * Extract JSDoc from the story file (the comment above meta)
-   */
-  extractStoryJsDoc(sourceFile) {
-    // Look for JSDoc on the meta variable
-    const metaVar = sourceFile.getVariableDeclaration('meta');
-    if (!metaVar) return undefined;
-
-    try {
-      if (typeof metaVar.getJsDocs === 'function') {
-        const jsDocs = metaVar.getJsDocs();
-        if (jsDocs && jsDocs.length > 0) {
-          const comment = jsDocs[0].getComment();
-          return typeof comment === 'string' ? comment : undefined;
-        }
-      }
-    } catch (error) {
-      return undefined;
-    }
-
-    return undefined;
   }
 
   /**
@@ -699,150 +660,94 @@ class LLMSGenerator {
       const categoryDir = path.join(this.outputDir, component.category);
       const mdFilePath = path.join(categoryDir, `${component.name.toLowerCase()}.md`);
 
-      // Ensure directory exists
       fs.mkdirSync(categoryDir, { recursive: true });
 
       const mdContent = this.buildComponentMarkdown(component);
       fs.writeFileSync(mdFilePath, mdContent, 'utf-8');
       
-      console.log(`   ✓ ${mdFilePath}`);
+      console.log(`   ✓ ${path.relative(this.outputDir, mdFilePath)}`);
     }
   }
 
   /**
-   * Build markdown content for a component using composition
+   * Build markdown content using mdast
    */
   buildComponentMarkdown(component) {
-    const sections = [];
+    const content = [];
 
-    sections.push(this.composeTitle(component.name));
-    
-    if (component.jsDoc) {
-      sections.push(this.composeDescription(component.jsDoc));
+    // Title
+    content.push(heading(1, text(component.name)));
+
+    // Description - use raw HTML to preserve markdown
+    const description = component.storyJsDoc || component.jsDoc;
+    if (description) {
+      content.push({
+        type: 'paragraph',
+        children: [{
+          type: 'html',
+          value: description
+        }]
+      });
     }
 
+    // Props table
     if (component.props.length > 0) {
-      // composeProps returns an array, so spread it
-      sections.push(...this.composeProps(component.props));
+      content.push(heading(2, text('Props')));
+      content.push(this.buildPropsTable(component.props));
     }
 
+    // Examples
     if (component.stories.length > 0) {
-      // composeExamples returns an array, so spread it
-      sections.push(...this.composeExamples(component.stories));
-    }
-
-    const tree = root(sections);
-    return toMarkdown(tree);
-  }
-
-  /**
-   * Compose the title section
-   */
-  composeTitle(name) {
-    return heading(1, text(name));
-  }
-
-  /**
-   * Compose the description section
-   */
-  composeDescription(description) {
-    return paragraph(text(description));
-  }
-
-  /**
-   * Compose the props section
-   */
-  composeProps(props) {
-    const content = [];
-    
-    content.push(heading(2, text('Props')));
-    
-    // Build markdown table manually as a code block
-    const tableLines = [];
-    tableLines.push('| Prop | Type | Required | Description |');
-    tableLines.push('|------|------|----------|-------------|');
-    
-    for (const prop of props) {
-      const propName = this.escapeMarkdown(prop.name);
-      const propType = this.escapeMarkdown(prop.type);
-      const required = prop.required ? 'Yes' : 'No';
-      const description = this.escapeMarkdown(prop.description || '');
+      content.push(heading(2, text('Examples')));
       
-      tableLines.push(`| ${propName} | \`${propType}\` | ${required} | ${description} |`);
-    }
-    
-    // Use html node to embed raw markdown table
-    content.push({
-      type: 'html',
-      value: tableLines.join('\n')
-    });
-    
-    return content;
-  }
-
-  /**
-   * Escape special markdown characters in table cells
-   */
-  escapeMarkdown(str) {
-    return str
-      .replace(/\|/g, '\\|')
-      .replace(/\n/g, ' ')
-      .replace(/\r/g, '');
-  }
-
-  /**
-   * Compose the examples section
-   */
-  composeExamples(stories) {
-    const content = [];
-    
-    content.push(heading(2, text('Examples')));
-
-    for (const story of stories) {
-      content.push(...this.composeExample(story));
+      for (const story of component.stories) {
+        content.push(heading(3, text(story.name)));
+        
+        if (story.jsDoc) {
+          content.push({
+            type: 'paragraph',
+            children: [html(story.jsDoc)]
+          });
+        }
+        
+        content.push(code('jsx', story.code));
+      }
     }
 
-    return content;
+    const tree = root(content);
+    return toMarkdown(tree, { extensions: [gfmToMarkdown()] });
   }
 
   /**
-   * Compose a single example
+   * Build a GFM table for props
    */
-  composeExample(story) {
-    const content = [];
-
-    content.push(this.composeExampleTitle(story.name));
-
-    if (story.jsDoc) {
-      content.push(this.composeExampleDescription(story.jsDoc));
-    }
-
-    content.push(this.composeExampleCode(story.code));
-
-    return content;
-  }
-
-  /**
-   * Compose an example title
-   */
-  composeExampleTitle(name) {
-    return heading(3, text(name));
-  }
-
-  /**
-   * Compose an example description
-   */
-  composeExampleDescription(description) {
-    // Handle multiline descriptions and preserve markdown formatting
-    const lines = description.split('\n').map(line => line.trim()).filter(line => line);
-    return paragraph(text(lines.join(' ')));
-  }
-
-  /**
-   * Compose an example code block
-   */
-  composeExampleCode(codeText) {
-    return code('jsx', codeText);
+  buildPropsTable(props) {
+    return {
+      type: 'table',
+      align: ['left', 'left', 'center', 'left'],
+      children: [
+        // Header row
+        {
+          type: 'tableRow',
+          children: [
+            { type: 'tableCell', children: [text('Prop')] },
+            { type: 'tableCell', children: [text('Type')] },
+            { type: 'tableCell', children: [text('Required')] },
+            { type: 'tableCell', children: [text('Description')] }
+          ]
+        },
+        // Data rows
+        ...props.map(prop => ({
+          type: 'tableRow',
+          children: [
+            { type: 'tableCell', children: [text(prop.name)] },
+            { type: 'tableCell', children: [{ type: 'inlineCode', value: prop.type }] },
+            { type: 'tableCell', children: [text(prop.required ? 'Yes' : 'No')] },
+            { type: 'tableCell', children: [text(prop.description || '')] }
+          ]
+        }))
+      ]
+    };
   }
 
   /**
@@ -852,12 +757,12 @@ class LLMSGenerator {
     console.log('\n📄 Generating llms.txt...');
 
     const content = [];
-
-    // H1: Project name
     const projectName = this.getProjectName();
+    
+    // Title
     content.push(heading(1, text(projectName)));
-
-    // Blockquote: Summary
+    
+    // Summary blockquote
     content.push(
       blockquote(
         paragraph(
@@ -866,33 +771,29 @@ class LLMSGenerator {
       )
     );
 
-    // Group components by category
+    // Components by category
     const categorizedComponents = this.categorizeComponents();
 
-    // Create sections for each category
     for (const [category, components] of categorizedComponents) {
       const categoryTitle = this.capitalizeWords(category.replace(/\//g, ' / '));
       content.push(heading(2, text(categoryTitle)));
 
-      const componentLinks = [];
-
-      for (const component of components) {
+      const items = components.map(component => {
         const componentPath = `https://system.damato.design/${component.category}/${component.name.toLowerCase()}.md`;
         const description = component.storyJsDoc || component.jsDoc 
           ? this.truncateDescription(component.storyJsDoc || component.jsDoc)
           : `${component.name} component with ${component.props.length} props and ${component.stories.length} examples`;
         
-        componentLinks.push(
-          listItem(
-            paragraph([
-              link(componentPath, component.name, text(component.name)),
-              text(`: ${description}`)
-            ])
-          )
+        // Create a single paragraph node with link and text as phrasing content
+        return listItem(
+          paragraph([
+            link(componentPath, undefined, text(component.name)),
+            html(`: ${description}`)
+          ])
         );
-      }
+      });
 
-      content.push(list('unordered', componentLinks));
+      content.push(list('unordered', items));
     }
 
     const tree = root(content);
@@ -901,23 +802,17 @@ class LLMSGenerator {
     const llmsTxtPath = path.join(this.outputDir, 'llms.txt');
     fs.writeFileSync(llmsTxtPath, markdown, 'utf-8');
 
-    console.log(`   ✓ ${llmsTxtPath}`);
+    console.log(`   ✓ llms.txt`);
   }
 
   /**
-   * Truncate description to first sentence or 150 chars
+   * Truncate description
    */
   truncateDescription(description) {
-    // Remove extra whitespace
     description = description.replace(/\s+/g, ' ').trim();
-    
-    // Get first sentence
     const firstSentence = description.split(/[.!?]\s/)[0];
     
-    if (firstSentence.length <= 150) {
-      return firstSentence;
-    }
-    
+    if (firstSentence.length <= 150) return firstSentence;
     return description.substring(0, 147) + '...';
   }
 
@@ -935,7 +830,7 @@ class LLMSGenerator {
   }
 
   /**
-   * Categorize components by their category
+   * Categorize components by category
    */
   categorizeComponents() {
     const categorized = new Map();
@@ -948,7 +843,6 @@ class LLMSGenerator {
       categorized.get(category).push(component);
     }
 
-    // Sort components within each category
     for (const [, components] of categorized) {
       components.sort((a, b) => a.name.localeCompare(b.name));
     }
