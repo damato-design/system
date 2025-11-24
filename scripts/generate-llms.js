@@ -15,14 +15,9 @@
 import { Project, SyntaxKind, Node, TypeFormatFlags } from 'ts-morph';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import { root, heading, paragraph, text, code, blockquote, link, list, listItem, html } from 'mdast-builder';
 import { toMarkdown } from 'mdast-util-to-markdown';
-import { gfmTableToMarkdown } from 'mdast-util-gfm-table';
 import { gfmToMarkdown } from 'mdast-util-gfm';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 class LLMSGenerator {
   constructor(projectRoot = process.cwd(), outputDir = '.storybook/public') {
