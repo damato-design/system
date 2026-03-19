@@ -20,7 +20,8 @@
 
     /* Icons found within the frame */
     > i[role="presentation"] {
-        margin-inline: space.$gap;
+        margin-block: space.$padding;
+        margin-inline: calc(space.$padding - .25em);
     }
 
     /* Button borders found within the frame should not contribute to the overall size or shape */
