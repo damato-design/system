@@ -103,7 +103,7 @@ export const Sizes: Story = {
  */
 export const Icon: Story = {
     args: {
-        children: 'Search',
+        children: 'Search for whatever you would like',
         icon: 'search',
         priority: 'primary'
     }

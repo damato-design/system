@@ -15,6 +15,7 @@ export const icon = proxy<string, IconProps>('icon', (reference) => {
     return (
       <text.i
         { ...props }
+        baselineEm
         role='presentation'
         className={ css.icon }>
         { reference }

@@ -7,6 +7,11 @@ import { element, ElementProps } from '../Element';
 export type TextProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
   & ElementProps & {
   /**
+   * Forces the content to align to the baseline.
+   * Meant for larger elements that need to align with text
+   */
+  baselineEm?: boolean
+  /**
    * Set the priority intended for this component.
    * This will affect the final presentation.
    */
@@ -23,6 +28,7 @@ export type TextProps = React.AnchorHTMLAttributes<HTMLAnchorElement>
 
 export const text = proxy<HTMLTagsOnly, TextProps>('text', (TagName) => {
   return forwardRef<HTMLElement, TextProps>(({
+    baselineEm,
     className,
     priority,
     standby = true,
@@ -32,7 +38,8 @@ export const text = proxy<HTMLTagsOnly, TextProps>('text', (TagName) => {
     const Text = element[TagName];
 
     const classNames = clsx(css.text, className, { 
-      [css.sronly]: screenreaderOnly
+      [css.baselineem]: baselineEm,
+      [css.sronly]: screenreaderOnly,
     });
 
     return <Text

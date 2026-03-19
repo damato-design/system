@@ -69,6 +69,13 @@
     }
 }
 
+.baselineem {
+    display: inline-grid;
+    place-content: center;
+    align-self: baseline;
+    height: 1lh;
+}
+
 .sronly:not(:focus):not(:active) {
     position: absolute;
     transform: scale(0);

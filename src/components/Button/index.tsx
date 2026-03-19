@@ -112,11 +112,10 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
             { ...flyoutProps }
             { ...listboxProps }
             ref={ref}
+            gap
             purpose='action'>
             {iconRef ? createElement(icon[iconRef]) : null}
-            { spacer }
             {children}
-            { spacer }
             {getAccessory(behavior)}
         </Element>
     )
