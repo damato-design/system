@@ -62,15 +62,6 @@ function getIcon(iconRef: string | undefined, subject: ReactElement<TextProps>) 
   return <IconElement { ...props } />;
 }
 
-function getSpacer(iconRef: string | undefined, subject: ReactElement<TextProps>) {
-  if (!iconRef) return null;
-  const props: TextProps = {
-    priority: subject?.props?.priority,
-    children: ' ',
-  };
-  return <text.pre {...props}/>
-}
-
 export type LockupProps = BoxProps & {
   icon?: string,
   subject?: ReactElement<TextProps>,
@@ -150,9 +141,8 @@ export const lockup = proxy<HTMLTagsOnly, LockupProps>('lockup', (TagName) => {
 
     return (
       <LockupProvider>
-        <Element { ...restrictProps(props) } placeChildren={ placeChildren } ref={ ref }>
+        <Element { ...restrictProps(props) } placeChildren={ placeChildren } ref={ ref } gap>
           { getIcon(iconRef, subject as ReactElement) }
-          { getSpacer(iconRef, subject as ReactElement) }
           <box.div stack gap stretch>
             { header }
             <PassiveComponent>{ passiveMessage }</PassiveComponent>
