@@ -18,11 +18,6 @@
     background: var(--action-bg);
     font-weight: bolder;
 
-    > pre {
-        /* Spacer */
-        opacity: 0;
-    }
-
     /*
      * The hover style adjusts the current background by mixing with the foreground by a small percentage. This assumes that the given background is a solid color; not a gradient.
      */

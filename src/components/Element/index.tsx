@@ -1,6 +1,8 @@
 import { forwardRef, createElement, memo } from 'react';
 import { proxy, Props, HTMLTagsOnly } from './proxy';
 
+export type { Intrinsic } from './proxy';
+
 export function restrictProps({
   id,
   tabIndex,
@@ -20,6 +22,15 @@ export type ElementProps = Props & {
    * Applies the `mode="system:denser"` to the component
    */
   denser?: boolean,
+  /**
+   * The Popover API state. Not yet present in this React version's types.
+   */
+  popover?: 'auto' | 'manual' | 'hint',
+  /**
+   * Fired when a popover is shown or hidden. Not yet present in this React
+   * version's base element types.
+   */
+  onToggle?: React.ReactEventHandler<HTMLElement>,
 }
 
 export const element = proxy<HTMLTagsOnly, ElementProps>('element', <TagName extends HTMLTagsOnly>(TagName: TagName) => {

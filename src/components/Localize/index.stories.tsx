@@ -97,7 +97,7 @@ export const Batch: Story = {
     args: {
         children: ''
     },
-    render: (args: _) => {
+    render: () => {
         const DICTIONARY: { [key: string]: string } = {
             close: 'cerca',
             previous: 'previa',

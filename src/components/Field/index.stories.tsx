@@ -5,10 +5,14 @@ import checklist from './checklist.md?raw';
 import { field, type FieldProps } from '.';
 
 import { box } from '../Box';
+import { Intrinsic } from '../Element';
 import { input } from '../Input';
 import { icon } from '../Icon';
 import { Button } from '../Button';
 import { text } from '../Text';
+
+// A `box.form` typed to also accept native form attributes such as `action`.
+const Form = box.form as Intrinsic<typeof box.form, 'form'>;
 
 /**
  * The `field` primitive helps compose user input fields.
@@ -96,7 +100,7 @@ export const InnerButton: Story = {
         }, []);
 
         return (
-            <box.form action='' gap placeChildren='top'>
+            <Form action='' gap placeChildren='top'>
                 <field.div { ...args }>
                     <Button icon='remove' aria-label='Decrement' value={ -1 } onClick={ onClick }/>
                     <input.number name='number' value={ value } onChange={ onChange } fieldSizing='content'/>
@@ -105,7 +109,7 @@ export const InnerButton: Story = {
                 <Button priority='primary'>
                     Submit
                 </Button>
-            </box.form>
+            </Form>
         )
     }
 }
@@ -130,14 +134,14 @@ export const OuterButton: Story = {
         }, []);
 
         return (
-            <box.form action='' infill placeChildren='top'>
+            <Form action='' infill placeChildren='top'>
                 <field.div { ...args } stretch>
                     <input.email name='email' value={ value } onChange={ onChange }/>
                 </field.div>
                 <Button priority='primary' icon='email' onClick={ onClick } stretch>
                     Subscribe
                 </Button>
-            </box.form>
+            </Form>
         )
     }
 }

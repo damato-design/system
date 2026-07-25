@@ -1,6 +1,5 @@
 import { createElement, forwardRef } from 'react';
 import { box, BoxProps } from '../Box';
-import { text } from '../Text';
 import { icon } from '../Icon';
 import { IDREF } from '../Localize';
 import { useFlyout } from '../Flyout';
@@ -102,9 +101,6 @@ export const Button = forwardRef<HTMLElement, ButtonProps>(({
             an 'aria-label' or 'aria-labelledby' to the component.
         `);
     }
-
-    // Spacers are used to have icon space adjust with text.
-    const spacer = children ? <text.pre> </text.pre> : null;
 
     return (
         <Element

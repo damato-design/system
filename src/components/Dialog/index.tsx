@@ -1,7 +1,7 @@
 import { forwardRef, useCallback } from 'react';
 import { box } from '../Box';
 import { lockup, LockupProps } from '../Lockup';
-import { element, restrictProps } from '../Element';
+import { element, restrictProps, Intrinsic } from '../Element';
 
 /**
  * Determines the correct icon reference based on emphasis.
@@ -44,7 +44,8 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(({
     ...props
 }: DialogProps, ref) => {
     
-    const Element = disrupt ? box.dialog : box.div;
+    // Typed as a dialog so it accepts the native `onCancel` event.
+    const Element = (disrupt ? box.dialog : box.div) as Intrinsic<typeof box.dialog, 'dialog'>;
     // This adds a small treatment to visually separate the lockup as a dialog
     const styles = { 
         background: 'currentColor',

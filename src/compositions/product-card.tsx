@@ -2,9 +2,11 @@ import { card, CardProps } from '../components/Card';
 import { text } from '../components/Text';
 import { Button } from '../components/Button';
 
-type Product = CardProps & {
-    price: number,
-    id: string,
+// `id` is a data field here (used for keys and links), not the element's HTML
+// `id`, so it's omitted from `CardProps` to allow a numeric identifier.
+export type Product = Omit<CardProps, 'id'> & {
+    price: string | number,
+    id: string | number,
     cta: string,
 }
 

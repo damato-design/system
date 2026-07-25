@@ -1,9 +1,13 @@
 import { box } from '../components/Box';
+import { Intrinsic } from '../components/Element';
 import { text } from '../components/Text';
 import { lockup } from '../components/Lockup';
 import { Checkbox } from '../components/Checkbox';
 import { Button } from '../components/Button';
 import { useCallback, useState } from 'react';
+
+// A `box.form` typed to also accept native form attributes such as `action`.
+const Form = box.form as Intrinsic<typeof box.form, 'form'>;
 
 type SizeOptionProps = {
     size: string,
@@ -37,7 +41,7 @@ export const ProductOptions = () => {
     }, [size]);
 
     return (
-        <box.form 
+        <Form
             action=''
             stack
             padding
@@ -57,6 +61,6 @@ export const ProductOptions = () => {
                 </box.div>
             </lockup.fieldset>
             <Button priority='primary' icon='add_shopping_cart'>Add to cart</Button>
-        </box.form>
+        </Form>
     );
 }

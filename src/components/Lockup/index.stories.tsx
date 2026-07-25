@@ -9,7 +9,11 @@ import { useCallback, useState } from 'react';
 import { Close } from '../Close';
 import { Button } from '../Button';
 import { box } from '../Box';
+import { Intrinsic } from '../Element';
 import { track } from '../Track';
+
+// A `box.form` typed to also accept native form attributes such as `action`.
+const FormBox = box.form as Intrinsic<typeof box.form, 'form'>;
 
 /**
  * The `lockup` primitive helps create standardized layouts of content.
@@ -201,7 +205,7 @@ export const Login: Story = {
         );
 
         return (
-            <box.form action='' stack gap { ...args }>
+            <FormBox action='' stack gap { ...args }>
                 <lockup.div subject={ <text.h2 priority='primary'>Login</text.h2> }>
                     <text.p>Your progress is saved, we'll bring you right back!</text.p>
                 </lockup.div>
@@ -223,7 +227,7 @@ export const Login: Story = {
                     </field.div>
                 </lockup.fieldset>
                 <Button priority='primary'>Login</Button>
-            </box.form>
+            </FormBox>
         )
     }
 }

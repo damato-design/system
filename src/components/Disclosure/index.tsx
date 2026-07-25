@@ -1,5 +1,6 @@
 import { forwardRef, ReactNode } from 'react';
 import { box, BoxProps } from '../Box';
+import { Intrinsic } from '../Element';
 import { icon } from '../Icon';
 
 export type DisclosureProps = BoxProps & {
@@ -20,8 +21,11 @@ export const Disclosure = forwardRef<HTMLElement, DisclosureProps>(({
     ...rest
 }: DisclosureProps, ref) => {
 
+    // Typed as details so it accepts the native `name` (exclusive accordion).
+    const Details = box.details as Intrinsic<typeof box.details, 'details'>;
+
     return (
-        <box.details { ...rest } ref={ ref } name={ name } stretch stack>
+        <Details { ...rest } ref={ ref } name={ name } stretch stack>
             <box.summary
                 purpose='action'
                 padding
@@ -32,6 +36,6 @@ export const Disclosure = forwardRef<HTMLElement, DisclosureProps>(({
                 <icon.expand_more/>
             </box.summary>
             { children }
-        </box.details>
+        </Details>
     );
 });
