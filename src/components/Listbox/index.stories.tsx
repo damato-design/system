@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import checklist from './checklist.md?raw';
 
@@ -102,25 +102,20 @@ export const Menu: Story = {
     render: ({ onActiveDescendantChange: _, ...args}) => {
         const [active, setActive] = useState(args.activeDescendant);
         const [focus, setFocus] = useState(args.visualFocus);
-        const [show, setShow] = useState(false);
-        const anchorRef = useRef(null);
 
         const anchor = (
             <Button
-                ref={ anchorRef }
                 onFocus={ () => setFocus(true) }
                 onBlur={ () => setFocus(false) }
-                onClick={ () => setShow(!show) }
                 behavior='menu'
                 priority='primary'>
                 { active }
             </Button>
         );
-        
+
         const menu = (
             <flyout.div
                 behavior='menu'
-                onClose={ () => setShow(false) }
                 stretch>
                 <box.div
                     stretch
@@ -139,7 +134,7 @@ export const Menu: Story = {
             <FlyoutProvider>
                 <ListboxProvider behavior='menu'>
                     { anchor }
-                    { show ? menu : null }
+                    { menu }
                 </ListboxProvider>
             </FlyoutProvider>
         )

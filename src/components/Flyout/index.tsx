@@ -1,4 +1,4 @@
-import { forwardRef, useId, useLayoutEffect, createContext, useContext, Provider } from 'react';
+import { forwardRef, useId, createContext, useContext } from 'react';
 import css from './styles.module.scss';
 import { proxy, HTMLTagsOnly } from '../Element/proxy';
 import { element, ElementProps, restrictProps } from '../Element';
@@ -6,7 +6,7 @@ import { element, ElementProps, restrictProps } from '../Element';
 const FlyoutContext = createContext(null);
 
 type FlyoutConfig = {
-  anchor: { id: string, anchorName: string },
+  anchor: { id: string, anchorName: string, commandfor?: string, command?: string },
   target: { id: string }
 }
 
@@ -32,7 +32,11 @@ export const FlyoutProvider = (props: any) => {
   const anchorName = `--${anchorId.replaceAll(':', '')}`;
 
   const value = {
-    anchor: { id: anchorId, anchorName },
+    // A button anchor toggles the popover via the Invoker Commands API. The
+    // browser exempts an invoker from immediately light-dismissing the popover
+    // it opens, which a manual click handler cannot do. These ride in the opaque
+    // anchor bag, so the button spreads them without knowing about flyouts.
+    anchor: { id: anchorId, anchorName, commandfor: targetId, command: 'toggle-popover' },
     target: { id: targetId }
   }
 
@@ -49,7 +53,7 @@ export type FlyoutProps = ElementProps & {
    */
   stretch?: boolean,
   /**
-   * Determines how the element should interact with the anchor.
+   * Called when the popover is dismissed (Esc, outside click or on close).
    */
   onClose?: (ev: any) => void
 };
@@ -73,38 +77,6 @@ export const flyout = proxy<HTMLTagsOnly, FlyoutProps>('flyout', (TagName) => {
     const Element = element[TagName];
     const { target, anchor } = useFlyout();
 
-    useLayoutEffect(() => {
-      if (!document || typeof target.id !=='string') return;
-      const $target = document.getElementById(target.id);
-
-      // Triggers is the Esc key is pressed.
-      const onEscape = (ev: any) => {
-        if (ev.key === 'Escape' && typeof onClose === 'function') onClose(ev);
-      }
-
-      // Triggers when an event occurs outside the flyout's content.
-      const onOutside = (ev: any) => {
-        const $elems = ev.composedPath();
-        const isOutside = ![...$elems].some(($elem) => {
-          const { anchorName: name, positionAnchor } = $elem?.style || {};
-          return name === anchor.anchorName || positionAnchor === anchor.anchorName;
-        });
-        if (isOutside && typeof onClose === 'function') onClose(ev);
-      }
-
-      if (!$target) return;
-      document.documentElement.addEventListener('keyup', onEscape);
-      document.documentElement.addEventListener('pointerdown', onOutside);
-      document.documentElement.addEventListener('focusin', onOutside);
-
-      $target.showPopover();
-      return () => {
-        document.documentElement.removeEventListener('keyup', onEscape);
-        document.documentElement.removeEventListener('pointerdown', onOutside);
-        document.documentElement.removeEventListener('focusin', onOutside);
-      };
-    }, [target.id, anchor.anchorName, onClose]);
-
     const styles = {
       positionAnchor: anchor.anchorName,
       minWidth: stretch ? 'anchor-size(width)' : 'fit-content',
@@ -112,12 +84,18 @@ export const flyout = proxy<HTMLTagsOnly, FlyoutProps>('flyout', (TagName) => {
       left: `anchor(${anchor.anchorName} left)`,
     }
 
+    // Fully declarative: a button anchor opens/toggles it via its command, the
+    // browser handles light-dismiss (Esc, outside click), and the native
+    // `toggle` event reports dismissal back through `onClose`.
     return <Element
       { ...restrictProps(props) }
       { ...target }
       role={ behavior }
-      popover='manual'
+      // A tooltip is a `hint` so opening it never dismisses an open `auto`
+      // popover (eg. a menu); everything else is a standard `auto` popover.
+      popover={ behavior === 'tooltip' ? 'hint' : 'auto' }
       ref={ ref }
+      onToggle={ (ev: any) => ev.nativeEvent?.newState === 'closed' && onClose?.(ev) }
       className={ css.flyout }
       style={ styles }/>;
   })

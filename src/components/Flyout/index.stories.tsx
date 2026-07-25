@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import checklist from './checklist.md?raw';
 
@@ -40,52 +39,34 @@ type Story = StoryObj<typeof meta>
  * 
  * ```jsx
  * function FlyoutExample(args) {
- *      const [show, setShow] = useState(false);
- *      const popover = (
- *          <flyout.div
- *              { ...args }
- *              onClose={ () => setShow(false) }>
- *              flyout is open!
- *          </flyout.div>
- *      )
- *
  *      return (
  *          <FlyoutProvider>
- *              <Button
- *              priority='primary'
- *              onClick={ () => setShow(!show) }>
+ *              <Button priority='primary'>
  *              anchor element
  *              </Button>
- *              { show ? popover : null }
+ *              <flyout.div { ...args }>
+ *              flyout is open!
+ *              </flyout.div>
  *          </FlyoutProvider>
  *      )
  * }
  * ```
- * 
- * The `<FlyoutProvider/>` provides context to the expected anchoring element and the contents of the flyout. If an interactive element (eg. `<Button/>`) is a direct child of the `<FlyoutProvider/>` it is considered the anchor for the flyout. In this way, there is an implicit connection between the anchor and flyout. In other words, the author does not need to explicitly connect the anchor to the flyout. It is inferred by the composition.
+ *
+ * The `<FlyoutProvider/>` provides context to the expected anchoring element and the contents of the flyout. If a button is a direct child of the `<FlyoutProvider/>` it becomes the anchor and toggles the flyout through the [Invoker Commands API](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API) — no state or click handler required. In this way the connection between the anchor and flyout is inferred by the composition.
  */
 export const Default: Story = {
     args: {
         children: 'Hello World!',
     },
     render: (args) => {
-        const [show, setShow] = useState(false);
-        const popover = (
-            <flyout.div
-                { ...args }
-                onClose={ () => setShow(false) }>
-                flyout is open!
-            </flyout.div>
-        )
-
         return (
             <FlyoutProvider>
-                <Button
-                priority='primary'
-                onClick={ () => setShow(!show) }>
+                <Button priority='primary'>
                 anchor element
                 </Button>
-                { show ? popover : null }
+                <flyout.div { ...args }>
+                flyout is open!
+                </flyout.div>
             </FlyoutProvider>
         )
     }
@@ -110,30 +91,20 @@ export const Stretch: Story = {
         stretch: true
     },
     render: (args) => {
-        const [show, setShow] = useState(false);
-
-        const popover = (
-            <flyout.div
-                { ...args }
-                onClose={ () => setShow(false) }>
-                <box.div
-                    stretch={ args.stretch }
-                    padding
-                    purpose='surface'
-                    priority='secondary'>
-                    Hi! 👋
-                </box.div>
-            </flyout.div>
-        );
-
         return (
             <FlyoutProvider>
-                <Button
-                    onClick={() => setShow(!show)}
-                    priority='primary'>
+                <Button priority='primary'>
                     anchor element
                 </Button>
-                { show ? popover : null }
+                <flyout.div { ...args }>
+                    <box.div
+                        stretch={ args.stretch }
+                        padding
+                        purpose='surface'
+                        priority='secondary'>
+                        Hi! 👋
+                    </box.div>
+                </flyout.div>
             </FlyoutProvider>
         )
     }
