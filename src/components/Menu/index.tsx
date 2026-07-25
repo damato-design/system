@@ -1,4 +1,4 @@
-import { forwardRef, useState, useRef, useCallback, useMemo, act } from 'react';
+import { forwardRef, useState, useRef, useCallback, useMemo } from 'react';
 import { Button, ButtonProps } from '../Button'
 import { listbox, ListboxProps, ListboxProvider } from '../Listbox';
 import { box } from '../Box';
@@ -21,37 +21,40 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
     ...rest
 }: MenuProps, ref) => {
     const [focus, setFocus] = useState(false);
-    const [show, setShow] = useState(false);
-    const anchorRef = useRef(null);
+    const popoverRef = useRef<HTMLElement>(null);
 
     const item = useMemo(() => {
         return items.find((item) => item.id === activeDescendant);
     }, [items, activeDescendant]);
 
+    // The popover is the source of truth for open state — the button toggles it
+    // via its `toggle-popover` command. We hold a ref to it so confirming can
+    // close it in one step.
     const _onConfirm = useCallback(() => {
-        if (show && typeof onConfirm === 'function') onConfirm(item);
-        setShow(!show);
-    }, [item, onConfirm, show]);
+        if (typeof onConfirm === 'function') onConfirm(item);
+        popoverRef.current?.hidePopover();
+    }, [item, onConfirm]);
 
     const button = (
         <Button
             { ...rest }
-            ref={ anchorRef }
             onFocus={ () => setFocus(true) }
-            onBlur={ () => {
-                setFocus(false);
-                // TODO: Need a way to check if menu item selected after blur
-                // requestAnimationFrame(() => setShow(false))
+            onBlur={ () => setFocus(false) }
+            // While open, Enter confirms the active item rather than letting the
+            // command toggle the popover closed.
+            onKeyDown={ (ev: any) => {
+                if (ev.key === 'Enter' && popoverRef.current?.matches(':popover-open')) {
+                    ev.preventDefault();
+                    _onConfirm();
+                }
             } }
-            onKeyDown={ (ev: any) => ev.key === 'Enter' && _onConfirm() }
-            onPointerDown={ () => setShow(!show) }
             behavior='menu'/>
     );
 
     const menu = (
         <flyout.div
+            ref={ popoverRef }
             behavior='menu'
-            onClose={ () => setShow(false) }
             stretch>
             <box.div
                 stretch
@@ -75,7 +78,7 @@ export const Menu = forwardRef<HTMLElement, MenuProps>(({
         <FlyoutProvider>
             <ListboxProvider behavior='menu'>
                 { button }
-                { show ? menu : null }
+                { menu }
             </ListboxProvider>
         </FlyoutProvider>
     )

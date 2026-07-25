@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useState, useMemo } from 'react';
+import { forwardRef, useCallback, useState, useMemo, useRef, useLayoutEffect } from 'react';
 import { input, InputProps } from '../Input';
 import { listbox, ListboxProps, ListboxProvider } from '../Listbox';
 import { field, FieldProps } from '../Field';
@@ -29,17 +29,28 @@ export const Combobox = forwardRef<HTMLElement, ComboBoxProps>(({
     ...rest
 }: ComboBoxProps, ref) => {
     const [show, setShow] = useState(false);
+    const popoverRef = useRef<HTMLElement>(null);
+
+    // The input opens the listbox as the user types — a non-button trigger, so
+    // the popover has no declarative command and is shown/hidden imperatively.
+    useLayoutEffect(() => {
+        const $popover = popoverRef.current;
+        if (!$popover) return;
+        const isOpen = $popover.matches(':popover-open');
+        if (show && !isOpen) $popover.showPopover();
+        if (!show && isOpen) $popover.hidePopover();
+    }, [show]);
 
     // Determine the active descendent as item
     const item = useMemo(() => {
         return items.find((item) => item.id === activeDescendant);
     }, [items, activeDescendant]);
 
-    // Hide the flyout when confirming selection
+    // Choosing an item commits it as the value and always closes the menu.
     const _onConfirm = useCallback(() => {
-        if (show && typeof onConfirm === 'function') onConfirm(item);
-        setShow(!show);
-    }, [item, onConfirm, show]);
+        if (typeof onConfirm === 'function') onConfirm(item);
+        setShow(false);
+    }, [item, onConfirm]);
 
     const anchor = (
         <field.div>
@@ -47,13 +58,16 @@ export const Combobox = forwardRef<HTMLElement, ComboBoxProps>(({
                 { ...rest }
                 value={ value }
                 autoComplete='off'
-                onInput={ () => setShow(Boolean(value)) }
+                // Typing filters (via the consumer's value) and keeps the menu
+                // open so the narrowed options are visible.
+                onInput={ () => setShow(true) }
                 onKeyDown={ (ev: any) => ev.key === 'Enter' && _onConfirm() }/>
         </field.div>
     )
 
     const popover = (
         <flyout.div
+            ref={ popoverRef }
             behavior='listbox'
             onClose={ () => setShow(false) }
             stretch>
@@ -79,7 +93,7 @@ export const Combobox = forwardRef<HTMLElement, ComboBoxProps>(({
         <FlyoutProvider>
             <ListboxProvider>
                 { anchor }
-                { show ? popover : null }
+                { popover }
             </ListboxProvider>
         </FlyoutProvider>
     )

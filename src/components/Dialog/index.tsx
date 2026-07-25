@@ -52,25 +52,24 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(({
         flexShrink: 0
     };
 
-    // Use client JS to trigger visibility of the <dialog/> on the top-layer
+    // Open on the top-layer. A modal <dialog/> natively inerts the rest of the
+    // document, traps focus and closes on Esc, so we only need a ref to call
+    // showModal() — no manual inert or keyboard handling.
     const showModal = useCallback(($elem: HTMLDialogElement) => {
         if (!disrupt || !$elem) return;
         $elem.style?.setProperty('margin', 'auto');
         $elem.showModal();
-        document.body.setAttribute('inert', '');
-        () => document.body.removeAttribute('inert');
-    }, [disrupt, onClose])
+    }, [disrupt])
 
-    // on Esc, close the dialog
-    const onKeyDown = useCallback((ev: any) => {
+    // Esc fires a cancelable native `cancel` event. Prevent the default close
+    // so the consumer decides whether to dismiss, and report it via onClose.
+    const onCancel = useCallback((ev: any) => {
         if (!disrupt) return;
-        if (ev.key === 'Escape') {
-            ev.preventDefault();
-            typeof onClose === 'function' && onClose(ev);
-        }
+        ev.preventDefault();
+        typeof onClose === 'function' && onClose(ev);
     }, [disrupt, onClose]);
 
-    // on pointerdown outside of the content area, close the dialog
+    // A pointerdown on the backdrop (the dialog element itself) also reports.
     const onPointerDown = useCallback((ev: any) => {
         if (!disrupt) return;
         if (ev.target === ev.currentTarget) {
@@ -83,7 +82,7 @@ export const Dialog = forwardRef<HTMLElement, DialogProps>(({
             purpose='surface'
             priority={ priority }
             ref={ showModal }
-            onKeyDown={ onKeyDown }
+            onCancel={ onCancel }
             onPointerDown={ onPointerDown }>
             <element.div style={ styles }/>
             <lockup.div

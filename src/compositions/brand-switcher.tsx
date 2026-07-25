@@ -1,4 +1,4 @@
-import { useState, useRef, forwardRef, CSSProperties, useCallback, useEffect } from 'react';
+import { useState, useRef, forwardRef, CSSProperties, useCallback, useEffect, useLayoutEffect } from 'react';
 import { flyout, FlyoutProvider, useFlyout } from '../components/Flyout';
 import { listbox, ListboxProvider, useListbox, ItemsProps } from '../components/Listbox';
 import { box } from '../components/Box';
@@ -81,10 +81,21 @@ export const BrandSwitcher = () => {
     const [focus, setFocus] = useState(false);
     const [show, setShow] = useState(false);
     const anchorRef = useRef(null);
+    const popoverRef = useRef<HTMLElement>(null);
 
     const onChange = useCallback((id: string) => setActive(id), []);
 
     useEffect(() => updateBrand(active), [active]);
+
+    // The logo is an image, not a button, so the popover has no declarative
+    // command and is shown/hidden imperatively from state.
+    useLayoutEffect(() => {
+        const $popover = popoverRef.current;
+        if (!$popover) return;
+        const isOpen = $popover.matches(':popover-open');
+        if (show && !isOpen) $popover.showPopover();
+        if (!show && isOpen) $popover.hidePopover();
+    }, [show]);
 
     const anchor = (
         <Logo
@@ -98,6 +109,7 @@ export const BrandSwitcher = () => {
 
     const menu = (
         <flyout.div
+            ref={ popoverRef }
             behavior='menu'
             onClose={ () => setShow(false) }
             stretch>
@@ -118,7 +130,7 @@ export const BrandSwitcher = () => {
         <FlyoutProvider>
             <ListboxProvider behavior='menu'>
                 { anchor }
-                { show ? menu : null }
+                { menu }
             </ListboxProvider>
         </FlyoutProvider>
     )

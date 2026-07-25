@@ -19,7 +19,9 @@ export const field = proxy<HTMLTagsOnly, FieldProps>('field', (TagName) => {
     }: FieldProps, ref) => {
 
         const Element = box[TagName];
-        const { anchor } = useFlyout();
+        // A field is a control, not a button, so drop the button-only command
+        // wiring from the anchor bag — it keeps the anchor id and name only.
+        const { command, commandfor, ...anchor } = useFlyout().anchor;
 
         return (
             <Element
